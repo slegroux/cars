@@ -696,6 +696,26 @@ tr.expand-row td {
   cursor: pointer;
 }
 .btn-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+/* ── paste parser ── */
+.paste-section { margin-bottom: 4px; }
+.paste-row { display: flex; gap: 8px; align-items: flex-end; }
+.paste-row textarea { flex: 1; min-height: 72px; font-size: 0.8rem; }
+.btn-parse {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  height: 30px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.btn-parse:hover { border-color: var(--accent); color: var(--accent); }
+.parse-result { font-size: 0.75rem; font-family: var(--font); margin-top: 4px; min-height: 16px; }
+.modal-divider { border: none; border-top: 1px solid var(--border-light); margin: 12px 0 8px; }
+
 .col-actions { display: none; width: 36px; text-align: center; }
 .del-btn {
   background: none;
@@ -1522,6 +1542,104 @@ _JS = r"""
       btn.disabled = false; btn.textContent = 'Save listing';
     });
   }
+  // ── Listing text parser ────────────────────────────────────────────────────
+  function parseListingText(raw) {
+    var result = {};
+
+    // 1. Structured key:value pairs (FB Marketplace full-page copy)
+    var kv = {
+      year:      /\byear\s*[:：]\s*(\d{4})/i,
+      make:      /\bmake\s*[:：]\s*([A-Za-z][A-Za-z\s\-]+?)(?:\n|$)/im,
+      model:     /\bmodel\s*[:：]\s*([A-Za-z0-9][A-Za-z0-9\s\-]+?)(?:\n|$)/im,
+      trim:      /\btrim\s*[:：]\s*([A-Za-z0-9\s\-]+?)(?:\n|$)/im,
+      mileage:   /\bmileage\s*[:：]\s*([\d,]+)/i,
+      price:     /\bprice\s*[:：]\s*\$?([\d,]+)/i,
+      body_type: /\bbody\s*(?:style|type)?\s*[:：]\s*([A-Za-z]+)/i,
+      location:  /\blocation\s*[:：]\s*([^\n]+)/i,
+    };
+    for (var key in kv) {
+      var km = raw.match(kv[key]);
+      if (km) result[key] = km[1].trim();
+    }
+    if (result.mileage) result.mileage = result.mileage.replace(/,/g, '');
+    if (result.price)   result.price   = result.price.replace(/,/g, '');
+
+    // 2. Free-text fallbacks for missing fields
+    var MAKES = ['Acura','Alfa Romeo','Audi','BMW','Buick','Cadillac','Chevrolet','Chevy',
+      'Chrysler','Dodge','Fiat','Ford','Genesis','GMC','Honda','Hyundai','Infiniti',
+      'Jaguar','Jeep','Kia','Land Rover','Lexus','Lincoln','Mazda','Mercedes-Benz',
+      'Mercedes','Mini','Mitsubishi','Nissan','Pontiac','Porsche','Ram','Saturn',
+      'Scion','Subaru','Tesla','Toyota','Volkswagen','VW','Volvo'];
+
+    if (!result.year) {
+      var ym = raw.match(/\b(20[0-2]\d|199\d|198\d)\b/);
+      if (ym) result.year = ym[1];
+    }
+
+    if (!result.make || !result.model) {
+      // "YYYY Make Model" on one line
+      var lineM = raw.match(/\b(20[0-2]\d|199\d)\s+([A-Z][a-zA-Z\-]+)\s+([A-Z][a-zA-Z0-9\-]+)/);
+      if (lineM) {
+        if (!result.year)  result.year  = lineM[1];
+        if (!result.make)  result.make  = lineM[2];
+        if (!result.model) result.model = lineM[3];
+      } else if (!result.make) {
+        for (var i = 0; i < MAKES.length; i++) {
+          var mre = new RegExp('\\b' + MAKES[i].replace(/[-\s]/g, '[-\\s]?') + '\\b', 'i');
+          if (mre.test(raw)) {
+            result.make = MAKES[i];
+            var mkIdx = raw.search(mre);
+            var afterMake = raw.slice(mkIdx + MAKES[i].length).match(/^\s+([A-Z][a-zA-Z0-9\-]+)/);
+            if (afterMake && !result.model) result.model = afterMake[1];
+            break;
+          }
+        }
+      }
+    }
+
+    if (!result.price) {
+      var pm = raw.match(/\$\s*([\d,]+)/);
+      if (pm) result.price = pm[1].replace(/,/g, '');
+    }
+
+    if (!result.mileage) {
+      var mm = raw.match(/([\d,]+)\s*[kK]\s*(?:miles?|mi)\b/i);
+      if (mm) {
+        result.mileage = String(parseInt(mm[1].replace(/,/g, '')) * 1000);
+      } else {
+        mm = raw.match(/([\d,]+)\s*miles?\b/i);
+        if (mm) result.mileage = mm[1].replace(/,/g, '');
+      }
+    }
+
+    if (!result.body_type) {
+      var bmap = {SUV:/\b(?:suv|crossover|cuv)\b/i, Sedan:/\bsedan\b/i, Wagon:/\bwagon\b/i,
+        Hatchback:/\b(?:hatchback|hatch)\b/i, Coupe:/\bcoupe\b/i,
+        Truck:/\b(?:truck|pickup)\b/i, Van:/\b(?:van|minivan)\b/i};
+      for (var bt in bmap) { if (bmap[bt].test(raw)) { result.body_type = bt; break; } }
+    }
+
+    if (!result.location) {
+      var lm = raw.match(/([A-Z][a-z][a-zA-Z\s]*),\s*(CA|California|NV|Nevada|AZ|Arizona|OR|Oregon|WA|Washington|TX|Texas|FL|Florida|NY)\b/);
+      if (lm) result.location = lm[1].trim() + ', ' + lm[2];
+    }
+
+    if (!result.seller_type) {
+      if (/\b(?:private\s*(?:seller|party)|personal\s*use|1\s*owner|one\s*owner)\b/i.test(raw)) result.seller_type = 'private';
+      else if (/\b(?:dealer|dealership)\b/i.test(raw)) result.seller_type = 'dealer';
+      else if (/\b(?:certified|cpo)\b/i.test(raw)) result.seller_type = 'certified';
+    }
+
+    // Aliases
+    if (result.make === 'Chevy') result.make = 'Chevrolet';
+    if (result.make === 'VW') result.make = 'Volkswagen';
+    if (result.make === 'Mercedes') result.make = 'Mercedes-Benz';
+    if (result.mileage && parseInt(result.mileage) > 500000) delete result.mileage;
+    if (result.model) result.model = result.model.split(/\s+/)[0]; // first word only
+
+    return result;
+  }
+
   function deleteRow(listingId, dataRow, expandRow) {
     if (!confirm('Remove this listing from the database?')) return;
     fetch('/api/delete/' + encodeURIComponent(listingId), { method: 'POST' })
@@ -1554,6 +1672,29 @@ _JS = r"""
       document.getElementById('importSubmit').addEventListener('click', submitImport);
       document.getElementById('importModal').addEventListener('click', function(e){ if (e.target === this) closeImportModal(); });
       document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeImportModal(); });
+      document.getElementById('parseBtn').addEventListener('click', function() {
+        var raw = document.getElementById('f-paste').value.trim();
+        var resultEl = document.getElementById('parseResult');
+        if (!raw) { resultEl.textContent = 'Paste some text first.'; resultEl.style.color = 'var(--text-faint)'; return; }
+        var parsed = parseListingText(raw);
+        var map = {year:'f-year', make:'f-make', model:'f-model', trim:'f-trim',
+                   body_type:'f-body-type', mileage:'f-mileage', price:'f-price',
+                   location:'f-location', seller_type:'f-seller-type'};
+        var filled = [];
+        for (var k in map) {
+          if (parsed[k]) {
+            document.getElementById(map[k]).value = parsed[k];
+            filled.push(k.replace('_', ' '));
+          }
+        }
+        if (filled.length) {
+          resultEl.style.color = 'var(--green)';
+          resultEl.textContent = 'Filled: ' + filled.join(', ') + '. Review before saving.';
+        } else {
+          resultEl.style.color = 'var(--text-faint)';
+          resultEl.textContent = 'Could not extract fields — try pasting more of the listing page.';
+        }
+      });
     }
   });
 
@@ -1737,6 +1878,15 @@ def render_html(
         '<div id="importModal" class="modal-backdrop">',
         '  <div class="modal-box">',
         '    <div class="modal-title">Add listing manually</div>',
+        '    <div class="form-group paste-section">',
+        '      <label>Paste listing text to auto-fill (Facebook Marketplace, Craigslist, etc.)</label>',
+        '      <div class="paste-row">',
+        '        <textarea id="f-paste" placeholder="Copy all text from the listing page and paste here — the parser will extract make, model, year, price, mileage, and location automatically."></textarea>',
+        '        <button class="btn-parse" id="parseBtn" type="button">Parse &#x2192;</button>',
+        '      </div>',
+        '      <div class="parse-result" id="parseResult"></div>',
+        '    </div>',
+        '    <hr class="modal-divider">',
         '    <div class="form-grid">',
         '      <div class="form-group full"><label>URL (optional)</label><input id="f-url" type="url" placeholder="https://www.facebook.com/marketplace/item/..."></div>',
         '      <div class="form-group"><label>Make *</label><input id="f-make" type="text" placeholder="Toyota" required></div>',
