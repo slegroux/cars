@@ -601,6 +601,114 @@ tr.expand-row td {
   font-family: var(--font);
 }
 
+/* ── import modal ── */
+.import-btn {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  height: 30px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: auto;
+}
+.import-btn:hover { background: #b45309; }
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 500;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 60px;
+}
+.modal-backdrop.open { display: flex; }
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 560px;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.modal-title {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+.form-group { display: flex; flex-direction: column; gap: 3px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.form-group textarea { resize: vertical; min-height: 60px; }
+.modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; align-items: center; }
+.form-msg { font-size: 0.78rem; color: var(--red); flex: 1; }
+.btn-primary {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-primary:hover { background: #b45309; }
+.btn-primary:disabled { opacity: 0.5; cursor: default; }
+.btn-cancel {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  background: var(--bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.btn-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+.col-actions { display: none; width: 36px; text-align: center; }
+.del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-faint);
+  font-size: 1rem;
+  padding: 2px 5px;
+  border-radius: 2px;
+  line-height: 1;
+}
+.del-btn:hover { color: var(--red); background: var(--red-dim); }
+
 /* ── pagination ── */
 .pagination {
   display: flex;
@@ -667,6 +775,8 @@ _JS = r"""
   'use strict';
 
   // ── State ──────────────────────────────────────────────────────────────────
+  var SERVER_MODE = window.location.protocol !== 'file:' && window.location.hostname === 'localhost';
+
   window.dashboardState = {
     source: 'all',
     minScore: 0,
@@ -995,6 +1105,20 @@ _JS = r"""
         tdView.textContent = '—';
       }
       tr.appendChild(tdView);
+
+      // Delete (col hidden until server mode enables it)
+      var tdDel = document.createElement('td');
+      tdDel.className = 'col-actions';
+      var delBtn = document.createElement('button');
+      delBtn.className = 'del-btn';
+      delBtn.title = 'Remove listing';
+      delBtn.textContent = '×';
+      delBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        deleteRow(d.id, tr, expandRow);
+      });
+      tdDel.appendChild(delBtn);
+      tr.appendChild(tdDel);
 
       // Row click → expand radar
       tr.addEventListener('click', function() { toggleExpand(d, tr, expandRow); });
@@ -1354,6 +1478,65 @@ _JS = r"""
     });
   }
 
+  // ── Import modal ───────────────────────────────────────────────────────────
+  function openImportModal() {
+    document.getElementById('importModal').classList.add('open');
+    document.getElementById('f-make').focus();
+  }
+  function closeImportModal() {
+    document.getElementById('importModal').classList.remove('open');
+    document.getElementById('formMsg').textContent = '';
+  }
+  function submitImport() {
+    var make = document.getElementById('f-make').value.trim();
+    var model = document.getElementById('f-model').value.trim();
+    var year = document.getElementById('f-year').value.trim();
+    var msgEl = document.getElementById('formMsg');
+    if (!make || !model || !year) { msgEl.textContent = 'Make, model, and year are required.'; return; }
+    var btn = document.getElementById('importSubmit');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    fetch('/api/import', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        url:         document.getElementById('f-url').value.trim() || null,
+        make:        make,
+        model:       model,
+        year:        +year,
+        trim:        document.getElementById('f-trim').value.trim() || null,
+        body_type:   document.getElementById('f-body-type').value || null,
+        mileage:     document.getElementById('f-mileage').value || null,
+        price:       document.getElementById('f-price').value || null,
+        location:    document.getElementById('f-location').value.trim() || null,
+        seller_type: document.getElementById('f-seller-type').value,
+        notes:       document.getElementById('f-notes').value.trim() || null,
+      }),
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      if (data.ok) { window.location.reload(); }
+      else { msgEl.textContent = data.error || 'Error saving listing.'; btn.disabled = false; btn.textContent = 'Save listing'; }
+    })
+    .catch(function(err) {
+      msgEl.textContent = 'Network error: ' + err.message;
+      btn.disabled = false; btn.textContent = 'Save listing';
+    });
+  }
+  function deleteRow(listingId, dataRow, expandRow) {
+    if (!confirm('Remove this listing from the database?')) return;
+    fetch('/api/delete/' + encodeURIComponent(listingId), { method: 'POST' })
+    .then(function(r){ return r.json(); })
+    .then(function(d) {
+      if (!d.ok) return;
+      if (expandRow) expandRow.remove();
+      dataRow.remove();
+      var tbody = document.getElementById('listingsTbody');
+      var n = tbody ? tbody.querySelectorAll('tr.data-row').length : 0;
+      var countEl = document.getElementById('tableCount');
+      if (countEl) countEl.textContent = n + ' listing' + (n !== 1 ? 's' : '');
+    });
+  }
+
   // ── Boot ───────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
     initFilters();
@@ -1361,6 +1544,17 @@ _JS = r"""
     attachSortHandlers();
     renderTable();
     buildScatter();
+
+    if (SERVER_MODE) {
+      var importBtn = document.getElementById('importBtn');
+      if (importBtn) importBtn.style.display = 'block';
+      document.querySelectorAll('.col-actions').forEach(function(el){ el.style.display = ''; });
+      importBtn.addEventListener('click', openImportModal);
+      document.getElementById('importCancel').addEventListener('click', closeImportModal);
+      document.getElementById('importSubmit').addEventListener('click', submitImport);
+      document.getElementById('importModal').addEventListener('click', function(e){ if (e.target === this) closeImportModal(); });
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeImportModal(); });
+    }
   });
 
 }());
@@ -1425,6 +1619,7 @@ def render_html(
         f'    <span class="stat-chip">Median price <strong>{_h(median_price_str)}</strong></span>',
         "  </div>",
         f'  <span class="fetched">Last fetched: {last_fetched}</span>',
+        '  <button id="importBtn" class="import-btn">+ Add listing</button>',
         "</div>",
         "",
         "<!-- ── Filters ─────────────────────────────────────────── -->",
@@ -1516,6 +1711,7 @@ def render_html(
         lines.append(
             f'        <th data-col="{col}">{_h(label)}{arrow}</th>'
         )
+    lines.append('        <th class="col-actions"></th>')
 
     lines += [
         "      </tr>",
@@ -1536,6 +1732,31 @@ def render_html(
         '    <button class="lightbox-btn" id="lbNext">Next →</button>',
         "  </div>",
         "</div>",
+        "",
+        "<!-- ── Import modal ────────────────────────────────────── -->",
+        '<div id="importModal" class="modal-backdrop">',
+        '  <div class="modal-box">',
+        '    <div class="modal-title">Add listing manually</div>',
+        '    <div class="form-grid">',
+        '      <div class="form-group full"><label>URL (optional)</label><input id="f-url" type="url" placeholder="https://www.facebook.com/marketplace/item/..."></div>',
+        '      <div class="form-group"><label>Make *</label><input id="f-make" type="text" placeholder="Toyota" required></div>',
+        '      <div class="form-group"><label>Model *</label><input id="f-model" type="text" placeholder="RAV4" required></div>',
+        '      <div class="form-group"><label>Year *</label><input id="f-year" type="number" placeholder="2018" min="1990" max="2030" required></div>',
+        '      <div class="form-group"><label>Trim</label><input id="f-trim" type="text" placeholder="SE"></div>',
+        '      <div class="form-group"><label>Body type</label><select id="f-body-type"><option value="">—</option><option>SUV</option><option>Sedan</option><option>Wagon</option><option>Hatchback</option><option>Coupe</option><option>Truck</option><option>Van</option></select></div>',
+        '      <div class="form-group"><label>Seller type</label><select id="f-seller-type"><option value="private">Private</option><option value="dealer">Dealer</option><option value="certified">Certified</option></select></div>',
+        '      <div class="form-group"><label>Mileage</label><input id="f-mileage" type="number" placeholder="75000" min="0"></div>',
+        '      <div class="form-group"><label>Price ($)</label><input id="f-price" type="number" placeholder="9500" min="0"></div>',
+        '      <div class="form-group"><label>Location</label><input id="f-location" type="text" placeholder="Santa Monica, CA"></div>',
+        '      <div class="form-group full"><label>Notes</label><textarea id="f-notes" placeholder="Clean title, one owner, no accidents…"></textarea></div>',
+        '    </div>',
+        '    <div class="modal-footer">',
+        '      <span class="form-msg" id="formMsg"></span>',
+        '      <button class="btn-cancel" id="importCancel">Cancel</button>',
+        '      <button class="btn-primary" id="importSubmit">Save listing</button>',
+        '    </div>',
+        '  </div>',
+        '</div>',
         "",
         "<!-- ── Footer ──────────────────────────────────────────── -->",
         '<div class="footer">',

@@ -438,6 +438,33 @@ def stats() -> None:
 
 
 @cli.command()
+@click.option("--port", default=8765, show_default=True, help="Port to listen on.")
+def serve(port: int) -> None:
+    """Start a local web server with live import and delete UI.
+
+    Opens the dashboard at http://localhost:PORT with an Import button
+    and per-row delete controls. Changes are persisted to the database
+    immediately; reload the page to see updated scores.
+    """
+    import webbrowser
+
+    from carfinder.config import load_config
+    from carfinder.server import run_server
+
+    cfg = load_config()
+    db_path = Path("data/listings.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    server, url = run_server(cfg, db_path, port=port)
+    click.echo(f"Serving carfinder dashboard at {url}  (Ctrl+C to stop)")
+    webbrowser.open(url)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        click.echo("\nStopped.")
+
+
+@cli.command()
 @click.option("--days", default=30, show_default=True)
 def prune(days: int) -> None:
     """Remove listings older than N days."""
