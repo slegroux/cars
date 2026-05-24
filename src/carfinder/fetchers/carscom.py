@@ -20,7 +20,7 @@ from carfinder.models import Listing
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://www.cars.com/shopping/results/"
-MAX_PAGES = 5
+MAX_PAGES = 10
 
 BROWSER_HEADERS = {
     "User-Agent": (

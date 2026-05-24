@@ -345,6 +345,50 @@ def export(top: int, path: str | None, fmt: str) -> None:
         click.echo(f"HTML dashboard exported to {html_path} ({len(scored)} listings)")
 
 
+@cli.command("import")
+@click.argument("url_or_file", required=False, metavar="[URL|CSV_FILE]")
+@click.option("--template", is_flag=True, help="Print CSV template headers and exit.")
+def import_listings(url_or_file: str | None, template: bool) -> None:
+    """Manually import listings (Facebook Marketplace, CSV, etc.).
+
+    \b
+    Examples:
+      carfinder import                          # interactive form
+      carfinder import https://fb.com/...       # pre-fill URL, prompt the rest
+      carfinder import listings.csv             # batch import from CSV
+      carfinder import --template               # print CSV column headers
+    """
+    from pathlib import Path as _Path
+
+    from carfinder.db import init_db
+    from carfinder.importer import CSV_TEMPLATE, import_csv, import_one
+
+    if template:
+        click.echo(CSV_TEMPLATE)
+        return
+
+    db_path = _Path("data/listings.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = init_db(db_path)
+
+    # Detect if argument is a CSV file
+    if url_or_file and url_or_file.endswith(".csv") and _Path(url_or_file).exists():
+        saved, skipped = import_csv(_Path(url_or_file), conn)
+        click.echo(f"\nImported {saved} listing(s), skipped {skipped}.")
+        if saved:
+            click.echo("Run 'carfinder export --format html --path ./output' to update the dashboard.")
+        return
+
+    # URL or no-arg → interactive
+    url = url_or_file if url_or_file and url_or_file.startswith("http") else None
+    if url_or_file and not url:
+        raise click.UsageError(f"'{url_or_file}' is not a URL or existing CSV file.")
+
+    ok = import_one(url, conn)
+    if ok:
+        click.echo("Run 'carfinder export --format html --path ./output' to update the dashboard.")
+
+
 @cli.command()
 @click.argument("listing_id")
 def show(listing_id: str) -> None:
