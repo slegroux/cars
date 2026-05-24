@@ -124,6 +124,7 @@ def _make_handler(config: "Config", db_path: Path):
             conn = init_db(db_path)
             lid = upsert_listing(conn, listing)
             conn.commit()
+            logger.info("Saved and committed listing %s", lid)
             conn.close()
             self._json({"ok": True, "id": lid})
 
@@ -132,8 +133,10 @@ def _make_handler(config: "Config", db_path: Path):
             from carfinder.db import init_db
 
             conn = init_db(db_path)
-            conn.execute("DELETE FROM listings WHERE id = ?", [listing_id])
+            cur = conn.execute("DELETE FROM listings WHERE id = ?", [listing_id])
             conn.commit()
+            if cur.rowcount:
+                logger.info("Deleted and committed listing %s", listing_id)
             conn.close()
             self._json({"ok": True})
 
