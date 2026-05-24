@@ -1,0 +1,203 @@
+# Insurance risk tiers by make/model/year range.
+# tier: low | medium | high
+# Fields: make, model, year_min, year_max, tier, reason
+
+# --- High theft: Kia/Hyundai no immobilizer (Kia Boys trend in LA) ---
+- make: Kia
+  model: Forte
+  year_min: 2011
+  year_max: 2021
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Kia
+  model: Optima
+  year_min: 2011
+  year_max: 2020
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Kia
+  model: Sportage
+  year_min: 2011
+  year_max: 2021
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Kia
+  model: Soul
+  year_min: 2010
+  year_max: 2021
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Hyundai
+  model: Elantra
+  year_min: 2011
+  year_max: 2021
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Hyundai
+  model: Sonata
+  year_min: 2011
+  year_max: 2020
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+- make: Hyundai
+  model: Tucson
+  year_min: 2011
+  year_max: 2021
+  tier: high
+  reason: "no immobilizer — Kia Boys theft trend in LA"
+
+# --- High theft: catalytic converter targets in LA ---
+- make: Toyota
+  model: Prius
+  year_min: 2004
+  year_max: 2015
+  tier: high
+  reason: "highest cat theft target in LA"
+
+- make: Toyota
+  model: Prius
+  year_min: 2016
+  year_max: 2022
+  tier: medium
+  reason: "redesigned cat — still targeted"
+
+- make: Honda
+  model: Element
+  year_min: 2003
+  year_max: 2011
+  tier: high
+  reason: "frequent cat theft target"
+
+- make: Honda
+  model: CR-V
+  year_min: 2007
+  year_max: 2011
+  tier: medium
+  reason: "cat theft uptick"
+
+- make: Honda
+  model: Accord
+  year_min: 2001
+  year_max: 2012
+  tier: medium
+  reason: "cat theft target"
+
+- make: Honda
+  model: Civic
+  year_min: 2001
+  year_max: 2015
+  tier: medium
+  reason: "cat theft target (older OBDII)"
+
+- make: Toyota
+  model: Tacoma
+  year_min: 2005
+  year_max: 2015
+  tier: high
+  reason: "truck cat theft"
+
+# --- Low risk: street parking safe ---
+- make: Mazda
+  model: CX-5
+  year_min: 2013
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Mazda
+  model: Mazda3
+  year_min: 2010
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Mazda
+  model: Mazda6
+  year_min: 2009
+  year_max: 2021
+  tier: low
+  reason: "low theft rate"
+
+- make: Subaru
+  model: Forester
+  year_min: 2009
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Subaru
+  model: Outback
+  year_min: 2010
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Subaru
+  model: Impreza
+  year_min: 2012
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Subaru
+  model: Crosstrek
+  year_min: 2013
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Toyota
+  model: RAV4
+  year_min: 2006
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Honda
+  model: Fit
+  year_min: 2009
+  year_max: 2020
+  tier: low
+  reason: "low theft rate"
+
+- make: Volkswagen
+  model: Jetta
+  year_min: 2011
+  year_max: 2024
+  tier: low
+  reason: "low theft rate"
+
+- make: Volkswagen
+  model: Golf
+  year_min: 2010
+  year_max: 2021
+  tier: low
+  reason: "low theft rate"
+
+- make: Volkswagen
+  model: Passat
+  year_min: 2012
+  year_max: 2019
+  tier: low
+  reason: "low theft rate"
+
+# --- Medium: German cars — higher comprehensive premium due to parts cost ---
+- make: BMW
+  model: 3-Series
+  year_min: 2007
+  year_max: 2024
+  tier: medium
+  reason: "high parts cost premium"
+
+- make: Audi
+  model: A4
+  year_min: 2009
+  year_max: 2024
+  tier: medium
+  reason: "high parts cost premium"

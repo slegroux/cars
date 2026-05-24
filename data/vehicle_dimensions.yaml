@@ -1,0 +1,89 @@
+# Vehicle exterior length in inches. Source: manufacturer specs / EPA data.
+# Fields: make, model, year_min, year_max, length_inches
+# Toyota
+- {make: Toyota, model: RAV4, year_min: 2006, year_max: 2012, length_inches: 181.0}
+- {make: Toyota, model: RAV4, year_min: 2013, year_max: 2018, length_inches: 179.9}
+- {make: Toyota, model: RAV4, year_min: 2019, year_max: 2024, length_inches: 181.0}
+- {make: Toyota, model: Corolla, year_min: 2009, year_max: 2013, length_inches: 178.3}
+- {make: Toyota, model: Corolla, year_min: 2014, year_max: 2019, length_inches: 182.7}
+- {make: Toyota, model: Corolla, year_min: 2020, year_max: 2024, length_inches: 182.7}
+- {make: Toyota, model: Camry, year_min: 2007, year_max: 2011, length_inches: 189.2}
+- {make: Toyota, model: Camry, year_min: 2012, year_max: 2017, length_inches: 189.2}
+- {make: Toyota, model: Camry, year_min: 2018, year_max: 2024, length_inches: 192.1}
+- {make: Toyota, model: Prius, year_min: 2010, year_max: 2015, length_inches: 175.6}
+- {make: Toyota, model: Prius, year_min: 2016, year_max: 2022, length_inches: 180.1}
+- {make: Toyota, model: Matrix, year_min: 2009, year_max: 2014, length_inches: 171.3}
+# Honda
+- {make: Honda, model: CR-V, year_min: 2007, year_max: 2011, length_inches: 178.3}
+- {make: Honda, model: CR-V, year_min: 2012, year_max: 2016, length_inches: 178.3}
+- {make: Honda, model: CR-V, year_min: 2017, year_max: 2022, length_inches: 180.6}
+- {make: Honda, model: Civic, year_min: 2006, year_max: 2011, length_inches: 177.0}
+- {make: Honda, model: Civic, year_min: 2012, year_max: 2015, length_inches: 178.7}
+- {make: Honda, model: Civic, year_min: 2016, year_max: 2021, length_inches: 182.3}
+- {make: Honda, model: Accord, year_min: 2008, year_max: 2012, length_inches: 193.8}
+- {make: Honda, model: Accord, year_min: 2013, year_max: 2017, length_inches: 191.4}
+- {make: Honda, model: Accord, year_min: 2018, year_max: 2022, length_inches: 192.0}
+- {make: Honda, model: Fit, year_min: 2009, year_max: 2014, length_inches: 161.0}
+- {make: Honda, model: Fit, year_min: 2015, year_max: 2020, length_inches: 161.0}
+# Mazda
+- {make: Mazda, model: CX-5, year_min: 2013, year_max: 2016, length_inches: 178.7}
+- {make: Mazda, model: CX-5, year_min: 2017, year_max: 2024, length_inches: 179.4}
+- {make: Mazda, model: Mazda3, year_min: 2010, year_max: 2013, length_inches: 181.3}
+- {make: Mazda, model: Mazda3, year_min: 2014, year_max: 2018, length_inches: 174.6}
+- {make: Mazda, model: Mazda3, year_min: 2019, year_max: 2024, length_inches: 183.5}
+- {make: Mazda, model: Mazda6, year_min: 2009, year_max: 2013, length_inches: 193.8}
+- {make: Mazda, model: Mazda6, year_min: 2014, year_max: 2021, length_inches: 191.5}
+# Subaru
+- {make: Subaru, model: Forester, year_min: 2009, year_max: 2013, length_inches: 180.1}
+- {make: Subaru, model: Forester, year_min: 2014, year_max: 2018, length_inches: 181.1}
+- {make: Subaru, model: Forester, year_min: 2019, year_max: 2024, length_inches: 182.1}
+- {make: Subaru, model: Outback, year_min: 2010, year_max: 2014, length_inches: 188.2}
+- {make: Subaru, model: Outback, year_min: 2015, year_max: 2019, length_inches: 190.0}
+- {make: Subaru, model: Outback, year_min: 2020, year_max: 2024, length_inches: 191.1}
+- {make: Subaru, model: Impreza, year_min: 2012, year_max: 2016, length_inches: 173.4}
+- {make: Subaru, model: Impreza, year_min: 2017, year_max: 2024, length_inches: 175.2}
+# Hyundai
+- {make: Hyundai, model: Tucson, year_min: 2010, year_max: 2015, length_inches: 173.0}
+- {make: Hyundai, model: Tucson, year_min: 2016, year_max: 2021, length_inches: 176.0}
+- {make: Hyundai, model: Tucson, year_min: 2022, year_max: 2024, length_inches: 182.3}
+- {make: Hyundai, model: Sonata, year_min: 2011, year_max: 2014, length_inches: 189.8}
+- {make: Hyundai, model: Sonata, year_min: 2015, year_max: 2019, length_inches: 190.9}
+- {make: Hyundai, model: Sonata, year_min: 2020, year_max: 2024, length_inches: 192.9}
+- {make: Hyundai, model: Elantra, year_min: 2011, year_max: 2016, length_inches: 178.5}
+- {make: Hyundai, model: Elantra, year_min: 2017, year_max: 2020, length_inches: 180.5}
+- {make: Hyundai, model: Elantra, year_min: 2021, year_max: 2024, length_inches: 184.1}
+# Kia
+- {make: Kia, model: Sportage, year_min: 2011, year_max: 2015, length_inches: 174.8}
+- {make: Kia, model: Sportage, year_min: 2017, year_max: 2022, length_inches: 177.0}
+- {make: Kia, model: Soul, year_min: 2010, year_max: 2013, length_inches: 161.1}
+- {make: Kia, model: Soul, year_min: 2014, year_max: 2019, length_inches: 163.0}
+- {make: Kia, model: Soul, year_min: 2020, year_max: 2024, length_inches: 164.8}
+- {make: Kia, model: Forte, year_min: 2010, year_max: 2013, length_inches: 177.6}
+- {make: Kia, model: Forte, year_min: 2014, year_max: 2018, length_inches: 180.1}
+- {make: Kia, model: Forte, year_min: 2019, year_max: 2024, length_inches: 182.7}
+- {make: Kia, model: Optima, year_min: 2011, year_max: 2015, length_inches: 190.9}
+- {make: Kia, model: Optima, year_min: 2016, year_max: 2020, length_inches: 191.7}
+# Nissan
+- {make: Nissan, model: Rogue, year_min: 2008, year_max: 2013, length_inches: 182.9}
+- {make: Nissan, model: Rogue, year_min: 2014, year_max: 2020, length_inches: 184.6}
+- {make: Nissan, model: Rogue, year_min: 2021, year_max: 2024, length_inches: 183.3}
+- {make: Nissan, model: Sentra, year_min: 2013, year_max: 2019, length_inches: 182.5}
+- {make: Nissan, model: Sentra, year_min: 2020, year_max: 2024, length_inches: 182.9}
+- {make: Nissan, model: Altima, year_min: 2013, year_max: 2018, length_inches: 191.5}
+- {make: Nissan, model: Altima, year_min: 2019, year_max: 2024, length_inches: 192.1}
+# Volkswagen
+- {make: Volkswagen, model: Jetta, year_min: 2011, year_max: 2018, length_inches: 182.5}
+- {make: Volkswagen, model: Jetta, year_min: 2019, year_max: 2024, length_inches: 185.8}
+- {make: Volkswagen, model: Golf, year_min: 2010, year_max: 2014, length_inches: 165.4}
+- {make: Volkswagen, model: Golf, year_min: 2015, year_max: 2021, length_inches: 168.0}
+- {make: Volkswagen, model: Passat, year_min: 2012, year_max: 2019, length_inches: 191.8}
+# BMW
+- {make: BMW, model: 3-Series, year_min: 2007, year_max: 2011, length_inches: 178.2}
+- {make: BMW, model: 3-Series, year_min: 2012, year_max: 2018, length_inches: 182.3}
+- {make: BMW, model: 3-Series, year_min: 2019, year_max: 2024, length_inches: 185.4}
+# Audi
+- {make: Audi, model: A4, year_min: 2009, year_max: 2016, length_inches: 184.5}
+- {make: Audi, model: A4, year_min: 2017, year_max: 2024, length_inches: 187.1}
+# Lexus
+- {make: Lexus, model: IS, year_min: 2006, year_max: 2013, length_inches: 184.3}
+- {make: Lexus, model: IS, year_min: 2014, year_max: 2024, length_inches: 184.3}

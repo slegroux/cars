@@ -1,0 +1,158 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779574860611,
+  "projectRoot": "/Users/sylvain/Projects/Cars",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "pyproject.toml"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "pytest",
+        "version": null,
+        "category": "testing"
+      }
+    ],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": "pytest",
+    "lintCommand": "ruff check",
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "data": {
+      "path": "data",
+      "purpose": "Data files",
+      "fileCount": 7,
+      "lastAccessed": 1779574860599,
+      "keyFiles": [
+        "insurance_risk.yaml",
+        "listings.db",
+        "mpg_lookup.csv",
+        "msrp_by_make_model.yaml",
+        "reliability_tiers.yaml"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 1,
+      "lastAccessed": 1779574860599,
+      "keyFiles": [
+        "build_mpg_lookup.py"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1779574860599,
+      "keyFiles": []
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 12,
+      "lastAccessed": 1779574860603,
+      "keyFiles": [
+        "__init__.py",
+        "test_carmax_parser.py",
+        "test_config.py",
+        "test_craigslist_parser.py",
+        "test_db.py"
+      ]
+    },
+    "tests/fixtures": {
+      "path": "tests/fixtures",
+      "purpose": "Test fixtures",
+      "fileCount": 0,
+      "lastAccessed": 1779574860606,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "tests/test_scorer.py",
+      "accessCount": 5,
+      "lastAccessed": 1779577661302,
+      "type": "file"
+    },
+    {
+      "path": "src/carfinder/scorer.py",
+      "accessCount": 4,
+      "lastAccessed": 1779577623493,
+      "type": "file"
+    },
+    {
+      "path": "src/carfinder/config.py",
+      "accessCount": 3,
+      "lastAccessed": 1779577599564,
+      "type": "file"
+    },
+    {
+      "path": "config.yaml",
+      "accessCount": 2,
+      "lastAccessed": 1779577591389,
+      "type": "file"
+    },
+    {
+      "path": "src/carfinder/cli.py",
+      "accessCount": 2,
+      "lastAccessed": 1779577634903,
+      "type": "file"
+    },
+    {
+      "path": "tests/test_carmax_parser.py",
+      "accessCount": 2,
+      "lastAccessed": 1779577682077,
+      "type": "file"
+    },
+    {
+      "path": "src/carfinder/models.py",
+      "accessCount": 1,
+      "lastAccessed": 1779575057737,
+      "type": "file"
+    },
+    {
+      "path": "data/insurance_risk.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1779575057879,
+      "type": "file"
+    },
+    {
+      "path": "tests/test_config.py",
+      "accessCount": 1,
+      "lastAccessed": 1779577403739,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

@@ -1,0 +1,35 @@
+# Approximate base MSRP (USD) at time of original sale.
+# Source: manufacturer data / Edmunds historical aggregates.
+# Used as depreciation fallback when cohort < 3 listings.
+# Fields: make, model, base_msrp_usd (era base trim)
+- {make: Toyota, model: RAV4, msrp: 22000}
+- {make: Toyota, model: Corolla, msrp: 17000}
+- {make: Toyota, model: Camry, msrp: 23000}
+- {make: Toyota, model: Prius, msrp: 24000}
+- {make: Toyota, model: Matrix, msrp: 17000}
+- {make: Honda, model: CR-V, msrp: 23000}
+- {make: Honda, model: Civic, msrp: 18000}
+- {make: Honda, model: Accord, msrp: 22000}
+- {make: Honda, model: Fit, msrp: 16000}
+- {make: Mazda, model: CX-5, msrp: 21000}
+- {make: Mazda, model: Mazda3, msrp: 17000}
+- {make: Mazda, model: Mazda6, msrp: 22000}
+- {make: Subaru, model: Forester, msrp: 22000}
+- {make: Subaru, model: Outback, msrp: 25000}
+- {make: Subaru, model: Impreza, msrp: 18000}
+- {make: Hyundai, model: Tucson, msrp: 21000}
+- {make: Hyundai, model: Sonata, msrp: 22000}
+- {make: Hyundai, model: Elantra, msrp: 17000}
+- {make: Kia, model: Sportage, msrp: 21000}
+- {make: Kia, model: Soul, msrp: 16000}
+- {make: Kia, model: Forte, msrp: 16000}
+- {make: Kia, model: Optima, msrp: 22000}
+- {make: Nissan, model: Rogue, msrp: 22000}
+- {make: Nissan, model: Sentra, msrp: 17000}
+- {make: Nissan, model: Altima, msrp: 22000}
+- {make: Volkswagen, model: Jetta, msrp: 18000}
+- {make: Volkswagen, model: Golf, msrp: 20000}
+- {make: Volkswagen, model: Passat, msrp: 24000}
+- {make: BMW, model: 3-Series, msrp: 37000}
+- {make: Audi, model: A4, msrp: 36000}
+- {make: Lexus, model: IS, msrp: 35000}

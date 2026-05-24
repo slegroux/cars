@@ -1,0 +1,2069 @@
+[
+  {
+    "type": "request",
+    "url": "https://c.go-mpulse.net/api/config.json?key=G44P5-SQM6J-DDMWR-2C333-A6FEA&d=www.carmax.com&t=5931901&v=1.720.0&sl=0&si=116b0492-62d3-41aa-bdf0-1aaa3cc908bd-tfid69&plugins=AK,ConfigOverride,Continuity,PageParams,IFrameDelay,AutoXHR,SPA,History,Angular,Backbone,Ember,RT,CrossDomain,BW,PaintTiming,NavigationTiming,ResourceTiming,Memory,CACHE_RELOAD,Errors,TPAnalytics,UserTiming,Akamai,Early,EventTiming,LOGN&acao=&ak.ai=245985",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://c.go-mpulse.net/api/config.json?key=G44P5-SQM6J-DDMWR-2C333-A6FEA&d=www.carmax.com&t=5931901&v=1.720.0&sl=0&si=116b0492-62d3-41aa-bdf0-1aaa3cc908bd-tfid69&plugins=AK,ConfigOverride,Continuity,PageParams,IFrameDelay,AutoXHR,SPA,History,Angular,Backbone,Ember,RT,CrossDomain,BW,PaintTiming,NavigationTiming,ResourceTiming,Memory,CACHE_RELOAD,Errors,TPAnalytics,UserTiming,Akamai,Early,EventTiming,LOGN&acao=&ak.ai=245985",
+    "status": 200,
+    "content_type": "application/json",
+    "response_headers": {
+      "cache-control": "private, max-age=300, stale-while-revalidate=60, stale-if-error=120",
+      "timing-allow-origin": "*",
+      "content-encoding": "gzip",
+      "access-control-allow-origin": "*",
+      "alt-svc": "h3=\":443\"; ma=93600",
+      "content-length": "4002",
+      "date": "Sat, 23 May 2026 21:03:54 GMT",
+      "content-type": "application/json",
+      "vary": "Accept-Encoding"
+    },
+    "body_preview": "{\"h.key\": \"G44P5-SQM6J-DDMWR-2C333-A6FEA\", \"h.d\": \"carmax.com\", \"h.t\": 1779570234552, \"h.cr\": \"ad9e20186e59449d6a41e7c7984aaca53a2eb4ca-d395869-718c98d\", \"session_id\": \"27414de6-fb26-4339-816a-f09dbc4ca5dd\", \"site_domain\": \"carmax.com\", \"beacon_url\": \"//17de4c0e.akstat.io/\", \"autorun\": true, \"instrument_xhr\": true, \"beacon_interval\": 60, \"BW\": {\"enabled\": false}, \"RT\": {\"session_exp\": 1800}, \"ResourceTiming\": {\"enabled\": true, \"splitAtPath\": true}, \"Errors\": {\"enabled\": true, \"monitorTimeout\": true, \"monitorEvents\": true, \"maxErrors\": 20, \"sendAfterOnload\": true, \"sendInterval\": 1000}, \"Continuity\": {\"enabled\": true, \"waitAfterOnload\": 2500}, \"PageParams\": {\"xhr\": \"match\", \"pageGroups\": [{\"type\": \"Regexp\", \"parameter1\": \"/404\", \"parameter2\": \"/404\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/cars\", \"parameter2\": \"Cars\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"www.*.carmax.com(/?(#.*)?)$\", \"parameter2\": \"Home Page\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"www.*.carmax.com/$\", \"parameter2\": \"Home Page\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/\\\\?\", \"parameter2\": \"Home Page\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car/\\\\d+/vehicle-history\", \"parameter2\": \"Vehicle History\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car/beta/\", \"parameter2\": \"Car\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car/api/watch\", \"parameter2\": \"API - Search Watch\", \"subresource\": true, \"on\": [\"xhr\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/cars/api/mykmx/savesearch\", \"parameter2\": \"API - Save Search\", \"subresource\": true, \"on\": [\"xhr\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car/\", \"parameter2\": \"Car\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car-detail/\", \"parameter2\": \"Car\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"/car_spotlight\", \"parameter2\": \"Car Spotlight\", \"on\": [\"navigation\"]}, {\"type\": \"Regexp\", \"parameter1\": \"carmax.com/stores\", \"parameter2\": ",
+    "body_shape": [
+      "h.key",
+      "h.d",
+      "h.t",
+      "h.cr",
+      "session_id",
+      "site_domain",
+      "beacon_url",
+      "autorun",
+      "instrument_xhr",
+      "beacon_interval",
+      "BW",
+      "RT",
+      "ResourceTiming",
+      "Errors",
+      "Continuity",
+      "PageParams",
+      "Akamai",
+      "user_ip"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/stores/api/7810",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept": "application/json",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/stores/api/status/7810",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept": "application/json",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/cars/api/cookie/screenWidthAndHeight?screenWidth=1280&screenHeight=800",
+    "method": "PUT",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/shop/api/insights/connectionstring",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/cars/api/finance/ratesandfees/CA",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/shared/shop-search/asset-manifest.json",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/ExW5b8ifs5v1/8bTEqD/-XXV3K/YO9DpQXrc4NGf6V5/GBAqNwE/ImJ/veV5bPjoB",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://carmax.sc.omtrdc.net/id?d_visid_ver=5.5.0&d_fieldgroup=A&mcorgid=0C1038B35278345B0A490D4C%40AdobeOrg&mid=28017165024916107932342773029111522744&ts=1779570235858",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "application/x-www-form-urlencoded",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://smetrics.carmax.com/rest/v1/delivery?client=carmax&sessionId=993d6a31de3e4dbb94fffaba1fc7091c&version=2.11.4",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/stores/api/status/7810",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      "request-context": "appId=cid-v1:9336cb2e-56a8-454e-8ffc-d63deab21124",
+      "server-timing": "cdn-cache; desc=MISS, edge; dur=14, origin; dur=10, ak_p; desc=\"1779570235311_399898574_520128873_2331_14228_41_0_219\";dur=1",
+      "content-length": "196",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": "{\"id\": \"7810\", \"holiday\": [{\"date\": \"Monday, May 25\", \"time\": \"9AM \\u2013 9PM\"}], \"alert\": null, \"isOpen\": true, \"currentHours\": {\"startDayOfWeek\": 6, \"endDayOfWeek\": 6, \"startHour\": \"09:00:00\", \"endHour\": \"21:00:00\"}}",
+    "body_shape": [
+      "id",
+      "holiday",
+      "alert",
+      "isOpen",
+      "currentHours"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/stores/api/7810",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      "request-context": "appId=cid-v1:9336cb2e-56a8-454e-8ffc-d63deab21124",
+      "server-timing": "cdn-cache; desc=MISS, edge; dur=5, origin; dur=16, ak_p; desc=\"1779570235316_399898574_520128872_2609_12863_41_0_219\";dur=1",
+      "content-length": "4232",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": "{\"isSaveable\": true, \"breadcrumb\": null, \"digitalData\": null, \"map\": null, \"schema\": null, \"storeFeeDisclaimer\": null, \"isOpen\": true, \"telephoneNumber\": \"(310) 568\\u20139272\", \"tollFreePhoneNumber\": \"(888) 646\\u20139898\", \"telephoneNumbers\": [\"EOfficePhoneLocal (310) 216\\u20138348\", \"EOfficePhoneTollFree (877) 999\\u20139792\", \"PhoneFax (310) 216\\u20138358\", \"PhoneLocal (310) 568\\u20139272\", \"PhoneLocalMobile (310) 957\\u20136708\", \"PhoneTollFree (888) 646\\u20139898\", \"AndroidRingTo (310) 957\\u20136704\", \"iOSRingTo (310) 216\\u20138365\"], \"salesTelephoneNumbers\": [\"PhoneFax (310) 216\\u20138358\", \"PhoneLocal (310) 568\\u20139272\", \"PhoneTollFree (888) 646\\u20139898\"], \"generalTelephoneNumbers\": [\"PhoneFax (310) 216\\u20138358\", \"PhoneLocal (310) 568\\u20139272\", \"PhoneTollFree (888) 646\\u20139898\"], \"id\": \"7810\", \"name\": \"LAX\", \"addressLine1\": \"8611 S La Cienega Blvd\", \"addressLine2\": null, \"city\": \"Los Angeles\", \"mailingCity\": \"Inglewood\", \"state\": \"CA\", \"stateAbbreviation\": \"CA\", \"stateName\": \"California\", \"zipCode\": \"90301\", \"status\": \"Active\", \"phoneNumbers\": [{\"type\": \"EOfficePhoneLocal\", \"number\": \"3102168348\", \"formatted\": \"(310) 216\\u20138348\"}, {\"type\": \"EOfficePhoneTollFree\", \"number\": \"8779999792\", \"formatted\": \"(877) 999\\u20139792\"}, {\"type\": \"PhoneFax\", \"number\": \"3102168358\", \"formatted\": \"(310) 216\\u20138358\"}, {\"type\": \"PhoneLocal\", \"number\": \"3105689272\", \"formatted\": \"(310) 568\\u20139272\"}, {\"type\": \"PhoneLocalMobile\", \"number\": \"3109576708\", \"formatted\": \"(310) 957\\u20136708\"}, {\"type\": \"PhoneTollFree\", \"number\": \"8886469898\", \"formatted\": \"(888) 646\\u20139898\"}, {\"type\": \"AndroidRingTo\", \"number\": \"3109576704\", \"formatted\": \"(310) 957\\u20136704\"}, {\"type\": \"iOSRingTo\", \"number\": \"3102168365\", \"formatted\": \"(310) 216\\u20138365\"}], \"latitude\": 33.95845, \"longitude\": -118.37018, \"hours\": [{\"startDayOfWeek\": 0, \"endDayOfWeek\": 0, \"startHour\": \"11:00:00\", \"endHour\": \"19:00:00\"}, {\"startDayOfWeek\": 1, \"endDayOfWeek\": 5, \"startHour\": \"10:00:00\", \"endHour\": \"2",
+    "body_shape": [
+      "isSaveable",
+      "breadcrumb",
+      "digitalData",
+      "map",
+      "schema",
+      "storeFeeDisclaimer",
+      "isOpen",
+      "telephoneNumber",
+      "tollFreePhoneNumber",
+      "telephoneNumbers",
+      "salesTelephoneNumbers",
+      "generalTelephoneNumbers",
+      "id",
+      "name",
+      "addressLine1",
+      "addressLine2",
+      "city",
+      "mailingCity",
+      "state",
+      "stateAbbreviation",
+      "stateName",
+      "zipCode",
+      "status",
+      "phoneNumbers",
+      "latitude",
+      "longitude",
+      "hours",
+      "holidayHours",
+      "holidayHoursDisplayed",
+      "serviceHours",
+      "alertMessage",
+      "phoneHours",
+      "currentHours",
+      "todaysHoursLabel",
+      "normalizedCity",
+      "normalizedName",
+      "activeStatus",
+      "capabilities",
+      "attributes",
+      "isMicrostore",
+      "isCarBuyingCenter",
+      "distanceInMiles"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/cars/api/cookie/screenWidthAndHeight?screenWidth=1280&screenHeight=800",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      "request-context": "appId=cid-v1:3db4d770-2986-440a-966d-39847b277244",
+      "server-timing": "ak_p; desc=\"1779570235412_399898574_520128979_3254_10626_71_0_219\";dur=1",
+      "content-length": "0",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/cars/api/finance/ratesandfees/CA",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "cache-control": "public,max-age=3600",
+      "timing-allow-origin": "*",
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "request-context": "appId=cid-v1:3db4d770-2986-440a-966d-39847b277244",
+      "server-timing": "cdn-cache; desc=HIT, edge; dur=1, ak_p; desc=\"1779570235494_399898574_520129146_1241_13912_93_0_219\";dur=1",
+      "content-length": "498",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": "{\"rates\": [{\"type\": \"Excellent\", \"minimumRate\": 5.24, \"maximumRate\": 8.49, \"medianRate\": 5.49, \"minimumFicoScore\": 800, \"maximumFicoScore\": null, \"value\": 0, \"description\": \"Excellent\", \"ficoRange\": \"800+\"}, {\"type\": \"VeryGood\", \"minimumRate\": 7.44, \"maximumRate\": 11.24, \"medianRate\": 8.24, \"minimumFicoScore\": 740, \"maximumFicoScore\": 799, \"value\": 1, \"description\": \"Very Good\", \"ficoRange\": \"740\\u2013799\"}, {\"type\": \"Good\", \"minimumRate\": 11.29, \"maximumRate\": 15.04, \"medianRate\": 12.04, \"minimumFicoScore\": 670, \"maximumFicoScore\": 739, \"value\": 2, \"description\": \"Good\", \"ficoRange\": \"670\\u2013739\"}, {\"type\": \"Fair\", \"minimumRate\": 15.74, \"maximumRate\": 19.89, \"medianRate\": 16.89, \"minimumFicoScore\": 580, \"maximumFicoScore\": 669, \"value\": 3, \"description\": \"Fair\", \"ficoRange\": \"580\\u2013669\"}, {\"type\": \"Challenged\", \"minimumRate\": 20.09, \"maximumRate\": 24.59, \"medianRate\": 21.59, \"minimumFicoScore\": null, \"maximumFicoScore\": 579, \"value\": 4, \"description\": \"Challenged\", \"ficoRange\": \"<580\"}], \"fees\": [{\"minimum\": 1.0, \"maximum\": 5000.0, \"estimatedFeesMaximum\": 1100.0}, {\"minimum\": 5001.0, \"maximum\": 10000.0, \"estimatedFeesMaximum\": 1600.0}, {\"minimum\": 10001.0, \"maximum\": 15000.0, \"estimatedFeesMaximum\": 2100.0}, {\"minimum\": 15001.0, \"maximum\": 20000.0, \"estimatedFeesMaximum\": 2600.0}, {\"minimum\": 20001.0, \"maximum\": 25000.0, \"estimatedFeesMaximum\": 3100.0}, {\"minimum\": 25001.0, \"maximum\": 30000.0, \"estimatedFeesMaximum\": 3600.0}, {\"minimum\": 30001.0, \"maximum\": 35000.0, \"estimatedFeesMaximum\": 4100.0}, {\"minimum\": 35001.0, \"maximum\": 40000.0, \"estimatedFeesMaximum\": 4600.0}, {\"minimum\": 40001.0, \"maximum\": 45000.0, \"estimatedFeesMaximum\": 5100.0}, {\"minimum\": 45001.0, \"maximum\": 50000.0, \"estimatedFeesMaximum\": 5600.0}, {\"minimum\": 50001.0, \"maximum\": 55000.0, \"estimatedFeesMaximum\": 6100.0}, {\"minimum\": 55001.0, \"maximum\": 60000.0, \"estimatedFeesMaximum\": 6600.0}, {\"minimum\": 60001.0, \"maximum\": 65000.0, \"estimatedFeesMaximum\": 7100.0}, {\"minimum\": 65001.0, \"maxi",
+    "body_shape": [
+      "rates",
+      "fees"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/shop/api/insights/connectionstring",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      "request-context": "appId=cid-v1:669c1207-3bba-4974-b1fe-be3fc936f05f",
+      "server-timing": "cdn-cache; desc=MISS, edge; dur=13, origin; dur=9, ak_p; desc=\"1779570235501_399898574_520129145_4095_12335_103_0_219\";dur=1",
+      "content-length": "328",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "content-type": "text/plain; charset=utf-8",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": "SW5zdHJ1bWVudGF0aW9uS2V5PTk1Zjk5MWU2LWYzNDItNDhmNy1iOGRlLTQxNDAwN2M1YTMwZTtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2NlbnRyYWx1cy0yLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLztMaXZlRW5kcG9pbnQ9aHR0cHM6Ly9jZW50cmFsdXMubGl2ZWRpYWdub3N0aWNzLm1vbml0b3IuYXp1cmUuY29tLztBcHBsaWNhdGlvbklkPTY2OWMxMjA3LTNiYmEtNDk3NC1iMWZlLWJlM2ZjOTM2ZjA1Zg=="
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/shared/shop-search/asset-manifest.json",
+    "status": 200,
+    "content_type": "application/json",
+    "response_headers": {
+      "content-encoding": "gzip",
+      "etag": "\"0x8DEAB7BDA365B53\"",
+      "x-content-type-options": "nosniff",
+      "server-timing": "cdn-cache; desc=MISS, edge; dur=41, origin; dur=13, ak_p; desc=\"1779570235529_399898574_520129191_5705_13061_125_0_219\";dur=1",
+      "date": "Sat, 23 May 2026 21:03:55 GMT",
+      "content-type": "application/json",
+      "last-modified": "Wed, 6 May 2026 14:29:16 GMT",
+      "vary": "Accept-Encoding",
+      "x-frame-options": "sameorigin",
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "cache-control": "no-cache",
+      "timing-allow-origin": "*",
+      "request-context": "appId=cid-v1:10145438-aa4e-4870-8785-9a64ffe121ad",
+      "access-control-allow-origin": "*",
+      "content-length": "979"
+    },
+    "body_preview": "{\"id\": \"shopflow\", \"name\": \"shopflow\", \"metaData\": {\"name\": \"shopflow\", \"type\": \"app\", \"buildInfo\": {\"buildVersion\": \"1.0.0\", \"buildName\": \"shopflow_saved_searches\"}, \"remoteEntry\": {\"name\": \"static/js/shopflow.f80f5a2d-asset.js\", \"path\": \"\", \"type\": \"global\"}, \"types\": {\"path\": \"\", \"name\": \"\", \"zip\": \"@mf-types.zip\", \"api\": \"@mf-types.d.ts\"}, \"globalName\": \"shopflow\", \"pluginVersion\": \"0.14.3\", \"prefetchInterface\": false, \"publicPath\": \"https://www.carmax.com/shared/shop-search/\"}, \"shared\": [{\"id\": \"shopflow:react\", \"name\": \"react\", \"version\": \"17\", \"singleton\": true, \"requiredVersion\": \"17\", \"assets\": {\"js\": {\"async\": [], \"sync\": [\"static/js/shopflow.f80f5a2d.js\", \"static/js/906.b8772139.js\"]}, \"css\": {\"async\": [], \"sync\": []}}}, {\"id\": \"shopflow:react-dom\", \"name\": \"react-dom\", \"version\": \"17\", \"singleton\": true, \"requiredVersion\": \"17\", \"assets\": {\"js\": {\"async\": [], \"sync\": [\"static/js/shopflow.f80f5a2d.js\", \"static/js/906.b8772139.js\"]}, \"css\": {\"async\": [], \"sync\": []}}}, {\"id\": \"shopflow:@emotion/react\", \"name\": \"@emotion/react\", \"version\": \"*\", \"singleton\": true, \"requiredVersion\": \"^*\", \"assets\": {\"js\": {\"async\": [], \"sync\": [\"static/js/shopflow.f80f5a2d.js\", \"static/js/906.b8772139.js\"]}, \"css\": {\"async\": [], \"sync\": []}}}, {\"id\": \"shopflow:zustand\", \"name\": \"zustand\", \"version\": \"*\", \"singleton\": true, \"requiredVersion\": \"^*\", \"assets\": {\"js\": {\"async\": [], \"sync\": [\"static/js/shopflow.f80f5a2d.js\", \"static/js/906.b8772139.js\"]}, \"css\": {\"async\": [], \"sync\": []}}}], \"remotes\": [], \"exposes\": [{\"id\": \"shopflow:shopflow_saved_searches\", \"name\": \"shopflow_saved_searches\", \"assets\": {\"js\": {\"sync\": [\"static/js/async/lib-router.d162bc6a.js\", \"static/js/async/269.96c9f3da.js\", \"static/js/async/313.7d06e66e.js\", \"static/js/async/34.072d4b87.js\", \"static/js/async/771.65a04cb1.js\", \"static/js/async/998.e344d861.js\", \"static/js/async/930.f9330698.js\", \"static/js/async/__federation_expose_shopflow_saved_searches.aee0fe03.js\"], \"async\": []}, \"css\": {\"sync\": [], \"as",
+    "body_shape": [
+      "id",
+      "name",
+      "metaData",
+      "shared",
+      "remotes",
+      "exposes"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://carmax.sc.omtrdc.net/id?d_visid_ver=5.5.0&d_fieldgroup=A&mcorgid=0C1038B35278345B0A490D4C%40AdobeOrg&mid=28017165024916107932342773029111522744&ts=1779570235858",
+    "status": 200,
+    "content_type": "application/x-javascript;charset=utf-8",
+    "response_headers": {
+      "cache-control": "no-cache, no-store, max-age=0, no-transform, private",
+      "access-control-allow-credentials": "true",
+      "x-content-type-options": "nosniff",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "p3p": "CP=\"This is not a P3P policy\"",
+      "content-length": "2",
+      "date": "Sat, 23 May 2026 21:03:56 GMT",
+      "x-xss-protection": "1; mode=block",
+      "content-type": "application/x-javascript;charset=utf-8",
+      "vary": "Origin",
+      "server": "jag"
+    },
+    "body_preview": "{}"
+  },
+  {
+    "type": "response",
+    "url": "https://smetrics.carmax.com/rest/v1/delivery?client=carmax&sessionId=993d6a31de3e4dbb94fffaba1fc7091c&version=2.11.4",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-request-id": "b0e30c1c-72ba-4654-802e-44c067580e09",
+      "cache-control": "no-cache, no-store, max-age=0, no-transform, private",
+      "timing-allow-origin": "*",
+      "content-encoding": "gzip",
+      "accept-ch": "Sec-CH-UA, Sec-CH-UA-Arch, Sec-CH-UA-Model, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version-List",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "date": "Sat, 23 May 2026 21:03:56 GMT",
+      "x-xss-protection": "1; mode=block",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "origin,access-control-request-method,access-control-request-headers,accept-encoding",
+      "server": "jag"
+    },
+    "body_preview": "{\"status\": 200, \"requestId\": \"f36375f52621412dadf1bf1adb3484fa\", \"client\": \"carmax\", \"id\": {\"tntId\": \"993d6a31de3e4dbb94fffaba1fc7091c.35_0\", \"marketingCloudVisitorId\": \"28017165024916107932342773029111522744\"}, \"edgeHost\": \"mboxedge35.tt.omtrdc.net\", \"prefetch\": {}, \"telemetryServerToken\": \"rPEFq/5x+VtJHwNlhEZSBosbFSY5A61PnBa2czKw/eE=\", \"execute\": {\"pageLoad\": {\"options\": [{\"responseTokens\": {\"experience.id\": \"0\", \"activity.name\": \".COM_54_PROD-show-user-location-prompt\", \"profile.activeActivities\": \"1670203,1662703,1660384,1583203,314399,1664693,1419371\", \"profile.100_SwimLane\": \"91\", \"activity.id\": \"314399\", \"experience.name\": \".com_54_control\", \"option.id\": \"0\"}, \"sourceType\": \"target\"}, {\"content\": [{\"type\": \"customCode\", \"selector\": \"HEAD\", \"cssSelector\": \"\", \"content\": \"<script>\\n    function addScript() {\\n        // Select the node that will be observed for mutations\\n        const targetNode = document.querySelector('#shopflow-toast-button')\\n\\n        // Options for the observer (which mutations to observe)\\n        const config = {\\n            attributes: true,\\n            childList: true,\\n            subtree: true\\n        };\\n\\n        var isEthnioLoaded = false;\\n\\n        // Callback function to execute when mutations are observed\\n        const callback = (mutationList, observer) => {\\n            const found = mutationList.find((m) => {                \\n                return m.target.className.indexOf('MuiSnackbarContent-root') > -1;\\n            });\\n            console.log({\\n                team: \\\"shopflow\\\",\\n                found: found\\n            });\\n            if (found) {\\n                try {\\n                    const addEthnioScript = (ethnioCode) => {\\n                        //Prepare the Ethnio script tag\\n                        const script = document.createElement(\\\"script\\\");\\n                        script.async = true;\\n                        script.type = \\\"text/javascript\\\";\\n\\n                        let ethnioURL ",
+    "body_shape": [
+      "status",
+      "requestId",
+      "client",
+      "id",
+      "edgeHost",
+      "prefetch",
+      "telemetryServerToken",
+      "execute"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/ExW5b8ifs5v1/8bTEqD/-XXV3K/YO9DpQXrc4NGf6V5/GBAqNwE/ImJ/veV5bPjoB",
+    "status": 201,
+    "content_type": "application/json",
+    "response_headers": {
+      "x-frame-options": "sameorigin",
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "access-control-allow-credentials": "true",
+      "x-content-type-options": "nosniff",
+      "x_req_id": "15e0547e-eb29-4d0d-9dd3-19cb2d669fa7",
+      "x-akamai-transformed": "0 - 0 -",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "server-timing": "edge; dur=2, origin; dur=178, cdn-cache; desc=MISS, ak_p; desc=\"1779570235935_399898574_520129682_18895_6496_75_0_219\";dur=1",
+      "date": "Sat, 23 May 2026 21:03:56 GMT",
+      "content-type": "application/json",
+      "vary": "Origin",
+      "access-control-allow-headers": "Content-Type"
+    },
+    "body_preview": "{\"success\": true}",
+    "body_shape": [
+      "success"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/akam/13/pixel_30ab9e2e",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "application/x-www-form-urlencoded",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://www.carmax.com/ExW5b8ifs5v1/8bTEqD/-XXV3K/YO9DpQXrc4NGf6V5/GBAqNwE/ImJ/veV5bPjoB",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/cars?zip=90405&distance=25&priceMin=5000&priceMax=12000&transmission=Automatic",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://userinsights.carmax.com/s/settings/J90WC/v1/web",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://userinsights.carmax.com/s/settings/J90WC/v1/web",
+    "status": 200,
+    "content_type": "application/json",
+    "response_headers": {
+      "x-goog-metageneration": "1",
+      "x-robots-tag": "noindex, nofollow",
+      "access-control-expose-headers": "*, Content-Length, Date, Server, Transfer-Encoding, X-GUploader-UploadID, X-Google-Trace",
+      "content-encoding": "gzip",
+      "x-goog-hash": "crc32c=Rricgw==, md5=BohKeyqQoTX77fTRsc/B/g==",
+      "etag": "\"06884a7b2a90a135fbedf4d1b1cfc1fe\"",
+      "age": "123",
+      "x-goog-stored-content-encoding": "gzip",
+      "expires": "Sat, 23 May 2026 21:16:54 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "x-goog-stored-content-length": "8231",
+      "date": "Sat, 23 May 2026 21:01:54 GMT",
+      "last-modified": "Sat, 23 May 2026 21:01:20 GMT",
+      "content-type": "application/json",
+      "x-guploader-uploadid": "AAVLpEjh0xHq8QzuK0_QRoFj3XK8v6BXb6jPL6qG9HkFLof9GJaU8mVV5Mv8ISPDqUluvs2B1UUh9Q",
+      "cache-control": "public,max-age=900,no-transform",
+      "x-goog-storage-class": "MULTI_REGIONAL",
+      "via": "1.1 google",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "x-goog-generation": "1779570080539494",
+      "content-length": "8231",
+      "server": "UploadServer"
+    },
+    "body_preview": "{\"AjaxWatches\": [{\"URLRegex\": \"https:\\\\/\\\\/offerhub-prod\\\\.service\\\\.signalr\\\\.net\\\\/client\\\\/.*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \"https:\\\\/\\\\/carmax\\\\.sc\\\\.omtrdc\\\\.net\\\\/b\\\\/ss\\\\/carmaxadaptive\\\\/*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \"https:\\\\/\\\\/carmax\\\\.sc\\\\.omtrdc\\\\.net\\\\/b\\\\/ss\\\\/carmaxadaptive\\\\/.*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/stores/.*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/accounts/.*/tracker\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/accounts/.*/profile/status\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/finance/ratesandfees/.*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/accounts/.*/saved-cars.*\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": \"\", \"ReqBody\": false, \"RspBody\": false}, {\"URLRegex\": \".*www\\\\.carmax\\\\.com/mycarmax/api/accounts/.*/preapproval\", \"RecordReq\": 1, \"RecordRsp\": 1, \"ReqWhitelist\": \"\", \"RspWhitelist\": \"\", \"ReqAllowlist\": \"\", \"RspAllowlist\": ",
+    "body_shape": [
+      "AjaxWatches",
+      "BehaviorSignalSettings",
+      "Domains",
+      "ElementBlocks",
+      "NamedElementBlocks",
+      "ElementDeferreds",
+      "ElementKeeps",
+      "ElementWatches",
+      "OrgSettings",
+      "UrlKeeps",
+      "DwellTime"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://userinsights.carmax.com/rec/page",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://userinsights.carmax.com/rec/page",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-robots-tag": "noindex, nofollow",
+      "content-encoding": "gzip",
+      "access-control-allow-credentials": "true",
+      "via": "1.1 google",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "alt-svc": "h3=\":443\"; ma=2592000",
+      "content-length": "708",
+      "date": "Sat, 23 May 2026 21:03:57 GMT",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "body_preview": "{\"Consented\": false, \"CookieDomain\": \"carmax.com\", \"PrivacyHash\": \"\", \"UserUUID\": \"118b67d4-4ba9-4f1d-93ca-1c30578a5240\", \"SessionUUID\": \"30c31290-5b2f-4043-808f-0b0af0540736\", \"PageUUID\": \"04778ce7-0237-40af-9137-7a329609bcee\", \"UserIntId\": \"0\", \"SessionIntId\": \"0\", \"PageIntId\": \"0\", \"EmbedToken\": \"\", \"PageStart\": 1779570237567, \"IsNewSession\": false, \"Flags\": {\"AjaxFetch\": true, \"AjaxWatcher\": true, \"CaptureAnimations\": true, \"ClientSideRageClick\": true, \"ConsoleWatcher\": true, \"FetchChildIntegrations\": true, \"FetchIntegrations\": true, \"GetCurrentSession\": true, \"ResourceUploading\": true, \"UseBufferedPO\": true, \"UseClientSideId\": true, \"UseCompression\": true, \"UseDwellTime\": true, \"UseLZEncoding\": true, \"UseStatelessConsent\": true, \"UseStaticSettings\": true, \"UseTreeWalker\": true}, \"GCLBSubdomain\": \"rs\", \"Blocks\": [], \"Watches\": [], \"AjaxFetchEnabled\": true, \"AjaxWatcherEnabled\": true, \"ConsoleWatcherEnabled\": true, \"GetCurrentSessionEnabled\": true, \"ResourceUploadingEnabled\": true, \"WhitelistElementsEnabled\": false, \"ElementBlocks\": [], \"ElementDeferreds\": [], \"ElementKeeps\": [], \"ElementWatches\": [], \"UrlKeeps\": [], \"DwellTime\": 0, \"AjaxWatches\": [], \"OrgSettings\": {\"AttributeBlocklist\": [], \"HttpRequestHeadersAllowlist\": [], \"HttpResponseHeadersAllowlist\": [], \"MaxAjaxPayloadLength\": 0, \"MaxConsoleLogPerPage\": 0, \"MaxPerfMarksPerPage\": 0, \"MaxUrlLength\": 0, \"RecordPerformanceResourceImg\": false, \"RecordPerformanceResourceTiming\": false, \"SessionLimits\": {\"MaxPages\": 0}, \"UrlPathBlocklist\": [], \"UrlPrivacyConfig\": [], \"UrlQueryStringBlocklist\": []}, \"BehaviorSignalSettings\": {\"ElementBlocks\": []}, \"DataLayerRules\": []}",
+    "body_shape": [
+      "Consented",
+      "CookieDomain",
+      "PrivacyHash",
+      "UserUUID",
+      "SessionUUID",
+      "PageUUID",
+      "UserIntId",
+      "SessionIntId",
+      "PageIntId",
+      "EmbedToken",
+      "PageStart",
+      "IsNewSession",
+      "Flags",
+      "GCLBSubdomain",
+      "Blocks",
+      "Watches",
+      "AjaxFetchEnabled",
+      "AjaxWatcherEnabled",
+      "ConsoleWatcherEnabled",
+      "GetCurrentSessionEnabled",
+      "ResourceUploadingEnabled",
+      "WhitelistElementsEnabled",
+      "ElementBlocks",
+      "ElementDeferreds",
+      "ElementKeeps",
+      "ElementWatches",
+      "UrlKeeps",
+      "DwellTime",
+      "AjaxWatches",
+      "OrgSettings",
+      "BehaviorSignalSettings",
+      "DataLayerRules"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/akam/13/pixel_30ab9e2e",
+    "status": 200,
+    "content_type": "text/html",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      "server-timing": "cdn-cache; desc=HIT, edge; dur=2, ak_p; desc=\"1779570237406_399898574_520131437_355_6791_179_0_219\";dur=1",
+      "content-length": "0",
+      "date": "Sat, 23 May 2026 21:03:57 GMT",
+      "content-type": "text/html",
+      "x-frame-options": "sameorigin"
+    },
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.carmax.com/ExW5b8ifs5v1/8bTEqD/-XXV3K/YO9DpQXrc4NGf6V5/GBAqNwE/ImJ/veV5bPjoB",
+    "status": 201,
+    "content_type": "application/json",
+    "response_headers": {
+      "x-frame-options": "sameorigin",
+      "strict-transport-security": "max-age=31536000 ; includeSubDomains",
+      "content-security-policy": "upgrade-insecure-requests",
+      "timing-allow-origin": "*",
+      "access-control-allow-credentials": "true",
+      "x-content-type-options": "nosniff",
+      "x_req_id": "50d7259e-2096-4e51-bd30-a4ac1271b8ac",
+      "x-akamai-transformed": "0 - 0 -",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "server-timing": "edge; dur=3, origin; dur=250, cdn-cache; desc=MISS, ak_p; desc=\"1779570237457_399898574_520131499_25309_8896_97_0_219\";dur=1",
+      "date": "Sat, 23 May 2026 21:03:57 GMT",
+      "content-type": "application/json",
+      "vary": "Origin",
+      "access-control-allow-headers": "Content-Type"
+    },
+    "body_preview": "{\"success\": true}",
+    "body_shape": [
+      "success"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://smetrics.carmax.com/rest/v1/delivery?client=carmax&sessionId=993d6a31de3e4dbb94fffaba1fc7091c&version=2.11.4",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://smetrics.carmax.com/rest/v1/delivery?client=carmax&sessionId=993d6a31de3e4dbb94fffaba1fc7091c&version=2.11.4",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "x-request-id": "3ab2c350-1661-4f53-acfd-1f8379de8627",
+      "cache-control": "no-cache, no-store, max-age=0, no-transform, private",
+      "timing-allow-origin": "*",
+      "content-encoding": "gzip",
+      "accept-ch": "Sec-CH-UA, Sec-CH-UA-Arch, Sec-CH-UA-Model, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version-List",
+      "access-control-allow-credentials": "true",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "date": "Sat, 23 May 2026 21:03:58 GMT",
+      "x-xss-protection": "1; mode=block",
+      "content-type": "application/json;charset=UTF-8",
+      "vary": "origin,access-control-request-method,access-control-request-headers,accept-encoding",
+      "server": "jag"
+    },
+    "body_preview": "{\"status\": 200, \"requestId\": \"06378d66163e43418fab11e8165a472d\", \"client\": \"carmax\", \"id\": {\"tntId\": \"993d6a31de3e4dbb94fffaba1fc7091c.35_0\", \"marketingCloudVisitorId\": \"28017165024916107932342773029111522744\"}, \"edgeHost\": \"mboxedge35.tt.omtrdc.net\", \"prefetch\": {\"mboxes\": [{\"index\": 0, \"name\": \"skye-features-budget-discovery-v1\", \"state\": \"7dyLjPUv0YShHv9mYux9sF2JyTOYzlQafgDGtzjGDI9Vzk7IRHo4V0hOHCEOGG/16JAriHG3/BJS09iebag679FJWqLPdlYwBe+tIhPZoE0=\"}, {\"index\": 1, \"name\": \"skye-features-concision-v1\", \"state\": \"7dyLjPUv0YShHv9mYux9sF2JyTOYzlQafgDGtzjGDI9Vzk7IRHo4V0hOHCEOGG/16JAriHG3/BJS09iebag679FJWqLPdlYwBe+tIhPZoE0=\"}, {\"index\": 2, \"name\": \"skye-features-escalation-friction-v1\", \"state\": \"7dyLjPUv0YShHv9mYux9sF2JyTOYzlQafgDGtzjGDI9Vzk7IRHo4V0hOHCEOGG/16JAriHG3/BJS09iebag679FJWqLPdlYwBe+tIhPZoE0=\"}, {\"index\": 3, \"name\": \"skye-features-input-fab\", \"state\": \"7dyLjPUv0YShHv9mYux9sF2JyTOYzlQafgDGtzjGDI9Vzk7IRHo4V0hOHCEOGG/16JAriHG3/BJS09iebag679FJWqLPdlYwBe+tIhPZoE0=\"}, {\"index\": 4, \"name\": \"skye-features-personalized-prompts\", \"state\": \"7dyLjPUv0YShHv9mYux9sF2JyTOYzlQafgDGtzjGDI9Vzk7IRHo4V0hOHCEOGG/16JAriHG3/BJS09iebag679FJWqLPdlYwBe+tIhPZoE0=\", \"options\": [{\"content\": {\"name\": \"personalizedPrompts\", \"value\": true}, \"type\": \"json\", \"eventToken\": \"aKjgAtCK+JhEDbZXz9A5Mw6taum/Ule9G8NTrZHPdMntyf8vZbHfLICMmcVo4KgxribCp42SjN/gmLvBN6LDfQ==\", \"responseTokens\": {\"experience.id\": \"1\", \"activity.name\": \"ConvEx Prod - Personalized Prompt Cards\", \"profile.activeActivities\": \"1670203,1662703,1706636,1660384,1583203,314399,1664693,1419371\", \"profile.100_SwimLane\": \"91\", \"activity.id\": \"1706636\", \"experience.name\": \"Experience B\", \"option.name\": \"Enable Personalized Prompt Cards\", \"option.id\": \"2\"}, \"sourceType\": \"target\"}]}]}, \"telemetryServerToken\": \"wCo/+PJpxeEeLo4mV5p9X40R2nRYff0h2IR6FCQ5Vhw=\"}",
+    "body_shape": [
+      "status",
+      "requestId",
+      "client",
+      "id",
+      "edgeHost",
+      "prefetch",
+      "telemetryServerToken"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=1&ClientTime=1779570240039&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=0&LastActivity=2365&IsNewSession=true&ContentEncoding=gzip",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=1&ClientTime=1779570240039&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=0&LastActivity=2365&IsNewSession=true&ContentEncoding=gzip",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-robots-tag": "noindex, nofollow",
+      "access-control-allow-credentials": "true",
+      "via": "1.1 google",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-length": "29",
+      "date": "Sat, 23 May 2026 21:04:00 GMT",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "body_preview": "{\"BundleTime\": 1779570240184}",
+    "body_shape": [
+      "BundleTime"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://gum.criteo.com/sid/json?origin=onetag&domain=carmax.com&sn=ChromeSyncframe&so=undefined&topUrl=www.carmax.com",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://gum.criteo.com/syncframe?topUrl=www.carmax.com&origin=onetag",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://gum.criteo.com/sid/json?origin=onetag&domain=carmax.com&sn=ChromeSyncframe&so=undefined&topUrl=www.carmax.com",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "strict-transport-security": "max-age=31536000; preload;",
+      "cache-control": "no-cache, no-store, must-revalidate",
+      "content-encoding": "gzip",
+      "pragma": "no-cache",
+      "server-processing-duration-in-ticks": "1293427",
+      "expires": "0",
+      "date": "Sat, 23 May 2026 21:04:00 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "server": "Kestrel"
+    },
+    "body_preview": "{\"sid\": null, \"removeSid\": false, \"bundle\": \"Nj2jd19UZWF0c0hoam52UXFkN1RZUjAzUDlzckRvSEJiQjZJYlh4VDclMkZTMlhCSExNSExLQUFneW9MRVhCR2d0dXd0blpqVExaTyUyQlI3TFRBSlgwdUxzUmtwaGpKWHgzTzlHQ21EajdWOXplM0pLamFrSUplR2clMkJrMms0UkclMkZBeXF0ZmlqS3JZSSUyQjdZclE4RXlJRU5OcGVEb0R3JTNEJTNE\", \"info\": \"dpF36l9UZWF0c0hoam52UXFkN1RZUjAzUDlzckRvSEJiQjZJYlh4VDclMkZTMlhCSExNSExLQUFneW9MRVhCR2d0dXd0blo2YkR1QTZ2TDdDWUJwUE9pek1mY0VRJTNEJTNE\", \"optout\": false}",
+    "body_shape": [
+      "sid",
+      "removeSid",
+      "bundle",
+      "info",
+      "optout"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=8&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45fe65k1v9181631201za200zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381&apve=1&apvf=f&apvc=1&tids=DC-8789640&tid=DC-8789640&tft=1779570241606&tfd=16480",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://ad.doubleclick.net/activity;src=8789640;type=carmax00;cat=serch000;rcb=8;ord=6528910386118;npa=0;auiddc=240406615.1779570242;u11=;uaa=x86;uab=64;uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0;uamb=0;uam=;uap=macOS;uapv=10_15_7;uaw=0;pscdl=noapi;frm=0;user_data_mode=c;_tu=IFA;gtm=45fe65k1v9181631201za200zd9181631201xec;gcd=13l3l3l3l1l1;dma=0;dc_fmt=3;tag_exp=0~115616986~115938466~115938469~116701381;epver=2;em=tv.1;dc_random=1779570241_VZWITeYs4Fdt1Qi1PIB88Y1m9a2NQBusGg;~oref=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic?",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=8&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45fe65k1v9181631201za200zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381&apve=1&apvf=f&apvc=1&tids=DC-8789640&tid=DC-8789640&tft=1779570241606&tfd=16480",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://ad.doubleclick.net/activity;dc_pre=CM3ih-Gn0JQDFT-ZjggdyLUxOw;src=8789640;type=carmax00;cat=serch000;rcb=8;ord=6528910386118;npa=0;auiddc=240406615.1779570242;u11=;uaa=x86;uab=64;uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0;uamb=0;uam=;uap=macOS;uapv=10_15_7;uaw=0;pscdl=noapi;frm=0;user_data_mode=c;_tu=IFA;gtm=45fe65k1v9181631201za200zd9181631201xec;gcd=13l3l3l3l1l1;dma=0;dc_fmt=3;tag_exp=0~115616986~115938466~115938469~116701381;epver=2;em=tv.1;dc_random=1779570241_VZWITeYs4Fdt1Qi1PIB88Y1m9a2NQBusGg;~oref=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic?",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://ad.doubleclick.net/activity;src=8789640;type=carmax00;cat=serch000;rcb=8;ord=6528910386118;npa=0;auiddc=240406615.1779570242;u11=;uaa=x86;uab=64;uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0;uamb=0;uam=;uap=macOS;uapv=10_15_7;uaw=0;pscdl=noapi;frm=0;user_data_mode=c;_tu=IFA;gtm=45fe65k1v9181631201za200zd9181631201xec;gcd=13l3l3l3l1l1;dma=0;dc_fmt=3;tag_exp=0~115616986~115938466~115938469~116701381;epver=2;em=tv.1;dc_random=1779570241_VZWITeYs4Fdt1Qi1PIB88Y1m9a2NQBusGg;~oref=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic?",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://ad.doubleclick.net/activity;dc_pre=CM3ih-Gn0JQDFT-ZjggdyLUxOw;src=8789640;type=carmax00;cat=serch000;rcb=8;ord=6528910386118;npa=0;auiddc=240406615.1779570242;u11=;uaa=x86;uab=64;uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0;uamb=0;uam=;uap=macOS;uapv=10_15_7;uaw=0;pscdl=noapi;frm=0;user_data_mode=c;_tu=IFA;gtm=45fe65k1v9181631201za200zd9181631201xec;gcd=13l3l3l3l1l1;dma=0;dc_fmt=3;tag_exp=0~115616986~115938466~115938469~116701381;epver=2;em=tv.1;dc_random=1779570241_VZWITeYs4Fdt1Qi1PIB88Y1m9a2NQBusGg;~oref=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic?",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "follow-only-when-prerender-shown": "1",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "content-length": "0",
+      "date": "Sat, 23 May 2026 21:04:02 GMT",
+      "x-xss-protection": "0",
+      "content-type": "text/html; charset=UTF-8",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://ad.doubleclick.net/activity;dc_pre=CM3ih-Gn0JQDFT-ZjggdyLUxOw;src=8789640;type=carmax00;cat=serch000;rcb=8;ord=6528910386118;npa=0;auiddc=240406615.1779570242;u11=;uaa=x86;uab=64;uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0;uamb=0;uam=;uap=macOS;uapv=10_15_7;uaw=0;pscdl=noapi;frm=0;user_data_mode=c;_tu=IFA;gtm=45fe65k1v9181631201za200zd9181631201xec;gcd=13l3l3l3l1l1;dma=0;dc_fmt=3;tag_exp=0~115616986~115938466~115938469~116701381;epver=2;em=tv.1;dc_random=1779570241_VZWITeYs4Fdt1Qi1PIB88Y1m9a2NQBusGg;~oref=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic?",
+    "status": 200,
+    "content_type": "image/gif",
+    "response_headers": {
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "content-length": "42",
+      "date": "Sat, 23 May 2026 21:04:02 GMT",
+      "x-xss-protection": "0",
+      "content-type": "image/gif",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "request",
+    "url": "https://analytics.google.com/g/collect?v=2&tid=G-NTWN6LKPPS&gtm=45je65k1v893987339za200zb9181631201zd9181631201&_p=1779570236161&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAGAC&are=1&cid=117511029.1779570242&frm=0&pscdl=noapi&rcb=2&sr=1280x800&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115616985~115938466~115938469&sid=1779570242&sct=1&seg=0&dl=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=17206",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=2&ClientTime=1779570242524&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=1779570240184&LastActivity=25&IsNewSession=true&ContentEncoding=gzip",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://analytics.google.com/g/collect?v=2&tid=G-NTWN6LKPPS&gtm=45je65k1v893987339za200zb9181631201zd9181631201&_p=1779570236161&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAGAC&are=1&cid=117511029.1779570242&frm=0&pscdl=noapi&rcb=2&sr=1280x800&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=en-us&gaf=2&_s=1&tag_exp=0~115616985~115938466~115938469&sid=1779570242&sct=1&seg=0&dl=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=17206",
+    "status": 204,
+    "content_type": "text/plain",
+    "response_headers": {
+      "cache-control": "no-cache, no-store, must-revalidate",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "content-security-policy-report-only": "script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/scaffolding/ascnsrsggc:196:0",
+      "report-to": "{\"group\":\"ascnsrsggc:196:0\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/scaffolding/ascnsrsggc:196:0\"}],}",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "cross-origin-opener-policy-report-only": "same-origin; report-to=ascnsrsggc:196:0",
+      "content-length": "0",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sat, 23 May 2026 21:04:02 GMT",
+      "content-type": "text/plain",
+      "server": "Golfe2"
+    },
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=2&ClientTime=1779570242524&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=1779570240184&LastActivity=25&IsNewSession=true&ContentEncoding=gzip",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-robots-tag": "noindex, nofollow",
+      "access-control-allow-credentials": "true",
+      "via": "1.1 google",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-length": "29",
+      "date": "Sat, 23 May 2026 21:04:03 GMT",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "body_preview": "{\"BundleTime\": 1779570242680}",
+    "body_shape": [
+      "BundleTime"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/769504883/?random=1779570243917&cv=11&fst=1779570243917&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/769504883/?random=1779570243937&cv=11&fst=1779570243937&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/769504883/?random=1779570243942&cv=11&fst=1779570243942&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-769504883&tid=AW-769504883&tft=1779570243949&tfd=18822",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/1060501044/?random=1779570244025&cv=11&fst=1779570244025&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/1060501044/?random=1779570244050&cv=11&fst=1779570244050&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/1060501044/?random=1779570244057&cv=11&fst=1779570244057&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/1060501044/?random=1779570244065&cv=11&fst=1779570244065&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&apve=1&apvf=f&apvc=0&tids=AW-1060501044&tid=AW-1060501044&tft=1779570244072&tfd=18945",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&ep.dynx_pagetype=Cars&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&apve=1&apvf=f&apvc=0&tids=AW-1060501044&tid=AW-1060501044&tft=1779570244074&tfd=18947",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/10777432239/?random=1779570244084&cv=11&fst=1779570244084&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/10777432239/?random=1779570244104&cv=11&fst=1779570244104&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/10777432239/?random=1779570244109&cv=11&fst=1779570244109&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=17&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&apve=1&apvf=f&apvc=0&tids=AW-10777432239&tid=AW-10777432239&tft=1779570244115&tfd=18988",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/586870437/?random=1779570244123&cv=11&fst=1779570244123&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v893569515za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=3&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=3&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v893569515za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-586870437&tid=AW-586870437&tft=1779570244143&tfd=19016",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/708462047/?random=1779570244151&cv=11&fst=1779570244151&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v885074536za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=8&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=8&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v885074536za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-708462047&tid=AW-708462047&tft=1779570244171&tfd=19045",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/rmkt/collect/768545124/?random=1779570244179&cv=11&fst=1779570244179&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.googleadservices.com/pagead/conversion/768545124/?random=1779570244198&cv=11&fst=1779570244198&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/ccm/collect?rcb=5&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&apve=1&apvf=f&apvc=0&tids=AW-768545124&tid=AW-768545124&tft=1779570244204&tfd=19078",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/769504883/?random=1779570243917&cv=11&fst=1779570243917&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/769504883/?random=1779570243937&cv=11&fst=1779570243937&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-769504883&tid=AW-769504883&tft=1779570243949&tfd=18822",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/1060501044/?random=1779570244025&cv=11&fst=1779570244025&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=SI_9oDlYMwRwk31RDD&Version=6&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=CR_emTkxoXvaQjl7dH&Version=1&Q_InterceptID=SI_9oDlYMwRwk31RDD&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=SI_ah0reLCPOi4vXLv&Version=18&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=CR_aWu0ZeBRVehNneJ&Version=2&Q_InterceptID=SI_ah0reLCPOi4vXLv&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/769504883/?random=1131750768&cv=11&fst=1779570243942&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHnRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZVoDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMgCVFbMcSaylXfi5aTEmvr1atMUZT0jRWhJ4BVzl0GUGXC5i2YYbUaAnFq&pscrd=IhMIv76P4qfQlAMVRxxECB1KnCcOOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pINXlQcGE1UHNYUlJtaUoxOWs4dGhkREc1dWxZbjhTZk01UFM2LWh1LVRuRmJEdDJ2ZXRLWnd6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/769504883/?random=1779570243942&cv=11&fst=1779570243942&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1011",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "response",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=SI_9oDlYMwRwk31RDD&Version=6&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-transaction-id": "1a127326-0941-4f1e-ab4a-16bdace9c902",
+      "x-request-id": "45d4c0a8-271b-4c2f-9fbd-9688574153c3",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"b8b-JuoIg/xvRfWXzq2F9yTApTPlWto\"",
+      "age": "373693",
+      "x-content-type-options": "nosniff",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "edge-control": "max-age=604800",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=604800, s-maxage=604800",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "cf-ray": "a00702cbed1729ab-LAX",
+      "permissions-policy": "camera=(), geolocation=(), microphone=()",
+      "access-control-allow-origin": "*",
+      "server": "cloudflare"
+    },
+    "body_preview": "{\"InterceptDefinition\": {\"BrandID\": \"carmax\", \"InterceptID\": \"SI_9oDlYMwRwk31RDD\", \"InterceptName\": \"Constant Footer Feedback Link\", \"Revision\": \"6\", \"DeletedDate\": null, \"ActionSets\": {\"AS_10337099\": {\"ID\": \"AS_10337099\", \"Creative\": \"CR_emTkxoXvaQjl7dH\", \"CreativeType\": \"Link\", \"WeightedSampleRate\": \"\", \"Target\": {\"Type\": \"Survey\", \"PrimaryElement\": \"SV_00VuSCNRp7i6aax\"}, \"EmbeddedData\": [{\"name\": \"URL\", \"type\": \"CurrentPage\", \"value\": null}, {\"name\": \"Unique_page_count\", \"type\": \"PageCount\", \"value\": null}, {\"name\": \"Total_page_count\", \"type\": \"TotalPageCount\", \"value\": null}, {\"name\": \"Time_spent_on_site\", \"type\": \"TimeOnSite\", \"value\": null}, {\"name\": \"Cookie\", \"type\": \"Cookie\", \"value\": \"KmxVisitor_0\"}, {\"name\": \"website-flag\", \"type\": \"StaticVal\", \"value\": \"1\"}], \"ActionOptions\": {\"targetNewWindow\": true, \"targetEmbedded\": false, \"targetFullScreen\": false, \"resizeForEmbeddedTargets\": true, \"targetWidth\": \"450\", \"targetHeight\": \"800\", \"accessibilityTitle\": \"\", \"displayElement\": \"oo-feedback-footer\", \"selectedDevices\": {\"browsers\": {\"Browser|all\": true, \"Browser|Internet Explorer|all\": true, \"Browser|Firefox|all\": true, \"Browser|Chrome|all\": true, \"Browser|Opera|all\": true, \"Browser|Safari|all\": true, \"Browser|Other|all\": true, \"Browser|Internet Explorer|7\": false, \"Browser|Internet Explorer|8\": false, \"Browser|Internet Explorer|9\": false, \"Browser|Internet Explorer|10\": false, \"Browser|Opera|9\": false, \"Browser|Opera|10\": false, \"Browser|Opera|11\": false, \"Browser|Opera|12\": false, \"Browser|Safari|3\": false, \"Browser|Safari|4\": false, \"Browser|Safari|5\": false, \"Browser|Safari|6\": false}, \"platforms\": {\"Platform|all\": true, \"Platform|Windows|all\": true, \"Platform|Mac OS X|all\": true, \"Platform|Mobile|all\": true, \"Platform|Mobile|iOS|iPhone\": false, \"Platform|Mobile|iOS|iPad\": false, \"Platform|Mobile|iOS|iPod\": false, \"Platform|Mobile|iOS|all\": false, \"Platform|Mobile|Android|all\": false, \"Platform|Mobile|BlackBerry|all\": false, \"Platform|Windows|XP\": false, \"P",
+    "body_shape": [
+      "InterceptDefinition"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10777432239/?random=1291576592&cv=11&fst=1779570244104&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKMHRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgbm90LWV2ZW50LXNvdXJjZVoDCgEBYgMKAQM&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOEZo5HHObloKVNxt_MpfYzZT0ySKU8-4X8nfk6G1qxMLVIzOCDUUAaAuoU&pscrd=IhMI_fKY4qfQlAMV8BBECB250iw7OhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIN0FlWnVSTk5KOUhEa3VIQmoxdUxxVGsxN2dFbE4zNlVrZmRiTGlfeWI5VzFVdklqMk5GeWd6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10777432239/?random=2047995692&cv=11&fst=1779570244109&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9ZXZlbnQtc291cmNlO25hdmlnYXRpb24tc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPSTIKP0mhb5OzUvI_nf8UAHaB0GisaTwbIkW6Wt_MWDh3Us4muWEcaAoMf&pscrd=IhMIh-eY4qfQlAMVyozuAR22ty9HOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIM2hzRFQ2SExXSHQyb0FqUk44b1pDUGtKVm9jMlNQZnUyMk1KME4ySGVuNlZURjNjMDlQLUF6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/10777432239/?random=1779570244104&cv=11&fst=1779570244104&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1039",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1060501044/?random=1493720188&cv=11&fst=1779570244050&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK3RyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZTtldmVudC1zb3VyY2VaAwoBAWIDCgED&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOhBsOUw_OUHDj3gG9OCT-6FwTI1vvkCOwDLPH14a3v3223jE8x8d4aAmB3&pscrd=IhMI2_iY4qfQlAMVS5zuAR3-0B8nOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pILU9lN2NHcTZsVEtSTktKY3VJWkt5LXI2TWx4WEZzR0tHd2RVaUgyRk15YU9VTHduYUp1emd6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=CR_aWu0ZeBRVehNneJ&Version=2&Q_InterceptID=SI_ah0reLCPOi4vXLv&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-transaction-id": "991b92d1-aed8-4126-aece-94947508bb1e",
+      "x-request-id": "31cd3e74-52f3-46a2-8b6b-4a199ab9ce47",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"149-4ZzoOy3j2smPlbOKJzox6K/Ru7Y\"",
+      "age": "558050",
+      "x-content-type-options": "nosniff",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "edge-control": "max-age=604800",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=604800, s-maxage=604800",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "cf-ray": "a00702cc1d9e29ab-LAX",
+      "permissions-policy": "camera=(), geolocation=(), microphone=()",
+      "access-control-allow-origin": "*",
+      "server": "cloudflare"
+    },
+    "body_preview": "{\"CreativeDefinition\": {\"CreativeID\": \"CR_aWu0ZeBRVehNneJ\", \"BrandID\": \"carmax\", \"Revision\": \"2\", \"Title\": \"Feedback Tab - Prod\", \"ZoneID\": \"ZN_824BpwRuzg5MXB3\", \"Options\": {\"position\": \"right\", \"verticalPosition\": \"setfrombottom\", \"posFromTop\": \"60\", \"posFromBottom\": \"150\", \"image\": \"UserDefined\", \"gid\": \"IM_20qzf8m77sY0mLX\"}, \"Type\": \"FeedbackLink\"}}",
+    "body_shape": [
+      "CreativeDefinition"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=SI_ah0reLCPOi4vXLv&Version=18&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-transaction-id": "9c746988-ffb8-448d-8e8d-e2d0971f3a60",
+      "x-request-id": "13787804-7c21-4ea8-a840-91faa4b6d2be",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"c09-t+6my+FzNin0kvJEow8CesvhVeI\"",
+      "age": "385389",
+      "x-content-type-options": "nosniff",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "edge-control": "max-age=604800",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=604800, s-maxage=604800",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "cf-ray": "a00702cc1da929ab-LAX",
+      "permissions-policy": "camera=(), geolocation=(), microphone=()",
+      "access-control-allow-origin": "*",
+      "server": "cloudflare"
+    },
+    "body_preview": "{\"InterceptDefinition\": {\"BrandID\": \"carmax\", \"InterceptID\": \"SI_ah0reLCPOi4vXLv\", \"InterceptName\": \"Side Tab Feedback\", \"Revision\": \"18\", \"DeletedDate\": null, \"ActionSets\": {\"AS_9YzH717RdZH7sPj\": {\"ID\": \"AS_9YzH717RdZH7sPj\", \"Creative\": \"CR_aWu0ZeBRVehNneJ\", \"CreativeType\": \"FeedbackLink\", \"WeightedSampleRate\": \"\", \"Target\": {\"Type\": \"Survey\", \"PrimaryElement\": \"SV_00VuSCNRp7i6aax\"}, \"EmbeddedData\": [{\"name\": \"URL\", \"type\": \"CurrentPage\", \"value\": null}, {\"name\": \"Unique_page_count\", \"type\": \"PageCount\", \"value\": null}, {\"name\": \"Total_page_count\", \"type\": \"TotalPageCount\", \"value\": null}, {\"name\": \"Time_spent_on_site\", \"type\": \"TimeOnSite\", \"value\": null}, {\"name\": \"Cookie\", \"type\": \"Cookie\", \"value\": \"KmxVisitor_0\"}, {\"name\": \"website-flag\", \"type\": \"StaticVal\", \"value\": \"1\"}, {\"name\": \"fullstoryurl\", \"type\": \"JavaScriptVal\", \"value\": \"window.FS && window.FS.getCurrentSessionURL ? FS.getCurrentSessionURL() : \\\"\\\"\"}], \"ActionOptions\": {\"targetNewWindow\": true, \"targetEmbedded\": false, \"targetFullScreen\": false, \"resizeForEmbeddedTargets\": true, \"targetWidth\": \"650\", \"targetHeight\": \"800\", \"accessibilityTitle\": \"\", \"displayElement\": \"\", \"selectedDevices\": {\"browsers\": {\"Browser|all\": true, \"Browser|Internet Explorer|all\": true, \"Browser|Firefox|all\": true, \"Browser|Chrome|all\": true, \"Browser|Opera|all\": true, \"Browser|Safari|all\": true, \"Browser|Other|all\": true, \"Browser|Internet Explorer|7\": false, \"Browser|Internet Explorer|8\": false, \"Browser|Internet Explorer|9\": false, \"Browser|Internet Explorer|10\": false, \"Browser|Opera|9\": false, \"Browser|Opera|10\": false, \"Browser|Opera|11\": false, \"Browser|Opera|12\": false, \"Browser|Safari|3\": false, \"Browser|Safari|4\": false, \"Browser|Safari|5\": false, \"Browser|Safari|6\": false}, \"platforms\": {\"Platform|all\": true, \"Platform|Windows|all\": true, \"Platform|Mac OS X|all\": true, \"Platform|Mobile|all\": true, \"Platform|Mobile|iOS|iPhone\": false, \"Platform|Mobile|iOS|iPad\": false, \"Platform|Mobile|iOS|iPod\": false, \"Platform|",
+    "body_shape": [
+      "InterceptDefinition"
+    ]
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1060501044/?random=2016655109&cv=11&fst=1779570244065&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9bmF2aWdhdGlvbi1zb3VyY2U7ZXZlbnQtc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMR8CBrK4WFZCkIiapIUvjn_inWAUs_WO_KwYne5Xh1dEpoZRExjCMaAnwn&pscrd=IhMIqfiY4qfQlAMVPxjvAh0q3ArVOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIXzlrd09jSzVsTGp0QjgzR3lsZTlSTDhsT0E3MmR0ZExiWG9NQWItWGpxczM0RmQ5YjNXZ3d6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "request",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/768545124/?random=1519591308&cv=11&fst=1779570244198&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgjU5rECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAkorbm90LW5hdmlnYXRpb24tc291cmNlO2V2ZW50LXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgiN4b0t24m-LQ&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPkwPqgVXKAGnGEHZyewTqt23JXj9WkCd9Vc8jYipnPXbaDIYCUnIwaAuRL&pscrd=IhMInYWZ4qfQlAMVfAdECB2JxjSnOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIeVFhUmV5Y2ZGNGJLOTlQZlptQlhXU2p1UlFJdTZMdWhVd2NUTEJ2c3dJYXd0R1VLYlpGdHd6DAgJYggIABAAGAAgAA",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://siteintercept.qualtrics.com/WRSiteInterceptEngine/Asset.php?Module=CR_emTkxoXvaQjl7dH&Version=1&Q_InterceptID=SI_9oDlYMwRwk31RDD&Q_ORIGIN=https://www.carmax.com&Q_CLIENTVERSION=2.49.0&Q_CLIENTTYPE=web&Q_BrandTier=RQqcwhV2J1&Q_ARCACHEVERSION=21&Q_BRANDDC=pdx1",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-transaction-id": "276b8e4f-b58b-4264-9856-4027a2157df4",
+      "x-request-id": "97fb4245-a108-4b23-a5b1-22b02d7aa1f4",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"c9-3Ff+6ZkFtuDn1iK+FmeNYT0Ibas\"",
+      "age": "127704",
+      "x-content-type-options": "nosniff",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "edge-control": "max-age=604800",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=604800, s-maxage=604800",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "cf-ray": "a00702cc2db829ab-LAX",
+      "permissions-policy": "camera=(), geolocation=(), microphone=()",
+      "access-control-allow-origin": "*",
+      "server": "cloudflare"
+    },
+    "body_preview": "{\"CreativeDefinition\": {\"CreativeID\": \"CR_emTkxoXvaQjl7dH\", \"BrandID\": \"carmax\", \"Revision\": \"1\", \"Title\": \"Feedback Link - Prod\", \"ZoneID\": \"ZN_824BpwRuzg5MXB3\", \"Options\": {\"linkText\": \"Feedback\"}, \"Type\": \"Link\"}}",
+    "body_shape": [
+      "CreativeDefinition"
+    ]
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/10777432239/?random=1779570244109&cv=11&fst=1779570244109&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1041",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/1060501044/?random=1779570244050&cv=11&fst=1779570244050&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1044",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/1060501044/?random=1779570244065&cv=11&fst=1779570244065&fmt=7&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1064",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.googleadservices.com/pagead/conversion/768545124/?random=1779570244198&cv=11&fst=1779570244198&fmt=7&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512",
+    "status": 200,
+    "content_type": "application/json; charset=UTF-8",
+    "response_headers": {
+      "content-encoding": "br",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://www.googleadservices.com/pagead/p3p.xml\", CP=\"NOI DEV PSA PSD IVA IVD OTP OUR OTR IND OTC\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "application/json; charset=UTF-8",
+      "content-disposition": "attachment; filename=\"f.txt\"",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "1049",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<json parse error: Expecting value: line 1 column 1 (char 0)>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&ep.dynx_pagetype=Cars&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&apve=1&apvf=f&apvc=0&tids=AW-1060501044&tid=AW-1060501044&tft=1779570244074&tfd=18947",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=12&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&apve=1&apvf=f&apvc=0&tids=AW-1060501044&tid=AW-1060501044&tft=1779570244072&tfd=18945",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=8&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v885074536za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-708462047&tid=AW-708462047&tft=1779570244171&tfd=19045",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=5&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&apve=1&apvf=f&apvc=0&tids=AW-768545124&tid=AW-768545124&tft=1779570244204&tfd=19078",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=3&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v893569515za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&apve=1&apvf=f&apvc=0&tids=AW-586870437&tid=AW-586870437&tft=1779570244143&tfd=19016",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/ccm/collect?rcb=17&frm=0&auid=240406615.1779570242&dt=Used%20cars%20near%20me%20for%20sale&en=page_view&dl=https%3A%2F%2Fwww.carmax.com%2Fcars&scrsrc=www.googletagmanager.com&rnd=2062794948.1779570242&navt=n&npa=0&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&apve=1&apvf=f&apvc=0&tids=AW-10777432239&tid=AW-10777432239&tft=1779570244115&tfd=18988",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/708462047/?random=1779570244151&cv=11&fst=1779570244151&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v885074536za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=8&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/586870437/?random=1779570244123&cv=11&fst=1779570244123&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v893569515za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=3&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/10777432239/?random=1779570244084&cv=11&fst=1779570244084&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/768545124/?random=1779570244179&cv=11&fst=1779570244179&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dgtag.config&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/rmkt/collect/1060501044/?random=1779570244057&cv=11&fst=1779570244057&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&gcp=5",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/10777432239/?random=1291576592&cv=11&fst=1779570244104&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKMHRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgbm90LWV2ZW50LXNvdXJjZVoDCgEBYgMKAQM&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOEZo5HHObloKVNxt_MpfYzZT0ySKU8-4X8nfk6G1qxMLVIzOCDUUAaAuoU&pscrd=IhMI_fKY4qfQlAMV8BBECB250iw7OhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIN0FlWnVSTk5KOUhEa3VIQmoxdUxxVGsxN2dFbE4zNlVrZmRiTGlfeWI5VzFVdklqMk5GeWd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfY7GP92awLGqU6dy-Pi8wWWMEaB3vwfokj8inNeOY7iFKWCALGoGdEHfuE248tRMFxCziewBEzPv9rNFB5g4Ij2i6RgO9YHg2q7cpbzemYwatGJ_8NLz7ydbgzDUY-jy9xgoWvo4XQOmjIC1wgwJ1ZKoO6TnGXxCvf0RxK8nFOTzviYDXbisHasdkXYqzD2wXf7ACFp94ZgXplon-1SJPtmQNLChzDZnANWQf6WZsWYQgjmvyjFY1Z0A00G8bQchMC2YK8aw4EypEbB83IGIzDdTlQ4SZu0EnV4BHk1I&random=2008546446",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10777432239/?random=1291576592&cv=11&fst=1779570244104&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKMHRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgbm90LWV2ZW50LXNvdXJjZVoDCgEBYgMKAQM&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOEZo5HHObloKVNxt_MpfYzZT0ySKU8-4X8nfk6G1qxMLVIzOCDUUAaAuoU&pscrd=IhMI_fKY4qfQlAMV8BBECB250iw7OhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIN0FlWnVSTk5KOUhEa3VIQmoxdUxxVGsxN2dFbE4zNlVrZmRiTGlfeWI5VzFVdklqMk5GeWd6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/10777432239/?random=1291576592&cv=11&fst=1779570244104&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKMHRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgbm90LWV2ZW50LXNvdXJjZVoDCgEBYgMKAQM&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOEZo5HHObloKVNxt_MpfYzZT0ySKU8-4X8nfk6G1qxMLVIzOCDUUAaAuoU&pscrd=IhMI_fKY4qfQlAMV8BBECB250iw7OhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIN0FlWnVSTk5KOUhEa3VIQmoxdUxxVGsxN2dFbE4zNlVrZmRiTGlfeWI5VzFVdklqMk5GeWd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfY7GP92awLGqU6dy-Pi8wWWMEaB3vwfokj8inNeOY7iFKWCALGoGdEHfuE248tRMFxCziewBEzPv9rNFB5g4Ij2i6RgO9YHg2q7cpbzemYwatGJ_8NLz7ydbgzDUY-jy9xgoWvo4XQOmjIC1wgwJ1ZKoO6TnGXxCvf0RxK8nFOTzviYDXbisHasdkXYqzD2wXf7ACFp94ZgXplon-1SJPtmQNLChzDZnANWQf6WZsWYQgjmvyjFY1Z0A00G8bQchMC2YK8aw4EypEbB83IGIzDdTlQ4SZu0EnV4BHk1I&random=2008546446",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/10777432239/?random=1291576592&cv=11&fst=1779570244104&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=ZBFpCISyovADEK-hipMo&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=4~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKMHRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgbm90LWV2ZW50LXNvdXJjZVoDCgEBYgMKAQM&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOEZo5HHObloKVNxt_MpfYzZT0ySKU8-4X8nfk6G1qxMLVIzOCDUUAaAuoU&pscrd=IhMI_fKY4qfQlAMV8BBECB250iw7OhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIN0FlWnVSTk5KOUhEa3VIQmoxdUxxVGsxN2dFbE4zNlVrZmRiTGlfeWI5VzFVdklqMk5GeWd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfY7GP92awLGqU6dy-Pi8wWWMEaB3vwfokj8inNeOY7iFKWCALGoGdEHfuE248tRMFxCziewBEzPv9rNFB5g4Ij2i6RgO9YHg2q7cpbzemYwatGJ_8NLz7ydbgzDUY-jy9xgoWvo4XQOmjIC1wgwJ1ZKoO6TnGXxCvf0RxK8nFOTzviYDXbisHasdkXYqzD2wXf7ACFp94ZgXplon-1SJPtmQNLChzDZnANWQf6WZsWYQgjmvyjFY1Z0A00G8bQchMC2YK8aw4EypEbB83IGIzDdTlQ4SZu0EnV4BHk1I&random=2008546446",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/10777432239/?random=2047995692&cv=11&fst=1779570244109&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9ZXZlbnQtc291cmNlO25hdmlnYXRpb24tc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPSTIKP0mhb5OzUvI_nf8UAHaB0GisaTwbIkW6Wt_MWDh3Us4muWEcaAoMf&pscrd=IhMIh-eY4qfQlAMVyozuAR22ty9HOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIM2hzRFQ2SExXSHQyb0FqUk44b1pDUGtKVm9jMlNQZnUyMk1KME4ySGVuNlZURjNjMDlQLUF6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfUHEq7Epumnz8CJIW9U8YymzFL2sD1MgG0QNBC_dOWeTNa6PfkN5RweQa6Y3mHI9pmEY5jJ_kXDFrQA7o6Q_7J63RmcjqbMrSUprc6ITzDC45ddaHcU9VcovhNCr2VKXcTY_y0urM_foKWv7MWOvYGlAUBZ1P6y26FBVtwsbl6pG6ZUKQvdydbC4IG0_0SeQgKc_LMrrMuchpWCdjvBydDoRY1009NKdzSH-Ol01aJQOlbKFKl882yzaYTmc7Zfc4b3C3sSrCMvRR47ubqoSBDxkcAjAfWcXLFJkQs--&random=1166647824",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10777432239/?random=2047995692&cv=11&fst=1779570244109&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9ZXZlbnQtc291cmNlO25hdmlnYXRpb24tc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPSTIKP0mhb5OzUvI_nf8UAHaB0GisaTwbIkW6Wt_MWDh3Us4muWEcaAoMf&pscrd=IhMIh-eY4qfQlAMVyozuAR22ty9HOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIM2hzRFQ2SExXSHQyb0FqUk44b1pDUGtKVm9jMlNQZnUyMk1KME4ySGVuNlZURjNjMDlQLUF6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/10777432239/?random=2047995692&cv=11&fst=1779570244109&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9ZXZlbnQtc291cmNlO25hdmlnYXRpb24tc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPSTIKP0mhb5OzUvI_nf8UAHaB0GisaTwbIkW6Wt_MWDh3Us4muWEcaAoMf&pscrd=IhMIh-eY4qfQlAMVyozuAR22ty9HOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIM2hzRFQ2SExXSHQyb0FqUk44b1pDUGtKVm9jMlNQZnUyMk1KME4ySGVuNlZURjNjMDlQLUF6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfUHEq7Epumnz8CJIW9U8YymzFL2sD1MgG0QNBC_dOWeTNa6PfkN5RweQa6Y3mHI9pmEY5jJ_kXDFrQA7o6Q_7J63RmcjqbMrSUprc6ITzDC45ddaHcU9VcovhNCr2VKXcTY_y0urM_foKWv7MWOvYGlAUBZ1P6y26FBVtwsbl6pG6ZUKQvdydbC4IG0_0SeQgKc_LMrrMuchpWCdjvBydDoRY1009NKdzSH-Ol01aJQOlbKFKl882yzaYTmc7Zfc4b3C3sSrCMvRR47ubqoSBDxkcAjAfWcXLFJkQs--&random=1166647824",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/10777432239/?random=2047995692&cv=11&fst=1779570244109&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v893265671za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381~118689382&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=17&label=kY7PCPug5dgaEK-hipMo&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&value=1&currency_code=USD&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=5~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9ZXZlbnQtc291cmNlO25hdmlnYXRpb24tc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPSTIKP0mhb5OzUvI_nf8UAHaB0GisaTwbIkW6Wt_MWDh3Us4muWEcaAoMf&pscrd=IhMIh-eY4qfQlAMVyozuAR22ty9HOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIM2hzRFQ2SExXSHQyb0FqUk44b1pDUGtKVm9jMlNQZnUyMk1KME4ySGVuNlZURjNjMDlQLUF6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfUHEq7Epumnz8CJIW9U8YymzFL2sD1MgG0QNBC_dOWeTNa6PfkN5RweQa6Y3mHI9pmEY5jJ_kXDFrQA7o6Q_7J63RmcjqbMrSUprc6ITzDC45ddaHcU9VcovhNCr2VKXcTY_y0urM_foKWv7MWOvYGlAUBZ1P6y26FBVtwsbl6pG6ZUKQvdydbC4IG0_0SeQgKc_LMrrMuchpWCdjvBydDoRY1009NKdzSH-Ol01aJQOlbKFKl882yzaYTmc7Zfc4b3C3sSrCMvRR47ubqoSBDxkcAjAfWcXLFJkQs--&random=1166647824",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/1060501044/?random=1493720188&cv=11&fst=1779570244050&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK3RyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZTtldmVudC1zb3VyY2VaAwoBAWIDCgED&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOhBsOUw_OUHDj3gG9OCT-6FwTI1vvkCOwDLPH14a3v3223jE8x8d4aAmB3&pscrd=IhMI2_iY4qfQlAMVS5zuAR3-0B8nOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pILU9lN2NHcTZsVEtSTktKY3VJWkt5LXI2TWx4WEZzR0tHd2RVaUgyRk15YU9VTHduYUp1emd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfbHlRxSxXOXppHjoHkIk66XtlutiN4dbR6SGVcO3smZGxtKL5bYYMQ7X-vajRII2JWvJeJ4CMWQNpjPFGloirjSPZNX6R3FzRKYu-H3nrOCoqEWBDTbU07SXq5j_8E3sapEcy95po6litA56vtvFhgteb9Blsjz_IyTzBqN31dp62FgfHIH_yySn2AdCWnnfR0NnMXvi3pDavKXJDbiTj3A3eXIImfe6Uw3nlunAiR8bV6mlo9MeEGpPP2tPoDcD3Ng8_qbev64CnfpJtrnzHhzHgXnvPhay6I2LRmGh&random=2578538506",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1060501044/?random=1493720188&cv=11&fst=1779570244050&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK3RyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZTtldmVudC1zb3VyY2VaAwoBAWIDCgED&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOhBsOUw_OUHDj3gG9OCT-6FwTI1vvkCOwDLPH14a3v3223jE8x8d4aAmB3&pscrd=IhMI2_iY4qfQlAMVS5zuAR3-0B8nOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pILU9lN2NHcTZsVEtSTktKY3VJWkt5LXI2TWx4WEZzR0tHd2RVaUgyRk15YU9VTHduYUp1emd6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/1060501044/?random=1493720188&cv=11&fst=1779570244050&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK3RyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZTtldmVudC1zb3VyY2VaAwoBAWIDCgED&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOhBsOUw_OUHDj3gG9OCT-6FwTI1vvkCOwDLPH14a3v3223jE8x8d4aAmB3&pscrd=IhMI2_iY4qfQlAMVS5zuAR3-0B8nOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pILU9lN2NHcTZsVEtSTktKY3VJWkt5LXI2TWx4WEZzR0tHd2RVaUgyRk15YU9VTHduYUp1emd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfbHlRxSxXOXppHjoHkIk66XtlutiN4dbR6SGVcO3smZGxtKL5bYYMQ7X-vajRII2JWvJeJ4CMWQNpjPFGloirjSPZNX6R3FzRKYu-H3nrOCoqEWBDTbU07SXq5j_8E3sapEcy95po6litA56vtvFhgteb9Blsjz_IyTzBqN31dp62FgfHIH_yySn2AdCWnnfR0NnMXvi3pDavKXJDbiTj3A3eXIImfe6Uw3nlunAiR8bV6mlo9MeEGpPP2tPoDcD3Ng8_qbev64CnfpJtrnzHhzHgXnvPhay6I2LRmGh&random=2578538506",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/1060501044/?random=1493720188&cv=11&fst=1779570244050&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&gcl_ctr=2~0~0~0&data=event%3Dgtag.config&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK3RyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZTtldmVudC1zb3VyY2VaAwoBAWIDCgED&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdOhBsOUw_OUHDj3gG9OCT-6FwTI1vvkCOwDLPH14a3v3223jE8x8d4aAmB3&pscrd=IhMI2_iY4qfQlAMVS5zuAR3-0B8nOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pILU9lN2NHcTZsVEtSTktKY3VJWkt5LXI2TWx4WEZzR0tHd2RVaUgyRk15YU9VTHduYUp1emd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfbHlRxSxXOXppHjoHkIk66XtlutiN4dbR6SGVcO3smZGxtKL5bYYMQ7X-vajRII2JWvJeJ4CMWQNpjPFGloirjSPZNX6R3FzRKYu-H3nrOCoqEWBDTbU07SXq5j_8E3sapEcy95po6litA56vtvFhgteb9Blsjz_IyTzBqN31dp62FgfHIH_yySn2AdCWnnfR0NnMXvi3pDavKXJDbiTj3A3eXIImfe6Uw3nlunAiR8bV6mlo9MeEGpPP2tPoDcD3Ng8_qbev64CnfpJtrnzHhzHgXnvPhay6I2LRmGh&random=2578538506",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/1060501044/?random=2016655109&cv=11&fst=1779570244065&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9bmF2aWdhdGlvbi1zb3VyY2U7ZXZlbnQtc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMR8CBrK4WFZCkIiapIUvjn_inWAUs_WO_KwYne5Xh1dEpoZRExjCMaAnwn&pscrd=IhMIqfiY4qfQlAMVPxjvAh0q3ArVOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIXzlrd09jSzVsTGp0QjgzR3lsZTlSTDhsT0E3MmR0ZExiWG9NQWItWGpxczM0RmQ5YjNXZ3d6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfdVGrLwYRCzH_AIrZVFGD-ND_cLxY3OPDN-68q8vmKyjIhsB9XThMSPoOY0d3hMywgUp8PeQdt5qD7f4VMiVL9GZDbrnYwy-eMI9QMepTJwtTb4FrHYqUpsmqKLfBzRDiODzYAqa1etFznR6hxVcpPOEBhNhgCGEyOROc5vfsSPZOw57bhU1rwajtrDk_4S1bR0NapmikT_jF6MTgpAHZi_aknCIIB2-r4QWdzCNyMtgTQcXZYmIwIau_J6XPbTPueMX_w8xJPTO5Lu6Lx0cyelKkS5vjujJPslHVdzD&random=1947005222",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1060501044/?random=2016655109&cv=11&fst=1779570244065&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9bmF2aWdhdGlvbi1zb3VyY2U7ZXZlbnQtc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMR8CBrK4WFZCkIiapIUvjn_inWAUs_WO_KwYne5Xh1dEpoZRExjCMaAnwn&pscrd=IhMIqfiY4qfQlAMVPxjvAh0q3ArVOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIXzlrd09jSzVsTGp0QjgzR3lsZTlSTDhsT0E3MmR0ZExiWG9NQWItWGpxczM0RmQ5YjNXZ3d6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/1060501044/?random=2016655109&cv=11&fst=1779570244065&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9bmF2aWdhdGlvbi1zb3VyY2U7ZXZlbnQtc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMR8CBrK4WFZCkIiapIUvjn_inWAUs_WO_KwYne5Xh1dEpoZRExjCMaAnwn&pscrd=IhMIqfiY4qfQlAMVPxjvAh0q3ArVOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIXzlrd09jSzVsTGp0QjgzR3lsZTlSTDhsT0E3MmR0ZExiWG9NQWItWGpxczM0RmQ5YjNXZ3d6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfdVGrLwYRCzH_AIrZVFGD-ND_cLxY3OPDN-68q8vmKyjIhsB9XThMSPoOY0d3hMywgUp8PeQdt5qD7f4VMiVL9GZDbrnYwy-eMI9QMepTJwtTb4FrHYqUpsmqKLfBzRDiODzYAqa1etFznR6hxVcpPOEBhNhgCGEyOROc5vfsSPZOw57bhU1rwajtrDk_4S1bR0NapmikT_jF6MTgpAHZi_aknCIIB2-r4QWdzCNyMtgTQcXZYmIwIau_J6XPbTPueMX_w8xJPTO5Lu6Lx0cyelKkS5vjujJPslHVdzD&random=1947005222",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/1060501044/?random=2016655109&cv=11&fst=1779570244065&fmt=8&bg=ffffff&guid=ON&async=1&en=page_view&gtm=45be65k1v872296686za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938466~115938469~116701381~119027223&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&npa=0&pscdl=noapi&auid=240406615.1779570242&label=sucuCNnvv_kDELTs1_kD&hn=www.googleadservices.com&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&ec_mode=c&gcl_ctr=3~0~0~0&data=event%3Dpage_view%3Bdynx_pagetype%3DCars%3Bdynx_itemid%3D&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKJnRyaWdnZXI9bmF2aWdhdGlvbi1zb3VyY2U7ZXZlbnQtc291cmNlWgMKAQFiAwoBAw&cerd=CgEA&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMR8CBrK4WFZCkIiapIUvjn_inWAUs_WO_KwYne5Xh1dEpoZRExjCMaAnwn&pscrd=IhMIqfiY4qfQlAMVPxjvAh0q3ArVOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIXzlrd09jSzVsTGp0QjgzR3lsZTlSTDhsT0E3MmR0ZExiWG9NQWItWGpxczM0RmQ5YjNXZ3d6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfdVGrLwYRCzH_AIrZVFGD-ND_cLxY3OPDN-68q8vmKyjIhsB9XThMSPoOY0d3hMywgUp8PeQdt5qD7f4VMiVL9GZDbrnYwy-eMI9QMepTJwtTb4FrHYqUpsmqKLfBzRDiODzYAqa1etFznR6hxVcpPOEBhNhgCGEyOROc5vfsSPZOw57bhU1rwajtrDk_4S1bR0NapmikT_jF6MTgpAHZi_aknCIIB2-r4QWdzCNyMtgTQcXZYmIwIau_J6XPbTPueMX_w8xJPTO5Lu6Lx0cyelKkS5vjujJPslHVdzD&random=1947005222",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/769504883/?random=1131750768&cv=11&fst=1779570243942&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHnRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZVoDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMgCVFbMcSaylXfi5aTEmvr1atMUZT0jRWhJ4BVzl0GUGXC5i2YYbUaAnFq&pscrd=IhMIv76P4qfQlAMVRxxECB1KnCcOOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pINXlQcGE1UHNYUlJtaUoxOWs4dGhkREc1dWxZbjhTZk01UFM2LWh1LVRuRmJEdDJ2ZXRLWnd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfYgQjn3af-YEOSSOPekD-mxBrktBjkQ6rwZkDnibAqAmaZeZ8hO6uKd8pRZnJ2ntpQYyeQ84nLuK1BNbJNyHg2va3yyqeWFtktARslCG2WE1bviZWtyt8B2zLjNrtZt2m2jV0URMZacWAaewAcwNJeQQe87X4Qzulpb-h8NJMSskiKYBAuwg4O5wr-ej5PTlLG8_m0AlnCjhVAJ-NWpHiVDuPmATS7JuM9Y4NypQPO-LD_bO2CZJkmjtvMl4ijpWU-3gB2pLmEepyLs7QYurbpg3yF6UMq-MbL7Er124&random=2471715707",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/769504883/?random=1131750768&cv=11&fst=1779570243942&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHnRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZVoDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMgCVFbMcSaylXfi5aTEmvr1atMUZT0jRWhJ4BVzl0GUGXC5i2YYbUaAnFq&pscrd=IhMIv76P4qfQlAMVRxxECB1KnCcOOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pINXlQcGE1UHNYUlJtaUoxOWs4dGhkREc1dWxZbjhTZk01UFM2LWh1LVRuRmJEdDJ2ZXRLWnd6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/769504883/?random=1131750768&cv=11&fst=1779570243942&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHnRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZVoDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMgCVFbMcSaylXfi5aTEmvr1atMUZT0jRWhJ4BVzl0GUGXC5i2YYbUaAnFq&pscrd=IhMIv76P4qfQlAMVRxxECB1KnCcOOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pINXlQcGE1UHNYUlJtaUoxOWs4dGhkREc1dWxZbjhTZk01UFM2LWh1LVRuRmJEdDJ2ZXRLWnd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfYgQjn3af-YEOSSOPekD-mxBrktBjkQ6rwZkDnibAqAmaZeZ8hO6uKd8pRZnJ2ntpQYyeQ84nLuK1BNbJNyHg2va3yyqeWFtktARslCG2WE1bviZWtyt8B2zLjNrtZt2m2jV0URMZacWAaewAcwNJeQQe87X4Qzulpb-h8NJMSskiKYBAuwg4O5wr-ej5PTlLG8_m0AlnCjhVAJ-NWpHiVDuPmATS7JuM9Y4NypQPO-LD_bO2CZJkmjtvMl4ijpWU-3gB2pLmEepyLs7QYurbpg3yF6UMq-MbL7Er124&random=2471715707",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/769504883/?random=1131750768&cv=11&fst=1779570243942&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116701381&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=12&label=Jip8CNmThZ0BEPPs9u4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=1~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHnRyaWdnZXIsIG5vdC1uYXZpZ2F0aW9uLXNvdXJjZVoDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdMgCVFbMcSaylXfi5aTEmvr1atMUZT0jRWhJ4BVzl0GUGXC5i2YYbUaAnFq&pscrd=IhMIv76P4qfQlAMVRxxECB1KnCcOOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pINXlQcGE1UHNYUlJtaUoxOWs4dGhkREc1dWxZbjhTZk01UFM2LWh1LVRuRmJEdDJ2ZXRLWnd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfYgQjn3af-YEOSSOPekD-mxBrktBjkQ6rwZkDnibAqAmaZeZ8hO6uKd8pRZnJ2ntpQYyeQ84nLuK1BNbJNyHg2va3yyqeWFtktARslCG2WE1bviZWtyt8B2zLjNrtZt2m2jV0URMZacWAaewAcwNJeQQe87X4Qzulpb-h8NJMSskiKYBAuwg4O5wr-ej5PTlLG8_m0AlnCjhVAJ-NWpHiVDuPmATS7JuM9Y4NypQPO-LD_bO2CZJkmjtvMl4ijpWU-3gB2pLmEepyLs7QYurbpg3yF6UMq-MbL7Er124&random=2471715707",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://www.google.com/pagead/1p-conversion/768545124/?random=1519591308&cv=11&fst=1779570244198&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgjU5rECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAkorbm90LW5hdmlnYXRpb24tc291cmNlO2V2ZW50LXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgiN4b0t24m-LQ&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPkwPqgVXKAGnGEHZyewTqt23JXj9WkCd9Vc8jYipnPXbaDIYCUnIwaAuRL&pscrd=IhMInYWZ4qfQlAMVfAdECB2JxjSnOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIeVFhUmV5Y2ZGNGJLOTlQZlptQlhXU2p1UlFJdTZMdWhVd2NUTEJ2c3dJYXd0R1VLYlpGdHd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfd_5sbQhINCnloXwLX716oPtiHyjBE7WHYBRmGuXzbrDlPHpWxc0hbF6FFeKIL5NPF5JozQH4c3wA6Z_OuTu_GGkteVhL5Z_LkmmDRe9QQFpX7SgkgHkbjklfCZmm3FBY1KOpN4WblVUQxGh0BUJBuN2--9eKen-BJgJM2b4tqUJY44deTpDApiQ4MwQbTZIlY8B7mEzp1pTNVojIgyaH8amhjtgywX-5CHj7zSv_dqKM9Lo6p8r18pAQXX4s98A_MxS1JMIstjC9Afzl1sJ5mIOtSSaO1rTDEQGcaq6&random=3141814136",
+    "method": "GET",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "accept-language": "en-US,en;q=0.9",
+      "referer": "https://www.carmax.com/"
+    },
+    "resource_type": "fetch"
+  },
+  {
+    "type": "response",
+    "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/768545124/?random=1519591308&cv=11&fst=1779570244198&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgjU5rECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAkorbm90LW5hdmlnYXRpb24tc291cmNlO2V2ZW50LXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgiN4b0t24m-LQ&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPkwPqgVXKAGnGEHZyewTqt23JXj9WkCd9Vc8jYipnPXbaDIYCUnIwaAuRL&pscrd=IhMInYWZ4qfQlAMVfAdECB2JxjSnOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIeVFhUmV5Y2ZGNGJLOTlQZlptQlhXU2p1UlFJdTZMdWhVd2NUTEJ2c3dJYXd0R1VLYlpGdHd6DAgJYggIABAAGAAgAA",
+    "status": 302,
+    "content_type": "text/html; charset=UTF-8",
+    "response_headers": {
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 01 Jan 1990 00:00:00 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "p3p": "policyref=\"https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml\", CP=\"CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"",
+      "date": "Sat, 23 May 2026 21:04:04 GMT",
+      "content-type": "text/html; charset=UTF-8",
+      "cache-control": "no-cache, must-revalidate",
+      "timing-allow-origin": "*",
+      "location": "https://www.google.com/pagead/1p-conversion/768545124/?random=1519591308&cv=11&fst=1779570244198&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgjU5rECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAkorbm90LW5hdmlnYXRpb24tc291cmNlO2V2ZW50LXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgiN4b0t24m-LQ&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPkwPqgVXKAGnGEHZyewTqt23JXj9WkCd9Vc8jYipnPXbaDIYCUnIwaAuRL&pscrd=IhMInYWZ4qfQlAMVfAdECB2JxjSnOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIeVFhUmV5Y2ZGNGJLOTlQZlptQlhXU2p1UlFJdTZMdWhVd2NUTEJ2c3dJYXd0R1VLYlpGdHd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfd_5sbQhINCnloXwLX716oPtiHyjBE7WHYBRmGuXzbrDlPHpWxc0hbF6FFeKIL5NPF5JozQH4c3wA6Z_OuTu_GGkteVhL5Z_LkmmDRe9QQFpX7SgkgHkbjklfCZmm3FBY1KOpN4WblVUQxGh0BUJBuN2--9eKen-BJgJM2b4tqUJY44deTpDApiQ4MwQbTZIlY8B7mEzp1pTNVojIgyaH8amhjtgywX-5CHj7zSv_dqKM9Lo6p8r18pAQXX4s98A_MxS1JMIstjC9Afzl1sJ5mIOtSSaO1rTDEQGcaq6&random=3141814136",
+      "pragma": "no-cache",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-credentials": "true",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "content-length": "0",
+      "x-xss-protection": "0",
+      "server": "cafe"
+    },
+    "body_preview": "<unreadable>"
+  },
+  {
+    "type": "response",
+    "url": "https://www.google.com/pagead/1p-conversion/768545124/?random=1519591308&cv=11&fst=1779570244198&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65k1v892579784za200zb9181631201zd9181631201xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468~116701381~118128923&u_w=1280&u_h=800&url=https%3A%2F%2Fwww.carmax.com%2Fcars%3Fzip%3D90405%26distance%3D25%26priceMin%3D5000%26priceMax%3D12000%26transmission%3DAutomatic&rcb=5&label=ZX5ACKiN8ZgBEOSivO4C&capi=1&gtm_ee=1&frm=0&tiba=Used%20cars%20near%20me%20for%20sale&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=240406615.1779570242&uaa=x86&uab=64&uafvl=Chromium%3B145.0.7632.6%7CNot%253AA-Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=IA&gcl_ctr=6~0~0~0&data=event%3Dconversion&category=acrcp_v1_512&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgjU5rECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAkorbm90LW5hdmlnYXRpb24tc291cmNlO2V2ZW50LXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgiN4b0t24m-LQ&fsk=ChEI8KDF0AYQ973A5qux08ynARIsAPmPTdPkwPqgVXKAGnGEHZyewTqt23JXj9WkCd9Vc8jYipnPXbaDIYCUnIwaAuRL&pscrd=IhMInYWZ4qfQlAMVfAdECB2JxjSnOhdodHRwczovL3d3dy5jYXJtYXguY29tL0JWQ2hBSThLREYwQVlRb1l1aG1lT2p3b1UzRWl3QWVRa0pIeVFhUmV5Y2ZGNGJLOTlQZlptQlhXU2p1UlFJdTZMdWhVd2NUTEJ2c3dJYXd0R1VLYlpGdHd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQS4gEABaugfd_5sbQhINCnloXwLX716oPtiHyjBE7WHYBRmGuXzbrDlPHpWxc0hbF6FFeKIL5NPF5JozQH4c3wA6Z_OuTu_GGkteVhL5Z_LkmmDRe9QQFpX7SgkgHkbjklfCZmm3FBY1KOpN4WblVUQxGh0BUJBuN2--9eKen-BJgJM2b4tqUJY44deTpDApiQ4MwQbTZIlY8B7mEzp1pTNVojIgyaH8amhjtgywX-5CHj7zSv_dqKM9Lo6p8r18pAQXX4s98A_MxS1JMIstjC9Afzl1sJ5mIOtSSaO1rTDEQGcaq6&random=3141814136",
+    "status": 200,
+    "content_type": "",
+    "response_headers": {},
+    "body_preview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=3&ClientTime=1779570247521&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=1779570242680&LastActivity=5024&IsNewSession=true&ContentEncoding=gzip",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"macOS\"",
+      "referer": "https://www.carmax.com/",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"145\", \"Not:A-Brand\";v=\"99\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0",
+      "accept-language": "en-US,en;q=0.9"
+    },
+    "resource_type": "xhr"
+  },
+  {
+    "type": "response",
+    "url": "https://userinsights.carmax.com/rec/bundle/v2?OrgId=J90WC&UserId=118b67d4-4ba9-4f1d-93ca-1c30578a5240&SessionId=30c31290-5b2f-4043-808f-0b0af0540736&PageId=04778ce7-0237-40af-9137-7a329609bcee&Seq=3&ClientTime=1779570247521&CompiledVersion=5b245fab1f5df4de7943b29486dda68c0d73e274&PageStart=1779570237495&PrevBundleTime=1779570242680&LastActivity=5024&IsNewSession=true&ContentEncoding=gzip",
+    "status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "response_headers": {
+      "x-robots-tag": "noindex, nofollow",
+      "access-control-allow-credentials": "true",
+      "via": "1.1 google",
+      "access-control-allow-origin": "https://www.carmax.com",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-length": "29",
+      "date": "Sat, 23 May 2026 21:04:07 GMT",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "body_preview": "{\"BundleTime\": 1779570247664}",
+    "body_shape": [
+      "BundleTime"
+    ]
+  }
+]

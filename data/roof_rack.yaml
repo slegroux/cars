@@ -1,0 +1,45 @@
+# Roof rack compatibility by make/model.
+# status: oem_rails | aftermarket | none
+# Fields: make, model, status, notes (optional)
+
+# OEM rails (factory cross-bar mounts or rails included/optional on most trims)
+- {make: Subaru, model: Outback, status: oem_rails, notes: "factory rails standard all years"}
+- {make: Subaru, model: Forester, status: oem_rails, notes: "factory rails standard all years"}
+- {make: Subaru, model: Crosstrek, status: oem_rails, notes: "factory rails standard all years"}
+- {make: Subaru, model: Impreza, status: aftermarket, notes: "sedan/hatch — Thule/Yakima clip system"}
+- {make: Toyota, model: RAV4, status: oem_rails, notes: "silver rails on XLE+ 2006-2018; standard 2019+"}
+- {make: Toyota, model: 4Runner, status: oem_rails, notes: "factory rails standard"}
+- {make: Toyota, model: Matrix, status: oem_rails, notes: "optional rails on XRS/AWD trims 2009-2014"}
+- {make: Honda, model: CR-V, status: oem_rails, notes: "silver rails on EX+ 2007-2016"}
+- {make: Honda, model: Pilot, status: oem_rails, notes: "factory rails standard"}
+- {make: Mazda, model: CX-5, status: oem_rails, notes: "silver rails on Touring+ 2013+"}
+- {make: Kia, model: Sportage, status: oem_rails, notes: "rails on mid/high trims all years"}
+- {make: Hyundai, model: Tucson, status: oem_rails, notes: "rails on mid/high trims all years"}
+- {make: Nissan, model: Rogue, status: oem_rails, notes: "trim-dependent 2014+; SV/SL standard"}
+
+# Aftermarket (Thule/Yakima naked-roof or clip systems work)
+- {make: Toyota, model: Camry, status: aftermarket, notes: "Thule/Yakima clip system for sedan"}
+- {make: Toyota, model: Corolla, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Toyota, model: Prius, status: aftermarket, notes: "some trims bare roof; complex fit, special Thule kit"}
+- {make: Honda, model: Civic, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Honda, model: Accord, status: aftermarket, notes: "Thule/Yakima clip system for sedan"}
+- {make: Honda, model: Fit, status: aftermarket, notes: "Yakima clips 2009-2014; factory rails optional 2015+"}
+- {make: Mazda, model: Mazda3, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Mazda, model: Mazda6, status: aftermarket, notes: "Thule/Yakima clip system for sedan"}
+- {make: Hyundai, model: Sonata, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Hyundai, model: Elantra, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Kia, model: Forte, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Kia, model: Optima, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Kia, model: Soul, status: aftermarket, notes: "Thule/Yakima clip system; boxy roof fits well"}
+- {make: Volkswagen, model: Jetta, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Volkswagen, model: Golf, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Volkswagen, model: Passat, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Nissan, model: Sentra, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: Nissan, model: Altima, status: aftermarket, notes: "Thule/Yakima clip system"}
+- {make: BMW, model: 3-Series, status: aftermarket, notes: "Thule/Yakima clip system for sedan/wagon"}
+- {make: Audi, model: A4, status: aftermarket, notes: "Thule/Yakima clip system; Avant has factory rails"}
+- {make: Lexus, model: IS, status: aftermarket, notes: "Thule/Yakima clip system for sedan"}
+
+# None (convertibles, coupes or bare roofs with no viable rack option)
+- {make: Toyota, model: MR2, status: none, notes: "convertible/coupe — no rack option"}
+- {make: BMW, model: Z4, status: none, notes: "roadster — no rack option"}

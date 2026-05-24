@@ -1,0 +1,25 @@
+zip: "90405"
+radius_miles: 25
+budget: {min: 5000, max: 12000}
+mileage: {max: 100000, sweet_spot: [50000, 80000]}
+transmission: {exclude_manual: true}
+sources: {craigslist: true, carmax: true, facebook: false}
+carmax_include_transfer: true
+carmax_max_transfer_miles: 200
+weights:
+  reliability: 0.22
+  price_value: 0.18
+  mileage: 0.16
+  size_class: 0.12
+  insurance_risk: 0.10
+  seller_type: 0.05
+  roof_rack: 0.06
+  mpg: 0.04
+  drivetrain: 0.03
+  parking_footprint: 0.02
+  title_status: 0.02
+export:
+  vault_path: "~/Obsidian/PersonalVault/wiki/cars"
+  photo_thumbnails: 3
+rate_limit: {min_delay_seconds: 2, max_delay_seconds: 5}
+retry: {max_retries: 3, backoff_base: 2, retryable_status: [429, 503]}
