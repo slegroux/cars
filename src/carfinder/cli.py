@@ -28,10 +28,12 @@ def cli(ctx: click.Context, verbose: bool) -> None:
 # ---------------------------------------------------------------------------
 def _get_fetcher_registry():
     from carfinder.fetchers.carmax import CarMaxFetcher
+    from carfinder.fetchers.carscom import CarsDotComFetcher
     from carfinder.fetchers.craigslist import CraigslistFetcher
     return {
         "craigslist": CraigslistFetcher,
         "carmax": CarMaxFetcher,
+        "carscom": CarsDotComFetcher,
     }
 
 

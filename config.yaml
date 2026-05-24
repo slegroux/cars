@@ -3,7 +3,7 @@ radius_miles: 25
 budget: {min: 5000, max: 12000}
 mileage: {max: 100000, sweet_spot: [50000, 80000]}
 transmission: {exclude_manual: true}
-sources: {craigslist: true, carmax: true, facebook: false}
+sources: {craigslist: true, carmax: true, carscom: true, facebook: false}
 carmax_include_transfer: true
 carmax_max_transfer_miles: 200
 weights:

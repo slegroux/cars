@@ -26,6 +26,7 @@ class TransmissionConfig(BaseModel):
 class SourcesConfig(BaseModel):
     craigslist: bool = True
     carmax: bool = False
+    carscom: bool = False
     facebook: bool = False
 
 

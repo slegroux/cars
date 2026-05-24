@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><title>Used Vehicles for Sale Near Santa Monica, CA | Cars.com</title></head>
+<body>
+<main>
+<!-- In-budget RAV4 — should be returned -->
+<div
+  data-listing-id="aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa"
+  data-vehicle-details='{"listingId":"aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa","make":"Toyota","model":"RAV4","year":"2019","trim":"XLE","vin":"JTMDFREV0KD123456","mileage":"75000","price":"11500","bodyStyle":"SUV","fuelType":"Gasoline","stockType":"Used","cpoIndicator":false,"primaryThumbnail":"https://example.com/rav4.jpg","seller":{"zip":"90404","customerId":"seller-1"}}'
+  id="vehicle-card-aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa"
+>
+  <a href="https://www.cars.com/vehicledetail/aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa/">RAV4</a>
+</div>
+
+<!-- In-budget CR-V — should be returned -->
+<div
+  data-listing-id="bbbbbbbb-0002-0002-0002-bbbbbbbbbbbb"
+  data-vehicle-details='{"listingId":"bbbbbbbb-0002-0002-0002-bbbbbbbbbbbb","make":"Honda","model":"CR-V","year":"2018","trim":"EX","vin":"2HKRW2H55JH123456","mileage":"60000","price":"10800","bodyStyle":"SUV","fuelType":"Gasoline","stockType":"Used","cpoIndicator":false,"primaryThumbnail":"https://example.com/crv.jpg","seller":{"zip":"90401","customerId":"seller-2"}}'
+  id="vehicle-card-bbbbbbbb-0002-0002-0002-bbbbbbbbbbbb"
+>
+  <a href="https://www.cars.com/vehicledetail/bbbbbbbb-0002-0002-0002-bbbbbbbbbbbb/">CR-V</a>
+</div>
+
+<!-- CPO Subaru Forester — should be returned with seller_type=certified -->
+<div
+  data-listing-id="cccccccc-0003-0003-0003-cccccccccccc"
+  data-vehicle-details='{"listingId":"cccccccc-0003-0003-0003-cccccccccccc","make":"Subaru","model":"Forester","year":"2020","trim":"Premium","vin":"JF2SKAEC0LH123456","mileage":"35000","price":"8500","bodyStyle":"SUV","fuelType":"Gasoline","stockType":"Used","cpoIndicator":true,"primaryThumbnail":"https://example.com/forester.jpg","seller":{"zip":"90501","customerId":"seller-3"}}'
+  id="vehicle-card-cccccccc-0003-0003-0003-cccccccccccc"
+>
+  <a href="https://www.cars.com/vehicledetail/cccccccc-0003-0003-0003-cccccccccccc/">Forester</a>
+</div>
+
+<!-- Over budget BMW X5 — should be filtered out -->
+<div
+  data-listing-id="dddddddd-0004-0004-0004-dddddddddddd"
+  data-vehicle-details='{"listingId":"dddddddd-0004-0004-0004-dddddddddddd","make":"BMW","model":"X5","year":"2020","trim":"xDrive40i","vin":"5UXCR6C09L9B123456","mileage":"45000","price":"42000","bodyStyle":"SUV","fuelType":"Gasoline","stockType":"Used","cpoIndicator":false,"primaryThumbnail":"https://example.com/x5.jpg","seller":{"zip":"90210","customerId":"seller-4"}}'
+  id="vehicle-card-dddddddd-0004-0004-0004-dddddddddddd"
+>
+  <a href="https://www.cars.com/vehicledetail/dddddddd-0004-0004-0004-dddddddddddd/">X5</a>
+</div>
+
+<!-- Over mileage Camry — should be filtered out -->
+<div
+  data-listing-id="eeeeeeee-0005-0005-0005-eeeeeeeeeeee"
+  data-vehicle-details='{"listingId":"eeeeeeee-0005-0005-0005-eeeeeeeeeeee","make":"Toyota","model":"Camry","year":"2017","trim":"SE","vin":"4T1BF1FK1HU123456","mileage":"130000","price":"8000","bodyStyle":"Sedan","fuelType":"Gasoline","stockType":"Used","cpoIndicator":false,"primaryThumbnail":"https://example.com/camry.jpg","seller":{"zip":"90402","customerId":"seller-5"}}'
+  id="vehicle-card-eeeeeeee-0005-0005-0005-eeeeeeeeeeee"
+>
+  <a href="https://www.cars.com/vehicledetail/eeeeeeee-0005-0005-0005-eeeeeeeeeeee/">Camry</a>
+</div>
+
+<!-- Ad placeholder — no data-vehicle-details, should be silently skipped -->
+<li class="listing-ad-row">
+  <cars-banner-ad data-ad-type="partial-page-width"></cars-banner-ad>
+</li>
+</main>
+</body>
+</html>
