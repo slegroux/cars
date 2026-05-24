@@ -601,6 +601,49 @@ tr.expand-row td {
   font-family: var(--font);
 }
 
+/* ── pagination ── */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+.page-size-sel {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px 6px;
+  background: var(--bg);
+  color: var(--text-muted);
+  height: 26px;
+  margin-right: auto;
+}
+.page-btn {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  height: 26px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: border-color 0.1s, color 0.1s;
+}
+.page-btn:disabled { opacity: 0.35; cursor: default; }
+.page-btn:not(:disabled):hover { border-color: var(--text-muted); color: var(--text); }
+.page-info {
+  font-family: var(--font);
+  color: var(--text-muted);
+  min-width: 90px;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
 /* ── footer ── */
 .footer {
   padding: 20px 0 8px;
@@ -633,6 +676,8 @@ _JS = r"""
     yearMin: 2008,
     sortCol: 'score',
     sortDir: 'desc',
+    page: 1,
+    pageSize: 25,
   };
 
   var S = window.dashboardState;
@@ -851,6 +896,11 @@ _JS = r"""
       return 0;
     });
 
+    var total = fl.length;
+    var start = S.pageSize > 0 ? (S.page - 1) * S.pageSize : 0;
+    var end   = S.pageSize > 0 ? start + S.pageSize : total;
+    var paginated = fl.slice(start, end);
+
     var tbody = document.getElementById('listingsTbody');
     tbody.innerHTML = '';
 
@@ -864,7 +914,7 @@ _JS = r"""
       if (col === S.sortCol) th.classList.add(S.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
     });
 
-    fl.forEach(function(d, i) {
+    paginated.forEach(function(d, i) {
       // Data row
       var tr = document.createElement('tr');
       tr.className = 'data-row';
@@ -956,12 +1006,70 @@ _JS = r"""
       expandRow.appendChild(expandTd);
       tbody.appendChild(expandRow);
     });
+
+    renderPagination(total);
   }
 
   function _td(text) {
     var td = document.createElement('td');
     td.textContent = text;
     return td;
+  }
+
+  // ── Pagination ─────────────────────────────────────────────────────────────
+  function renderPagination(total) {
+    var el = document.getElementById('pagination');
+    if (!el) return;
+    el.innerHTML = '';
+
+    var totalPages = S.pageSize > 0 ? Math.ceil(total / S.pageSize) : 1;
+    if (S.page > totalPages) S.page = Math.max(1, totalPages);
+
+    // Per-page selector (right side via margin-left:auto on first element)
+    var sel = document.createElement('select');
+    sel.className = 'page-size-sel';
+    [10, 25, 50, 100].forEach(function(n) {
+      var opt = document.createElement('option');
+      opt.value = n; opt.textContent = n + ' per page';
+      if (n === S.pageSize) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    var optAll = document.createElement('option');
+    optAll.value = 0; optAll.textContent = 'All';
+    if (S.pageSize === 0) optAll.selected = true;
+    sel.appendChild(optAll);
+    sel.addEventListener('change', function() {
+      S.pageSize = +this.value; S.page = 1;
+      renderTable();
+    });
+    el.appendChild(sel);
+
+    if (S.pageSize <= 0 || total <= S.pageSize) return;
+
+    var prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.textContent = '← Prev';
+    prev.disabled = S.page <= 1;
+    prev.addEventListener('click', function() {
+      if (S.page > 1) { S.page--; renderTable(); window.scrollTo({top: document.getElementById('listingsTbody').getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth'}); }
+    });
+    el.appendChild(prev);
+
+    var info = document.createElement('span');
+    info.className = 'page-info';
+    var from = (S.page - 1) * S.pageSize + 1;
+    var to   = Math.min(S.page * S.pageSize, total);
+    info.textContent = from + '–' + to + ' of ' + total;
+    el.appendChild(info);
+
+    var next = document.createElement('button');
+    next.className = 'page-btn';
+    next.textContent = 'Next →';
+    next.disabled = S.page >= totalPages;
+    next.addEventListener('click', function() {
+      if (S.page < totalPages) { S.page++; renderTable(); window.scrollTo({top: document.getElementById('listingsTbody').getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth'}); }
+    });
+    el.appendChild(next);
   }
 
   // ── Expand / radar ─────────────────────────────────────────────────────────
@@ -1064,10 +1172,30 @@ _JS = r"""
 
   // ── Scroll + highlight ─────────────────────────────────────────────────────
   function scrollToRow(id) {
+    if (S.pageSize > 0) {
+      var sorted = filteredListings();
+      sorted.sort(function(a, b) {
+        var av = a[S.sortCol], bv = b[S.sortCol];
+        if (av == null) av = S.sortDir === 'asc' ? Infinity : -Infinity;
+        if (bv == null) bv = S.sortDir === 'asc' ? Infinity : -Infinity;
+        if (typeof av === 'string') av = av.toLowerCase();
+        if (typeof bv === 'string') bv = bv.toLowerCase();
+        if (av < bv) return S.sortDir === 'asc' ? -1 : 1;
+        if (av > bv) return S.sortDir === 'asc' ? 1 : -1;
+        return 0;
+      });
+      var idx = -1;
+      for (var i = 0; i < sorted.length; i++) {
+        if (sorted[i].id === id) { idx = i; break; }
+      }
+      if (idx >= 0) {
+        var targetPage = Math.floor(idx / S.pageSize) + 1;
+        if (targetPage !== S.page) { S.page = targetPage; renderTable(); }
+      }
+    }
     var row = document.querySelector('tr.data-row[data-id="' + CSS.escape(id) + '"]');
     if (!row) return;
     row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Flash highlight
     row.classList.add('highlighted');
     setTimeout(function(){ if (openRowId !== id) row.classList.remove('highlighted'); }, 2500);
   }
@@ -1087,6 +1215,7 @@ _JS = r"""
 
   // ── Apply all filters ──────────────────────────────────────────────────────
   function applyFilters() {
+    S.page = 1;
     renderTable();
     buildScatter();
   }
@@ -1366,6 +1495,7 @@ def render_html(
         '    <tbody id="listingsTbody">',
         "    </tbody>",
         "  </table>",
+        '  <div id="pagination" class="pagination"></div>',
         "</div>",
         "",
         "<!-- ── Lightbox ────────────────────────────────────────── -->",

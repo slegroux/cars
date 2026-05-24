@@ -295,7 +295,7 @@ def rank(top: int, min_score: float, fmt: str, body_types: str | None) -> None:
 
 
 @cli.command()
-@click.option("--top", default=15, show_default=True)
+@click.option("--top", default=None, type=int, help="Limit number of listings exported (default: all).")
 @click.option("--path", default=None, help="Override export path.")
 @click.option(
     "--format",
