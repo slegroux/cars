@@ -36,6 +36,7 @@ _FACTOR_KEYS = [
     "insurance_risk",
     "roof_rack",
     "title_status",
+    "seller_type",
 ]
 
 
@@ -499,6 +500,7 @@ table.listings td.col-photo img {
 }
 .source-craigslist { background: var(--blue-dim);    color: var(--blue); }
 .source-carmax     { background: var(--orange-dim);  color: var(--orange); }
+.source-carscom    { background: var(--green-dim);   color: var(--green); }
 .source-other      { background: var(--border-light); color: var(--text-muted); }
 
 .ext-link {
@@ -667,6 +669,7 @@ _JS = r"""
   function sourceChipClass(src) {
     if (src === 'craigslist') return 'source-craigslist';
     if (src === 'carmax')     return 'source-carmax';
+    if (src === 'carscom')    return 'source-carscom';
     return 'source-other';
   }
 
@@ -915,7 +918,7 @@ _JS = r"""
       var tdSrc = document.createElement('td');
       var srcSpan = document.createElement('span');
       srcSpan.className = 'source-chip ' + sourceChipClass(d.source);
-      srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source;
+      srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source === 'carscom' ? 'Cars' : d.source;
       tdSrc.appendChild(srcSpan);
       tr.appendChild(tdSrc);
 
@@ -1282,6 +1285,7 @@ def render_html(
         '      <option value="all">All sources</option>',
         '      <option value="craigslist">Craigslist</option>',
         '      <option value="carmax">CarMax</option>',
+        '      <option value="carscom">Cars.com</option>',
         "    </select>",
         "  </div>",
         '  <div class="filter-group">',
