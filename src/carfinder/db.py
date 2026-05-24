@@ -4,11 +4,12 @@ from __future__ import annotations
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
 
 from carfinder.models import Listing
 
 # Columns that are mutable and should be updated on conflict
-_MUTABLE_COLS = [
+_MUTABLE_COLS: List[str] = [
     "asking_price",
     "last_seen",
     "score",
@@ -24,7 +25,7 @@ _MUTABLE_COLS = [
 ]
 
 
-def _get_column_defs() -> list[str]:
+def _get_column_defs() -> List[str]:
     """Derive column list from Listing.model_fields.
 
     We resolve the inner type of each Optional[X] annotation by walking
@@ -33,7 +34,7 @@ def _get_column_defs() -> list[str]:
     import types
     import typing
 
-    def _sql_type(annotation) -> str:
+    def _sql_type(annotation: Any) -> str:
         # Unwrap Optional / Union
         origin = getattr(annotation, "__origin__", None)
         if origin is typing.Union or (
@@ -60,7 +61,7 @@ def _get_column_defs() -> list[str]:
         }
         return mapping.get(name, "TEXT")
 
-    cols = []
+    cols: List[str] = []
     for name, field_info in Listing.model_fields.items():
         sql_type = _sql_type(field_info.annotation)
         cols.append(f"    {name} {sql_type}")
@@ -145,7 +146,7 @@ def upsert_listing(conn: sqlite3.Connection, listing: Listing) -> str:
 
 def find_fuzzy_duplicate(
     conn: sqlite3.Connection, listing: Listing
-) -> Listing | None:
+) -> Optional[Listing]:
     """Find a possible duplicate when VIN is absent.
 
     Matches on (year, make, model) within ±5% price and ±2000 mileage.
@@ -194,13 +195,13 @@ def find_fuzzy_duplicate(
 
 def get_listings(
     conn: sqlite3.Connection,
-    min_score: float | None = None,
-    limit: int | None = None,
-    source: str | None = None,
-) -> list[Listing]:
+    min_score: Optional[float] = None,
+    limit: Optional[int] = None,
+    source: Optional[str] = None,
+) -> List[Listing]:
     """Fetch listings ordered by score DESC."""
-    clauses: list[str] = []
-    params: list = []
+    clauses: List[str] = []
+    params: List[Union[float, int, str]] = []
 
     if min_score is not None:
         clauses.append("score >= ?")
@@ -219,19 +220,19 @@ def get_listings(
     return [Listing.from_row(r) for r in rows]
 
 
-def get_listing_by_id(conn: sqlite3.Connection, listing_id: str) -> "Listing | None":
+def get_listing_by_id(conn: sqlite3.Connection, listing_id: str) -> Optional[Listing]:
     """Fetch a single listing by its id column. Returns None if not found."""
     row = conn.execute("SELECT * FROM listings WHERE id = ?", (listing_id,)).fetchone()
     return Listing.from_row(row) if row else None
 
 
-def get_last_run(conn: sqlite3.Connection) -> dict[str, float]:
+def get_last_run(conn: sqlite3.Connection) -> Dict[str, float]:
     """Return {listing_id: score} from the last_run snapshot table."""
     rows = conn.execute("SELECT listing_id, score FROM last_run").fetchall()
     return {row[0]: row[1] for row in rows}
 
 
-def update_last_run(conn: sqlite3.Connection, scored_listings: list) -> int:
+def update_last_run(conn: sqlite3.Connection, scored_listings: List) -> int:
     """Replace last_run contents with current scored set. Returns count written."""
     from datetime import datetime, timezone
 
