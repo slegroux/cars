@@ -376,7 +376,9 @@ def import_listings(url_or_file: str | None, template: bool) -> None:
         saved, skipped = import_csv(_Path(url_or_file), conn)
         click.echo(f"\nImported {saved} listing(s), skipped {skipped}.")
         if saved:
+            conn.commit()
             click.echo("Run 'carfinder export --format html --path ./output' to update the dashboard.")
+        conn.close()
         return
 
     # URL or no-arg → interactive
@@ -386,7 +388,9 @@ def import_listings(url_or_file: str | None, template: bool) -> None:
 
     ok = import_one(url, conn)
     if ok:
+        conn.commit()
         click.echo("Run 'carfinder export --format html --path ./output' to update the dashboard.")
+    conn.close()
 
 
 @cli.command()

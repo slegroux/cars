@@ -123,6 +123,7 @@ def _make_handler(config: "Config", db_path: Path):
 
             conn = init_db(db_path)
             lid = upsert_listing(conn, listing)
+            conn.commit()
             conn.close()
             self._json({"ok": True, "id": lid})
 
