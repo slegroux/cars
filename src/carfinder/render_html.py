@@ -678,6 +678,8 @@ _JS = r"""
     sortDir: 'desc',
     page: 1,
     pageSize: 25,
+    priceMin: 0,
+    priceMax: 20000,
   };
 
   var S = window.dashboardState;
@@ -692,6 +694,8 @@ _JS = r"""
     var bt = d.body_type || 'Unknown';
     if (!S.bodyTypes.has(bt) && !S.bodyTypes.has('Unknown')) return false;
     if (S.bodyTypes.size > 0 && !S.bodyTypes.has(bt === '' ? 'Unknown' : bt)) return false;
+    var pr = d.asking_price != null ? d.asking_price : 0;
+    if (pr < S.priceMin || pr > S.priceMax) return false;
     var mi = d.mileage != null ? d.mileage : 0;
     if (mi < S.mileMin || mi > S.mileMax) return false;
     var yr = d.year != null ? d.year : 0;
@@ -1277,6 +1281,20 @@ _JS = r"""
       applyFilters();
     });
 
+    // Price range double slider
+    var priceMinEl = document.getElementById('priceMin');
+    var priceMaxEl = document.getElementById('priceMax');
+    var priceLabel = document.getElementById('priceLabel');
+    function updatePrice() {
+      var lo = +priceMinEl.value, hi = +priceMaxEl.value;
+      if (lo > hi) { var t = lo; lo = hi; hi = t; }
+      S.priceMin = lo; S.priceMax = hi;
+      priceLabel.textContent = '$' + (lo/1000).toFixed(0) + 'k – $' + (hi/1000).toFixed(lo >= 1000 ? 1 : 0) + 'k';
+      applyFilters();
+    }
+    priceMinEl.addEventListener('input', updatePrice);
+    priceMaxEl.addEventListener('input', updatePrice);
+
     // Mileage range double slider
     var mileMin = document.getElementById('mileMin');
     var mileMax = document.getElementById('mileMax');
@@ -1295,6 +1313,7 @@ _JS = r"""
     document.getElementById('btnReset').addEventListener('click', function() {
       S.source = 'all'; S.minScore = 0;
       S.bodyTypes = new Set(['SUV','Sedan','Wagon','Hatchback','Coupe','Truck','Van','Unknown']);
+      S.priceMin = 0; S.priceMax = 20000;
       S.mileMin = 0; S.mileMax = 200000; S.yearMin = 2008;
       selSrc.value = 'all';
       scoreSlider.value = 0; scoreLabel.textContent = '0';
@@ -1302,6 +1321,8 @@ _JS = r"""
         cb.checked = true; cb.parentElement.classList.add('checked');
       });
       yearInput.value = 2008;
+      priceMinEl.value = 0; priceMaxEl.value = 20000;
+      priceLabel.textContent = '$0k – $20k';
       mileMin.value = 0; mileMax.value = 200000;
       mileLabel.textContent = '0k – 200k mi';
       applyFilters();
@@ -1434,6 +1455,13 @@ def render_html(
         )
 
     lines += [
+        "    </div>",
+        "  </div>",
+        '  <div class="filter-group range-wrap">',
+        '    <label>Price <span id="priceLabel">$0 – $20k</span></label>',
+        '    <div class="range-wrapper">',
+        '      <input type="range" id="priceMin" min="0" max="20000" value="0" step="250">',
+        '      <input type="range" id="priceMax" min="0" max="20000" value="20000" step="250">',
         "    </div>",
         "  </div>",
         '  <div class="filter-group range-wrap">',

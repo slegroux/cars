@@ -227,6 +227,14 @@ def _load_scored_listings(cfg, top_n: int | None = None):
         if l.asking_price is not None and bmin <= l.asking_price <= bmax
     ]
 
+    # Enrich distance_miles for listings that don't have it yet
+    from carfinder.geo import distance_from_location
+    for l in all_listings:
+        if l.distance_miles is None and l.location:
+            d = distance_from_location(l.location, cfg.zip)
+            if d is not None:
+                l.distance_miles = d
+
     scored = [score_listing(l, all_listings, cfg, lk) for l in all_listings]
     scored.sort(key=lambda s: s.score, reverse=True)
 

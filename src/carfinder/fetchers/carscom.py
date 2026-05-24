@@ -112,6 +112,16 @@ def _map_vehicle(data: dict) -> Listing | None:
     thumb = data.get("primaryThumbnail")
     seller_type = "certified" if data.get("cpoIndicator") else "dealer"
 
+    dealer_zip = _clean(data.get("zip"))
+    dealer_city = _clean(data.get("city"))
+    dealer_state = _clean(data.get("state"))
+    if dealer_city and dealer_state:
+        location = f"{dealer_city}, {dealer_state}"
+    elif dealer_city:
+        location = dealer_city
+    else:
+        location = dealer_zip  # fall back to zip for haversine lookup
+
     return Listing(
         id=f"carscom-{listing_id}",
         source="carscom",
@@ -127,6 +137,7 @@ def _map_vehicle(data: dict) -> Listing | None:
         asking_price=_safe_float(data.get("price")),
         seller_type=seller_type,
         photos=[thumb] if thumb else [],
+        location=location,
     )
 
 
