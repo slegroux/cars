@@ -31,6 +31,18 @@ def _source_id_from_url(url: str) -> str:
     return "manual-" + hashlib.sha256(url.encode()).hexdigest()[:12]
 
 
+def _source_id_from_fields(make: str, model: str, year: int, mileage: int | None = None) -> str:
+    """Stable digest used as source_id for manual imports without a URL.
+
+    Same make/model/year/mileage always produces the same id, so a
+    repeat manual entry of the same car updates the existing row
+    instead of inserting a duplicate.
+    """
+    parts = [make.strip().lower(), model.strip().lower(), str(year), str(mileage or "")]
+    digest = hashlib.sha1("|".join(parts).encode()).hexdigest()[:16]
+    return f"manual-{digest}"
+
+
 def _prompt_listing(url: str | None = None) -> Listing | None:
     """Interactively prompt the user for listing details. Returns None if aborted."""
     click.echo()
@@ -93,7 +105,7 @@ def _prompt_listing(url: str | None = None) -> Listing | None:
 
     notes = click.prompt("  Notes / description (optional)", default="", show_default=False).strip() or None
 
-    source_id = _source_id_from_url(url) if url else None
+    source_id = _source_id_from_url(url) if url else _source_id_from_fields(make, model, year, mileage)
 
     return Listing(
         id=source_id,
@@ -164,9 +176,6 @@ def import_csv(path: Path, conn: sqlite3.Connection) -> tuple[int, int]:
                 skipped += 1
                 continue
 
-            url = row.get("url") or None
-            source_id = _source_id_from_url(url) if url else None
-
             def _int(v: str) -> int | None:
                 try:
                     return int(v.replace(",", "").replace("k", "000").rstrip("mi").strip()) if v else None
@@ -178,6 +187,10 @@ def import_csv(path: Path, conn: sqlite3.Connection) -> tuple[int, int]:
                     return float(v.replace(",", "").lstrip("$").strip()) if v else None
                 except ValueError:
                     return None
+
+            url = row.get("url") or None
+            mileage_for_id = _int(row.get("mileage", ""))
+            source_id = _source_id_from_url(url) if url else _source_id_from_fields(make, model, year, mileage_for_id)
 
             listing = Listing(
                 id=source_id,

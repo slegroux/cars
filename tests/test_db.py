@@ -8,12 +8,14 @@ from pathlib import Path
 import pytest
 
 from carfinder.db import (
+    find_by_vin,
     find_fuzzy_duplicate,
     get_listings,
     init_db,
     prune_old,
     upsert_listing,
 )
+from carfinder.importer import _source_id_from_fields
 from carfinder.models import Listing
 
 
@@ -300,3 +302,136 @@ def test_migrate_schema_adds_missing_column(tmp_path):
     listing = make_listing(source_id="migration-test", insurance_risk_tier="low")
     upsert_listing(conn2, listing)
     conn2.close()
+
+
+# --- VIN-based cross-source merge tests ---
+
+
+def test_upsert_merges_same_vin_from_different_source(db):
+    """Same VIN from a different source should merge into the existing row."""
+    first = make_listing(
+        source="carmax",
+        source_id="cm-123",
+        vin="ABC123",
+        asking_price=12000.0,
+        description=None,
+        location="Seattle, WA",
+    )
+    first_id = upsert_listing(db, first)
+
+    second = make_listing(
+        source="craigslist",
+        source_id="cl-456",
+        vin="ABC123",
+        asking_price=11500.0,  # existing non-null, should NOT be overwritten
+        description="Great condition, one owner",  # existing is null, should fill
+        location=None,
+    )
+    second_id = upsert_listing(db, second)
+
+    # Same id (canonical existing row)
+    assert second_id == first_id
+
+    # Only one row in DB
+    rows = db.execute("SELECT * FROM listings").fetchall()
+    assert len(rows) == 1
+
+    row = rows[0]
+    # Canonical (source, source_id) preserved from the existing row.
+    assert row["source"] == "carmax"
+    assert row["source_id"] == "cm-123"
+    # Non-null existing field preserved (no overwrite).
+    assert row["asking_price"] == 12000.0
+    assert row["location"] == "Seattle, WA"
+    # Null existing field filled from incoming.
+    assert row["description"] == "Great condition, one owner"
+
+
+def test_upsert_no_vin_does_not_merge(db):
+    """Without VINs, listings from different sources stay as separate rows."""
+    first = make_listing(source="carmax", source_id="cm-1", vin=None)
+    upsert_listing(db, first)
+
+    second = make_listing(source="craigslist", source_id="cl-1", vin=None)
+    upsert_listing(db, second)
+
+    rows = db.execute("SELECT * FROM listings").fetchall()
+    assert len(rows) == 2
+
+
+def test_upsert_same_vin_same_source_is_normal_upsert(db):
+    """Same VIN + same (source, source_id) follows normal ON CONFLICT update path."""
+    first = make_listing(
+        source="carmax", source_id="cm-789", vin="XYZ999", asking_price=15000.0
+    )
+    upsert_listing(db, first)
+
+    second = make_listing(
+        source="carmax", source_id="cm-789", vin="XYZ999", asking_price=14500.0
+    )
+    upsert_listing(db, second)
+
+    rows = db.execute("SELECT * FROM listings").fetchall()
+    assert len(rows) == 1
+    # Mutable field updated via normal ON CONFLICT path.
+    assert rows[0]["asking_price"] == 14500.0
+
+
+def test_find_by_vin_returns_none_for_null_vin(db):
+    """find_by_vin must never match on a NULL/empty VIN."""
+    # Insert a listing with a real VIN.
+    listing = make_listing(source_id="cl-vin", vin="REAL-VIN-1")
+    upsert_listing(db, listing)
+    # Insert a listing with NULL VIN.
+    null_vin_listing = make_listing(source_id="cl-novin", vin=None)
+    upsert_listing(db, null_vin_listing)
+
+    assert find_by_vin(db, None) is None
+    assert find_by_vin(db, "") is None
+    # Sanity: a real VIN still resolves.
+    found = find_by_vin(db, "REAL-VIN-1")
+    assert found is not None
+    assert found.source_id == "cl-vin"
+
+
+# --- _source_id_from_fields tests ---
+
+def test_source_id_from_fields_is_deterministic():
+    """Same inputs produce the same id across multiple calls."""
+    id1 = _source_id_from_fields("Toyota", "RAV4", 2019, 45000)
+    id2 = _source_id_from_fields("Toyota", "RAV4", 2019, 45000)
+    assert id1 == id2
+    assert id1.startswith("manual-")
+
+
+def test_source_id_from_fields_normalizes_whitespace_case():
+    """Variations in case and surrounding whitespace produce the same id."""
+    base = _source_id_from_fields("Toyota", "RAV4", 2019)
+    assert _source_id_from_fields("TOYOTA", "RAV4", 2019) == base
+    assert _source_id_from_fields(" toyota ", " rav4 ", 2019) == base
+    assert _source_id_from_fields("toyota", "RAV4", 2019) == base
+
+
+def test_manual_import_idempotent_without_url(db):
+    """Importing the same car twice without a URL creates only one DB row."""
+    from carfinder.importer import _source_id_from_fields
+
+    source_id = _source_id_from_fields("Honda", "CR-V", 2020, 30000)
+    listing = Listing(
+        id=source_id,
+        source="manual",
+        source_id=source_id,
+        url=None,
+        make="Honda",
+        model="CR-V",
+        year=2020,
+        mileage=30000,
+        asking_price=25000.0,
+    )
+    upsert_listing(db, listing)
+    upsert_listing(db, listing)
+
+    rows = db.execute(
+        "SELECT * FROM listings WHERE source='manual' AND source_id=?", (source_id,)
+    ).fetchall()
+    assert len(rows) == 1

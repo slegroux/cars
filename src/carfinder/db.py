@@ -1,12 +1,15 @@
 """SQLite database layer."""
 from __future__ import annotations
 
+import logging
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
 from carfinder.models import Listing
+
+logger = logging.getLogger(__name__)
 
 # Columns that are mutable and should be updated on conflict
 _MUTABLE_COLS: List[str] = [
@@ -133,8 +136,30 @@ def init_db(path: Path) -> sqlite3.Connection:
     return conn
 
 
+def find_by_vin(conn: sqlite3.Connection, vin: Optional[str]) -> Optional[Listing]:
+    """Return any existing listing with the given VIN, or None.
+
+    Always returns None when ``vin`` is None or empty — we never want to match
+    NULL VINs to each other.
+    """
+    if not vin:
+        return None
+    row = conn.execute(
+        "SELECT * FROM listings WHERE vin IS NOT NULL AND vin = ? LIMIT 1",
+        (vin,),
+    ).fetchone()
+    return Listing.from_row(row) if row else None
+
+
 def upsert_listing(conn: sqlite3.Connection, listing: Listing) -> str:
-    """Insert or update a listing. Returns listing id."""
+    """Insert or update a listing. Returns listing id.
+
+    If the incoming listing has a VIN and there is an existing row with the same
+    VIN from a DIFFERENT (source, source_id), merge into the existing row: fill
+    NULL fields from the incoming listing but never overwrite non-null values.
+    The existing row's (source, source_id) wins as canonical and its id is
+    returned. The new source row is NOT inserted.
+    """
     import uuid
 
     if listing.id is None:
@@ -143,6 +168,15 @@ def upsert_listing(conn: sqlite3.Connection, listing: Listing) -> str:
     if listing.first_seen is None:
         listing = listing.model_copy(update={"first_seen": now})
     listing = listing.model_copy(update={"last_seen": now})
+
+    # VIN-based cross-source merge: only when incoming has a VIN.
+    if listing.vin:
+        existing = find_by_vin(conn, listing.vin)
+        if existing is not None and (
+            existing.source != listing.source
+            or existing.source_id != listing.source_id
+        ):
+            return _merge_into_existing(conn, existing, listing)
 
     row = listing.to_row()
     cols = list(row.keys())
@@ -163,6 +197,58 @@ def upsert_listing(conn: sqlite3.Connection, listing: Listing) -> str:
     conn.execute(sql, [row[c] for c in cols])
     conn.commit()
     return listing.id  # type: ignore[return-value]
+
+
+# Columns excluded from the VIN-merge fill (identity / scoring-stability).
+_VIN_MERGE_EXCLUDED: set[str] = {"id", "source", "source_id", "first_seen"}
+
+
+def _merge_into_existing(
+    conn: sqlite3.Connection, existing: Listing, incoming: Listing
+) -> str:
+    """Fill NULL columns on the existing row from the incoming listing.
+
+    Only updates columns where the existing value is NULL/empty and the
+    incoming value is non-NULL/non-empty. Always bumps last_seen. The
+    existing row's id is returned. Never overwrites non-null existing values.
+    """
+    existing_row = existing.to_row()
+    incoming_row = incoming.to_row()
+
+    updates: Dict[str, Any] = {}
+    for col, new_val in incoming_row.items():
+        if col in _VIN_MERGE_EXCLUDED:
+            continue
+        if new_val is None:
+            continue
+        # JSON-encoded list/dict cols: "[]" / "{}" count as empty.
+        if isinstance(new_val, str) and new_val in ("[]", "{}"):
+            continue
+        old_val = existing_row.get(col)
+        if old_val is None or old_val == "" or old_val in ("[]", "{}"):
+            updates[col] = new_val
+
+    # Always refresh last_seen so the merged row reflects this observation.
+    updates["last_seen"] = incoming_row["last_seen"]
+
+    set_clause = ", ".join(f"{c} = ?" for c in updates)
+    params = list(updates.values()) + [existing.id]
+    conn.execute(
+        f"UPDATE listings SET {set_clause} WHERE id = ?",
+        params,
+    )
+    conn.commit()
+
+    logger.info(
+        "VIN merge: incoming %s/%s merged into existing %s/%s (vin=%s, id=%s)",
+        incoming.source,
+        incoming.source_id,
+        existing.source,
+        existing.source_id,
+        incoming.vin,
+        existing.id,
+    )
+    return existing.id  # type: ignore[return-value]
 
 
 def find_fuzzy_duplicate(

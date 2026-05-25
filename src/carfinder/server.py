@@ -98,11 +98,12 @@ def _make_handler(config: "Config", db_path: Path):
                 return
 
             from carfinder.db import init_db, upsert_listing
-            from carfinder.importer import _source_id_from_url
+            from carfinder.importer import _source_id_from_fields, _source_id_from_url
             from carfinder.models import Listing
 
             url = (data.get("url") or "").strip() or None
-            source_id = _source_id_from_url(url) if url else None
+            mileage = _safe_int(data.get("mileage"))
+            source_id = _source_id_from_url(url) if url else _source_id_from_fields(make, model, year, mileage)
 
             listing = Listing(
                 id=source_id,
@@ -114,7 +115,7 @@ def _make_handler(config: "Config", db_path: Path):
                 year=year,
                 trim=(data.get("trim") or "").strip() or None,
                 body_type=(data.get("body_type") or "").strip() or None,
-                mileage=_safe_int(data.get("mileage")),
+                mileage=mileage,
                 asking_price=_safe_float(data.get("price")),
                 location=(data.get("location") or "").strip() or None,
                 seller_type=(data.get("seller_type") or "private").strip(),
