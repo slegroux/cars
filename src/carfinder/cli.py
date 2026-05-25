@@ -118,12 +118,12 @@ async def _run_search(config, enabled_sources: list[str]) -> None:
                 #     pass
 
         except asyncio.CancelledError:
-            logger.error("Fetcher %r timed out after 60s", source)
+            logger.error("Fetcher %r timed out after 300s", source)
         except Exception as exc:
             logger.error("Fetcher %r failed: %s", source, exc)
 
     tasks = [
-        asyncio.wait_for(run_fetcher(src, f), timeout=60.0)
+        asyncio.wait_for(run_fetcher(src, f), timeout=300.0)
         for src, f in fetchers
     ]
     results = await asyncio.gather(*tasks, return_exceptions=True)

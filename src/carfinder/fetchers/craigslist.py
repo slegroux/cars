@@ -1,6 +1,7 @@
 """Craigslist async fetcher."""
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from datetime import datetime, timezone
@@ -343,10 +344,16 @@ class CraigslistFetcher(BaseFetcher):
                 logger.info("No results on page %d — stopping pagination", page_num + 1)
                 break
 
-            for card in cards:
-                await self._rate_limit_sleep()
+            sem = asyncio.Semaphore(4)
 
-                listing = await self._fetch_and_build_listing(client, card, config)
+            async def _bounded_fetch(card: dict, _sem: asyncio.Semaphore = sem) -> Listing | None:
+                async with _sem:
+                    await self._rate_limit_sleep()
+                    return await self._fetch_and_build_listing(client, card, config)
+
+            tasks = [asyncio.ensure_future(_bounded_fetch(card)) for card in cards]
+            for coro in asyncio.as_completed(tasks):
+                listing = await coro
                 if listing is not None:
                     yield listing
 
