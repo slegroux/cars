@@ -18,6 +18,7 @@ from carfinder.fetchers.carmax import (
     BROWSER_HEADERS,
     CarMaxFetcher,
     _extract_cars,
+    _normalize_body_type,
     _vehicle_to_listing,
 )
 from carfinder.models import Listing
@@ -315,3 +316,58 @@ def test_dedup_by_vin_merges_carmax_and_craigslist(tmp_path):
     assert dup.vin == "SHARED_VIN_123456"
 
     conn.close()
+
+
+# ---------------------------------------------------------------------------
+# Test 9 — _normalize_body_type: CarMax raw strings → scorer-expected values
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("raw,expected", [
+    ("4D Sedan", "Sedan"),
+    ("2D Sedan", "Sedan"),
+    ("4D Hatchback", "Hatchback"),
+    ("4D Crew Cab", "Truck"),
+    ("4D Sport Utility", "SUV"),
+    ("SUV", "SUV"),
+    ("Crossover", "SUV"),
+    ("2D Coupe", "Coupe"),
+    ("4D Wagon", "Wagon"),
+    ("Convertible", "Convertible"),
+    ("Minivan", "Van"),
+    ("4D Pass Ext Van", "Van"),
+    ("Pickup", "Truck"),
+    ("Extended Cab", "Truck"),
+    ("Regular Cab", "Truck"),
+    ("Truck", "Truck"),
+    (None, None),
+    ("", None),
+    ("FlyingCar", "FlyingCar"),  # unknown → unchanged
+])
+def test_normalize_body_type(raw, expected):
+    assert _normalize_body_type(raw) == expected
+
+
+# ---------------------------------------------------------------------------
+# Test 10 — integration: fixture body types are normalized in parsed Listings
+# ---------------------------------------------------------------------------
+
+def test_fixture_body_types_normalized():
+    """Listings parsed from the fixture HTML must have scorer-expected body_type values."""
+    html = _load_fixture_html()
+    vehicles = _extract_cars(html)
+    config = _default_config()
+
+    # Fixture contains: 4D Sedan, 4D Sport Utility, 2D Coupe, 4D Hatchback,
+    # 4D Crew Cab, 4D Pass Ext Van — all should normalize to clean values.
+    expected_clean = {"Sedan", "SUV", "Coupe", "Hatchback", "Truck", "Van"}
+    seen = set()
+    for v in vehicles:
+        listing = _vehicle_to_listing(v, config)
+        if listing.body_type:
+            seen.add(listing.body_type)
+
+    # Every body_type in the result set must be a known clean value
+    unknown = seen - expected_clean
+    assert not unknown, f"Unexpected raw body_type values not normalized: {unknown}"
+    # Confirm we saw at least a few distinct types
+    assert len(seen) >= 3, f"Expected >=3 distinct body types, got: {seen}"
