@@ -22,6 +22,11 @@ _MUTABLE_COLS: List[str] = [
     "length_inches",
     "roof_rack_compatible",
     "insurance_risk_tier",
+    "transmission",
+    "drivetrain",
+    "fuel_type",
+    "title_status",
+    "location",
 ]
 
 
@@ -68,6 +73,19 @@ def _get_column_defs() -> List[str]:
     return cols
 
 
+def _migrate_schema(conn: sqlite3.Connection) -> None:
+    """Add any columns present in the canonical Listing schema but missing from the DB."""
+    existing = {row[1] for row in conn.execute("PRAGMA table_info(listings)").fetchall()}
+    for col_def in _get_column_defs():
+        # col_def looks like "    col_name TYPE"
+        parts = col_def.split()
+        if len(parts) < 2:
+            continue
+        col_name, col_type = parts[0], parts[1]
+        if col_name not in existing:
+            conn.execute(f"ALTER TABLE listings ADD COLUMN {col_name} {col_type}")
+
+
 def init_db(path: Path) -> sqlite3.Connection:
     """Create the database schema if it doesn't exist, return connection."""
     conn = sqlite3.connect(str(path))
@@ -95,6 +113,9 @@ def init_db(path: Path) -> sqlite3.Connection:
             run_at TEXT NOT NULL
         );
     """)
+
+    # Migration: add any new columns to listings that exist in the model but not the DB.
+    _migrate_schema(conn)
 
     # Migration: if last_run was created with old schema (run_ts column), recreate it.
     cols = {row[1] for row in conn.execute("PRAGMA table_info(last_run)").fetchall()}

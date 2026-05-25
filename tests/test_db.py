@@ -1,6 +1,7 @@
 """Tests for db.py."""
 from __future__ import annotations
 
+import sqlite3
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -228,3 +229,74 @@ def test_prune_old_keeps_fresh(db):
     removed = prune_old(db, days=30)
     assert removed == 0
     assert len(get_listings(db)) == 1
+
+
+# --- Mutable columns upsert tests ---
+
+def test_upsert_updates_detail_page_fields(db):
+    """Fields scraped on a second-pass detail-page crawl should overwrite NULL values."""
+    # First pass: insert with NULL detail fields
+    listing = make_listing(
+        source_id="cl-detail",
+        transmission=None,
+        drivetrain=None,
+        fuel_type=None,
+        title_status=None,
+        location=None,
+    )
+    upsert_listing(db, listing)
+
+    # Second pass: same source+source_id with real values from detail page
+    updated = make_listing(
+        source_id="cl-detail",
+        transmission="automatic",
+        drivetrain="AWD",
+        fuel_type="gasoline",
+        title_status="clean",
+        location="Seattle, WA",
+    )
+    upsert_listing(db, updated)
+
+    row = db.execute(
+        "SELECT transmission, drivetrain, fuel_type, title_status, location "
+        "FROM listings WHERE source_id='cl-detail'"
+    ).fetchone()
+    assert row["transmission"] == "automatic"
+    assert row["drivetrain"] == "AWD"
+    assert row["fuel_type"] == "gasoline"
+    assert row["title_status"] == "clean"
+    assert row["location"] == "Seattle, WA"
+
+
+# --- Schema migration tests ---
+
+def test_migrate_schema_adds_missing_column(tmp_path):
+    """init_db should add columns present in the model but absent from an older DB."""
+    db_path = tmp_path / "migrate.db"
+
+    # Create a fresh DB so the table exists, then simulate an older schema by
+    # recreating the listings table without the 'insurance_risk_tier' column.
+    conn = init_db(db_path)
+    conn.close()
+
+    raw = sqlite3.connect(str(db_path))
+    raw.row_factory = sqlite3.Row
+    # Collect all current columns except the one we want to drop.
+    cols_info = raw.execute("PRAGMA table_info(listings)").fetchall()
+    kept_cols = [row["name"] for row in cols_info if row["name"] != "insurance_risk_tier"]
+    col_list = ", ".join(kept_cols)
+    raw.executescript(f"""
+        DROP TABLE listings;
+        CREATE TABLE listings ({col_list}, UNIQUE(source, source_id));
+    """)
+    raw.close()
+
+    # Now call init_db again — migration should add the missing column back.
+    conn2 = init_db(db_path)
+    existing = {row[1] for row in conn2.execute("PRAGMA table_info(listings)").fetchall()}
+    assert "insurance_risk_tier" in existing
+
+    # And upsert_listing must not raise OperationalError.
+    listing = make_listing(source_id="migration-test", insurance_risk_tier="low")
+    upsert_listing(conn2, listing)
+    conn2.close()
