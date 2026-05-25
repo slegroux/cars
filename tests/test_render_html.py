@@ -320,3 +320,41 @@ def test_render_html_escapes_closing_script_tag_in_json():
     assert xss_payload not in out, "XSS payload appeared unescaped in rendered HTML"
     # The escaped form must be present, confirming the fix is applied.
     assert "<\\/script>" in out, "Expected escaped form <\\/script> not found in rendered HTML"
+
+
+# ---------------------------------------------------------------------------
+# Golden-output regression: static CSS/JS inlining
+# ---------------------------------------------------------------------------
+
+def test_render_html_golden_output_structure():
+    """Regression test: verifies key structural invariants of rendered output.
+
+    Checks that the LISTINGS JSON blob is present, that </script> injection is
+    escaped, that Chart.js was inlined, and that all 11 factor keys appear.
+    """
+    from carfinder.render_html import render_html
+    from carfinder.render_html.template import _FACTOR_KEYS
+
+    # Build 3 deterministic scored listings; one has </script> in its URL
+    items = [
+        _make_scored(listing_id="golden-0", score=85.0, make="Toyota", model="RAV4"),
+        _make_scored(listing_id="golden-1", score=75.0, make="Honda", model="CR-V"),
+        _make_scored(listing_id="golden-2", score=65.0, make="Mazda", model="CX-5"),
+    ]
+    # Inject </script> into the URL of the third listing to exercise escaping
+    items[2].listing.url = "https://example.com/</script>xss"
+
+    out = render_html(items)
+
+    # LISTINGS JSON blob present
+    assert "var LISTINGS = " in out, "LISTINGS JSON blob not found in output"
+
+    # </script> in data must be escaped to <\/script>
+    assert "<\\/script>" in out, "Expected escaped <\\/script> form not found in output"
+
+    # Chart.js inlined (the vendored build always contains "Chart.js" in its header comment)
+    assert "Chart.js" in out, "Chart.js not inlined in output"
+
+    # All 11 factor keys must appear at least once in the output
+    for key in _FACTOR_KEYS:
+        assert key in out, f"Factor key {key!r} not found in output"
