@@ -337,6 +337,17 @@
         a.textContent = '↗';
         a.addEventListener('click', function(e){ e.stopPropagation(); });
         tdView.appendChild(a);
+      } else if (d.source === 'manual' && d.description) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ext-link notes-btn';
+        btn.title = 'View notes';
+        btn.textContent = '📝';
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          openNotesModal(d);
+        });
+        tdView.appendChild(btn);
       } else {
         tdView.textContent = '—';
       }
@@ -721,6 +732,21 @@
       if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbPhotos.length; updateLightbox(); }
     });
   }
+
+  // ── Notes modal (manual listings) ─────────────────────────────────────────
+  function openNotesModal(d) {
+    var title = (d.year ? d.year + ' ' : '') + (d.make || '') + ' ' + (d.model || '');
+    document.getElementById('notesTitle').textContent = title.trim() || 'Listing notes';
+    document.getElementById('notesBody').textContent = d.description || '';
+    document.getElementById('notesModal').classList.add('open');
+  }
+  function closeNotesModal() {
+    document.getElementById('notesModal').classList.remove('open');
+  }
+  document.getElementById('notesClose').addEventListener('click', closeNotesModal);
+  document.getElementById('notesModal').addEventListener('click', function(e) {
+    if (e.target === this) closeNotesModal();
+  });
 
   // ── Import modal ───────────────────────────────────────────────────────────
   function openImportModal() {

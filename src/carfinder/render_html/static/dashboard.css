@@ -581,6 +581,30 @@ tr.expand-row td {
 .parse-result { font-size: 0.75rem; font-family: var(--font); margin-top: 4px; min-height: 16px; }
 .modal-divider { border: none; border-top: 1px solid var(--border-light); margin: 12px 0 8px; }
 
+.notes-body {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 60vh;
+  overflow-y: auto;
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  color: var(--text);
+}
+
+.notes-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
 .col-actions { display: none; width: 36px; text-align: center; }
 .del-btn {
   background: none;
