@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import re
@@ -155,7 +156,7 @@ def _vehicle_to_listing(vehicle: dict, config: Config) -> Listing | None:
         # Create listing
         listing = Listing(
             source="kbb",
-            source_id=vin or url or f"kbb-{hash(str(vehicle))}",  # Generate ID if no VIN
+            source_id=vin or url or f"kbb-{hashlib.sha1(repr(sorted(vehicle.items())).encode()).hexdigest()[:16]}",  # Generate stable ID if no VIN
             url=url,
             year=year,
             make=make,
