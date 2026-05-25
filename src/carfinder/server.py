@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import logging
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -46,10 +46,10 @@ def _make_handler(config: "Config", db_path: Path):
         # ── GET ────────────────────────────────────────────────────────────
         def do_GET(self) -> None:
             if self.path in ("/", "/index.html"):
-                from carfinder.cli import _load_scored_listings
+                from carfinder.service import load_scored_listings
                 from carfinder.render_html import render_html
 
-                scored, conn = _load_scored_listings(config)
+                scored, conn = load_scored_listings(config)
                 conn.close()
                 self._html(render_html(scored, config=config))
             else:
@@ -157,8 +157,8 @@ def _safe_float(v: object) -> float | None:
         return None
 
 
-def run_server(config: "Config", db_path: Path, port: int = 8765) -> tuple[HTTPServer, str]:
+def run_server(config: "Config", db_path: Path, port: int = 8765) -> tuple[ThreadingHTTPServer, str]:
     """Create and return the server (not yet started). Caller calls server.serve_forever()."""
     handler = _make_handler(config, db_path)
-    server = HTTPServer(("localhost", port), handler)
+    server = ThreadingHTTPServer(("localhost", port), handler)
     return server, f"http://localhost:{port}"

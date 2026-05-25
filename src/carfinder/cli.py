@@ -181,69 +181,7 @@ def search(
     asyncio.run(_run_search(config, enabled))
 
 
-def _load_scored_listings(cfg, top_n: int | None = None):
-    """Shared helper: load all listings, score them, return sorted list.
-
-    Returns (scored_list, conn) — caller is responsible for closing conn.
-    """
-    from carfinder.db import get_listings, init_db
-    from carfinder.lookups import load_lookups
-    from carfinder.scorer import score_listing
-
-    lk = load_lookups(Path("data"))
-    db_path = Path("data/listings.db")
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    conn = init_db(db_path)
-
-    all_listings = get_listings(conn)
-
-    if not all_listings:
-        return [], conn
-
-    # Exclude manual if configured. Two-stage check:
-    # 1. structured transmission field (when fetcher parsed it cleanly)
-    # 2. defensive text scan of model + description (CL listings often leave the
-    #    structured field empty but the title says "5 speed" / "manual" / "5spd")
-    if cfg.transmission.exclude_manual:
-        import re as _re
-        _manual_re = _re.compile(
-            r"\bmanual\b|\b\d+\s?spd\b|\b\d+\s?speed\b|\bstick\s?shift\b",
-            _re.IGNORECASE,
-        )
-
-        def _is_manual(l):
-            if (l.transmission or "").lower() == "manual":
-                return True
-            if (l.transmission or "").lower() in ("automatic", "auto"):
-                return False  # trust explicit auto signal
-            text = " ".join(filter(None, [l.model, l.trim, l.description]))
-            return bool(_manual_re.search(text))
-
-        all_listings = [l for l in all_listings if not _is_manual(l)]
-
-    # Enforce budget at the rank layer — fetchers may have included
-    # out-of-budget listings (e.g. CarMax transfer-radius queries).
-    bmin, bmax = cfg.budget.min, cfg.budget.max
-    all_listings = [
-        l for l in all_listings
-        if l.asking_price is not None and bmin <= l.asking_price <= bmax
-    ]
-
-    # Enrich distance_miles for listings that don't have it yet
-    from carfinder.geo import distance_from_location
-    for l in all_listings:
-        if l.distance_miles is None and l.location:
-            d = distance_from_location(l.location, cfg.zip)
-            if d is not None:
-                l.distance_miles = d
-
-    scored = [score_listing(l, all_listings, cfg, lk) for l in all_listings]
-    scored.sort(key=lambda s: s.score, reverse=True)
-
-    if top_n is not None:
-        scored = scored[:top_n]
-
-    return scored, conn
+from carfinder.service import load_scored_listings as _load_scored_listings
 
 
 @cli.command()
@@ -262,7 +200,14 @@ def _load_scored_listings(cfg, top_n: int | None = None):
     default=None,
     help="Filter by body type (comma-separated, e.g. SUV,Wagon). Case-insensitive substring match.",
 )
-def rank(top: int, min_score: float, fmt: str, body_types: str | None) -> None:
+@click.option(
+    "--in-budget",
+    "in_budget",
+    is_flag=True,
+    default=False,
+    help="Filter out listings outside config.budget.min/max.",
+)
+def rank(top: int, min_score: float, fmt: str, body_types: str | None, in_budget: bool) -> None:
     """Rank and display stored listings by score."""
     import json as _json
 
@@ -270,7 +215,7 @@ def rank(top: int, min_score: float, fmt: str, body_types: str | None) -> None:
     from carfinder.render import render_markdown, render_table
 
     cfg = load_config()
-    scored, conn = _load_scored_listings(cfg)
+    scored, conn = _load_scored_listings(cfg, in_budget=in_budget)
     conn.close()
 
     if not scored:
@@ -315,7 +260,14 @@ def rank(top: int, min_score: float, fmt: str, body_types: str | None) -> None:
     type=click.Choice(["markdown", "html", "both"]),
     help="Output format: markdown, html, or both.",
 )
-def export(top: int, path: str | None, fmt: str) -> None:
+@click.option(
+    "--in-budget",
+    "in_budget",
+    is_flag=True,
+    default=False,
+    help="Filter out listings outside config.budget.min/max.",
+)
+def export(top: int, path: str | None, fmt: str, in_budget: bool) -> None:
     """Export shortlist to Obsidian vault."""
     import os
 
@@ -329,7 +281,7 @@ def export(top: int, path: str | None, fmt: str) -> None:
     if path:
         os.environ["CARFINDER_VAULT_PATH"] = path
 
-    scored, conn = _load_scored_listings(cfg, top_n=top)
+    scored, conn = _load_scored_listings(cfg, top_n=top, in_budget=in_budget)
     conn.close()
 
     if not scored:
