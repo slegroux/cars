@@ -46,10 +46,12 @@ def load_scored_listings(
     if not all_listings:
         return [], conn
 
-    # Exclude manual if configured. Two-stage check:
-    # 1. structured transmission field (when fetcher parsed it cleanly)
-    # 2. defensive text scan of model + description (CL listings often leave the
-    #    structured field empty but the title says "5 speed" / "manual" / "5spd")
+    # Exclude manual if configured. Strategy depends on source:
+    # - Craigslist: structured transmission field is usually empty, so fall back
+    #   to a regex scan of model + trim + description.
+    # - All other sources (CarMax, KBB, Cars.com, manual imports): trust the
+    #   structured transmission field. A NULL field is treated as not-manual so
+    #   user-entered listings without that field set are not silently dropped.
     if cfg.transmission.exclude_manual:
         import re as _re
         _manual_re = _re.compile(
@@ -58,10 +60,13 @@ def load_scored_listings(
         )
 
         def _is_manual(l):
-            if (l.transmission or "").lower() == "manual":
+            tx = (l.transmission or "").lower()
+            if tx == "manual":
                 return True
-            if (l.transmission or "").lower() in ("automatic", "auto"):
-                return False  # trust explicit auto signal
+            if tx in ("automatic", "auto"):
+                return False
+            if l.source != "craigslist":
+                return False  # trust structured field for non-CL sources
             text = " ".join(filter(None, [l.model, l.trim, l.description]))
             return bool(_manual_re.search(text))
 
