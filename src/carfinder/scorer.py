@@ -12,7 +12,7 @@ from typing import Any, Literal
 from pydantic import BaseModel
 
 from carfinder.config import Config
-from carfinder.lookups import Lookups
+from carfinder.lookups import Lookups, _norm
 from carfinder.models import Listing
 
 # Current year used for depreciation fallback
@@ -68,8 +68,8 @@ def _default_factor(weight: float) -> FactorScore:
 
 
 def score_reliability(listing: Listing, lookups: Lookups, weight: float) -> FactorScore:
-    if listing.make and listing.make in lookups.reliability:
-        raw = lookups.reliability[listing.make]
+    if listing.make and _norm(listing.make) in lookups.reliability:
+        raw = lookups.reliability[_norm(listing.make)]
         return _factor(raw, weight, "real", f"{listing.make} reliability score {raw:.0f}/10")
     return _default_factor(weight)
 
@@ -176,7 +176,7 @@ def score_parking_footprint(listing: Listing, lookups: Lookups, weight: float) -
     # Prefer enriched field on listing, then lookup
     length = listing.length_inches
     if length is None and listing.make and listing.model and listing.year:
-        length = lookups.dimensions.get((listing.make, listing.model, listing.year))
+        length = lookups.dimensions.get((_norm(listing.make), listing.model, listing.year))
 
     if length is None:
         return _factor(5.0, weight, "estimated", "length unknown")
@@ -241,7 +241,7 @@ def score_insurance_risk(listing: Listing, lookups: Lookups, weight: float) -> F
     tier = listing.insurance_risk_tier
     source = "enriched"
     if tier is None and listing.make and listing.model and listing.year:
-        tier = lookups.insurance.get((listing.make, listing.model, listing.year))
+        tier = lookups.insurance.get((_norm(listing.make), listing.model, listing.year))
         source = "lookup"
 
     tier_map = {"low": (10.0, "low insurance risk"), "medium": (6.0, "medium insurance risk"), "high": (2.0, "high insurance risk")}
@@ -256,7 +256,7 @@ def score_roof_rack(listing: Listing, lookups: Lookups, weight: float) -> Factor
     status = listing.roof_rack_compatible
     source = "enriched"
     if status is None and listing.make and listing.model:
-        status = lookups.roof_rack.get((listing.make, listing.model))
+        status = lookups.roof_rack.get((_norm(listing.make), listing.model))
         source = "lookup"
 
     status_map = {

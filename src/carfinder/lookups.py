@@ -8,6 +8,11 @@ from pathlib import Path
 import yaml
 
 
+def _norm(s: str | None) -> str:
+    """Normalize a make string: strip whitespace, remove internal spaces, lowercase."""
+    return (s or "").strip().replace(" ", "").lower()
+
+
 @dataclass
 class Lookups:
     reliability: dict[str, float] = field(default_factory=dict)
@@ -31,14 +36,14 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
     rel_path = data_dir / "reliability_tiers.yaml"
     if rel_path.exists():
         raw = yaml.safe_load(rel_path.read_text()) or {}
-        lk.reliability = {str(k): float(v) for k, v in raw.items()}
+        lk.reliability = {_norm(k): float(v) for k, v in raw.items()}
 
     # --- vehicle_dimensions.yaml: expand year ranges -> (make, model, year) ---
     dim_path = data_dir / "vehicle_dimensions.yaml"
     if dim_path.exists():
         entries = yaml.safe_load(dim_path.read_text()) or []
         for entry in entries:
-            make = entry["make"]
+            make = _norm(entry["make"])
             model = entry["model"]
             year_min = int(entry["year_min"])
             year_max = int(entry["year_max"])
@@ -51,7 +56,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
     if ins_path.exists():
         entries = yaml.safe_load(ins_path.read_text()) or []
         for entry in entries:
-            make = entry["make"]
+            make = _norm(entry["make"])
             model = entry["model"]
             year_min = int(entry["year_min"])
             year_max = int(entry["year_max"])
@@ -64,7 +69,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
     if rack_path.exists():
         entries = yaml.safe_load(rack_path.read_text()) or []
         for entry in entries:
-            lk.roof_rack[(entry["make"], entry["model"])] = entry["status"]
+            lk.roof_rack[(_norm(entry["make"]), entry["model"])] = entry["status"]
 
     # --- mpg_lookup.csv: (year, make, model) -> mpg_combined ---
     mpg_path = data_dir / "mpg_lookup.csv"
