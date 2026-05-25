@@ -937,12 +937,16 @@
             filled.push(k.replace('_', ' '));
           }
         }
+        // Stash the raw pasted text into Notes so it persists as the listing
+        // description and surfaces in the dashboard view modal later.
+        var notesEl = document.getElementById('f-notes');
+        if (!notesEl.value.trim()) notesEl.value = raw;
         if (filled.length) {
           resultEl.style.color = 'var(--green)';
-          resultEl.textContent = 'Filled: ' + filled.join(', ') + '. Review before saving.';
+          resultEl.textContent = 'Filled: ' + filled.join(', ') + '. Pasted text saved to Notes. Review before saving.';
         } else {
           resultEl.style.color = 'var(--text-faint)';
-          resultEl.textContent = 'Could not extract fields — try pasting more of the listing page.';
+          resultEl.textContent = 'Could not extract fields — pasted text saved to Notes. Try pasting more of the listing page.';
         }
       });
     }
