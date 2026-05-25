@@ -90,6 +90,16 @@ def parse_title(title: str) -> tuple[int | None, str | None, str | None]:
     return year, make, model
 
 
+def _split_model_trim(model: str) -> tuple[str, str | None]:
+    """Split 'RAV4 XLE' into ('RAV4', 'XLE'). Returns ('RAV4', None) when no trim."""
+    if not model:
+        return model, None
+    parts = model.strip().split(None, 1)
+    if len(parts) == 1:
+        return parts[0], None
+    return parts[0], parts[1] or None
+
+
 def _normalize_make(raw: str) -> str:
     """Normalize raw make string to title case, matching known makes if possible."""
     raw_lower = raw.lower().replace("-", "").replace(" ", "")
@@ -398,7 +408,10 @@ class CraigslistFetcher(BaseFetcher):
             return None
 
         title = card.get("title", "")
-        year, make, model = parse_title(title)
+        year, make, parsed_model = parse_title(title)
+        model, trim = _split_model_trim(parsed_model or "")
+        if not model:
+            model = None
 
         now = datetime.now(timezone.utc)
 
@@ -420,6 +433,7 @@ class CraigslistFetcher(BaseFetcher):
             year=year,
             make=make,
             model=model,
+            trim=trim or None,
             title_status=detail.get("title_status"),
             condition=detail.get("condition"),
             transmission=detail.get("transmission"),

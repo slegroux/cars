@@ -14,6 +14,7 @@ from carfinder.fetchers.craigslist import (
     CraigslistFetcher,
     _parse_detail_page,
     _parse_search_page,
+    _split_model_trim,
     parse_title,
 )
 
@@ -373,3 +374,52 @@ async def test_excludes_manual_when_configured():
 
         assert len(skipped) >= 1
         conn.close()
+
+
+# ---------------------------------------------------------------------------
+# _split_model_trim unit tests
+# ---------------------------------------------------------------------------
+
+def test_split_model_trim_single_word():
+    assert _split_model_trim("RAV4") == ("RAV4", None)
+
+
+def test_split_model_trim_two_words():
+    assert _split_model_trim("RAV4 XLE") == ("RAV4", "XLE")
+
+
+def test_split_model_trim_multi_word_trim():
+    assert _split_model_trim("Outback Premium AWD") == ("Outback", "Premium AWD")
+
+
+def test_split_model_trim_empty():
+    assert _split_model_trim("") == ("", None)
+
+
+# ---------------------------------------------------------------------------
+# Integration: _build_listing splits model/trim correctly
+# ---------------------------------------------------------------------------
+
+def test_build_listing_splits_model_trim_from_title():
+    """A title like '2014 Toyota RAV4 XLE AWD' should yield model='RAV4', trim='XLE AWD'."""
+    from carfinder.fetchers.craigslist import CraigslistFetcher
+
+    config = _make_config()
+    fetcher = CraigslistFetcher(config)
+
+    card = {
+        "source_id": "123456789",
+        "url": "https://losangeles.craigslist.org/lac/cto/d/rav4/123456789.html",
+        "title": "2014 Toyota RAV4 XLE AWD",
+        "asking_price": 9500.0,
+        "location": "Santa Monica",
+        "posted_dt": None,
+        "thumbnail": None,
+    }
+    detail = _parse_detail_page(_read("detail_rav4_2014.html"))
+
+    listing = fetcher._build_listing(card, detail, config)
+
+    assert listing is not None
+    assert listing.model == "RAV4"
+    assert listing.trim == "XLE AWD"
