@@ -343,16 +343,19 @@ class CraigslistFetcher(BaseFetcher):
             offset += self.PAGE_SIZE
 
     def _build_search_url(self, config: Config, offset: int = 0) -> str:
-        params = (
-            f"postal={config.zip}"
-            f"&search_distance={config.radius_miles}"
-            f"&auto_transmission=1"
-            f"&min_price={int(config.budget.min)}"
-            f"&max_price={int(config.budget.max)}"
-        )
+        parts = [
+            f"postal={config.zip}",
+            f"search_distance={config.radius_miles}",
+        ]
+        if config.transmission.exclude_manual:
+            parts.append("auto_transmission=1")
+        parts += [
+            f"min_price={int(config.budget.min)}",
+            f"max_price={int(config.budget.max)}",
+        ]
         if offset > 0:
-            params += f"&s={offset}"
-        return f"{self.BASE_URL}?{params}"
+            parts.append(f"s={offset}")
+        return f"{self.BASE_URL}?{'&'.join(parts)}"
 
     async def _fetch_and_build_listing(
         self,

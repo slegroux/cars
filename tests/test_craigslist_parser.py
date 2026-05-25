@@ -280,6 +280,26 @@ async def test_retry_on_429(httpx_mock: HTTPXMock):
 
 
 # ---------------------------------------------------------------------------
+# _build_search_url transmission param
+# ---------------------------------------------------------------------------
+
+def test_build_search_url_excludes_auto_transmission_param_when_disabled():
+    """When exclude_manual=False, auto_transmission must NOT appear in the URL."""
+    config = _make_config(transmission={"exclude_manual": False})
+    fetcher = CraigslistFetcher(config)
+    url = fetcher._build_search_url(config)
+    assert "auto_transmission" not in url
+
+
+def test_build_search_url_includes_auto_transmission_param_when_enabled():
+    """When exclude_manual=True (default), auto_transmission=1 must appear in the URL."""
+    config = _make_config(transmission={"exclude_manual": True})
+    fetcher = CraigslistFetcher(config)
+    url = fetcher._build_search_url(config)
+    assert "auto_transmission=1" in url
+
+
+# ---------------------------------------------------------------------------
 # Manual transmission exclusion
 # ---------------------------------------------------------------------------
 
