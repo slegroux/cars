@@ -30,10 +30,12 @@ def _get_fetcher_registry():
     from carfinder.fetchers.carmax import CarMaxFetcher
     from carfinder.fetchers.carscom import CarsDotComFetcher
     from carfinder.fetchers.craigslist import CraigslistFetcher
+    from carfinder.fetchers.kbb import KBBFetcher
     return {
         "craigslist": CraigslistFetcher,
         "carmax": CarMaxFetcher,
         "carscom": CarsDotComFetcher,
+        "kbb": KBBFetcher,
     }
 
 
@@ -703,6 +705,30 @@ async def _refresh_fixtures_async(cfg, enabled_sources: list[str], today: str) -
                         warnings.append(f"carmax: HTTP {resp.status_code} on search page")
             except Exception as exc:
                 warnings.append(f"carmax: fetch failed — {exc}")
+
+        elif source == "kbb":
+            from carfinder.fetchers.kbb import KBBFetcher, BROWSER_HEADERS
+            fetcher = KBBFetcher(cfg)
+            params = fetcher._build_params(cfg)
+
+            try:
+                async with httpx.AsyncClient(
+                    http2=True,
+                    headers=BROWSER_HEADERS,
+                    follow_redirects=True,
+                    timeout=30.0,
+                ) as client:
+                    resp = await fetcher._retry_request(
+                        client, "GET", fetcher.SEARCH_URL, params=params
+                    )
+                    if resp.status_code == 200:
+                        search_path = out_dir / f"search_{today}.html"
+                        search_path.write_bytes(resp.content)
+                        results.append(f"tests/fixtures/kbb/search_{today}.html ({len(resp.content)} bytes)")
+                    else:
+                        warnings.append(f"kbb: HTTP {resp.status_code} on search page")
+            except Exception as exc:
+                warnings.append(f"kbb: fetch failed — {exc}")
 
         else:
             warnings.append(f"refresh-fixtures: no raw-fetch implementation for source {source!r}")

@@ -27,6 +27,7 @@ class SourcesConfig(BaseModel):
     craigslist: bool = True
     carmax: bool = False
     carscom: bool = False
+    kbb: bool = False
     facebook: bool = False
 
 

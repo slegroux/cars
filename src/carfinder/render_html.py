@@ -501,6 +501,7 @@ table.listings td.col-photo img {
 .source-craigslist { background: var(--blue-dim);    color: var(--blue); }
 .source-carmax     { background: var(--orange-dim);  color: var(--orange); }
 .source-carscom    { background: var(--green-dim);   color: var(--green); }
+.source-kbb        { background: var(--yellow-dim);  color: var(--yellow); }
 .source-other      { background: var(--border-light); color: var(--text-muted); }
 
 .ext-link {
@@ -849,6 +850,7 @@ _JS = r"""
     if (src === 'craigslist') return 'source-craigslist';
     if (src === 'carmax')     return 'source-carmax';
     if (src === 'carscom')    return 'source-carscom';
+    if (src === 'kbb')        return 'source-kbb';
     return 'source-other';
   }
 
@@ -902,7 +904,8 @@ _JS = r"""
 
     var clPts  = pts.filter(function(p){ return fl[p.dataIdx].source === 'craigslist'; });
     var cmPts  = pts.filter(function(p){ return fl[p.dataIdx].source === 'carmax'; });
-    var othPts = pts.filter(function(p){ return fl[p.dataIdx].source !== 'craigslist' && fl[p.dataIdx].source !== 'carmax'; });
+    var kbbPts = pts.filter(function(p){ return fl[p.dataIdx].source === 'kbb'; });
+    var othPts = pts.filter(function(p){ return fl[p.dataIdx].source !== 'craigslist' && fl[p.dataIdx].source !== 'carmax' && fl[p.dataIdx].source !== 'kbb'; });
 
     var allXY = fl.filter(function(d){ return d.asking_price != null; }).map(function(d){ return { x: d.asking_price, y: d.score }; });
     var ols = olsLine(allXY);
@@ -920,6 +923,13 @@ _JS = r"""
         data: cmPts,
         backgroundColor: 'rgba(234,88,12,0.65)',
         borderColor: 'rgba(234,88,12,0.9)',
+        borderWidth: 1,
+      },
+      {
+        label: 'KBB',
+        data: kbbPts,
+        backgroundColor: 'rgba(202,138,4,0.65)',
+        borderColor: 'rgba(202,138,4,0.9)',
         borderWidth: 1,
       },
     ];
@@ -1102,7 +1112,7 @@ _JS = r"""
       var tdSrc = document.createElement('td');
       var srcSpan = document.createElement('span');
       srcSpan.className = 'source-chip ' + sourceChipClass(d.source);
-      srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source === 'carscom' ? 'Cars' : d.source;
+      srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source === 'carscom' ? 'Cars' : d.source === 'kbb' ? 'KBB' : d.source;
       tdSrc.appendChild(srcSpan);
       tr.appendChild(tdSrc);
 
@@ -1389,6 +1399,14 @@ _JS = r"""
   function initFilters() {
     // Source dropdown
     var selSrc = document.getElementById('filterSource');
+    var srcOptions = ['all', 'craigslist', 'carmax', 'carscom', 'kbb'];
+    srcOptions.forEach(function(src) {
+      var opt = document.createElement('option');
+      opt.value = src;
+      opt.textContent = src.charAt(0).toUpperCase() + src.slice(1);
+      if (src === 'all') opt.selected = true;
+      selSrc.appendChild(opt);
+    });
     selSrc.addEventListener('change', function() {
       S.source = this.value;
       applyFilters();
@@ -1768,10 +1786,6 @@ def render_html(
         '  <div class="filter-group">',
         '    <label for="filterSource">Source</label>',
         '    <select id="filterSource">',
-        '      <option value="all">All sources</option>',
-        '      <option value="craigslist">Craigslist</option>',
-        '      <option value="carmax">CarMax</option>',
-        '      <option value="carscom">Cars.com</option>',
         "    </select>",
         "  </div>",
         '  <div class="filter-group">',
