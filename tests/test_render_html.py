@@ -135,15 +135,18 @@ def test_render_html_contains_all_listings():
 
 
 # ---------------------------------------------------------------------------
-# 3. Chart.js CDN
+# 3. Chart.js inlined
 # ---------------------------------------------------------------------------
 
-def test_render_html_includes_chart_js_cdn():
-    """Chart.js CDN URL must be present in the output."""
+def test_render_html_includes_chart_js_inline():
+    """Chart.js must be inlined in the output (not loaded from CDN)."""
     from carfinder.render_html import render_html
 
     out = render_html(_make_scored_list(2))
-    assert "cdn.jsdelivr.net/npm/chart.js" in out
+    # CDN src tag should be gone — Chart.js is now inlined
+    assert "cdn.jsdelivr.net/npm/chart.js" not in out
+    # The inlined build always starts with a comment containing "Chart.js"
+    assert "Chart.js" in out
 
 
 # ---------------------------------------------------------------------------
@@ -282,11 +285,38 @@ def test_export_both_writes_both_files():
 # Bonus: output size sanity check
 # ---------------------------------------------------------------------------
 
-def test_render_html_output_under_200kb():
-    """30-listing output should stay under 200 KB."""
+def test_render_html_output_under_600kb():
+    """30-listing output should stay under 600 KB (includes ~200 KB inlined Chart.js)."""
     from carfinder.render_html import render_html
 
     items = _make_scored_list(30)
     out = render_html(items)
     size_kb = len(out.encode("utf-8")) / 1024
-    assert size_kb < 200, f"HTML output is {size_kb:.1f} KB, expected < 200 KB"
+    assert size_kb < 600, f"HTML output is {size_kb:.1f} KB, expected < 600 KB"
+
+
+# ---------------------------------------------------------------------------
+# XSS: </script> in listing data must not break out of the script tag
+# ---------------------------------------------------------------------------
+
+
+def test_render_html_escapes_closing_script_tag_in_json():
+    """String fields containing </script> must be escaped so they cannot break
+    out of the embedded <script> block (XSS regression test).
+
+    The payload is injected into ``url``, which is serialised directly into the
+    LISTINGS JSON blob by ``_listing_to_dict``.
+    """
+    from carfinder.render_html import render_html
+
+    xss_payload = "</script><script>alert(1)</script>"
+    # url is included verbatim in the JSON blob via _listing_to_dict
+    listing = _make_scored(listing_id="xss-test")
+    listing.listing.url = xss_payload
+
+    out = render_html([listing])
+
+    # The raw payload must NOT appear verbatim in the rendered output.
+    assert xss_payload not in out, "XSS payload appeared unescaped in rendered HTML"
+    # The escaped form must be present, confirming the fix is applied.
+    assert "<\\/script>" in out, "Expected escaped form <\\/script> not found in rendered HTML"

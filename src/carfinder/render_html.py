@@ -1,9 +1,11 @@
 """HTML dashboard export — produces a self-contained HTML file.
 
 Dependencies:
-  - Chart.js loaded from CDN (https://cdn.jsdelivr.net/npm/chart.js@4).
-    The file will NOT render charts when opened offline without network.
-  - External photo URLs (Craigslist / CarMax CDNs) also require network.
+  - Chart.js v4 is inlined from data/vendor/chart.umd.min.js at render time.
+    Charts work fully offline as long as that file exists. To (re)download it:
+      curl -L -o data/vendor/chart.umd.min.js \
+        https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js
+  - External photo URLs (Craigslist / CarMax CDNs) still require network.
   - Everything else (layout, filters, table, radar) works offline.
 
 No Jinja2, no build step. Python stdlib only: json, html, datetime, string.
@@ -15,11 +17,25 @@ import html as _html
 import json
 import statistics
 import subprocess
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from carfinder.config import Config
     from carfinder.scorer import ScoredListing
+
+# ---------------------------------------------------------------------------
+# Vendored Chart.js (inlined at render time for offline support)
+# ---------------------------------------------------------------------------
+
+_CHART_JS_PATH = Path(__file__).parent.parent.parent / "data" / "vendor" / "chart.umd.min.js"
+
+
+def _chart_js_source() -> str:
+    if _CHART_JS_PATH.exists():
+        return _CHART_JS_PATH.read_text(encoding="utf-8")
+    return ""  # fall back to empty; chart won't render but dashboard still loads
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -1729,9 +1745,9 @@ def render_html(
 ) -> str:
     """Return a self-contained HTML dashboard string.
 
-    Pure function — no I/O. Inline JSON-encodes all listing data into the
-    page so it works as a static file:// document (except Chart.js CDN
-    and external photo URLs which require network).
+    Pure function — no I/O. Inline JSON-encodes all listing data and Chart.js
+    into the page so it works as a fully offline static file:// document
+    (external photo URLs still require network).
     """
     today = datetime.date.today().isoformat()
     now_ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -1743,6 +1759,9 @@ def render_html(
 
     # JSON-encode into the page — use separators to keep it compact
     listings_json = json.dumps(listings_data, separators=(",", ":"), default=str)
+    # Prevent </script> in string values from breaking out of the script block.
+    # <\/ is valid JSON (forward slash needs no escaping) and valid JS.
+    listings_json = listings_json.replace("</", "<\\/")
 
     # Stat chips
     src_parts = ", ".join(
@@ -1759,8 +1778,7 @@ def render_html(
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         f"<title>Car Finder Shortlist — {_h(today)}</title>",
-        "<!-- Chart.js from CDN — requires network for charts to render -->",
-        '<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>',
+        f"<script>{_chart_js_source()}</script>",
         "<style>",
         _CSS,
         "</style>",
