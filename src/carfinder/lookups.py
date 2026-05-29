@@ -12,22 +12,30 @@ logger = logging.getLogger(__name__)
 
 
 def _norm(s: str | None) -> str:
-    """Normalize a make string: strip whitespace, remove internal spaces, lowercase."""
+    """Normalize a make OR model string for lookup keys.
+
+    Strips whitespace, removes internal spaces, and lowercases so that scraped
+    casing variants ("MAZDA"/"mazda", "ELANTRA"/"Elantra", "RAV 4"/"RAV4")
+    resolve to the same key. Must be applied identically on the table-build
+    side and the scorer query side.
+    """
     return (s or "").strip().replace(" ", "").lower()
 
 
 @dataclass
 class Lookups:
+    # All make/model components of these keys are normalized via _norm() so
+    # scraped casing variants resolve consistently. Query them the same way.
     reliability: dict[str, float] = field(default_factory=dict)
-    # (make, model, year) -> length_inches
+    # (_norm(make), _norm(model), year) -> length_inches
     dimensions: dict[tuple[str, str, int], float] = field(default_factory=dict)
-    # (make, model, year) -> tier "low"|"medium"|"high"
+    # (_norm(make), _norm(model), year) -> tier "low"|"medium"|"high"
     insurance: dict[tuple[str, str, int], str] = field(default_factory=dict)
-    # (make, model) -> "oem_rails"|"aftermarket"|"none"
+    # (_norm(make), _norm(model)) -> "oem_rails"|"aftermarket"|"none"
     roof_rack: dict[tuple[str, str], str] = field(default_factory=dict)
-    # (year, make, model) -> mpg_combined
+    # (year, _norm(make), _norm(model)) -> mpg_combined
     mpg: dict[tuple[int, str, str], int] = field(default_factory=dict)
-    # (make, model) -> approximate base MSRP (USD)
+    # (_norm(make), _norm(model)) -> approximate base MSRP (USD)
     msrp: dict[tuple[str, str], int] = field(default_factory=dict)
 
 
@@ -69,7 +77,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
         entries = yaml.safe_load(dim_path.read_text()) or []
         for entry in entries:
             make = _norm(entry["make"])
-            model = entry["model"]
+            model = _norm(entry["model"])
             year_min = int(entry["year_min"])
             year_max = int(entry["year_max"])
             length = float(entry["length_inches"])
@@ -82,7 +90,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
         entries = yaml.safe_load(ins_path.read_text()) or []
         for entry in entries:
             make = _norm(entry["make"])
-            model = entry["model"]
+            model = _norm(entry["model"])
             year_min = int(entry["year_min"])
             year_max = int(entry["year_max"])
             tier = entry["tier"]
@@ -94,7 +102,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
     if rack_path.exists():
         entries = yaml.safe_load(rack_path.read_text()) or []
         for entry in entries:
-            lk.roof_rack[(_norm(entry["make"]), entry["model"])] = entry["status"]
+            lk.roof_rack[(_norm(entry["make"]), _norm(entry["model"]))] = entry["status"]
 
     # --- mpg_lookup.csv: (year, make, model) -> mpg_combined ---
     mpg_path = data_dir / "mpg_lookup.csv"
@@ -104,8 +112,8 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
             for row in reader:
                 try:
                     year = int(row["year"])
-                    make = row["make"].strip()
-                    model = row["model"].strip()
+                    make = _norm(row["make"])
+                    model = _norm(row["model"])
                     mpg = round(float(row["mpg_combined"]))
                     # Keep first entry per (year, make, model) — CSV is pre-deduped
                     key = (year, make, model)
@@ -119,7 +127,7 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
     if msrp_path.exists():
         entries = yaml.safe_load(msrp_path.read_text()) or []
         for entry in entries:
-            lk.msrp[(entry["make"], entry["model"])] = int(entry["msrp"])
+            lk.msrp[(_norm(entry["make"]), _norm(entry["model"]))] = int(entry["msrp"])
 
     logger.info(
         "Loaded lookups: %d reliability, %d dimensions, %d insurance, "

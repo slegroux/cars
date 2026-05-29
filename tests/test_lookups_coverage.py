@@ -52,7 +52,7 @@ def test_top_5_models_have_full_dimension_coverage(lk):
     ]
     for make, model, y_start, y_end in targets:
         for year in range(y_start, y_end + 1):
-            key = (_norm(make), model, year)
+            key = (_norm(make), _norm(model), year)
             assert key in lk.dimensions, f"No dimension entry for {make} {model} {year}"
 
 
@@ -69,7 +69,7 @@ def test_kia_hyundai_pre_2022_marked_high_risk(lk):
         ("Hyundai", "Sonata", 2013),
     ]
     for make, model, year in samples:
-        tier = lk.insurance.get((_norm(make), model, year))
+        tier = lk.insurance.get((_norm(make), _norm(model), year))
         assert tier == "high", (
             f"Expected high risk for {make} {model} {year}, got {tier!r}"
         )
@@ -84,7 +84,7 @@ def test_subaru_low_risk(lk):
         ("Subaru", "Forester", 2014),
         ("Subaru", "Outback", 2014),
     ]:
-        tier = lk.insurance.get((_norm(make), model, year))
+        tier = lk.insurance.get((_norm(make), _norm(model), year))
         assert tier == "low", (
             f"Expected low risk for {make} {model} {year}, got {tier!r}"
         )

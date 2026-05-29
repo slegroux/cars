@@ -104,7 +104,7 @@ def score_price_value(
     # Fallback: depreciation estimate
     make = listing.make or ""
     model = listing.model or ""
-    msrp = lookups.msrp.get((make, model))
+    msrp = lookups.msrp.get((_norm(make), _norm(model)))
     if msrp and listing.year:
         age = _CURRENT_YEAR - listing.year
         expected = msrp * (0.88 ** age) - (listing.mileage or 0) * 0.04
@@ -176,7 +176,9 @@ def score_parking_footprint(listing: Listing, lookups: Lookups, weight: float) -
     # Prefer enriched field on listing, then lookup
     length = listing.length_inches
     if length is None and listing.make and listing.model and listing.year:
-        length = lookups.dimensions.get((_norm(listing.make), listing.model, listing.year))
+        length = lookups.dimensions.get(
+            (_norm(listing.make), _norm(listing.model), listing.year)
+        )
 
     if length is None:
         return _factor(5.0, weight, "estimated", "length unknown")
@@ -196,7 +198,7 @@ def score_parking_footprint(listing: Listing, lookups: Lookups, weight: float) -
 def score_mpg(listing: Listing, lookups: Lookups, weight: float) -> FactorScore:
     mpg = listing.mpg_combined
     if mpg is None and listing.year and listing.make and listing.model:
-        looked_up = lookups.mpg.get((listing.year, listing.make, listing.model))
+        looked_up = lookups.mpg.get((listing.year, _norm(listing.make), _norm(listing.model)))
         if looked_up is not None:
             mpg = float(looked_up)
             # A successful lookup is canonical data — treat it as "real" for
@@ -244,7 +246,9 @@ def score_insurance_risk(listing: Listing, lookups: Lookups, weight: float) -> F
     tier = listing.insurance_risk_tier
     source = "enriched"
     if tier is None and listing.make and listing.model and listing.year:
-        tier = lookups.insurance.get((_norm(listing.make), listing.model, listing.year))
+        tier = lookups.insurance.get(
+            (_norm(listing.make), _norm(listing.model), listing.year)
+        )
         source = "lookup"
 
     tier_map = {"low": (10.0, "low insurance risk"), "medium": (6.0, "medium insurance risk"), "high": (2.0, "high insurance risk")}
@@ -259,7 +263,7 @@ def score_roof_rack(listing: Listing, lookups: Lookups, weight: float) -> Factor
     status = listing.roof_rack_compatible
     source = "enriched"
     if status is None and listing.make and listing.model:
-        status = lookups.roof_rack.get((_norm(listing.make), listing.model))
+        status = lookups.roof_rack.get((_norm(listing.make), _norm(listing.model)))
         source = "lookup"
 
     status_map = {

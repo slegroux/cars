@@ -5,6 +5,7 @@ Each test pins a specific bug so it cannot silently regress.
 from __future__ import annotations
 
 import pytest
+import yaml
 
 from carfinder.config import Config
 from carfinder.fetchers.craigslist import (
@@ -14,9 +15,15 @@ from carfinder.fetchers.craigslist import (
     parse_title,
 )
 from carfinder.fetchers.kbb import _extract_vehicle_from_eggs, _parse_mileage
-from carfinder.lookups import Lookups
+from carfinder.lookups import Lookups, load_lookups
 from carfinder.models import Listing
-from carfinder.scorer import score_mpg
+from carfinder.scorer import (
+    score_insurance_risk,
+    score_mpg,
+    score_parking_footprint,
+    score_price_value,
+    score_roof_rack,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -159,7 +166,7 @@ def test_kbb_extract_absolute_and_rooted_vdp():
 
 def test_score_mpg_lookup_hit_is_real():
     lk = Lookups()
-    lk.mpg[(2016, "Toyota", "RAV4")] = 30
+    lk.mpg[(2016, "toyota", "rav4")] = 30  # keys are normalized (lowercased)
     listing = Listing(year=2016, make="Toyota", model="RAV4")  # no mpg_combined
     fs = score_mpg(listing, lk, 0.04)
     assert fs.confidence == "real"
@@ -205,3 +212,59 @@ def test_config_rejects_out_of_range_weight():
 def test_config_defaults_are_valid():
     cfg = Config()
     assert cfg.zip == "90405" and cfg.radius_miles == 25
+
+
+# ---------------------------------------------------------------------------
+# Lookup tables are case-insensitive on make AND model — scraped casing
+# ("MAZDA"/"ELANTRA"/"camry") must still resolve against canonical table keys.
+# ---------------------------------------------------------------------------
+
+def test_mpg_lookup_case_insensitive(tmp_path):
+    (tmp_path / "mpg_lookup.csv").write_text(
+        "year,make,model,mpg_combined\n2016,Toyota,RAV4,30\n"
+    )
+    lk = load_lookups(tmp_path)
+    fs = score_mpg(Listing(year=2016, make="TOYOTA", model="rav4"), lk, 0.04)
+    assert fs.confidence == "real" and fs.raw == 8.0
+
+
+def test_dimensions_lookup_case_insensitive(tmp_path):
+    (tmp_path / "vehicle_dimensions.yaml").write_text(
+        yaml.dump([{"make": "Toyota", "model": "RAV4",
+                    "year_min": 2015, "year_max": 2018, "length_inches": 179.0}])
+    )
+    lk = load_lookups(tmp_path)
+    fs = score_parking_footprint(Listing(year=2016, make="TOYOTA", model="rav4"), lk, 0.02)
+    assert fs.confidence == "real" and fs.raw == 10.0  # < 180"
+
+
+def test_insurance_lookup_case_insensitive(tmp_path):
+    (tmp_path / "insurance_risk.yaml").write_text(
+        yaml.dump([{"make": "Toyota", "model": "RAV4",
+                    "year_min": 2015, "year_max": 2018, "tier": "low"}])
+    )
+    lk = load_lookups(tmp_path)
+    fs = score_insurance_risk(Listing(year=2016, make="toyota", model="RAV4"), lk, 0.10)
+    assert fs.confidence == "real" and fs.raw == 10.0
+
+
+def test_roof_rack_lookup_case_insensitive(tmp_path):
+    (tmp_path / "roof_rack.yaml").write_text(
+        yaml.dump([{"make": "Toyota", "model": "RAV4", "status": "oem_rails"}])
+    )
+    lk = load_lookups(tmp_path)
+    fs = score_roof_rack(Listing(make="TOYOTA", model="rav4"), lk, 0.06)
+    assert fs.confidence == "real" and fs.raw == 10.0
+
+
+def test_msrp_lookup_case_insensitive(tmp_path):
+    (tmp_path / "msrp_by_make_model.yaml").write_text(
+        yaml.dump([{"make": "Mazda", "model": "Mazda3", "msrp": 23000}])
+    )
+    lk = load_lookups(tmp_path)
+    # Empty cohort → MSRP depreciation fallback; the uppercase "MAZDA"/"MAZDA3"
+    # scraped casing must still hit the canonical "Mazda"/"Mazda3" entry.
+    listing = Listing(year=2018, make="MAZDA", model="MAZDA3",
+                      asking_price=12000, mileage=40000)
+    fs = score_price_value(listing, [], lk, Config(), 0.18)
+    assert "MSRP" in fs.reason or "depreciation" in fs.reason.lower()
