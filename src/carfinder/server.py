@@ -6,6 +6,7 @@ import logging
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING
+from urllib.parse import urlparse
 
 if TYPE_CHECKING:
     from carfinder.config import Config
@@ -39,9 +40,19 @@ def _make_handler(config: "Config", db_path: Path):
             origin = self.headers.get("Origin") or self.headers.get("Referer")
             if not origin:
                 return True  # non-browser client (curl); not a CSRF vector
-            return any(
-                origin.startswith(f"http://{host}:{self.server.server_port}")
-                for host in ("localhost", "127.0.0.1")
+            # Parse the URL and compare host + port exactly. A naive
+            # startswith() check would accept e.g. "http://localhost:8765.evil.com".
+            # Accessing .port can itself raise ValueError for a malformed
+            # authority (e.g. that same payload), so guard the whole read.
+            try:
+                parsed = urlparse(origin)
+                port = parsed.port
+            except ValueError:
+                return False
+            return (
+                parsed.scheme == "http"
+                and parsed.hostname in ("localhost", "127.0.0.1")
+                and port == self.server.server_port
             )
 
         def _html(self, html: str) -> None:
@@ -52,8 +63,19 @@ def _make_handler(config: "Config", db_path: Path):
             self.end_headers()
             self.wfile.write(body)
 
+        # Cap request bodies so a malicious/huge Content-Length can't exhaust
+        # memory. 1 MB is far more than any single manual listing needs.
+        _MAX_BODY_BYTES = 1_000_000
+
         def _read_body(self) -> dict:
-            length = int(self.headers.get("Content-Length", 0))
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                length = 0
+            if length <= 0:
+                return {}
+            if length > self._MAX_BODY_BYTES:
+                raise ValueError("request body exceeds maximum allowed size")
             raw = self.rfile.read(length)
             return json.loads(raw) if raw else {}
 

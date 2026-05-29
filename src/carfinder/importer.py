@@ -4,7 +4,6 @@ from __future__ import annotations
 import csv
 import hashlib
 import sqlite3
-import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 

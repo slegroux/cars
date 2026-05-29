@@ -8,7 +8,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 
 from carfinder.config import Config
 from carfinder.fetchers.kbb import (

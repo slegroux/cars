@@ -8,6 +8,8 @@ from typing import TYPE_CHECKING
 
 import click
 
+from carfinder.service import load_scored_listings as _load_scored_listings
+
 if TYPE_CHECKING:
     pass
 
@@ -48,7 +50,6 @@ async def _run_search(config, enabled_sources: list[str]) -> None:
 
     db_path = Path("data/listings.db")
     db_path.parent.mkdir(parents=True, exist_ok=True)
-    conn = init_db(db_path)
 
     fetchers = []
     for source in enabled_sources:
@@ -59,9 +60,12 @@ async def _run_search(config, enabled_sources: list[str]) -> None:
         fetchers.append((source, cls(config)))
 
     if not fetchers:
+        # Open the DB connection only after this guard so the early return
+        # can't leak a connection.
         click.echo("No valid sources configured.")
         return
 
+    conn = init_db(db_path)
     counters = {"fetched": 0, "new": 0, "updated": 0, "fuzzy": 0, "skipped": 0}
 
     async def run_fetcher(source: str, fetcher) -> None:
@@ -179,9 +183,6 @@ def search(
 
     click.echo(f"Searching sources: {', '.join(enabled)}")
     asyncio.run(_run_search(config, enabled))
-
-
-from carfinder.service import load_scored_listings as _load_scored_listings
 
 
 @cli.command()
@@ -444,7 +445,6 @@ def watch(min_score: float) -> None:
 
     from carfinder.config import load_config
     from carfinder.db import get_last_run, init_db, update_last_run
-    from carfinder.render import render_table
 
     cfg = load_config()
 
@@ -513,42 +513,42 @@ def watch(min_score: float) -> None:
         rank = 0
         for s in new_listings:
             rank += 1
-            l = s.listing
+            lst = s.listing
             score_str = s.display_score()
-            mileage_str = f"{l.mileage:,}" if l.mileage is not None else "—"
-            price_str = f"${l.asking_price:,.0f}" if l.asking_price is not None else "—"
+            mileage_str = f"{lst.mileage:,}" if lst.mileage is not None else "—"
+            price_str = f"${lst.asking_price:,.0f}" if lst.asking_price is not None else "—"
             table.add_row(
                 Text("NEW", style="green bold"),
                 str(rank),
                 Text(score_str, style="green" if s.score >= 80 else "yellow"),
-                str(l.year or "—"),
-                l.make or "—",
-                l.model or "—",
-                l.trim or "—",
+                str(lst.year or "—"),
+                lst.make or "—",
+                lst.model or "—",
+                lst.trim or "—",
                 mileage_str,
                 price_str,
-                l.source or "—",
-                l.location or "—",
+                lst.source or "—",
+                lst.location or "—",
             )
 
         for s, old_score in changed_listings:
             rank += 1
-            l = s.listing
+            lst = s.listing
             score_str = f"{old_score:.1f} → {s.display_score()}"
-            mileage_str = f"{l.mileage:,}" if l.mileage is not None else "—"
-            price_str = f"${l.asking_price:,.0f}" if l.asking_price is not None else "—"
+            mileage_str = f"{lst.mileage:,}" if lst.mileage is not None else "—"
+            price_str = f"${lst.asking_price:,.0f}" if lst.asking_price is not None else "—"
             table.add_row(
                 Text("Δ", style="yellow bold"),
                 str(rank),
                 Text(score_str, style="yellow"),
-                str(l.year or "—"),
-                l.make or "—",
-                l.model or "—",
-                l.trim or "—",
+                str(lst.year or "—"),
+                lst.make or "—",
+                lst.model or "—",
+                lst.trim or "—",
                 mileage_str,
                 price_str,
-                l.source or "—",
-                l.location or "—",
+                lst.source or "—",
+                lst.location or "—",
             )
 
         Console().print(table)

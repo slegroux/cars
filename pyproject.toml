@@ -1,13 +1,14 @@
 [project]
 name = "carfinder"
 version = "0.1.0"
-description = "Add your description here"
+description = "Local-first CLI that aggregates used-car listings (Craigslist, CarMax, Cars.com, KBB), scores each against a personal-profile rubric, and exports a ranked shortlist to an Obsidian vault."
 readme = "README.md"
 authors = [
-    { name = '"Sylvain Le Groux"', email = "slegroux@ccrma.stanford.edu" }
+    { name = "Sylvain Le Groux", email = "slegroux@ccrma.stanford.edu" }
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "beautifulsoup4>=4.12",
     "click>=8.4.1",
     "httpx[http2]>=0.28.1",
     "pydantic>=2",

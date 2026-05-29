@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import datetime
 from statistics import median
-from typing import Any, Literal
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -199,7 +199,10 @@ def score_mpg(listing: Listing, lookups: Lookups, weight: float) -> FactorScore:
         looked_up = lookups.mpg.get((listing.year, listing.make, listing.model))
         if looked_up is not None:
             mpg = float(looked_up)
-            confidence: Literal["real", "estimated"] = "estimated"
+            # A successful lookup is canonical data — treat it as "real" for
+            # consistency with reliability/dimensions/insurance/roof_rack, which
+            # all report "real" on a lookup hit.
+            confidence: Literal["real", "estimated"] = "real"
         else:
             confidence = "estimated"
     else:

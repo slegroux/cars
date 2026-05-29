@@ -2,13 +2,9 @@
 from __future__ import annotations
 
 import datetime
-from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import pytest
-from click.testing import CliRunner
 
-from carfinder.cli import cli
 
 
 TODAY = datetime.date.today().isoformat()
@@ -30,7 +26,6 @@ def test_refresh_fixtures_creates_dated_files(tmp_path):
     """_refresh_fixtures_async writes search_{today}.html (and detail) for craigslist."""
     import asyncio
     from carfinder.config import Config
-    from carfinder.cli import _refresh_fixtures_async
 
     cfg = Config()  # craigslist=True, carmax=False by default
 
@@ -58,7 +53,6 @@ def test_refresh_fixtures_creates_dated_files(tmp_path):
 
     # Patch _refresh_fixtures_async to use our tmp fixtures root
     import carfinder.cli as cli_mod
-    original_fixtures_logic = cli_mod._refresh_fixtures_async
 
     async def patched_refresh(cfg, enabled_sources, today):
         import httpx
@@ -102,7 +96,6 @@ def test_refresh_fixtures_creates_dated_files(tmp_path):
             click.echo(f"WARNING: {w}")
 
     with patch.object(cli_mod, "_refresh_fixtures_async", patched_refresh):
-        runner = CliRunner()
         with patch("carfinder.cli.load_config", create=True):
             pass  # load_config is called inside the command; patch at the import site
 
@@ -145,11 +138,8 @@ def test_refresh_fixtures_honors_enabled_sources(tmp_path):
 
 def test_refresh_fixtures_handles_fetch_failure_gracefully(tmp_path):
     """HTTP 503 from the source causes a warning but no crash."""
-    from carfinder.config import Config
     import asyncio
-    from carfinder.cli import _refresh_fixtures_async
 
-    cfg = Config()  # craigslist enabled
     fixtures_root = tmp_path / "tests" / "fixtures"
 
     mock_503 = _make_mock_response(503, b"Service Unavailable")
@@ -165,24 +155,14 @@ def test_refresh_fixtures_handles_fetch_failure_gracefully(tmp_path):
             "carfinder.fetchers.base.BaseFetcher._rate_limit_sleep",
             new=AsyncMock(),
         ):
-            # Override fixtures_root in the async function by monkeypatching Path
-            import carfinder.cli as cli_mod
-
-            original_path = cli_mod.Path
-
-            class PatchedPath(type(Path())):
-                pass
-
-            # Run with patched fixtures root
+            # Run the async refresh path against the mocked 503 response.
             async def run_patched():
                 import httpx
-                from carfinder.fetchers.craigslist import CraigslistFetcher, _USER_AGENT
+                from carfinder.fetchers.craigslist import _USER_AGENT
 
-                fetcher = CraigslistFetcher(cfg)
                 out_dir = fixtures_root / "craigslist"
                 out_dir.mkdir(parents=True, exist_ok=True)
 
-                search_url = fetcher._build_search_url(cfg, offset=0)
                 headers = {"User-Agent": _USER_AGENT}
 
                 warnings_out = []
@@ -191,7 +171,7 @@ def test_refresh_fixtures_handles_fetch_failure_gracefully(tmp_path):
                 try:
                     async with httpx.AsyncClient(
                         headers=headers, follow_redirects=True, timeout=30.0
-                    ) as client:
+                    ):
                         # Use fake_retry_request manually
                         resp = mock_503
                         if resp.status_code == 200:

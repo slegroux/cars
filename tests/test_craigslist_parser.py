@@ -1,9 +1,8 @@
 """Tests for the Craigslist fetcher and parser."""
 from __future__ import annotations
 
-import asyncio
 from pathlib import Path
-from unittest.mock import AsyncMock, patch
+from unittest.mock import patch
 
 import httpx
 import pytest
@@ -307,7 +306,7 @@ def test_build_search_url_includes_auto_transmission_param_when_enabled():
 @pytest.mark.asyncio
 async def test_excludes_manual_when_configured():
     """Listings with transmission=='manual' should be skipped when exclude_manual=True."""
-    from carfinder.db import init_db, get_listings
+    from carfinder.db import init_db
     import tempfile
 
     # Create a minimal manual-transmission detail page
@@ -343,7 +342,6 @@ async def test_excludes_manual_when_configured():
         db_path = P(tmpdir) / "test.db"
         conn = init_db(db_path)
 
-        from carfinder.cli import _run_search
 
         with patch.object(
             fetcher,
@@ -362,15 +360,14 @@ async def test_excludes_manual_when_configured():
                         listings.append(listing)
 
         # The listing is manual — should have transmission='manual'
-        assert any(l.transmission == "manual" for l in listings)
+        assert any(lst.transmission == "manual" for lst in listings)
 
         # Now verify that _run_search filters it out
         # We count what the search command would store
-        from unittest.mock import MagicMock
         skipped = []
-        for l in listings:
-            if config.transmission.exclude_manual and l.transmission == "manual":
-                skipped.append(l)
+        for lst in listings:
+            if config.transmission.exclude_manual and lst.transmission == "manual":
+                skipped.append(lst)
 
         assert len(skipped) >= 1
         conn.close()

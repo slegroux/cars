@@ -123,40 +123,70 @@ def _parse_search_results(html: str, config: Config) -> list[dict]:
     return vehicles
 
 
+def _parse_mileage(text: object) -> int | None:
+    """Parse a KBB mileage value to int, taking the first number group.
+
+    KBB usually sends "27,800" but occasionally a range like "27,800–30,000";
+    take the first value rather than concatenating digits into a nonsense
+    number, and reject implausible values (> 500k mi) from a malformed parse.
+    """
+    if not text:
+        return None
+    m = re.search(r"\d[\d,]*", str(text))
+    if not m:
+        return None
+    val = int(m.group(0).replace(",", ""))
+    return val if val <= 500_000 else None
+
+
 def _extract_vehicle_from_eggs(listing_id: str, item: dict) -> dict | None:
-    """Map a single __eggsState.inventory entry to a normalized vehicle dict."""
+    """Map a single __eggsState.inventory entry to a normalized vehicle dict.
+
+    Uses ``(item.get(k) or {})`` rather than ``item.get(k, {})`` throughout so
+    an explicit ``null`` value (not just a missing key) doesn't blow up on a
+    subsequent ``.get(...)``.
+    """
     try:
-        price_raw = item.get("pricingDetail", {}).get("salePrice")
+        price_raw = (item.get("pricingDetail") or {}).get("salePrice")
         price = int(price_raw) if price_raw is not None else None
 
-        mileage_str = item.get("mileage", {}).get("value", "")
-        mileage_digits = re.sub(r"[^0-9]", "", mileage_str)
-        mileage = int(mileage_digits) if mileage_digits else None
+        mileage = _parse_mileage((item.get("mileage") or {}).get("value"))
 
-        body_styles = item.get("bodyStyles", [])
-        body_type = body_styles[0].get("name") if body_styles else None
+        body_styles = item.get("bodyStyles")
+        body_type = (
+            body_styles[0].get("name")
+            if isinstance(body_styles, list)
+            and body_styles
+            and isinstance(body_styles[0], dict)
+            else None
+        )
 
-        vdp = item.get("vdpBaseUrl", "")
-        url = f"{_KBB_BASE}{vdp}" if vdp and vdp.startswith("/") else vdp or None
+        vdp = item.get("vdpBaseUrl") or ""
+        if vdp.startswith("/"):
+            url = f"{_KBB_BASE}{vdp}"
+        elif vdp.startswith("http"):
+            url = vdp
+        else:
+            url = None  # bare relative path → unusable, drop it
 
         return {
             "listing_id": listing_id,
             "year": item.get("year"),
-            "make": item.get("make", {}).get("name"),
-            "model": item.get("model", {}).get("name"),
-            "trim": item.get("trim", {}).get("name"),
+            "make": (item.get("make") or {}).get("name"),
+            "model": (item.get("model") or {}).get("name"),
+            "trim": (item.get("trim") or {}).get("name"),
             "mileage": mileage,
             "price": price,
             "url": url,
             "vin": item.get("vin"),
             "body_type": body_type,
-            "drivetrain": item.get("driveType", {}).get("name"),
-            "fuel_type": item.get("fuelType", {}).get("name"),
-            "exterior_color": item.get("color", {}).get("exteriorColor"),
-            "interior_color": item.get("color", {}).get("interiorColor"),
+            "drivetrain": (item.get("driveType") or {}).get("name"),
+            "fuel_type": (item.get("fuelType") or {}).get("name"),
+            "exterior_color": (item.get("color") or {}).get("exteriorColor"),
+            "interior_color": (item.get("color") or {}).get("interiorColor"),
             "listing_type": item.get("listingType"),
         }
-    except Exception as exc:
+    except (AttributeError, KeyError, ValueError, TypeError) as exc:
         logger.debug("Error extracting vehicle %s: %s", listing_id, exc)
         return None
 
@@ -195,7 +225,8 @@ def _parse_vehicle_card(card) -> dict | None:
             "mileage": mileage,
             "url": url,
         }
-    except Exception:
+    except (AttributeError, KeyError, ValueError, TypeError) as exc:
+        logger.debug("Error parsing KBB vehicle card: %s", exc)
         return None
 
 
@@ -238,7 +269,7 @@ def _vehicle_to_listing(vehicle: dict, config: Config) -> Listing | None:
             vin=vin,
             seller_type="dealer",
         )
-    except Exception as exc:
+    except (ValueError, TypeError) as exc:
         logger.error("Error converting KBB vehicle to listing: %s", exc)
         return None
 

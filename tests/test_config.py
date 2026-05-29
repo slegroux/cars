@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from carfinder.config import Config, load_config, resolved_vault_path
+from carfinder.config import load_config, resolved_vault_path
 
 
 CONFIG_PATH = Path(__file__).parent.parent / "config.yaml"

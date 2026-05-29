@@ -189,7 +189,11 @@
       });
     }
 
-    var ctx = document.getElementById('scatterCanvas').getContext('2d');
+    var canvasEl = document.getElementById('scatterCanvas');
+    // Bail out cleanly if the canvas is missing or Chart.js failed to load
+    // (the vendored chart.umd.min.js can be absent for offline exports).
+    if (!canvasEl || typeof Chart === 'undefined') return;
+    var ctx = canvasEl.getContext('2d');
     if (scatterChart) { scatterChart.destroy(); scatterChart = null; }
 
     scatterChart = new Chart(ctx, {
@@ -539,7 +543,8 @@
     inner.appendChild(right);
     td.appendChild(inner);
 
-    // Draw radar
+    // Draw radar (skip if Chart.js is unavailable — the table above still shows)
+    if (typeof Chart === 'undefined') return;
     var labels = d.factors.map(function(f){ return f.key.replace(/_/g,' '); });
     var values = d.factors.map(function(f){ return f.raw; });
     openRadarChart = new Chart(canvas.getContext('2d'), {

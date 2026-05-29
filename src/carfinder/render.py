@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import datetime
-import os
 import sqlite3
 import statistics
 from pathlib import Path
@@ -40,6 +39,26 @@ def _days_on_market(listing: "Listing") -> str:
     return "—"
 
 
+def _md_alt(text: str) -> str:
+    """Escape characters that would break a Markdown image/link alt-text.
+
+    Scraped make/model strings can contain ``[`` / ``]`` that would otherwise
+    corrupt ``![alt](url)`` syntax in the exported vault file.
+    """
+    return text.replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]")
+
+
+def _safe_md_url(url: str | None) -> str | None:
+    """Return ``url`` only when it is an http(s) URL, else None.
+
+    Prevents a scraped ``javascript:`` / ``data:`` URL from being emitted as a
+    clickable Markdown link in the exported vault note.
+    """
+    if not url:
+        return None
+    return url if url.lower().startswith(("http://", "https://")) else None
+
+
 # ---------------------------------------------------------------------------
 # render_table
 # ---------------------------------------------------------------------------
@@ -74,7 +93,7 @@ def render_table(
     for rank, s in enumerate(items, 1):
         from rich.text import Text
 
-        l = s.listing
+        lst = s.listing
         raw_score = _score_cell(s)
         # Color by score value using Text objects (not markup strings)
         if s.score >= 80:
@@ -84,21 +103,21 @@ def render_table(
         else:
             score_cell = Text(raw_score, style="dim white")
 
-        mileage_str = f"{l.mileage:,}" if l.mileage is not None else "—"
-        price_str = f"${l.asking_price:,.0f}" if l.asking_price is not None else "—"
+        mileage_str = f"{lst.mileage:,}" if lst.mileage is not None else "—"
+        price_str = f"${lst.asking_price:,.0f}" if lst.asking_price is not None else "—"
 
         table.add_row(
             str(rank),
             score_cell,
-            str(l.year or "—"),
-            l.make or "—",
-            l.model or "—",
-            l.trim or "—",
+            str(lst.year or "—"),
+            lst.make or "—",
+            lst.model or "—",
+            lst.trim or "—",
             mileage_str,
             price_str,
-            l.source or "—",
-            l.location or "—",
-            _days_on_market(l),
+            lst.source or "—",
+            lst.location or "—",
+            _days_on_market(lst),
         )
 
     return table
@@ -158,21 +177,21 @@ def render_markdown(
     lines.append("| " + " | ".join("---" for _ in header_cols) + " |")
 
     for rank, s in enumerate(items, 1):
-        l = s.listing
-        mileage_str = f"{l.mileage:,}" if l.mileage is not None else "—"
-        price_str = f"${l.asking_price:,.0f}" if l.asking_price is not None else "—"
+        lst = s.listing
+        mileage_str = f"{lst.mileage:,}" if lst.mileage is not None else "—"
+        price_str = f"${lst.asking_price:,.0f}" if lst.asking_price is not None else "—"
         row = [
             str(rank),
             _score_cell(s),
-            str(l.year or "—"),
-            l.make or "—",
-            l.model or "—",
-            l.trim or "—",
+            str(lst.year or "—"),
+            lst.make or "—",
+            lst.model or "—",
+            lst.trim or "—",
             mileage_str,
             price_str,
-            l.source or "—",
-            l.location or "—",
-            _days_on_market(l),
+            lst.source or "—",
+            lst.location or "—",
+            _days_on_market(lst),
         ]
         lines.append("| " + " | ".join(row) + " |")
 
@@ -180,10 +199,10 @@ def render_markdown(
 
     # Section 3: per-vehicle breakdown
     for rank, s in enumerate(items, 1):
-        l = s.listing
-        name_parts = [str(l.year or ""), l.make or "", l.model or ""]
-        if l.trim:
-            name_parts.append(l.trim)
+        lst = s.listing
+        name_parts = [str(lst.year or ""), lst.make or "", lst.model or ""]
+        if lst.trim:
+            name_parts.append(lst.trim)
         vehicle_name = " ".join(p for p in name_parts if p)
         badge = _confidence_badge(s.confidence)
 
@@ -191,26 +210,31 @@ def render_markdown(
         lines.append("")
 
         # One-line meta
-        price_str = f"${l.asking_price:,.0f}" if l.asking_price is not None else "—"
-        mileage_str = f"{l.mileage:,}" if l.mileage is not None else "—"
-        vin_str = l.vin or "—"
+        price_str = f"${lst.asking_price:,.0f}" if lst.asking_price is not None else "—"
+        mileage_str = f"{lst.mileage:,}" if lst.mileage is not None else "—"
+        vin_str = lst.vin or "—"
         lines.append(
             f"**Price:** {price_str} · **Miles:** {mileage_str} · "
-            f"**Source:** {l.source or '—'} · **Location:** {l.location or '—'} · "
+            f"**Source:** {lst.source or '—'} · **Location:** {lst.location or '—'} · "
             f"**VIN:** {vin_str}"
         )
         lines.append("")
 
-        # Link
-        if l.url:
-            lines.append(f"[View listing]({l.url})")
+        # Link — only emit validated http(s) URLs
+        safe_url = _safe_md_url(lst.url)
+        if safe_url:
+            lines.append(f"[View listing]({safe_url})")
             lines.append("")
 
-        # Photos
-        photos = l.photos or []
+        # Photos — skip non-http(s) URLs and escape the alt text
+        photos = lst.photos or []
+        embedded = 0
         for photo_url in photos[:photo_thumbnails]:
-            lines.append(f"![{vehicle_name}]({photo_url})")
-        if photos:
+            safe_photo = _safe_md_url(photo_url)
+            if safe_photo:
+                lines.append(f"![{_md_alt(vehicle_name)}]({safe_photo})")
+                embedded += 1
+        if embedded:
             lines.append("")
 
         # Score breakdown table
@@ -251,32 +275,32 @@ def render_show(scored: "ScoredListing"):
     from rich.table import Table
     from rich.text import Text
 
-    l = scored.listing
+    lst = scored.listing
 
     # Basic info text
     info_lines = [
         f"[bold]Score:[/bold] {_score_cell(scored)}  [bold]Confidence:[/bold] {scored.confidence}",
-        f"[bold]Year:[/bold] {l.year or '—'}  [bold]Make:[/bold] {l.make or '—'}  "
-        f"[bold]Model:[/bold] {l.model or '—'}  [bold]Trim:[/bold] {l.trim or '—'}",
-        f"[bold]Price:[/bold] {'$' + f'{l.asking_price:,.0f}' if l.asking_price else '—'}  "
-        f"[bold]Mileage:[/bold] {f'{l.mileage:,}' if l.mileage else '—'}",
-        f"[bold]Body:[/bold] {l.body_type or '—'}  [bold]Drivetrain:[/bold] {l.drivetrain or '—'}  "
-        f"[bold]Transmission:[/bold] {l.transmission or '—'}",
-        f"[bold]Fuel:[/bold] {l.fuel_type or '—'}  [bold]MPG:[/bold] {l.mpg_combined or '—'}",
-        f"[bold]Title:[/bold] {l.title_status or '—'}  [bold]Condition:[/bold] {l.condition or '—'}",
-        f"[bold]VIN:[/bold] {l.vin or '—'}",
-        f"[bold]Location:[/bold] {l.location or '—'}  [bold]Distance:[/bold] {l.distance_miles or '—'} mi",
-        f"[bold]Source:[/bold] {l.source or '—'}  [bold]Source ID:[/bold] {l.source_id or '—'}",
-        f"[bold]URL:[/bold] {l.url or '—'}",
-        f"[bold]Posted:[/bold] {l.posted_date or '—'}  [bold]Days listed:[/bold] {l.days_listed or '—'}",
+        f"[bold]Year:[/bold] {lst.year or '—'}  [bold]Make:[/bold] {lst.make or '—'}  "
+        f"[bold]Model:[/bold] {lst.model or '—'}  [bold]Trim:[/bold] {lst.trim or '—'}",
+        f"[bold]Price:[/bold] {'$' + f'{lst.asking_price:,.0f}' if lst.asking_price else '—'}  "
+        f"[bold]Mileage:[/bold] {f'{lst.mileage:,}' if lst.mileage else '—'}",
+        f"[bold]Body:[/bold] {lst.body_type or '—'}  [bold]Drivetrain:[/bold] {lst.drivetrain or '—'}  "
+        f"[bold]Transmission:[/bold] {lst.transmission or '—'}",
+        f"[bold]Fuel:[/bold] {lst.fuel_type or '—'}  [bold]MPG:[/bold] {lst.mpg_combined or '—'}",
+        f"[bold]Title:[/bold] {lst.title_status or '—'}  [bold]Condition:[/bold] {lst.condition or '—'}",
+        f"[bold]VIN:[/bold] {lst.vin or '—'}",
+        f"[bold]Location:[/bold] {lst.location or '—'}  [bold]Distance:[/bold] {lst.distance_miles or '—'} mi",
+        f"[bold]Source:[/bold] {lst.source or '—'}  [bold]Source ID:[/bold] {lst.source_id or '—'}",
+        f"[bold]URL:[/bold] {lst.url or '—'}",
+        f"[bold]Posted:[/bold] {lst.posted_date or '—'}  [bold]Days listed:[/bold] {lst.days_listed or '—'}",
     ]
 
     # Description (truncated)
-    if l.description:
-        desc = l.description[:500]
-        if len(l.description) > 500:
+    if lst.description:
+        desc = lst.description[:500]
+        if len(lst.description) > 500:
             desc += "…"
-        info_lines += ["", f"[bold]Description:[/bold]", desc]
+        info_lines += ["", "[bold]Description:[/bold]", desc]
 
     info_text = Text.from_markup("\n".join(info_lines))
 
@@ -299,10 +323,10 @@ def render_show(scored: "ScoredListing"):
             fs.reason,
         )
 
-    name_parts = [str(l.year or ""), l.make or "", l.model or ""]
-    if l.trim:
-        name_parts.append(l.trim)
-    title = " ".join(p for p in name_parts if p) or l.id or "Listing"
+    name_parts = [str(lst.year or ""), lst.make or "", lst.model or ""]
+    if lst.trim:
+        name_parts.append(lst.trim)
+    title = " ".join(p for p in name_parts if p) or lst.id or "Listing"
 
     return Panel(
         Group(info_text, breakdown_table),
@@ -329,15 +353,15 @@ def render_stats(listings: list["Listing"], conn: sqlite3.Connection):
     make_counts: dict[str, int] = {}
     prices: list[float] = []
 
-    for l in listings:
-        src = l.source or "unknown"
+    for lst in listings:
+        src = lst.source or "unknown"
         source_counts[src] = source_counts.get(src, 0) + 1
-        bt = l.body_type or "unknown"
+        bt = lst.body_type or "unknown"
         body_counts[bt] = body_counts.get(bt, 0) + 1
-        mk = l.make or "unknown"
+        mk = lst.make or "unknown"
         make_counts[mk] = make_counts.get(mk, 0) + 1
-        if l.asking_price is not None:
-            prices.append(l.asking_price)
+        if lst.asking_price is not None:
+            prices.append(lst.asking_price)
 
     # Price stats
     price_min = min(prices) if prices else None
@@ -348,7 +372,7 @@ def render_stats(listings: list["Listing"], conn: sqlite3.Connection):
     try:
         row = conn.execute("SELECT MAX(last_seen) FROM listings").fetchone()
         last_seen = row[0] if row and row[0] else "—"
-    except Exception:
+    except sqlite3.Error:
         last_seen = "—"
 
     # --- Summary table ---
@@ -388,7 +412,7 @@ def render_stats(listings: list["Listing"], conn: sqlite3.Connection):
         make_table.add_row(mk, str(cnt))
 
     # --- Score histogram ---
-    scores = [l.score for l in listings if l.score is not None]
+    scores = [lst.score for lst in listings if lst.score is not None]
     bins = [(0, 20), (20, 40), (40, 60), (60, 80), (80, 100)]
     bin_counts = [
         sum(1 for s in scores if lo <= s < hi) for (lo, hi) in bins

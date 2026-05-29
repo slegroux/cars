@@ -7,11 +7,8 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock
 
-import httpx
 import pytest
-import pytest_asyncio
 
 from carfinder.config import Config
 from carfinder.fetchers.carmax import (
@@ -260,8 +257,7 @@ def test_dedup_by_vin_merges_carmax_and_craigslist(tmp_path):
     one row in the DB.  CarMax wins (upsert updates the existing row) because
     it has richer data (VIN, title_status, mpg_combined populated).
     """
-    import sqlite3
-    from carfinder.db import init_db, upsert_listing, get_listings
+    from carfinder.db import init_db, upsert_listing
 
     db_path = tmp_path / "test.db"
     conn = init_db(db_path)

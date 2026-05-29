@@ -79,6 +79,7 @@ def _get_column_defs() -> List[str]:
 def _migrate_schema(conn: sqlite3.Connection) -> None:
     """Add any columns present in the canonical Listing schema but missing from the DB."""
     existing = {row[1] for row in conn.execute("PRAGMA table_info(listings)").fetchall()}
+    added = False
     for col_def in _get_column_defs():
         # col_def looks like "    col_name TYPE"
         parts = col_def.split()
@@ -87,6 +88,11 @@ def _migrate_schema(conn: sqlite3.Connection) -> None:
         col_name, col_type = parts[0], parts[1]
         if col_name not in existing:
             conn.execute(f"ALTER TABLE listings ADD COLUMN {col_name} {col_type}")
+            added = True
+    if added:
+        # Persist the DDL so the new columns survive even if the caller never
+        # commits (init_db does commit, but keep the migration self-contained).
+        conn.commit()
 
 
 def init_db(path: Path) -> sqlite3.Connection:
@@ -318,7 +324,9 @@ def get_listings(
         params.append(source)
 
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
-    lim = f"LIMIT {limit}" if limit else ""
+    # int() guarantees the LIMIT value can never carry injected SQL even if a
+    # caller passes a non-int; SQLite does not allow parameterizing LIMIT.
+    lim = f"LIMIT {int(limit)}" if limit else ""
 
     rows = conn.execute(
         f"SELECT * FROM listings {where} ORDER BY score DESC {lim}",

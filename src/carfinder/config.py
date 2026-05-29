@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,14 @@ from pydantic import BaseModel, field_validator, model_validator
 class BudgetConfig(BaseModel):
     min: float = 5000
     max: float = 12000
+
+    @model_validator(mode="after")
+    def _validate_range(self) -> "BudgetConfig":
+        if self.min > self.max:
+            raise ValueError(
+                f"budget.min ({self.min}) must be <= budget.max ({self.max})"
+            )
+        return self
 
 
 class MileageConfig(BaseModel):
@@ -44,6 +53,16 @@ class WeightsConfig(BaseModel):
     parking_footprint: float = 0.02
     title_status: float = 0.02
 
+    @model_validator(mode="after")
+    def _validate_bounds(self) -> "WeightsConfig":
+        for fname in WeightsConfig.model_fields:
+            val = getattr(self, fname)
+            if not 0.0 <= val <= 1.0:
+                raise ValueError(
+                    f"weight {fname!r}={val} must be between 0 and 1"
+                )
+        return self
+
 
 class ExportConfig(BaseModel):
     vault_path: str = "~/Obsidian/PersonalVault/wiki/cars"
@@ -75,6 +94,21 @@ class Config(BaseModel):
     rate_limit: RateLimitConfig = RateLimitConfig()
     retry: RetryConfig = RetryConfig()
 
+    @field_validator("zip")
+    @classmethod
+    def _validate_zip(cls, v: str) -> str:
+        s = str(v).strip()
+        if not re.fullmatch(r"\d{5}", s):
+            raise ValueError(f"zip must be a 5-digit US ZIP code, got {v!r}")
+        return s
+
+    @field_validator("radius_miles")
+    @classmethod
+    def _validate_radius(cls, v: int) -> int:
+        if v <= 0:
+            raise ValueError(f"radius_miles must be a positive integer, got {v}")
+        return v
+
     @model_validator(mode="after")
     def validate_weights_sum(self) -> "Config":
         total = sum(
@@ -89,11 +123,23 @@ class Config(BaseModel):
 
 
 def load_config(path: Path | None = None) -> Config:
-    """Load config from YAML file. Defaults to ./config.yaml."""
+    """Load config from YAML file. Defaults to ./config.yaml.
+
+    Raises a clear FileNotFoundError if the file is missing and a ValueError
+    if it is not valid YAML, instead of leaking a raw traceback to the user.
+    """
     if path is None:
         path = Path("config.yaml")
-    with open(path) as f:
-        data: dict[str, Any] = yaml.safe_load(f) or {}
+    try:
+        with open(path) as f:
+            data: dict[str, Any] = yaml.safe_load(f) or {}
+    except FileNotFoundError as e:
+        raise FileNotFoundError(
+            f"Config file not found: {path}. Copy the bundled config.yaml to the "
+            f"repo root or pass an explicit --config path."
+        ) from e
+    except yaml.YAMLError as e:
+        raise ValueError(f"Config file {path} is not valid YAML: {e}") from e
     return Config(**data)
 
 

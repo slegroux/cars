@@ -138,7 +138,20 @@ body {
   user-select: none;
   transition: background 0.1s, border-color 0.1s;
 }
-.cb-label input[type=checkbox] { display: none; }
+/* Visually hide the checkbox but keep it in the focus order so keyboard
+   users can Tab to it and toggle with Space (display:none would remove it). */
+.cb-label input[type=checkbox] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+.cb-label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
 .cb-label.checked {
   background: var(--accent-dim);
   border-color: var(--accent);

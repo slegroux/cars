@@ -4,15 +4,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
 
 from carfinder.config import Config, WeightsConfig
 from carfinder.lookups import Lookups, load_lookups
 from carfinder.models import Listing
 from carfinder.scorer import (
-    ScoredListing,
     score_drivetrain,
-    score_insurance_risk,
     score_listing,
     score_mileage,
     score_mpg,
@@ -20,7 +17,6 @@ from carfinder.scorer import (
     score_price_value,
     score_reliability,
     score_roof_rack,
-    score_seller_type,
     score_size_class,
     score_title_status,
 )

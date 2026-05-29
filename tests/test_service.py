@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 
 from carfinder.db import init_db, upsert_listing
 from carfinder.models import Listing
@@ -82,8 +81,8 @@ def test_load_scored_listings_in_budget_filters_out_of_range(tmp_path, monkeypat
     cheap = _make_listing(source_id="cheap", asking_price=1000.0)
     expensive = _make_listing(source_id="expensive", asking_price=99000.0)
     in_range = _make_listing(source_id="ok", asking_price=8000.0)
-    for l in (cheap, expensive, in_range):
-        upsert_listing(conn, l)
+    for lst in (cheap, expensive, in_range):
+        upsert_listing(conn, lst)
     conn.close()
 
     cfg = load_config(CONFIG_PATH)
@@ -107,8 +106,8 @@ def test_load_scored_listings_no_budget_flag_returns_all(tmp_path, monkeypatch):
     cheap = _make_listing(source_id="cheap", asking_price=1000.0)
     expensive = _make_listing(source_id="expensive", asking_price=99000.0)
     in_range = _make_listing(source_id="ok", asking_price=8000.0)
-    for l in (cheap, expensive, in_range):
-        upsert_listing(conn, l)
+    for lst in (cheap, expensive, in_range):
+        upsert_listing(conn, lst)
     conn.close()
 
     cfg = load_config(CONFIG_PATH)
@@ -129,8 +128,8 @@ def test_load_scored_listings_in_budget_drops_none_price(tmp_path, monkeypatch):
     conn = init_db(db_path)
     no_price = _make_listing(source_id="no-price", asking_price=None)
     in_range = _make_listing(source_id="ok", asking_price=8000.0)
-    for l in (no_price, in_range):
-        upsert_listing(conn, l)
+    for lst in (no_price, in_range):
+        upsert_listing(conn, lst)
     conn.close()
 
     cfg = load_config(CONFIG_PATH)

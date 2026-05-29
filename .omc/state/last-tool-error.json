@@ -1,7 +1,0 @@
-{
-  "tool_name": "Read",
-  "tool_input_preview": "{\"file_path\":\"/Users/sylvain/.claude-personal/projects/-Users-sylvain-Projects-Cars/memory/MEMORY.md\"}",
-  "error": "File does not exist. Note: your current working directory is /Users/sylvain/Projects/Cars.",
-  "timestamp": "2026-05-23T22:21:04.972Z",
-  "retry_count": 1
-}

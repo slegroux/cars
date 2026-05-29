@@ -68,14 +68,15 @@ def _git_hash() -> str:
             capture_output=True, text=True, timeout=3,
         )
         return result.stdout.strip() if result.returncode == 0 else ""
-    except Exception:
+    except (subprocess.SubprocessError, OSError):
+        # git missing, timeout, or not a repo — the hash is cosmetic.
         return ""
 
 
 def _listing_to_dict(s: "ScoredListing") -> dict:
     """Serialise one ScoredListing into a JSON-safe dict for the dashboard."""
-    l = s.listing
-    photos = l.photos or []
+    lst = s.listing
+    photos = lst.photos or []
 
     factors = []
     for key in _FACTOR_KEYS:
@@ -100,27 +101,27 @@ def _listing_to_dict(s: "ScoredListing") -> dict:
             })
 
     return {
-        "id": l.id or "",
-        "url": l.url or "",
-        "source": l.source or "unknown",
-        "year": l.year,
-        "make": l.make or "",
-        "model": l.model or "",
-        "trim": l.trim or "",
-        "body_type": l.body_type or "",
-        "mileage": l.mileage,
-        "asking_price": l.asking_price,
+        "id": lst.id or "",
+        "url": lst.url or "",
+        "source": lst.source or "unknown",
+        "year": lst.year,
+        "make": lst.make or "",
+        "model": lst.model or "",
+        "trim": lst.trim or "",
+        "body_type": lst.body_type or "",
+        "mileage": lst.mileage,
+        "asking_price": lst.asking_price,
         "score": s.score,
         "confidence": s.confidence,
         "display_score": s.display_score(),
-        "location": l.location or "",
-        "distance_miles": l.distance_miles,
-        "seller_type": l.seller_type or "",
-        "transmission": l.transmission or "",
-        "description": l.description or "",
+        "location": lst.location or "",
+        "distance_miles": lst.distance_miles,
+        "seller_type": lst.seller_type or "",
+        "transmission": lst.transmission or "",
+        "description": lst.description or "",
         "photos": photos,
         "first_photo": photos[0] if photos else "",
-        "last_seen": l.last_seen.isoformat() if l.last_seen else "",
+        "last_seen": lst.last_seen.isoformat() if lst.last_seen else "",
         "factors": factors,
     }
 

@@ -38,7 +38,8 @@ def _load_known_makes() -> list[str]:
             data = yaml.safe_load(f) or {}
         # Keys like "MercedesBenz" → "Mercedes Benz"; preserve as-is for lookup
         return list(data.keys())
-    except Exception:
+    except (OSError, yaml.YAMLError) as exc:
+        logger.warning("Could not load known makes from %s: %s", path, exc)
         return []
 
 
@@ -62,6 +63,10 @@ def parse_title(title: str) -> tuple[int | None, str | None, str | None]:
     Tries regex match, then normalizes make against known makes list.
     Returns (None, None, None) if no year found.
     """
+    # Strip a trailing price tag like " - $7,500" or " – $12,000" from the raw
+    # title first, so price digits never leak into the parsed model (which would
+    # otherwise yield a bogus numeric model like "15" from "Honda – $15,000").
+    title = re.sub(r"\s*[-–—|]\s*\$[\d,]+.*$", "", title)
     # Strip emoji and extra punctuation
     clean = re.sub(r"[^\w\s\-/]", " ", title).strip()
     clean = re.sub(r"\s+", " ", clean)
@@ -123,14 +128,25 @@ def _normalize_make(raw: str) -> str:
 def _parse_price(text: str | None) -> float | None:
     if not text:
         return None
-    digits = re.sub(r"[^\d]", "", text)
-    return float(digits) if digits else None
+    # Take the first number group so a range like "$12,000 – $15,000" parses as
+    # 12000 instead of the concatenated digits "1200015000".
+    m = re.search(r"\d[\d,]*", text)
+    if not m:
+        return None
+    return float(m.group(0).replace(",", ""))
 
 
-def _extract_source_id_from_url(url: str) -> str:
-    """Extract the numeric post ID from a CL URL slug."""
-    m = re.search(r"/(\d+)\.html", url)
-    return m.group(1) if m else url
+def _extract_source_id_from_url(url: str) -> str | None:
+    """Extract the numeric post ID from a CL URL slug, or None if absent.
+
+    Handles the canonical ``.../<id>.html`` form and trailing-id forms with an
+    optional query/fragment. Returns None (never the full URL) so callers don't
+    persist a non-numeric source_id that breaks dedup.
+    """
+    if not url:
+        return None
+    m = re.search(r"/(\d+)\.html\b", url) or re.search(r"/(\d+)/?(?:[?#]|$)", url)
+    return m.group(1) if m else None
 
 
 def _parse_search_page(html: str) -> list[dict]:
@@ -146,10 +162,8 @@ def _parse_search_page(html: str) -> list[dict]:
 
     # Try new layout first, then old
     items = tree.css("li.cl-static-search-result")
-    layout = "new"
     if not items:
         items = tree.css("li.result-row")
-        layout = "old"
 
     for item in items:
         # Skip the "see also" hub-links entry
@@ -186,7 +200,7 @@ def _parse_search_page(html: str) -> list[dict]:
         # source_id: prefer data-pid, then extract from URL
         source_id = item.attributes.get("data-pid", "")
         if not source_id:
-            source_id = _extract_source_id_from_url(url)
+            source_id = _extract_source_id_from_url(url) or ""
         card["source_id"] = source_id
 
         # Price: div.price (current) or span.result-price (old)
@@ -194,8 +208,15 @@ def _parse_search_page(html: str) -> list[dict]:
         card["asking_price"] = _parse_price(price_node.text(strip=True) if price_node else None)
 
         # Location: div.location (current) or span.result-hood (old)
+        # CL wraps the hood in parens, e.g. "(santa monica)". Extract the inner
+        # text so any trailing junk after ")" doesn't survive in the location.
         loc_node = item.css_first("div.location") or item.css_first("span.result-hood")
-        card["location"] = loc_node.text(strip=True).strip("() ") if loc_node else None
+        if loc_node:
+            loc_text = loc_node.text(strip=True)
+            m = re.search(r"\(([^)]+)\)", loc_text)
+            card["location"] = (m.group(1) if m else loc_text).strip("() ").strip() or None
+        else:
+            card["location"] = None
 
         # Posting datetime (older layouts only)
         time_node = item.css_first("time")
@@ -403,13 +424,9 @@ class CraigslistFetcher(BaseFetcher):
 
     def _build_listing(self, card: dict, detail: dict, config: Config) -> Listing | None:
         """Merge card + detail dicts into a Listing."""
-        source_id = card.get("source_id", "")
-        if not source_id:
-            # Try to extract from URL slug
-            url = card.get("url", "")
-            m = re.search(r"/(\d+)\.html", url)
-            source_id = m.group(1) if m else url
-
+        source_id = card.get("source_id", "") or _extract_source_id_from_url(
+            card.get("url", "")
+        )
         if not source_id:
             logger.warning("Cannot determine source_id for card %s", card)
             return None

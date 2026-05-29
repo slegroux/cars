@@ -5,9 +5,7 @@ import datetime
 import json
 import os
 import tempfile
-from pathlib import Path
 
-import pytest
 
 from carfinder.models import Listing
 from carfinder.scorer import FactorScore, ScoredListing

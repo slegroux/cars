@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 
 from carfinder.config import Config
 from carfinder.fetchers.carscom import _map_vehicle, _parse_search_page
@@ -45,7 +44,7 @@ def _html() -> str:
 
 def test_in_budget_listings_are_returned():
     listings = _parse_search_page(_html(), _cfg())
-    ids = {l.source_id for l in listings}
+    ids = {lst.source_id for lst in listings}
     assert "aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa" in ids  # RAV4 $11,500
     assert "bbbbbbbb-0002-0002-0002-bbbbbbbbbbbb" in ids  # CR-V $10,800
     assert "cccccccc-0003-0003-0003-cccccccccccc" in ids  # Forester $8,500
@@ -57,7 +56,7 @@ def test_in_budget_listings_are_returned():
 
 def test_over_budget_listing_excluded():
     listings = _parse_search_page(_html(), _cfg())
-    ids = {l.source_id for l in listings}
+    ids = {lst.source_id for lst in listings}
     assert "dddddddd-0004-0004-0004-dddddddddddd" not in ids  # BMW $42,000
 
 
@@ -67,7 +66,7 @@ def test_over_budget_listing_excluded():
 
 def test_over_mileage_listing_excluded():
     listings = _parse_search_page(_html(), _cfg())
-    ids = {l.source_id for l in listings}
+    ids = {lst.source_id for lst in listings}
     assert "eeeeeeee-0005-0005-0005-eeeeeeeeeeee" not in ids  # Camry 130k mi
 
 
@@ -77,7 +76,7 @@ def test_over_mileage_listing_excluded():
 
 def test_cpo_maps_to_certified():
     listings = _parse_search_page(_html(), _cfg())
-    forester = next(l for l in listings if l.source_id == "cccccccc-0003-0003-0003-cccccccccccc")
+    forester = next(lst for lst in listings if lst.source_id =="cccccccc-0003-0003-0003-cccccccccccc")
     assert forester.seller_type == "certified"
 
 
@@ -87,7 +86,7 @@ def test_cpo_maps_to_certified():
 
 def test_non_cpo_maps_to_dealer():
     listings = _parse_search_page(_html(), _cfg())
-    rav4 = next(l for l in listings if l.source_id == "aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa")
+    rav4 = next(lst for lst in listings if lst.source_id =="aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa")
     assert rav4.seller_type == "dealer"
 
 
@@ -97,7 +96,7 @@ def test_non_cpo_maps_to_dealer():
 
 def test_core_fields_parsed():
     listings = _parse_search_page(_html(), _cfg())
-    rav4 = next(l for l in listings if l.source_id == "aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa")
+    rav4 = next(lst for lst in listings if lst.source_id =="aaaaaaaa-0001-0001-0001-aaaaaaaaaaaa")
     assert rav4.make == "Toyota"
     assert rav4.model == "RAV4"
     assert rav4.year == 2019

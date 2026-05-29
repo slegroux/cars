@@ -6,7 +6,6 @@ import sqlite3
 import tempfile
 from pathlib import Path
 
-import pytest
 
 from carfinder.models import Listing
 from carfinder.scorer import FactorScore, ScoredListing
@@ -136,7 +135,7 @@ def test_render_markdown_has_yaml_frontmatter():
     assert md.startswith("---\ntitle:")
     # Must have closing ---
     lines = md.splitlines()
-    closing = [l for l in lines[1:] if l.strip() == "---"]
+    closing = [line for line in lines[1:] if line.strip() == "---"]
     assert len(closing) >= 1
 
 
@@ -145,7 +144,7 @@ def test_render_markdown_embeds_first_n_photos():
     photos = [f"https://example.com/photo{i}.jpg" for i in range(5)]
     items = [_make_scored(score=80.0, photos=photos)]
     md = render_markdown(items, top_n=1, photo_thumbnails=3)
-    embed_lines = [l for l in md.splitlines() if l.startswith("![")]
+    embed_lines = [line for line in md.splitlines() if line.startswith("![")]
     assert len(embed_lines) == 3
 
 
@@ -154,9 +153,9 @@ def test_render_markdown_includes_score_breakdown_table():
     items = _make_scored_list(2)
     md = render_markdown(items, top_n=2)
     # Each listing has 10 factor rows in its breakdown table
-    factor_rows = [l for l in md.splitlines() if l.startswith("| reliability") or
-                   l.startswith("| price_value") or l.startswith("| mileage") or
-                   l.startswith("| size_class")]
+    factor_rows = [line for line in md.splitlines() if line.startswith("| reliability") or
+                   line.startswith("| price_value") or line.startswith("| mileage") or
+                   line.startswith("| size_class")]
     # 2 listings × at least 4 checked factors = at least 8 rows
     assert len(factor_rows) >= 8
 
@@ -170,7 +169,7 @@ def test_render_markdown_handles_listings_without_photos():
     # Should not raise
     md = render_markdown(items, top_n=2)
     # No photo embeds
-    embed_lines = [l for l in md.splitlines() if l.startswith("![")]
+    embed_lines = [line for line in md.splitlines() if line.startswith("![")]
     assert len(embed_lines) == 0
 
 

@@ -59,28 +59,28 @@ def load_scored_listings(
             _re.IGNORECASE,
         )
 
-        def _is_manual(l):
-            tx = (l.transmission or "").lower()
+        def _is_manual(lst):
+            tx = (lst.transmission or "").lower()
             if tx == "manual":
                 return True
             if tx in ("automatic", "auto"):
                 return False
-            if l.source != "craigslist":
+            if lst.source != "craigslist":
                 return False  # trust structured field for non-CL sources
-            text = " ".join(filter(None, [l.model, l.trim, l.description]))
+            text = " ".join(filter(None, [lst.model, lst.trim, lst.description]))
             return bool(_manual_re.search(text))
 
-        all_listings = [l for l in all_listings if not _is_manual(l)]
+        all_listings = [lst for lst in all_listings if not _is_manual(lst)]
 
     # Enrich distance_miles for listings that don't have it yet
     from carfinder.geo import distance_from_location
-    for l in all_listings:
-        if l.distance_miles is None and l.location:
-            d = distance_from_location(l.location, cfg.zip)
+    for lst in all_listings:
+        if lst.distance_miles is None and lst.location:
+            d = distance_from_location(lst.location, cfg.zip)
             if d is not None:
-                l.distance_miles = d
+                lst.distance_miles = d
 
-    scored = [score_listing(l, all_listings, cfg, lk) for l in all_listings]
+    scored = [score_listing(lst, all_listings, cfg, lk) for lst in all_listings]
     scored.sort(key=lambda s: s.score, reverse=True)
 
     # Apply budget filter after scoring so cohort medians stay accurate.

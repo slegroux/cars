@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from carfinder.db import get_last_run, init_db, update_last_run, upsert_listing
+from carfinder.db import get_last_run, init_db, update_last_run
 from carfinder.models import Listing
 
 
@@ -108,7 +108,6 @@ def test_watch_first_run_all_above_threshold_are_new(
     """Empty last_run → all listings above min_score reported as new."""
     from click.testing import CliRunner
     from carfinder.cli import cli
-    from carfinder.config import Config
 
     db_path = tmp_path / "listings.db"
     conn = init_db(db_path)
@@ -121,12 +120,14 @@ def test_watch_first_run_all_above_threshold_are_new(
     ])
 
     mock_load.return_value = (scored, conn)
-    mock_asyncio.run = lambda coro: None  # skip actual search
+    # _run_search is an async def, so @patch replaces it with an AsyncMock whose
+    # call returns a coroutine. Close it instead of dropping it on the floor so
+    # asyncio.run being stubbed out doesn't leave an un-awaited coroutine.
+    mock_asyncio.run = lambda coro: coro.close()  # skip actual search
 
     runner = CliRunner()
     with patch("carfinder.cli.Path") as mock_path_cls:
         # Make Path("data/listings.db") resolve to tmp_path db
-        real_path = Path.__new__(Path)
         mock_path_cls.return_value = db_path
         mock_path_cls.side_effect = lambda p: tmp_path / "listings.db" if "listings" in str(p) else Path(p)
 
@@ -159,7 +160,10 @@ def test_watch_second_run_no_changes_zero_new(
     update_last_run(conn, scored)
 
     mock_load.return_value = (scored, conn)
-    mock_asyncio.run = lambda coro: None
+    # _run_search is an async def, so @patch replaces it with an AsyncMock whose
+    # call returns a coroutine. Close it instead of dropping it on the floor so
+    # asyncio.run being stubbed out doesn't leave an un-awaited coroutine.
+    mock_asyncio.run = lambda coro: coro.close()
 
     runner = CliRunner()
     with patch("carfinder.cli.Path") as mock_path_cls:
@@ -192,7 +196,10 @@ def test_watch_score_change_detected(
     # New run: id-001 now at 76 (delta = 6 >= 5)
     new_scored = _make_scored_list([("cl-001", "id-001", 76.0)])
     mock_load.return_value = (new_scored, conn)
-    mock_asyncio.run = lambda coro: None
+    # _run_search is an async def, so @patch replaces it with an AsyncMock whose
+    # call returns a coroutine. Close it instead of dropping it on the floor so
+    # asyncio.run being stubbed out doesn't leave an un-awaited coroutine.
+    mock_asyncio.run = lambda coro: coro.close()
 
     runner = CliRunner()
     with patch("carfinder.cli.Path") as mock_path_cls:
@@ -224,7 +231,10 @@ def test_watch_below_threshold_filtered(
         ("cl-002", "id-002", 45.0),  # also below
     ])
     mock_load.return_value = (scored, conn)
-    mock_asyncio.run = lambda coro: None
+    # _run_search is an async def, so @patch replaces it with an AsyncMock whose
+    # call returns a coroutine. Close it instead of dropping it on the floor so
+    # asyncio.run being stubbed out doesn't leave an un-awaited coroutine.
+    mock_asyncio.run = lambda coro: coro.close()
 
     runner = CliRunner()
     with patch("carfinder.cli.Path") as mock_path_cls:

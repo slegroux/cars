@@ -2,10 +2,13 @@
 from __future__ import annotations
 
 import csv
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
+
+logger = logging.getLogger(__name__)
 
 
 def _norm(s: str | None) -> str:
@@ -28,9 +31,31 @@ class Lookups:
     msrp: dict[tuple[str, str], int] = field(default_factory=dict)
 
 
+_EXPECTED_FILES = [
+    "reliability_tiers.yaml",
+    "vehicle_dimensions.yaml",
+    "insurance_risk.yaml",
+    "roof_rack.yaml",
+    "mpg_lookup.csv",
+    "msrp_by_make_model.yaml",
+]
+
+
 def load_lookups(data_dir: Path = Path("data")) -> Lookups:
-    """Load all lookup tables from data_dir. Returns a Lookups instance."""
+    """Load all lookup tables from data_dir. Returns a Lookups instance.
+
+    Missing lookup files are skipped but logged at WARNING level so that
+    silent score degradation (everything defaulting to ~5.0) is visible.
+    """
     lk = Lookups()
+
+    missing = [name for name in _EXPECTED_FILES if not (data_dir / name).exists()]
+    if missing:
+        logger.warning(
+            "Lookup files missing from %s: %s — affected factors will default to ~5.0",
+            data_dir,
+            ", ".join(missing),
+        )
 
     # --- reliability_tiers.yaml: make -> score ---
     rel_path = data_dir / "reliability_tiers.yaml"
@@ -96,4 +121,10 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
         for entry in entries:
             lk.msrp[(entry["make"], entry["model"])] = int(entry["msrp"])
 
+    logger.info(
+        "Loaded lookups: %d reliability, %d dimensions, %d insurance, "
+        "%d roof_rack, %d mpg, %d msrp",
+        len(lk.reliability), len(lk.dimensions), len(lk.insurance),
+        len(lk.roof_rack), len(lk.mpg), len(lk.msrp),
+    )
     return lk
