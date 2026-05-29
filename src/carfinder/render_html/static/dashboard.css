@@ -606,6 +606,8 @@ tr.expand-row td {
 }
 
 .col-actions { display: none; width: 36px; text-align: center; }
+body.server-mode .col-actions { display: table-cell; }
+body.server-mode th.col-actions { display: table-cell; }
 .del-btn {
   background: none;
   border: none;

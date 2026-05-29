@@ -4,10 +4,22 @@
   // ── State ──────────────────────────────────────────────────────────────────
   var SERVER_MODE = window.location.protocol !== 'file:' && window.location.hostname === 'localhost';
 
+  // Canonical body-type buckets shown as filter checkboxes. Listings whose
+  // raw body_type is a case variant (Craigslist lowercases) or off-list value
+  // (Convertible, Minivan, Pickup…) are folded into 'Unknown' so they remain
+  // visible instead of being silently filtered out.
+  var BODY_TYPES = ['SUV','Sedan','Wagon','Hatchback','Coupe','Truck','Van','Unknown'];
+  var BODY_CANON = {};
+  BODY_TYPES.forEach(function(b) { BODY_CANON[b.toLowerCase()] = b; });
+  function canonBodyType(bt) {
+    if (bt == null || bt === '') return 'Unknown';
+    return BODY_CANON[String(bt).toLowerCase()] || 'Unknown';
+  }
+
   window.dashboardState = {
     source: 'all',
     minScore: 0,
-    bodyTypes: new Set(['SUV','Sedan','Wagon','Hatchback','Coupe','Truck','Van','Unknown']),
+    bodyTypes: new Set(BODY_TYPES),
     mileMin: 0,
     mileMax: 200000,
     yearMin: 2008,
@@ -17,6 +29,7 @@
     pageSize: 25,
     priceMin: 0,
     priceMax: 20000,
+    search: '',
   };
 
   var S = window.dashboardState;
@@ -25,18 +38,31 @@
   var openRowId = null;
 
   // ── Filtering ──────────────────────────────────────────────────────────────
+  function searchHaystack(d) {
+    return [d.make, d.model, d.trim, d.body_type, d.source, d.location,
+            d.description, d.year, d.seller_type, d.transmission, d.url]
+      .filter(function(v) { return v != null && v !== ''; })
+      .join(' ').toLowerCase();
+  }
+
   function matchesFilter(d) {
     if (S.source !== 'all' && d.source !== S.source) return false;
     if (d.score < S.minScore) return false;
-    var bt = d.body_type || 'Unknown';
-    if (!S.bodyTypes.has(bt) && !S.bodyTypes.has('Unknown')) return false;
-    if (S.bodyTypes.size > 0 && !S.bodyTypes.has(bt === '' ? 'Unknown' : bt)) return false;
+    if (!S.bodyTypes.has(canonBodyType(d.body_type))) return false;
     var pr = d.asking_price != null ? d.asking_price : 0;
     if (pr < S.priceMin || pr > S.priceMax) return false;
     var mi = d.mileage != null ? d.mileage : 0;
     if (mi < S.mileMin || mi > S.mileMax) return false;
     var yr = d.year != null ? d.year : 0;
     if (yr < S.yearMin) return false;
+    if (S.search) {
+      var hay = searchHaystack(d);
+      // AND across whitespace-separated terms so "honda civic" requires both.
+      var terms = S.search.split(/\s+/);
+      for (var i = 0; i < terms.length; i++) {
+        if (terms[i] && hay.indexOf(terms[i]) === -1) return false;
+      }
+    }
     return true;
   }
 
@@ -327,7 +353,7 @@
 
       // View link
       var tdView = document.createElement('td');
-      if (d.url) {
+      if (d.url && /^https?:\/\//i.test(d.url)) {
         var a = document.createElement('a');
         a.href = d.url;
         a.target = '_blank';
@@ -353,18 +379,21 @@
       }
       tr.appendChild(tdView);
 
-      // Delete (col hidden until server mode enables it)
+      // Delete (col hidden via body.server-mode CSS unless we're in server mode;
+      // the × button only renders for manual entries since other sources can be re-scraped).
       var tdDel = document.createElement('td');
       tdDel.className = 'col-actions';
-      var delBtn = document.createElement('button');
-      delBtn.className = 'del-btn';
-      delBtn.title = 'Remove listing';
-      delBtn.textContent = '×';
-      delBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        deleteRow(d.id, tr, expandRow);
-      });
-      tdDel.appendChild(delBtn);
+      if (SERVER_MODE && d.source === 'manual') {
+        var delBtn = document.createElement('button');
+        delBtn.className = 'del-btn';
+        delBtn.title = 'Remove listing';
+        delBtn.textContent = '×';
+        delBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          deleteRow(d.id, tr, expandRow);
+        });
+        tdDel.appendChild(delBtn);
+      }
       tr.appendChild(tdDel);
 
       // Row click → expand radar
@@ -377,7 +406,9 @@
       expandRow.className = 'expand-row';
       expandRow.dataset.parentId = d.id;
       var expandTd = document.createElement('td');
-      expandTd.colSpan = 12;
+      // Span every header cell so the detail row stays full-width even when the
+      // actions column is shown in server mode.
+      expandTd.colSpan = document.querySelectorAll('table.listings thead th').length || 12;
       expandRow.appendChild(expandTd);
       tbody.appendChild(expandRow);
     });
@@ -614,6 +645,21 @@
 
   // ── Filter controls wiring ─────────────────────────────────────────────────
   function initFilters() {
+    // Search box (debounced so a full table+scatter rebuild doesn't fire on
+    // every keystroke)
+    var searchInput = document.getElementById('filterSearch');
+    if (searchInput) {
+      var searchTimer = null;
+      searchInput.addEventListener('input', function() {
+        var val = this.value.trim().toLowerCase();
+        if (searchTimer) clearTimeout(searchTimer);
+        searchTimer = setTimeout(function() {
+          S.search = val;
+          applyFilters();
+        }, 150);
+      });
+    }
+
     // Source dropdown
     var selSrc = document.getElementById('filterSource');
     var srcOptions = ['all', 'craigslist', 'carmax', 'carscom', 'kbb'];
@@ -642,7 +688,17 @@
     document.querySelectorAll('.body-cb').forEach(function(cb) {
       cb.parentElement.classList.add('checked'); // all checked initially
       cb.addEventListener('change', function() {
-        if (this.checked) {
+        // From the default "all checked" state, the first click selects only that
+        // body type instead of merely toggling the clicked one off.
+        if (!this.checked && S.bodyTypes.size === BODY_TYPES.length) {
+          var only = this.value;
+          S.bodyTypes = new Set([only]);
+          document.querySelectorAll('.body-cb').forEach(function(other) {
+            var keep = (other.value === only);
+            other.checked = keep;
+            other.parentElement.classList.toggle('checked', keep);
+          });
+        } else if (this.checked) {
           S.bodyTypes.add(this.value);
           this.parentElement.classList.add('checked');
         } else {
@@ -691,9 +747,11 @@
     // Reset
     document.getElementById('btnReset').addEventListener('click', function() {
       S.source = 'all'; S.minScore = 0;
-      S.bodyTypes = new Set(['SUV','Sedan','Wagon','Hatchback','Coupe','Truck','Van','Unknown']);
+      S.bodyTypes = new Set(BODY_TYPES);
       S.priceMin = 0; S.priceMax = 20000;
       S.mileMin = 0; S.mileMax = 200000; S.yearMin = 2008;
+      S.search = '';
+      if (searchInput) searchInput.value = '';
       selSrc.value = 'all';
       scoreSlider.value = 0; scoreLabel.textContent = '0';
       document.querySelectorAll('.body-cb').forEach(function(cb){
@@ -895,13 +953,14 @@
     fetch('/api/delete/' + encodeURIComponent(listingId), { method: 'POST' })
     .then(function(r){ return r.json(); })
     .then(function(d) {
-      if (!d.ok) return;
-      if (expandRow) expandRow.remove();
-      dataRow.remove();
-      var tbody = document.getElementById('listingsTbody');
-      var n = tbody ? tbody.querySelectorAll('tr.data-row').length : 0;
-      var countEl = document.getElementById('tableCount');
-      if (countEl) countEl.textContent = n + ' listing' + (n !== 1 ? 's' : '');
+      if (!d.ok) { alert(d.error || 'Delete failed'); return; }
+      // Remove from the canonical data set so it can't reappear on the next
+      // filter/sort/pagination render, then rebuild table + scatter from state.
+      for (var i = 0; i < LISTINGS.length; i++) {
+        if (LISTINGS[i].id === listingId) { LISTINGS.splice(i, 1); break; }
+      }
+      if (openRowId === listingId) openRowId = null;
+      applyFilters();
     });
   }
 
@@ -914,9 +973,9 @@
     buildScatter();
 
     if (SERVER_MODE) {
+      document.body.classList.add('server-mode');
       var importBtn = document.getElementById('importBtn');
       if (importBtn) importBtn.style.display = 'block';
-      document.querySelectorAll('.col-actions').forEach(function(el){ el.style.display = ''; });
       importBtn.addEventListener('click', openImportModal);
       document.getElementById('importCancel').addEventListener('click', closeImportModal);
       document.getElementById('importSubmit').addEventListener('click', submitImport);
