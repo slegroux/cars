@@ -26,9 +26,23 @@ def _make_handler(config: "Config", db_path: Path):
             self.send_response(status)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(body)))
-            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(body)
+
+        def _origin_ok(self) -> bool:
+            """Reject cross-origin state-changing requests (CSRF guard).
+
+            The dashboard is served same-origin, so legitimate POSTs carry an
+            Origin/Referer pointing back at this loopback server. Anything else
+            (a malicious site the user happens to be visiting) is refused.
+            """
+            origin = self.headers.get("Origin") or self.headers.get("Referer")
+            if not origin:
+                return True  # non-browser client (curl); not a CSRF vector
+            return any(
+                origin.startswith(f"http://{host}:{self.server.server_port}")
+                for host in ("localhost", "127.0.0.1")
+            )
 
         def _html(self, html: str) -> None:
             body = html.encode()
@@ -58,6 +72,9 @@ def _make_handler(config: "Config", db_path: Path):
 
         # ── POST ───────────────────────────────────────────────────────────
         def do_POST(self) -> None:
+            if not self._origin_ok():
+                self._json({"ok": False, "error": "cross-origin request refused"}, 403)
+                return
             if self.path == "/api/import":
                 self._handle_import()
             elif self.path.startswith("/api/delete/"):
@@ -66,14 +83,6 @@ def _make_handler(config: "Config", db_path: Path):
             else:
                 self.send_response(404)
                 self.end_headers()
-
-        # ── OPTIONS (CORS preflight) ────────────────────────────────────────
-        def do_OPTIONS(self) -> None:
-            self.send_response(204)
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Methods", "POST, GET, DELETE, OPTIONS")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
-            self.end_headers()
 
         # ── Import handler ─────────────────────────────────────────────────
         def _handle_import(self) -> None:
@@ -102,6 +111,9 @@ def _make_handler(config: "Config", db_path: Path):
             from carfinder.models import Listing
 
             url = (data.get("url") or "").strip() or None
+            if url and not url.lower().startswith(("http://", "https://")):
+                self._json({"ok": False, "error": "url must be http(s)"}, 400)
+                return
             mileage = _safe_int(data.get("mileage"))
             source_id = _source_id_from_url(url) if url else _source_id_from_fields(make, model, year, mileage)
 
@@ -122,23 +134,44 @@ def _make_handler(config: "Config", db_path: Path):
                 description=(data.get("notes") or "").strip() or None,
             )
 
-            conn = init_db(db_path)
-            lid = upsert_listing(conn, listing)
-            conn.commit()
-            logger.info("Saved and committed listing %s", lid)
-            conn.close()
+            import sqlite3
+            from contextlib import closing
+
+            try:
+                with closing(init_db(db_path)) as conn:
+                    lid = upsert_listing(conn, listing)
+                    conn.commit()
+                    logger.info("Saved and committed listing %s", lid)
+            except sqlite3.Error:
+                logger.exception("Import failed for %s", source_id)
+                self._json({"ok": False, "error": "database error"}, 500)
+                return
             self._json({"ok": True, "id": lid})
 
         # ── Delete handler ─────────────────────────────────────────────────
         def _handle_delete(self, listing_id: str) -> None:
+            import sqlite3
+            from contextlib import closing
+
             from carfinder.db import init_db
 
-            conn = init_db(db_path)
-            cur = conn.execute("DELETE FROM listings WHERE id = ?", [listing_id])
-            conn.commit()
-            if cur.rowcount:
-                logger.info("Deleted and committed listing %s", listing_id)
-            conn.close()
+            try:
+                with closing(init_db(db_path)) as conn:
+                    # Only manual entries are deletable; scraped rows can be
+                    # re-fetched and must not be removable via the API.
+                    cur = conn.execute(
+                        "DELETE FROM listings WHERE id = ? AND source = 'manual'",
+                        [listing_id],
+                    )
+                    conn.commit()
+            except sqlite3.Error:
+                logger.exception("Delete failed for %s", listing_id)
+                self._json({"ok": False, "error": "database error"}, 500)
+                return
+            if not cur.rowcount:
+                self._json({"ok": False, "error": "not found or not deletable"}, 404)
+                return
+            logger.info("Deleted and committed listing %s", listing_id)
             self._json({"ok": True})
 
     return _Handler
