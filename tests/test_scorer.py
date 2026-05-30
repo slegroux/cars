@@ -167,18 +167,21 @@ def test_price_far_above_median_scores_1():
 # ---------------------------------------------------------------------------
 
 def test_price_falls_back_to_depreciation_when_cohort_lt_3():
-    listing = _listing(year=2016, make="BMW", model="328i", asking_price=12_000, mileage=80_000)
-    # Only 2 cohort entries → fallback to depreciation
+    # RAV4 has an MSRP lookup entry, so with only 2 same-model comps (below the
+    # exact- and model-cohort thresholds) the scorer falls back to an
+    # MSRP-depreciation estimate and exposes the reference price.
+    listing = _listing(year=2016, make="Toyota", model="RAV4", asking_price=12_000, mileage=80_000)
     cohort = [
-        Listing(id="c0", source="test", source_id="c0", year=2016, make="BMW", model="328i",
+        Listing(id="c0", source="test", source_id="c0", year=2016, make="Toyota", model="RAV4",
                 asking_price=15_000, mileage=70_000, transmission="automatic", title_status="clean"),
-        Listing(id="c1", source="test", source_id="c1", year=2016, make="BMW", model="328i",
+        Listing(id="c1", source="test", source_id="c1", year=2016, make="Toyota", model="RAV4",
                 asking_price=14_000, mileage=75_000, transmission="automatic", title_status="clean"),
     ]
     w = _cfg().weights.price_value
     fs = score_price_value(listing, cohort, _lk(), _cfg(), w)
     assert fs.confidence == "estimated"
-    assert "depreciation" in fs.reason.lower() or "MSRP" in fs.reason or "msrp" in fs.reason.lower()
+    assert "depreciation" in fs.reason.lower() or "msrp" in fs.reason.lower()
+    assert fs.ref_price is not None
 
 
 # ---------------------------------------------------------------------------

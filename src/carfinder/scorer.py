@@ -25,6 +25,7 @@ class FactorScore(BaseModel):
     weighted: float
     confidence: Literal["real", "estimated"]
     reason: str
+    ref_price: float | None = None  # market reference used by price_value (for the dashboard "deal" column)
 
 
 class ScoredListing(BaseModel):
@@ -74,6 +75,76 @@ def score_reliability(listing: Listing, lookups: Lookups, weight: float) -> Fact
     return _default_factor(weight)
 
 
+# Used-car depreciation ~12%/yr; mileage costs ~$0.04/mi. Used to normalise
+# cross-year / cross-mileage comparables to the subject listing.
+_DEPRECIATION = 0.88
+_COST_PER_MILE = 0.04
+
+
+def _market_reference(
+    listing: Listing, cohort: list[Listing], lookups: Lookups
+) -> tuple[float | None, str, Literal["real", "estimated"]]:
+    """Best available fair-price reference for one listing.
+
+    Tries, in order of trust: an exact (year, make, model) cohort, a
+    year/mileage-adjusted model cohort across all years, an MSRP-depreciation
+    estimate, and finally a loose body-type/year-band cohort. Returns
+    (reference_price, reason, confidence) or (None, ..., ...) if nothing fits.
+    """
+    yr, mk, mo = listing.year, listing.make, listing.model
+    nmk, nmo = _norm(mk or ""), _norm(mo or "")
+
+    # 1. Exact (year, make, model) cohort — most trustworthy.
+    exact = [
+        c.asking_price
+        for c in cohort
+        if c.asking_price is not None and c.id != listing.id
+        and c.year == yr and c.make == mk and c.model == mo
+    ]
+    if len(exact) >= 3:
+        return median(exact), f"median of {len(exact)} same {yr} {mk} {mo}", "real"
+
+    # 2. Model cohort across years, each comp normalised to the subject's
+    #    year and mileage so different model-years can be pooled.
+    if nmk and nmo:
+        comps: list[float] = []
+        for c in cohort:
+            if c.id == listing.id or c.asking_price is None:
+                continue
+            if _norm(c.make or "") != nmk or _norm(c.model or "") != nmo:
+                continue
+            adj = c.asking_price
+            if c.year and yr:
+                adj *= _DEPRECIATION ** (c.year - yr)  # age comp up/down to subject's year
+            if c.mileage is not None and listing.mileage is not None:
+                adj += (c.mileage - listing.mileage) * _COST_PER_MILE
+            comps.append(max(adj, 1000.0))
+        if len(comps) >= 3:
+            return median(comps), f"{len(comps)} {mk} {mo} comps (year/mileage-adjusted)", "estimated"
+
+    # 3. MSRP depreciation estimate.
+    msrp = lookups.msrp.get((nmk, nmo))
+    if msrp and yr:
+        age = _CURRENT_YEAR - yr
+        expected = max(msrp * (_DEPRECIATION ** age) - (listing.mileage or 0) * _COST_PER_MILE, 2000.0)
+        return expected, f"depreciation est. (MSRP ${msrp:,}, age {age}y)", "estimated"
+
+    # 4. Loose body-type + year-band cohort — coarse, but better than a flat default.
+    bt = (listing.body_type or "").strip()
+    if bt and yr:
+        band = [
+            c.asking_price
+            for c in cohort
+            if c.asking_price is not None and c.id != listing.id
+            and (c.body_type or "").strip() == bt
+            and c.year is not None and abs(c.year - yr) <= 1
+        ]
+        if len(band) >= 4:
+            return median(band), f"{len(band)} {bt} comps within ±1yr", "estimated"
+
+    return None, "no market reference", "estimated"
+
+
 def score_price_value(
     listing: Listing,
     cohort: list[Listing],
@@ -85,37 +156,14 @@ def score_price_value(
     if asking is None:
         return _factor(5.0, weight, "estimated", "no asking price")
 
-    # Filter cohort to same (year, make, model)
-    same = [
-        c.asking_price
-        for c in cohort
-        if c.asking_price is not None
-        and c.year == listing.year
-        and c.make == listing.make
-        and c.model == listing.model
-        and c.id != listing.id  # exclude self
-    ]
+    ref, reason, conf = _market_reference(listing, cohort, lookups)
+    if ref is None:
+        return _factor(5.0, weight, "estimated", reason)
 
-    if len(same) >= 3:
-        med = median(same)
-        raw, reason = _price_bands(asking, med)
-        return _factor(raw, weight, "real", f"cohort median ${med:,.0f}, asking ${asking:,.0f} — {reason}")
-
-    # Fallback: depreciation estimate
-    make = listing.make or ""
-    model = listing.model or ""
-    msrp = lookups.msrp.get((_norm(make), _norm(model)))
-    if msrp and listing.year:
-        age = _CURRENT_YEAR - listing.year
-        expected = msrp * (0.88 ** age) - (listing.mileage or 0) * 0.04
-        expected = max(expected, 2000.0)
-        raw, reason = _price_bands(asking, expected)
-        return _factor(
-            raw, weight, "estimated",
-            f"depreciation estimate ${expected:,.0f} (MSRP ${msrp:,}, age {age}y) — {reason}",
-        )
-
-    return _factor(5.0, weight, "estimated", "no cohort or MSRP reference")
+    raw, band = _price_bands(asking, ref)
+    factor = _factor(raw, weight, conf, f"{reason}: ${asking:,.0f} vs ${ref:,.0f} — {band}")
+    factor.ref_price = round(ref, 0)
+    return factor
 
 
 def _price_bands(asking: float, reference: float) -> tuple[float, str]:
