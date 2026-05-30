@@ -72,6 +72,13 @@ def load_scored_listings(
 
         all_listings = [lst for lst in all_listings if not _is_manual(lst)]
 
+    # Normalize make/model (after manual detection, which relies on the raw
+    # model/trim text) so scraped Craigslist titles resolve against KBB and the
+    # lookup tables — e.g. "Forester 2 5x manual transmission AWD" -> "Forester".
+    from carfinder.normalize import normalize_make_model
+    for lst in all_listings:
+        lst.make, lst.model = normalize_make_model(lst.make, lst.model)
+
     # Enrich distance_miles for listings that don't have it yet
     from carfinder.geo import distance_from_location
     for lst in all_listings:

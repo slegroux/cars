@@ -714,6 +714,7 @@ def kbb_values(limit: int | None, refresh: bool) -> None:
     from carfinder.config import load_config
     from carfinder.db import get_listings, init_db
     from carfinder.fetchers.kbb_value import BROWSER_HEADERS, cache_key, fetch_fair_values
+    from carfinder.normalize import normalize_make_model
 
     cfg = load_config()
     cache_path = Path("data/kbb_values.json")
@@ -732,8 +733,9 @@ def kbb_values(limit: int | None, refresh: bool) -> None:
 
     unique: dict[str, tuple[str, str, int]] = {}
     for lst in listings:
-        if lst.make and lst.model and lst.year:
-            unique.setdefault(cache_key(lst.make, lst.model, lst.year), (lst.make, lst.model, lst.year))
+        mk, mo = normalize_make_model(lst.make, lst.model)
+        if mk and mo and lst.year:
+            unique.setdefault(cache_key(mk, mo, lst.year), (mk, mo, lst.year))
 
     todo = [(k, v) for k, v in unique.items() if refresh or k not in cache]
     if limit is not None:
