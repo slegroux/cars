@@ -64,6 +64,17 @@
     return s;
   }
 
+  // Stock model render from imagin.studio's CDN, used as a fallback when a
+  // listing has no source photo. Returns null if we can't build a query.
+  function modelImageUrl(d) {
+    if (!d.make || !d.model) return null;
+    var q = 'customer=img&angle=23'
+      + '&make=' + encodeURIComponent(String(d.make).toLowerCase().trim())
+      + '&modelFamily=' + encodeURIComponent(String(d.model).toLowerCase().trim());
+    if (d.year) q += '&modelYear=' + encodeURIComponent(d.year);
+    return 'https://cdn.imagin.studio/getImage?' + q;
+  }
+
   // ── Live re-ranking from adjustable weights ──────────────────────────────────
   // Each listing ships its raw per-factor scores; recompute the 0-100 score as a
   // weight-normalised sum so dragging a weight instantly re-ranks with no refetch.
@@ -395,19 +406,37 @@
       tr.className = 'data-row';
       tr.dataset.id = d.id;
 
-      // Photo
+      // Photo — the source photo if present, else a stock model render so
+      // every listing has an image; placeholder only if even that fails.
       var tdPhoto = document.createElement('td');
       tdPhoto.className = 'col-photo';
-      if (d.first_photo) {
+      var imgSrc = d.first_photo || modelImageUrl(d);
+      if (imgSrc) {
+        var isStock = !d.first_photo;
         var img = document.createElement('img');
-        img.src = d.first_photo;
+        img.src = imgSrc;
         img.loading = 'lazy';
         img.alt = (d.year || '') + ' ' + (d.make || '') + ' ' + (d.model || '');
+        if (isStock) img.classList.add('stock-img');
         img.addEventListener('click', function(e) {
           e.stopPropagation();
-          openLightbox(d.photos, 0);
+          openLightbox((d.photos && d.photos.length) ? d.photos : [imgSrc], 0);
+        });
+        img.addEventListener('error', function() {
+          tdPhoto.innerHTML = '';
+          var ph = document.createElement('div');
+          ph.className = 'photo-placeholder';
+          ph.textContent = 'no photo';
+          tdPhoto.appendChild(ph);
         });
         tdPhoto.appendChild(img);
+        if (isStock) {
+          var tag = document.createElement('span');
+          tag.className = 'stock-tag';
+          tag.textContent = 'stock';
+          tag.title = 'Representative model image — not the actual listing';
+          tdPhoto.appendChild(tag);
+        }
       } else {
         var ph = document.createElement('div');
         ph.className = 'photo-placeholder';
