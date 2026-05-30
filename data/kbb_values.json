@@ -1,23 +1,258 @@
 {
+  "alfaromeo|romeo|1974": {
+    "default": null,
+    "miss": true
+  },
+  "audi|a3|2009": {
+    "default": 3600,
+    "image": null,
+    "trims": {
+      "2.0tquattrowagon4d": 3600,
+      "2.0twagon4d": 2925,
+      "3.2quattrowagon4d": 6150
+    }
+  },
+  "audi|a4|2006": {
+    "default": 2300,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2006/2006-Audi-A4-FrontSide_AUA4SED061_505x375.jpg",
+    "trims": {
+      "1.8tcabriolet2d": 2300,
+      "2.0tavantquattrowagon4d": 1500,
+      "2.0tquattrosedan4d": 2775,
+      "2.0tsedan4d": 1275,
+      "3.0quattrocabriolet2d": 3500,
+      "3.2avantquattrowagon4d": 2100,
+      "3.2quattrosedan4d": 2425,
+      "3.2sedan4d": 1900
+    }
+  },
+  "audi|a4|2021": {
+    "default": 21500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/15034/2021-Audi-A4-front_15034_032_1970x741_T9T9_cropped.png",
+    "trims": {
+      "40tfsipremiumplussedan4d": 20600,
+      "40tfsipremiumsedan4d": 18600,
+      "40tfsiprestigesedan4d": 24800,
+      "sline45tfsipremiumplussedan4d": 21500,
+      "sline45tfsipremiumsedan4d": 21400,
+      "sline45tfsiprestigesedan4d": 25600
+    }
+  },
   "audi|rs7|2021": {
     "default": 65500,
+    "image": null,
     "trims": {
       "sedan4d": 65500
+    }
+  },
+  "audi|rs|2021": {
+    "default": null,
+    "miss": true
+  },
+  "audi|tt|2001": {
+    "default": 5775,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2001/2001-Audi-TT-FrontSide_AUTTR015_505x375.jpg",
+    "trims": {
+      "coupe2d": 4950,
+      "quattrocoupe2d": 6100,
+      "quattroroadster2d": 5775,
+      "roadster2d": 4925
     }
   },
   "bmw|2002|1974": {
     "default": null,
     "miss": true
   },
+  "bmw|2002|1975": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|228i|2024": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|325xi|2004": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|330i|2006": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|3series|2004": {
+    "default": 3500,
+    "image": null,
+    "trims": {
+      "325cicconvertible2d": 3225,
+      "325cicoupe2d": 3500,
+      "325isedan4d": 4000,
+      "325itwagon4d": 5250,
+      "325xisedan4d": 2750,
+      "325xitwagon4d": 3725,
+      "330cicconvertible2d": 3500,
+      "330cicoupe2d": 4350,
+      "330isedan4d": 2200,
+      "330xisedan4d": 2600
+    }
+  },
+  "bmw|3series|2006": {
+    "default": 3500,
+    "image": null,
+    "trims": {
+      "325ciconvertible2d": 3100,
+      "325cicoupe2d": 4200,
+      "325isedan4d": 3200,
+      "325xisedan4d": 2200,
+      "325xiwagon4d": 4550,
+      "330ciconvertible2d": 3900,
+      "330cicoupe2d": 4900,
+      "330isedan4d": 3500,
+      "330xisedan4d": 2600
+    }
+  },
+  "bmw|3|2011": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|528i|2015": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|5series|2015": {
+    "default": 12550,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10366/2015-BMW-5%20Series-front_10366_032_1863x778_668_cropped.png",
+    "trims": {
+      "528isedan4d": 9925,
+      "528ixdrivesedan4d": 9475,
+      "535dsedan4d": 12550,
+      "535dxdrivesedan4d": 12950,
+      "535igranturismosedan4d": 11000,
+      "535igranturismoxdrivesedan4d": 10800,
+      "535isedan4d": 11350,
+      "535ixdrivesedan4d": 12750,
+      "550igranturismosedan4d": 14000,
+      "550igranturismoxdrivesedan4d": 14000,
+      "550isedan4d": 12650,
+      "550ixdrivesedan4d": 14250,
+      "activehybrid5sedan4d": 11550
+    }
+  },
+  "bmw|750ixdrive|2018": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|750i|2018": {
+    "default": null,
+    "miss": true
+  },
   "bmw|m3|2018": {
     "default": 55900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12255/2018-BMW-M3-front_12255_032_1845x763_B67_cropped.png",
     "trims": {
       "cssedan4d": 55900,
       "sedan4d": 48700
     }
   },
+  "bmw|x1|2024": {
+    "default": 38500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/54146/2024-BMW-X1-front_54146_032_1818x866_C67_cropped.png",
+    "trims": {
+      "m35isportutility4d": 38500,
+      "xdrive28isportutility4d": 28800
+    }
+  },
+  "bmw|x5|2003": {
+    "default": 3950,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2003/2003-BMW-X5-FrontSide_BTX530031_505x375.jpg",
+    "trims": {
+      "3.0isportutility4d": 2125,
+      "4.4isportutility4d": 3950,
+      "4.6issportutility4d": 4150
+    }
+  },
+  "bmw|x6|2022": {
+    "default": 49300,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/15264/2022-BMW-X6-front_15264_032_1866x833_C1M_cropped.png",
+    "trims": {
+      "m50isportutility4d": 49300,
+      "xdrive40isportutility4d": 44800
+    }
+  },
+  "bmw|z3|2001": {
+    "default": 7200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2001/2001-BMW-Z3-FrontSide_BMZ325RDSR014_505x375.jpg",
+    "trims": {
+      "2.5iroadster2d": 5475,
+      "3.0icoupe2d": 7400,
+      "3.0iroadster2d": 7200
+    }
+  },
+  "chevrolet|apache|1958": {
+    "default": null,
+    "miss": true
+  },
+  "chevrolet|avalanche|2007": {
+    "default": 7050,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2007/2007-Chevrolet-Avalanche-FrontSide_CTAVALT071_505x375.jpg",
+    "trims": {
+      "lssportutilitypickup4d51/4ft": 7050,
+      "ltsportutilitypickup4d51/4ft": 3050,
+      "ltzsportutilitypickup4d51/4ft": 7300
+    }
+  },
+  "chevrolet|blazerev|2024": {
+    "default": 26200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/54024/2024-Chevrolet-Blazer%20EV-front_54024_032_1843x821_G1W_cropped.png",
+    "trims": {
+      "2ltsportutility4d": 26200,
+      "ltsportutility4d": 26200,
+      "rssportutility4d": 28000
+    }
+  },
+  "chevrolet|blazer|2024": {
+    "default": 32900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/52591/2024-Chevrolet-Blazer-front_52591_032_1845x830_GBA_cropped.png",
+    "trims": {
+      "2ltsportutility4d": 25500,
+      "3ltsportutility4d": 26500,
+      "premiersportutility4d": 32900,
+      "rssportutility4d": 35300
+    }
+  },
+  "chevrolet|colorado|2018": {
+    "default": 17700,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12801/2018-Chevrolet-Colorado%20Extended%20Cab-front_12801_032_1807x812_G7C_cropped.png",
+    "trims": {
+      "ltpickup2d6ft": 17700,
+      "pickup2d6ft": 13600,
+      "worktruckpickup2d6ft": 13750,
+      "z71pickup2d6ft": 20800,
+      "zr2pickup2d6ft": 22700
+    }
+  },
+  "chevrolet|corvette|1994": {
+    "default": null,
+    "miss": true
+  },
+  "chevrolet|c|1971": {
+    "default": null,
+    "miss": true
+  },
+  "chevrolet|k|1963": {
+    "default": null,
+    "miss": true
+  },
+  "chevrolet|malibu|2025": {
+    "default": null,
+    "miss": true
+  },
+  "chevrolet|master|1939": {
+    "default": null,
+    "miss": true
+  },
   "chevrolet|sonic|2015": {
     "default": 6150,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9830/2015-Chevrolet-Sonic-front_9830_032_1841x886_GAN_cropped.png",
     "trims": {
       "lshatchbacksedan4d": 5625,
       "lssedan4d": 5550,
@@ -31,16 +266,60 @@
   },
   "chevrolet|spark|2016": {
     "default": 6925,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11005/2016-Chevrolet-Spark-front_11005_032_1890x965_G54_cropped.png",
     "trims": {
       "1lthatchback4d": 7225,
       "2lthatchback4d": 6925,
       "lshatchback4d": 5700
     }
   },
+  "chevrolet|traverse|2026": {
+    "default": null,
+    "miss": true
+  },
   "chevrolet|volt|2013": {
     "default": 5100,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8644/2013-Chevrolet-Volt-front_8644_032_1819x784_GBV_cropped.png",
     "trims": {
       "sedan4d": 5100
+    }
+  },
+  "chevrolet|volt|2018": {
+    "default": 11550,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12617/2018-Chevrolet-Volt-front_12617_032_1830x800_G9K_cropped.png",
+    "trims": {
+      "ltsedan4d": 10400,
+      "premiersedan4d": 11550
+    }
+  },
+  "chevrolet|z28|1977": {
+    "default": null,
+    "miss": true
+  },
+  "chevy|avalanche|2007": {
+    "default": null,
+    "miss": true
+  },
+  "chevy|k|1963": {
+    "default": null,
+    "miss": true
+  },
+  "dodge|dart|1975": {
+    "default": null,
+    "miss": true
+  },
+  "dodge|phoenix|1961": {
+    "default": null,
+    "miss": true
+  },
+  "fiat|500l|2014": {
+    "default": 4350,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8929/2014-FIAT-500L-front_8929_032_1838x932_PTA_cropped.png",
+    "trims": {
+      "easyhatchback4d": 4350,
+      "loungehatchback4d": 4875,
+      "pophatchback4d": 3850,
+      "trekkinghatchback4d": 4275
     }
   },
   "fiat|500poppop2drhatchbacknojoborcreditneeded|2013": {
@@ -49,6 +328,7 @@
   },
   "fiat|500x|2018": {
     "default": 11500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10949/2018-FIAT-500X-front_10949_032_1829x886_PWV_cropped.png",
     "trims": {
       "loungesportutility4d": 13150,
       "popblueskyeditionsportutility4d": 11000,
@@ -59,6 +339,7 @@
   },
   "fiat|500|2013": {
     "default": 4400,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8481/2013-FIAT-500-front_8481_032_1878x958_PAJ_cropped.png",
     "trims": {
       "500cabarthcabrioconvertible2d": 6125,
       "500cgucciconvertible2d": 5000,
@@ -80,6 +361,7 @@
   },
   "ford|escape|2014": {
     "default": 7400,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8979/2014-Ford-Escape-front_8979_032_1797x873_YZ_cropped.png",
     "trims": {
       "sesportutility4d": 6925,
       "ssportutility4d": 7400,
@@ -88,6 +370,7 @@
   },
   "ford|escape|2018": {
     "default": 11850,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11943/2018-Ford-Escape-front_11943_032_1824x886_N6_cropped.png",
     "trims": {
       "selsportutility4d": 11850,
       "sesportutility4d": 9825,
@@ -95,17 +378,17 @@
       "titaniumsportutility4d": 12050
     }
   },
+  "ford|f250|1985": {
+    "default": null,
+    "miss": true
+  },
+  "ford|fiesta|2012": {
+    "default": null,
+    "miss": true
+  },
   "ford|fiesta|2016": {
-    "default": 6450,
-    "trims": {
-      "sehatchback4d": 6450,
-      "sesedan4d": 6325,
-      "shatchback4d": 5950,
-      "ssedan4d": 5825,
-      "sthatchback4d": 9700,
-      "titaniumhatchback4d": 7525,
-      "titaniumsedan4d": 7400
-    }
+    "default": null,
+    "miss": true
   },
   "ford|focusst4doorhatchback|2014": {
     "default": null,
@@ -113,12 +396,26 @@
   },
   "ford|focusst|2014": {
     "default": 9725,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8964/2014-Ford-Focus%20ST-front_8964_032_1803x815_UH_cropped.png",
     "trims": {
       "hatchback4d": 9725
     }
   },
+  "ford|focus|2014": {
+    "default": 5825,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9044/2014-Ford-Focus-front_9044_032_1788x778_UX_cropped.png",
+    "trims": {
+      "electrichatchback4d": 5825,
+      "sehatchback4d": 5350,
+      "sesedan4d": 5525,
+      "ssedan4d": 4925,
+      "titaniumhatchback4d": 7000,
+      "titaniumsedan4d": 7025
+    }
+  },
   "ford|focus|2015": {
     "default": 5925,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10214/2015-Ford-Focus-front_10214_032_1808x813_RR_cropped.png",
     "trims": {
       "electrichatchback4d": 5050,
       "sehatchback4d": 6525,
@@ -130,6 +427,7 @@
   },
   "ford|fusion|2016": {
     "default": 8675,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10423/2016-Ford-Fusion-front_10423_032_1807x746_RR_cropped.png",
     "trims": {
       "sehybridsedan4d": 9225,
       "sesedan4d": 8675,
@@ -139,15 +437,94 @@
       "titaniumsedan4d": 9575
     }
   },
+  "ford|mustang|1998": {
+    "default": null,
+    "miss": true
+  },
+  "ford|mustang|2002": {
+    "default": 4950,
+    "image": null,
+    "trims": {
+      "coupe2d": 3650,
+      "deluxeconvertible2d": 4750,
+      "deluxecoupe2d": 3775,
+      "gtdeluxeconvertible2d": 8075,
+      "gtdeluxecoupe2d": 7700,
+      "gtpremiumconvertible2d": 8250,
+      "gtpremiumcoupe2d": 7525,
+      "premiumconvertible2d": 4950,
+      "premiumcoupe2d": 4200
+    }
+  },
+  "ford|mustang|2015": {
+    "default": 16200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10249/2015-Ford-Mustang-front_10249_032_1827x718_UA_cropped.png",
+    "trims": {
+      "ecoboostcoupe2d": 14750,
+      "ecoboostpremiumconvertible2d": 14500,
+      "ecoboostpremiumcoupe2d": 16200,
+      "gt50yearslimitededitioncoupe2d": 29200,
+      "gtcoupe2d": 22000,
+      "gtpremiumconvertible2d": 22900,
+      "gtpremiumcoupe2d": 24800,
+      "v6convertible2d": 15950,
+      "v6coupe2d": 15500
+    }
+  },
+  "ford|pinto|1976": {
+    "default": null,
+    "miss": true
+  },
+  "ford|ranger|1986": {
+    "default": null,
+    "miss": true
+  },
+  "ford|ranger|2006": {
+    "default": 5525,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2006/2006-Ford-Ranger%20Regular%20Cab-FrontSide_FTRGR061_505x375.jpg",
+    "trims": {
+      "sportpickup2d6ft": 6725,
+      "stxpickup2d6ft": 6750,
+      "xlpickup2d6ft": 4625,
+      "xlpickup2d7ft": 4975,
+      "xltpickup2d6ft": 5175,
+      "xltpickup2d7ft": 5525
+    }
+  },
   "ford|transitconnect|2014": {
     "default": 9425,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9613/2014-Ford-Transit%20Connect%20Passenger-front_9613_032_1806x885_UE_cropped.png",
     "trims": {
       "titaniumvan4d": 9425,
       "xltvan4d": 8400,
       "xlvan4d": 10250
     }
   },
+  "ford|transit|2014": {
+    "default": null,
+    "miss": true
+  },
   "gen|4toyotapickuphiluxrwd22emanual|1986": {
+    "default": null,
+    "miss": true
+  },
+  "gen|4|1986": {
+    "default": null,
+    "miss": true
+  },
+  "gen|toyota|1986": {
+    "default": null,
+    "miss": true
+  },
+  "gmc|sierra|1988": {
+    "default": null,
+    "miss": true
+  },
+  "gmc|sierra|2026": {
+    "default": null,
+    "miss": true
+  },
+  "grumman|olson|1961": {
     "default": null,
     "miss": true
   },
@@ -155,8 +532,21 @@
     "default": null,
     "miss": true
   },
+  "honda|accord|1979": {
+    "default": null,
+    "miss": true
+  },
+  "honda|civc|2016": {
+    "default": null,
+    "miss": true
+  },
+  "honda|civic|2024": {
+    "default": null,
+    "miss": true
+  },
   "honda|cr-v|2016": {
     "default": 15200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11007/2016-Honda-CR-V-front_11007_032_1839x882_BR_cropped.png",
     "trims": {
       "ex-lsportutility4d": 15450,
       "exsportutility4d": 15200,
@@ -166,15 +556,41 @@
     }
   },
   "honda|cr-v|2026": {
-    "default": 34450,
+    "default": null,
+    "miss": true
+  },
+  "honda|odyssey|2016": {
+    "default": 14350,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10627/2016-Honda-Odyssey-front_10627_032_1847x826_BK_cropped.png",
     "trims": {
-      "ex": 34450,
-      "ex-l": 36850,
-      "lx": 32550
+      "ex-lminivan4d": 14350,
+      "exminivan4d": 12500,
+      "lxminivan4d": 11150,
+      "seminivan4d": 12800,
+      "touringeliteminivan4d": 15850,
+      "touringminivan4d": 14350
     }
+  },
+  "honda|ridgeline|2017": {
+    "default": 18600,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11315/2017-Honda-Ridgeline-front_11315_032_1853x853_BK_cropped.png",
+    "trims": {
+      "blackeditionpickup4d5ft": 19650,
+      "rtl-epickup4d5ft": 19850,
+      "rtl-tpickup4d5ft": 18600,
+      "rtlpickup4d5ft": 19650,
+      "rtpickup4d5ft": 15700,
+      "rtspickup4d5ft": 18600,
+      "sportpickup4d5ft": 15950
+    }
+  },
+  "honda|ridgeline|2026": {
+    "default": null,
+    "miss": true
   },
   "hyundai|accent|2017": {
     "default": 7625,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11803/2017-Hyundai-Accent-front_11803_032_1834x824_M2B_cropped.png",
     "trims": {
       "sehatchback4d": 7625,
       "sesedan4d": 7475,
@@ -184,6 +600,7 @@
   },
   "hyundai|elantra|2007": {
     "default": 3350,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2007/2007-Hyundai-Elantra-FrontSide_HYELA071_505x375.jpg",
     "trims": {
       "glssedan4d": 2875,
       "limitedsedan4d": 3550,
@@ -192,10 +609,21 @@
   },
   "hyundai|elantra|2015": {
     "default": 7800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9972/2015-Hyundai-Elantra-front_9972_032_1818x784_N5S_cropped.png",
     "trims": {
       "limitedsedan4d": 7800,
       "sesedan4d": 7900,
       "sportsedan4d": 7225
+    }
+  },
+  "hyundai|elantra|2016": {
+    "default": 8025,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10399/2016-Hyundai-Elantra-front_10399_032_1824x777_N5S_cropped.png",
+    "trims": {
+      "limitedsedan4d": 7550,
+      "sesedan4d": 8025,
+      "sportsedan4d": 8050,
+      "valueeditionsedan4d": 7800
     }
   },
   "hyundai|genesis107k6speedtopmodelgrantouring38lpowerful|2010": {
@@ -204,9 +632,43 @@
   },
   "hyundai|genesis|2010": {
     "default": 5950,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Hyundai-Genesis-FrontSide_HYGEN101_505x375.jpg",
     "trims": {
       "3.8sedan4d": 5950,
       "4.6sedan4d": 5525
+    }
+  },
+  "hyundai|kona|2019": {
+    "default": 14450,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12686/2019-Hyundai-Kona-front_12686_032_1865x896_Z3U_cropped.png",
+    "trims": {
+      "ironmansportutility4d": 15300,
+      "limitedsportutility4d": 14450,
+      "selsportutility4d": 13100,
+      "sesportutility4d": 12500,
+      "ultimatesportutility4d": 15050
+    }
+  },
+  "hyundai|kona|2021": {
+    "default": 16100,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/15379/2021-Hyundai-Kona-front_15379_032_2055x908_Y2R_cropped.png",
+    "trims": {
+      "limitedsportutility4d": 16950,
+      "nightsportutility4d": 15300,
+      "selplussportutility4d": 16100,
+      "selsportutility4d": 15800,
+      "sesportutility4d": 14050,
+      "ultimatesportutility4d": 16650
+    }
+  },
+  "hyundai|kona|2024": {
+    "default": 22200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/54935/2024-Hyundai-Kona-front_54935_032_1919x889_SOP_cropped.png",
+    "trims": {
+      "limitedsportutility4d": 23800,
+      "nlinesportutility4d": 22200,
+      "selsportutility4d": 20300,
+      "sesportutility4d": 19200
     }
   },
   "hyundai|sonatahybrid|2015": {
@@ -215,6 +677,7 @@
   },
   "hyundai|sonata|2014": {
     "default": 7650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9255/2014-Hyundai-Sonata-front_9255_032_1834x753_RN_cropped.png",
     "trims": {
       "glssedan4d": 6150,
       "hybridlimitedsedan4d": 8150,
@@ -223,8 +686,41 @@
       "sesedan4d": 6625
     }
   },
+  "hyundai|sonata|2015": {
+    "default": 8900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9699/2015-Hyundai-Sonata-front_9699_032_1831x760_S3_cropped.png",
+    "trims": {
+      "ecosedan4d": 7250,
+      "hybridlimitedsedan4d": 8900,
+      "hybridsedan4d": 7500,
+      "limited2.0tsedan4d": 8600,
+      "limitedsedan4d": 9425,
+      "sesedan4d": 6875,
+      "sport2.0tsedan4d": 9100,
+      "sportsedan4d": 9025
+    }
+  },
+  "hyundai|veloster|2013": {
+    "default": 5375,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8428/2013-Hyundai-Veloster-front_8428_032_1883x818_UU9_cropped.png",
+    "trims": {
+      "coupe3d": 5300,
+      "re:mixcoupe3d": 5375,
+      "turbocoupe3d": 6125
+    }
+  },
+  "jaguar|f-type|2014": {
+    "default": 21800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9263/2014-Jaguar-F-TYPE-front_9263_032_1805x713_FRSD_cropped.png",
+    "trims": {
+      "convertible2d": 21500,
+      "sconvertible2d": 21800,
+      "v8sconvertible2d": 24700
+    }
+  },
   "jeep|cherokee|2016": {
     "default": 11050,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10564/2016-Jeep-Cherokee-front_10564_032_1826x873_PXR_cropped.png",
     "trims": {
       "75thanniversarysportutility4d": 9300,
       "altitudesportutility4d": 11000,
@@ -239,6 +735,7 @@
   },
   "jeep|compass|2015": {
     "default": 7325,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9853/2015-Jeep-Compass-front_9853_032_1865x903_PX8_cropped.png",
     "trims": {
       "altitudeeditionsportutility4d": 7275,
       "highaltitudeeditionsportutility4d": 7425,
@@ -249,6 +746,7 @@
   },
   "jeep|compass|2016": {
     "default": 7900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10656/2016-Jeep-Compass-front_10656_032_1862x904_PW7_cropped.png",
     "trims": {
       "75thanniversarysportutility4d": 7900,
       "highaltitudeeditionsportutility4d": 8150,
@@ -259,6 +757,7 @@
   },
   "jeep|patriot|2015": {
     "default": 7475,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9822/2015-Jeep-Patriot-front_9822_032_1874x920_PW7_cropped.png",
     "trims": {
       "altitudeeditionsportutility4d": 6425,
       "highaltitudeeditionsportutility4d": 5950,
@@ -267,8 +766,32 @@
       "sportsuv4d": 7650
     }
   },
+  "jeep|patriot|2016": {
+    "default": 7800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10615/2016-Jeep-Patriot-front_10615_032_1865x941_PTA_cropped.png",
+    "trims": {
+      "75thanniversarysportutility4d": 6875,
+      "highaltitudeeditionsportutility4d": 7800,
+      "latitudesportutility4d": 8125,
+      "sportsesportutility4d": 8950,
+      "sportsuv4d": 7275
+    }
+  },
+  "jeep|renegade|2016": {
+    "default": 11450,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11116/2016-Jeep-Renegade-front_11116_032_1842x954_PB1_cropped.png",
+    "trims": {
+      "75thanniversarysportutility4d": 11600,
+      "dawnofjusticesportutility4d": 10500,
+      "latitudesportutility4d": 10950,
+      "limitedsportutility4d": 12050,
+      "sportsuv4d": 10150,
+      "trailhawksportutility4d": 11450
+    }
+  },
   "jeep|renegade|2017": {
     "default": 12250,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11720/2017-Jeep-Renegade-front_11720_032_1849x953_PDS_cropped.png",
     "trims": {
       "altitudesportutility4d": 11400,
       "deserthawksportutility4d": 13850,
@@ -278,19 +801,76 @@
       "trailhawksportutility4d": 12300
     }
   },
+  "jeep|wrangler|1963": {
+    "default": null,
+    "miss": true
+  },
+  "jeep|wrangler|1998": {
+    "default": null,
+    "miss": true
+  },
+  "jeep|wrangler|2003": {
+    "default": 8100,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2003/2003-Jeep-Wrangler-FrontSide_JEWRN034_505x394.jpg",
+    "trims": {
+      "\"sport\"sportutility2d": 7000,
+      "rubiconsportutility2d": 9200,
+      "saharasportutility2d": 9725,
+      "sesportutility2d": 6525,
+      "xsportutility2d": 8100
+    }
+  },
+  "jeep|wrangler|2004": {
+    "default": 10550,
+    "image": null,
+    "trims": {
+      "\"sport\"sportutility2d": 10950,
+      "rubiconsportutility2d": 10950,
+      "saharasportutility2d": 8850,
+      "sesportutility2d": 6325,
+      "unlimitedsportutility2d": 10550,
+      "xsportutility2d": 9000
+    }
+  },
+  "jeep|wrangler|2006": {
+    "default": 10850,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2006/2006-Jeep-Wrangler-FrontSide_JEWRNSPT051_505x375.jpg",
+    "trims": {
+      "rubiconsportutility2d": 10850,
+      "sesportutility2d": 8550,
+      "sportsuv2d": 9725,
+      "unlimitedrubiconsportutility2d": 13000,
+      "unlimitedsportutility2d": 11000,
+      "xsportutility2d": 8525
+    }
+  },
+  "jensen|healey|1975": {
+    "default": null,
+    "miss": true
+  },
   "kia|cadenza|2014": {
     "default": 7550,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8851/2014-Kia-Cadenza-front_8851_032_1809x732_SWP_cropped.png",
     "trims": {
       "limited-sxlsedan4d": 5775,
       "premiumsedan4d": 7550
     }
   },
   "kia|forte|2014": {
-    "default": null,
-    "miss": true
+    "default": 6250,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9563/2014-Kia-Forte-front_9563_032_1828x770_MST_cropped.png",
+    "trims": {
+      "exhatchback4d": 5900,
+      "exsedan4d": 6250,
+      "koupexcoupe2d": 5125,
+      "koupsxcoupe2d": 6475,
+      "lxsedan4d": 5925,
+      "sxhatchback4d": 6575
+    }
   },
   "kia|rio|2016": {
     "default": 7250,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10717/2016-Kia-Rio-front_10717_032_1815x815_ABP_cropped.png",
     "trims": {
       "exhatchback4d": 7150,
       "exsedan4d": 7250,
@@ -302,6 +882,7 @@
   },
   "kia|soul|2014": {
     "default": 7225,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9328/2014-Kia-Soul-front_9328_032_1878x926_IM_cropped.png",
     "trims": {
       "!wagon4d": 7850,
       "+wagon4d": 7225,
@@ -310,6 +891,7 @@
   },
   "kia|soul|2015": {
     "default": 7225,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10160/2015-Kia-Soul-front_10160_032_1888x933_9H_cropped.png",
     "trims": {
       "!wagon4d": 7225,
       "+wagon4d": 8475,
@@ -317,12 +899,36 @@
     }
   },
   "kia|soul|2016": {
-    "default": 8700,
+    "default": null,
+    "miss": true
+  },
+  "kia|soul|2020": {
+    "default": 13150,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/13512/2020-Kia-Soul-front_13512_032_1874x921_SWP_cropped.png",
     "trims": {
-      "!wagon4d": 10150,
-      "+wagon4d": 8700,
-      "wagon4d": 7925
+      "exwagon4d": 14300,
+      "gt-lineturbowagon4d": 14300,
+      "gt-linewagon4d": 11800,
+      "lxwagon4d": 11850,
+      "swagon4d": 11450,
+      "x-linewagon4d": 13150
     }
+  },
+  "landrover|rangeroverevoque|2026": {
+    "default": null,
+    "miss": true
+  },
+  "landrover|rangerover|2026": {
+    "default": null,
+    "miss": true
+  },
+  "landrover|range|2026": {
+    "default": null,
+    "miss": true
+  },
+  "lucid|air|2026": {
+    "default": null,
+    "miss": true
   },
   "mazda|b2600i|1992": {
     "default": null,
@@ -330,17 +936,165 @@
   },
   "mazda|cx-5|2014": {
     "default": 10750,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8788/2014-MAZDA-CX-5-front_8788_032_1833x908_38P_cropped.png",
     "trims": {
       "grandtouringsportutility4d": 11150,
       "sportsuv4d": 9875,
       "touringsportutility4d": 10750
     }
   },
+  "mazda|cx|2015": {
+    "default": null,
+    "miss": true
+  },
+  "mazda|mazda3|2008": {
+    "default": 3675,
+    "image": null,
+    "trims": {
+      "isportsedan4d": 2800,
+      "itouringsedan4d": 4200,
+      "itouringvaluesedan4d": 3325,
+      "mazdaspeed3grandtouringhatchback4d": 4575,
+      "mazdaspeed3sporthatchback4d": 4250,
+      "sgrandtouringhatchback4d": 3950,
+      "sgrandtouringsedan4d": 3950,
+      "ssporthatchback4d": 3575,
+      "ssportsedan4d": 3500,
+      "stouringhatchback4d": 3675,
+      "stouringsedan4d": 3675
+    }
+  },
+  "mazda|mazda3|2010": {
+    "default": 5775,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Mazda-MAZDA3-FrontSide_MA3SED101_505x375.jpg",
+    "trims": {
+      "isportsedan4d": 4425,
+      "isvsedan4d": 3825,
+      "itouringsedan4d": 5200,
+      "mazdaspeed3sporthatchback4d": 7025,
+      "sgrandtouringhatchback4d": 6525,
+      "sgrandtouringsedan4d": 4300,
+      "ssporthatchback4d": 6525,
+      "ssportsedan4d": 5775
+    }
+  },
+  "mazda|mazda3|2013": {
+    "default": 7650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8607/2013-MAZDA-MAZDA3-front_8607_032_1800x781_38P_cropped.png",
+    "trims": {
+      "igrandtouringhatchback4d": 7650,
+      "igrandtouringsedan4d": 8325,
+      "isportsedan4d": 6825,
+      "isvsedan4d": 6175,
+      "itouringhatchback4d": 7000,
+      "itouringsedan4d": 6075,
+      "mazdaspeed3touringhatchback4d": 10700,
+      "sgrandtouringhatchback4d": 8475,
+      "sgrandtouringsedan4d": 8300
+    }
+  },
+  "mazda|mazdaspeed3|2008": {
+    "default": null,
+    "miss": true
+  },
+  "mazda|mazdaspeed3|2010": {
+    "default": null,
+    "miss": true
+  },
+  "mazda|miata|1999": {
+    "default": null,
+    "miss": true
+  },
+  "mazda|rx|2004": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes-benz|240d|1982": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes-benz|benz|1977": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes-benz|benz|1989": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes-benz|benz|1996": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes-benz|eqe|2023": {
+    "default": null,
+    "miss": true
+  },
+  "mercedesbenz|240d|1982": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes|benz|1977": {
+    "default": null,
+    "miss": true
+  },
+  "mercedes|benz|1996": {
+    "default": null,
+    "miss": true
+  },
+  "mercury|capri|1992": {
+    "default": null,
+    "miss": true
+  },
+  "mg|convertible|1974": {
+    "default": null,
+    "miss": true
+  },
+  "mg|midget|1967": {
+    "default": null,
+    "miss": true
+  },
   "mini|coopercountryman|2015": {
     "default": null,
     "miss": true
   },
+  "mini|cooper|2007": {
+    "default": 4275,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2007/2007-MINI-Cooper-FrontSide_MNCOP071_505x375.jpg",
+    "trims": {
+      "hatchback2d": 4275,
+      "shatchback2d": 4200
+    }
+  },
+  "mini|cooper|2009": {
+    "default": null,
+    "miss": true
+  },
+  "mini|cooper|2011": {
+    "default": null,
+    "miss": true
+  },
+  "mini|cooper|2012": {
+    "default": null,
+    "miss": true
+  },
+  "mini|cooper|2015": {
+    "default": null,
+    "miss": true
+  },
+  "mini|hardtop|2015": {
+    "default": 10500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10174/2015-MINI-Hardtop%202%20Door-front_10174_032_1879x883_B58_cropped.png",
+    "trims": {
+      "cooperhatchback2d": 8525,
+      "coopershatchback2d": 10500,
+      "johncooperworkshatchback2d": 11300
+    }
+  },
   "nissan|240sxs13240sx|1990": {
+    "default": null,
+    "miss": true
+  },
+  "nissan|240sx|1990": {
     "default": null,
     "miss": true
   },
@@ -348,8 +1102,49 @@
     "default": null,
     "miss": true
   },
+  "nissan|350z|2005": {
+    "default": 7375,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2005/2005-Nissan-350Z-FrontSide_NI350051_505x375.jpg",
+    "trims": {
+      "35thanniversarycoupe2d": 7375,
+      "coupe2d": 8800,
+      "enthusiastcoupe2d": 6800,
+      "enthusiastroadster2d": 7200,
+      "grandtouringroadster2d": 7375,
+      "performancecoupe2d": 5200,
+      "touringcoupe2d": 10250,
+      "touringroadster2d": 9475,
+      "trackcoupe2d": 9900
+    }
+  },
+  "nissan|350z|2007": {
+    "default": 9975,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2007/2007-Nissan-350Z-FrontSide_NI350061_505x375.jpg",
+    "trims": {
+      "coupe2d": 9900,
+      "enthusiastcoupe2d": 10500,
+      "enthusiastroadster2d": 7950,
+      "grandtouringcoupe2d": 6700,
+      "grandtouringroadster2d": 8275,
+      "nismocoupe2d": 10200,
+      "touringcoupe2d": 9975,
+      "touringroadster2d": 10300
+    }
+  },
+  "nissan|370z|2013": {
+    "default": 16850,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8258/2013-Nissan-370Z-front_8258_032_1844x745_A54_cropped.png",
+    "trims": {
+      "coupe2d": 17900,
+      "nismocoupe2d": 20000,
+      "roadster2d": 16200,
+      "touringcoupe2d": 16850,
+      "touringroadster2d": 15600
+    }
+  },
   "nissan|altima|2014": {
     "default": 7325,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9035/2014-Nissan-Altima-front_9035_032_1813x744_KAH_cropped.png",
     "trims": {
       "2.5sedan4d": 5950,
       "2.5slsedan4d": 8325,
@@ -362,6 +1157,7 @@
   },
   "nissan|altima|2015": {
     "default": 7750,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9700/2015-Nissan-Altima-front_9700_032_1818x754_RBD_cropped.png",
     "trims": {
       "2.5sedan4d": 6850,
       "2.5slsedan4d": 8400,
@@ -372,8 +1168,13 @@
       "3.5svsedan4d": 7750
     }
   },
+  "nissan|rogue|2026": {
+    "default": null,
+    "miss": true
+  },
   "nissan|sentra|2014": {
     "default": 5975,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9531/2014-Nissan-Sentra-front_9531_032_1823x801_QAC_cropped.png",
     "trims": {
       "fe+ssedan4d": 5175,
       "fe+svsedan4d": 5375,
@@ -385,6 +1186,7 @@
   },
   "nissan|sentra|2015": {
     "default": 5700,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10347/2015-Nissan-Sentra-front_10347_032_1825x789_QM1_cropped.png",
     "trims": {
       "fe+ssedan4d": 5325,
       "slsedan4d": 5700,
@@ -395,14 +1197,20 @@
   },
   "nissan|sentra|2020": {
     "default": 13400,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/14547/2020-Nissan-Sentra-front_14547_032_1810x779_KH3_cropped.png",
     "trims": {
       "srsedan4d": 13800,
       "ssedan4d": 12250,
       "svsedan4d": 13400
     }
   },
+  "nissan|truck|2000": {
+    "default": null,
+    "miss": true
+  },
   "nissan|versanote|2016": {
     "default": 5800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9764/2016-Nissan-Versa%20Note-front_9764_032_1865x887_KH3_cropped.png",
     "trims": {
       "shatchback4d": 5275,
       "slhatchback4d": 7125,
@@ -410,6 +1218,45 @@
       "srhatchback4d": 6175,
       "svhatchback4d": 5800
     }
+  },
+  "nissan|versa|2014": {
+    "default": 4425,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8892/2014-Nissan-Versa-front_8892_032_1853x823_KAC_cropped.png",
+    "trims": {
+      "noteshatchback4d": 5325,
+      "notesplushatchback4d": 4300,
+      "notesvhatchback4d": 5900,
+      "slsedan4d": 4400,
+      "splussedan4d": 4425,
+      "ssedan4d": 4225,
+      "svsedan4d": 5150
+    }
+  },
+  "nissan|versa|2016": {
+    "default": 6850,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11107/2016-Nissan-Versa-front_11107_032_1817x813_RAQ_cropped.png",
+    "trims": {
+      "slsedan4d": 6850,
+      "splussedan4d": 5225,
+      "ssedan4d": 6225,
+      "svsedan4d": 6900
+    }
+  },
+  "nissan|versa|2018": {
+    "default": 7300,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12839/2018-Nissan-Versa-front_12839_032_1828x819_K23_cropped.png",
+    "trims": {
+      "s(2018.5)sedan4d": 7300,
+      "splus(2018.5)sedan4d": 7100,
+      "splussedan4d": 7100,
+      "ssedan4d": 7300,
+      "sv(2018.5)sedan4d": 7850,
+      "svsedan4d": 7850
+    }
+  },
+  "pontiac|trans|1979": {
+    "default": null,
+    "miss": true
   },
   "porsche|944s22doorcovertible|1990": {
     "default": null,
@@ -421,6 +1268,7 @@
   },
   "porsche|cayenne|2014": {
     "default": 15650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9489/2014-Porsche-Cayenne-front_9489_032_1836x849_2T_cropped.png",
     "trims": {
       "dieselplatinumeditionsportutility4d": 16550,
       "dieselsportutility4d": 15650,
@@ -433,20 +1281,107 @@
       "turbossportutility4d": 25700
     }
   },
+  "porsche|cayenne|2022": {
+    "default": 56800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/14550/2022-Porsche-Cayenne-front_14550_032_1834x847_2T_cropped.png",
+    "trims": {
+      "e-hybridplatinumeditionsportutility4d": 62300,
+      "e-hybridsportutility4d": 54300,
+      "gtssportutility4d": 67000,
+      "platinumeditionsportutility4d": 48600,
+      "splatinumeditionsportutility4d": 56800,
+      "sportutility4d": 46200,
+      "ssportutility4d": 52900,
+      "turbose-hybridsportutility4d": 92200,
+      "turbosportutility4d": 78300
+    }
+  },
+  "porsche|taycan|2023": {
+    "default": 86900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/52034/2023-Porsche-Taycan-front_52034_032_1815x695_0L_cropped.png",
+    "trims": {
+      "4ssedan4d": 74500,
+      "gtssedan4d": 86900,
+      "sedan4d": 61800,
+      "turbosedan4d": 87900,
+      "turbossedan4d": 108000
+    }
+  },
+  "porsche|taycan|2024": {
+    "default": 97200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/54145/2024-Porsche-Taycan-front_54145_032_1815x695_G7_cropped.png",
+    "trims": {
+      "4ssedan4d": 83500,
+      "gtssedan4d": 97200,
+      "sedan4d": 67100,
+      "turbosedan4d": 104000,
+      "turbossedan4d": 116000
+    }
+  },
+  "ram|1500|2025": {
+    "default": null,
+    "miss": true
+  },
+  "saab|9|2004": {
+    "default": null,
+    "miss": true
+  },
+  "scion|xb|2011": {
+    "default": 6625,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2011/2011-Scion-xB-FrontSide_SIXB111_505x375.jpg",
+    "trims": {
+      "hatchback4d": 6150,
+      "releaseseries8.0hatchback4d": 6625
+    }
+  },
   "subaru|crosstrek|2017": {
     "default": 13550,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10590/2017-Subaru-Crosstrek-front_10590_032_1840x869_H2Q_cropped.png",
     "trims": {
       "2.0ilimitedsportutility4d": 14350,
       "2.0ipremiumsportutility4d": 13550,
       "2.0isportutility4d": 12500
     }
   },
+  "subaru|crosstrek|2018": {
+    "default": 15100,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11945/2018-Subaru-Crosstrek-front_11945_032_1776x847_PAF_cropped.png",
+    "trims": {
+      "2.0ilimitedsportutility4d": 16750,
+      "2.0ipremiumsportutility4d": 15100,
+      "2.0isportutility4d": 14450
+    }
+  },
   "subaru|forester25xmanualtransmissionawd|2013": {
     "default": null,
     "miss": true
   },
+  "subaru|forester|2010": {
+    "default": 7075,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Subaru-Forester-FrontSide_STFOR091_505x375.jpg",
+    "trims": {
+      "2.5xlimitedsportutility4d": 7075,
+      "2.5xpremiumsportutility4d": 6425,
+      "2.5xsportutility4d": 5900,
+      "2.5xtlimitedsportutility4d": 7700,
+      "2.5xtpremiumsportutility4d": 7150
+    }
+  },
+  "subaru|forester|2013": {
+    "default": 8950,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8276/2013-Subaru-Forester-front_8276_032_1821x888_69Z_cropped.png",
+    "trims": {
+      "2.5xlimitedsportutility4d": 9300,
+      "2.5xpremiumsportutility4d": 8950,
+      "2.5xsportutility4d": 7600,
+      "2.5xtouringsportutility4d": 7825,
+      "2.5xtpremiumsportutility4d": 7375,
+      "2.5xttouringsportutility4d": 9375
+    }
+  },
   "subaru|forester|2018": {
     "default": 16650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11060/2018-Subaru-Forester-front_11060_032_1838x906_H2Q_cropped.png",
     "trims": {
       "2.0xtpremiumsportutility4d": 15350,
       "2.0xttouringsportutility4d": 17100,
@@ -456,8 +1391,46 @@
       "2.5itouringsportutility4d": 16650
     }
   },
+  "subaru|outback|2008": {
+    "default": 5425,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2008/2008-Subaru-Outback-FrontSide_SUOUT081_505x375.jpg",
+    "trims": {
+      "2.5ilimitedwagon4d": 5425,
+      "2.5iwagon4d": 4300,
+      "2.5xtlimitedwagon4d": 5625,
+      "3.0rllbeaneditionwagon4d": 5500,
+      "basicwagon4d": 4025
+    }
+  },
+  "subaru|outback|2016": {
+    "default": 13500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10520/2016-Subaru-Outback-front_10520_032_1832x841_K4X_cropped.png",
+    "trims": {
+      "2.5ilimitedwagon4d": 13500,
+      "2.5ipremiumwagon4d": 11400,
+      "2.5iwagon4d": 10700,
+      "3.6rlimitedwagon4d": 13550
+    }
+  },
+  "subaru|sti|2013": {
+    "default": null,
+    "miss": true
+  },
+  "subaru|wrx|2015": {
+    "default": 16250,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9480/2015-Subaru-WRX-front_9480_032_1822x762_61K_cropped.png",
+    "trims": {
+      "limitedsedan4d": 14500,
+      "premiumsedan4d": 12100,
+      "sedan4d": 13150,
+      "stilauncheditionsedan4d": 17900,
+      "stilimitedsedan4d": 16250,
+      "stisedan4d": 17850
+    }
+  },
   "tesla|model3|2020": {
     "default": 23100,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12659/2020-Tesla-Model%203-front_12659_032_1821x757_PPSW_cropped.png",
     "trims": {
       "longrangesedan4d": 23100,
       "performancesedan4d": 23900,
@@ -465,21 +1438,108 @@
       "standardrangesedan4d": 19500
     }
   },
-  "toyota|camry|2014": {
-    "default": 10950,
+  "tesla|modely|2022": {
+    "default": 30700,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/50446/2022-Tesla-Model%20Y-front_50446_032_1867x815_PPSB_cropped.png",
     "trims": {
-      "hybridlesedan4d": 10950,
-      "hybridselimitededitionsedan4d": 10600,
-      "hybridxlesedan4d": 12100,
-      "lesedan4d": 10600,
-      "lsedan4d": 10800,
-      "sesedan4d": 11050,
-      "sesportsedan4d": 10550,
-      "xlesedan4d": 12100
+      "longrangesportutility4d": 29800,
+      "performancesportutility4d": 30700
+    }
+  },
+  "tesla|model|2020": {
+    "default": null,
+    "miss": true
+  },
+  "tesla|model|2022": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|camry|2011": {
+    "default": 7875,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2011/2011-Toyota-Camry-FrontSide_TOCAM111_640x480.jpg",
+    "trims": {
+      "hybridsedan4d": 7875,
+      "lesedan4d": 7400,
+      "sedan4d": 5400,
+      "sesedan4d": 8400,
+      "xlesedan4d": 8625
+    }
+  },
+  "toyota|camry|2014": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|camry|2022": {
+    "default": 23300,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/51303/2022-Toyota-Camry-front_51303_032_1851x716_2PS_cropped.png",
+    "trims": {
+      "lesedan4d": 20300,
+      "senightshadeeditionsedan4d": 22400,
+      "sesedan4d": 21900,
+      "trdsedan4d": 30700,
+      "xlesedan4d": 23300,
+      "xsesedan4d": 25600
+    }
+  },
+  "toyota|camry|2025": {
+    "default": 33400,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/53921/2025-Toyota-Camry-front_53921_032_1800x738_8Q4_cropped.png",
+    "trims": {
+      "le": 28700,
+      "se": 30850,
+      "xle": 33400,
+      "xse": 34500
+    }
+  },
+  "toyota|corolla|2013": {
+    "default": 8900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/8352/2013-Toyota-Corolla-front_8352_032_1832x790_209_cropped.png",
+    "trims": {
+      "lesedan4d": 9125,
+      "lespecialeditionsedan4d": 8900,
+      "lsedan4d": 8750,
+      "ssedan4d": 10350,
+      "sspecialeditionsedan4d": 8150
+    }
+  },
+  "toyota|corolla|2015": {
+    "default": 11650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10404/2015-Toyota-Corolla-front_10404_032_1807x772_040_cropped.png",
+    "trims": {
+      "leecoplussedan4d": 10650,
+      "leecopremiumsedan4d": 12500,
+      "leecosedan4d": 11650,
+      "leplussedan4d": 11400,
+      "lepremiumsedan4d": 11100,
+      "lesedan4d": 11000,
+      "lsedan4d": 11850,
+      "splussedan4d": 11700,
+      "spremiumsedan4d": 12100,
+      "ssedan4d": 11600
+    }
+  },
+  "toyota|mr2|1985": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|mr2|1991": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|prius|2010": {
+    "default": 6925,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Toyota-Prius-FrontSide_TOPRIUS101_505x375.jpg",
+    "trims": {
+      "ihatchback4d": 6425,
+      "iihatchback4d": 7325,
+      "iiihatchback4d": 6200,
+      "ivhatchback4d": 6925,
+      "vhatchback4d": 7875
     }
   },
   "toyota|rav4|2010": {
     "default": 7850,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Toyota-RAV4-FrontSide_TTRAV4101_505x375.jpg",
     "trims": {
       "limitedsportutility4d": 10700,
       "sportsuv4d": 7575,
@@ -488,12 +1548,37 @@
   },
   "toyota|rav4|2017": {
     "default": 17650,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10951/2017-Toyota-RAV4-front_10951_032_1820x903_1D6_cropped.png",
     "trims": {
       "lesportutility4d": 16100,
       "limitedsportutility4d": 18450,
       "platinumsportutility4d": 18800,
       "sesportutility4d": 17650,
       "xlesportutility4d": 16800
+    }
+  },
+  "toyota|sienna|2014": {
+    "default": 12550,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9104/2014-Toyota-Sienna-front_9104_032_1870x848_1D6_cropped.png",
+    "trims": {
+      "leminivan4d": 11300,
+      "limitedminivan4d": 12700,
+      "lminivan4d": 10300,
+      "seminivan4d": 13950,
+      "xleminivan4d": 12550
+    }
+  },
+  "toyota|sienna|2023": {
+    "default": 39800,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/52231/2023-Toyota-Sienna-front_52231_032_1818x825_089_cropped.png",
+    "trims": {
+      "leminivan4d": 35000,
+      "limitedminivan4d": 41600,
+      "platinumminivan4d": 47000,
+      "xleminivan4d": 38800,
+      "xlewoodlandeditionminivan4d": 42500,
+      "xse25thanniversaryeditionminivan4d": 39000,
+      "xseminivan4d": 39800
     }
   },
   "toyota|tacoma4x4sr54cylinder5speedmanual|2000": {
@@ -514,13 +1599,72 @@
   },
   "toyota|tacoma|2002": {
     "default": 6200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2002/2002-Toyota-Tacoma%20Regular%20Cab-FrontSide_TTTCRPRE001_505x375.jpg",
     "trims": {
       "prerunnershortbed": 5275,
       "shortbed": 6200
     }
   },
+  "toyota|tacoma|2004": {
+    "default": 7425,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2004/2004-Toyota-Tacoma%20Regular%20Cab-FrontSide_TTTCR041_505x298.jpg",
+    "trims": {
+      "pickup2d6ft": 7425,
+      "prerunnerpickup2d6ft": 6325
+    }
+  },
+  "toyota|tacoma|2023": {
+    "default": 33200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/51076/2023-Toyota-Tacoma%20Access%20Cab-front_51076_032_1833x806_1J9_cropped.png",
+    "trims": {
+      "sr5pickup4d6ft": 25300,
+      "srpickup4d6ft": 24800,
+      "trdoff-roadpickup4d6ft": 34400,
+      "trdsportpickup4d6ft": 33200
+    }
+  },
+  "triumph|tr4|1962": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|beetle|1969": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|beetle|1972": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|beetle|2015": {
+    "default": 14200,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10074/2015-Volkswagen-Beetle-front_10074_032_1835x848_8E8E_cropped.png",
+    "trims": {
+      "1.8tclassicconvertible2d": 14900,
+      "1.8tclassichatchback2d": 11900,
+      "1.8tconvertible2d": 14200,
+      "1.8tfleeteditionhatchback2d": 7000,
+      "1.8thatchback2d": 11800,
+      "r-lineconvertible2d": 15350,
+      "r-linehatchback2d": 14250,
+      "tdiconvertible2d": 15050,
+      "tdihatchback2d": 12950
+    }
+  },
+  "volkswagen|bettle|1971": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|bug|1969": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|bug|1973": {
+    "default": null,
+    "miss": true
+  },
   "volkswagen|golf|2015": {
     "default": 9500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/9770/2015-Volkswagen-Golf-front_9770_032_1840x817_2B2B_cropped.png",
     "trims": {
       "launcheditionhatchbackcoupe2d": 6950,
       "sehatchbacksedan4d": 8825,
@@ -532,8 +1676,36 @@
       "tdishatchbacksedan4d": 10950
     }
   },
+  "volkswagen|golf|2016": {
+    "default": 9900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/10704/2016-Volkswagen-Golf-front_10704_032_1825x819_0Q0Q_cropped.png",
+    "trims": {
+      "tsihatchbackcoupe2d": 9500,
+      "tsisehatchbacksedan4d": 10400,
+      "tsiselhatchbacksedan4d": 11200,
+      "tsishatchbackcoupe2d": 9900,
+      "tsishatchbacksedan4d": 9300
+    }
+  },
+  "volkswagen|gti|2006": {
+    "default": 4475,
+    "image": null,
+    "trims": {
+      "1.8thatchbackcoupe2d": 4475,
+      "2.0thatchbackcoupe2d": 4200
+    }
+  },
+  "volkswagen|gti|2012": {
+    "default": 8150,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/house/2012/2012-Volkswagen-GTI-FrontSide_VWGTIS121_640x480.jpg",
+    "trims": {
+      "2.0thatchbackcoupe2d": 8150,
+      "2.0thatchbacksedan4d": 8000
+    }
+  },
   "volkswagen|jetta|2018": {
     "default": 11500,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12391/2018-Volkswagen-Jetta-front_12391_032_1785x767_A1A1_cropped.png",
     "trims": {
       "1.4tsesedan4d": 10900,
       "1.4tssedan4d": 9875,
@@ -543,8 +1715,50 @@
       "2.0tglisedan4d": 12850
     }
   },
+  "volkswagen|jetta|2023": {
+    "default": 18600,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/52445/2023-Volkswagen-Jetta-front_52445_032_1762x750_K2K2_cropped.png",
+    "trims": {
+      "1.5tselsedan4d": 19650,
+      "1.5tsesedan4d": 18600,
+      "1.5tsportsedan4d": 17250,
+      "1.5tssedan4d": 17450
+    }
+  },
+  "volkswagen|maxi|1968": {
+    "default": null,
+    "miss": true
+  },
+  "volkswagen|tiguan|2018": {
+    "default": 12900,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/12281/2018-Volkswagen-Tiguan-front_12281_032_1832x866_0Q0Q_cropped.png",
+    "trims": {
+      "2.0ts4motionsportutility4d": 11350,
+      "2.0tse4motionsportutility4d": 12450,
+      "2.0tsel4motionsportutility4d": 13300,
+      "2.0tselpremium4motionsportutility4d": 15000,
+      "2.0tselpremiumsportutility4d": 13500,
+      "2.0tselsportutility4d": 12900,
+      "2.0tsesportutility4d": 11550,
+      "2.0tssportutility4d": 10550
+    }
+  },
+  "volkswagen|tiguan|2023": {
+    "default": 22700,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/52520/2023-Volkswagen-Tiguan-front_52520_032_1848x866_2R2R_cropped.png",
+    "trims": {
+      "s4motionsportutility4d": 19200,
+      "se4motionsportutility4d": 22700,
+      "selr-line4motionsportutility4d": 25800,
+      "ser-lineblack4motionsportutility4d": 24500,
+      "ser-lineblacksportutility4d": 23000,
+      "sesportutility4d": 21000,
+      "ssportutility4d": 18700
+    }
+  },
   "volkswagen|tiguan|2025": {
     "default": 32300,
+    "image": "https://file.kelleybluebookimages.com/kbb/base/evox/CP/57749/2025-Volkswagen-Tiguan-front_57749_032_1834x841_2R2R_cropped.png",
     "trims": {
       "s": 28500,
       "s4motion": 30100,
@@ -559,7 +1773,27 @@
     "default": null,
     "miss": true
   },
+  "volkswgen|gti|2012": {
+    "default": null,
+    "miss": true
+  },
   "volvo|v70t5|1998": {
+    "default": null,
+    "miss": true
+  },
+  "volvo|v70|1998": {
+    "default": null,
+    "miss": true
+  },
+  "vw|beetle|1969": {
+    "default": null,
+    "miss": true
+  },
+  "vw|bettle|1971": {
+    "default": null,
+    "miss": true
+  },
+  "vw|bug|1973": {
     "default": null,
     "miss": true
   }

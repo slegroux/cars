@@ -54,3 +54,18 @@ def test_make_that_is_actually_a_model():
 def test_normalize_make_model_combined():
     assert normalize_make_model("Subaru", "Forester 2 5x manual transmission AWD") == ("Subaru", "Forester")
     assert normalize_make_model("Chevy", "Avalanche") == ("Chevrolet", "Avalanche")
+
+
+@pytest.mark.parametrize("make, model, expected_model", [
+    ("BMW", "528i", "5 Series"),
+    ("BMW", "330i", "3 Series"),
+    ("BMW", "228i", "2 Series"),
+    ("BMW", "325xi", "3 Series"),
+    ("BMW", "2002", "2002"),   # classic, not a trim code — untouched
+    ("BMW", "M3", "M3"),       # untouched
+    ("BMW", "X5", "X5"),       # untouched
+    ("MAZDA", "MAZDASPEED3", "Mazda3"),
+    ("Mazda", "Mazdaspeed6", "Mazda6"),
+])
+def test_trim_code_model_aliases(make, model, expected_model):
+    assert normalize_make_model(make, model)[1] == expected_model

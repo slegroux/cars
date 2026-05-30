@@ -424,17 +424,36 @@ def serve(port: int) -> None:
 
 
 @cli.command()
-@click.option("--days", default=30, show_default=True)
-def prune(days: int) -> None:
-    """Remove listings older than N days."""
+@click.option("--days", default=None, type=int, help="Remove listings not seen in N days.")
+@click.option("--over-budget", is_flag=True, help="Remove listings priced above 1.5x budget.max (stale out-of-budget junk).")
+def prune(days: int | None, over_budget: bool) -> None:
+    """Remove stale and/or out-of-budget listings."""
     from carfinder.db import init_db, prune_old
+
+    if days is None and not over_budget:
+        click.echo("Nothing to do — pass --days N and/or --over-budget.")
+        return
 
     db_path = Path("data/listings.db")
     db_path.parent.mkdir(parents=True, exist_ok=True)
     conn = init_db(db_path)
-    removed = prune_old(conn, days)
+
+    if over_budget:
+        from carfinder.config import load_config
+
+        cap = load_config().budget.max * 1.5
+        cur = conn.execute(
+            "DELETE FROM listings WHERE asking_price IS NOT NULL AND asking_price > ?",
+            (cap,),
+        )
+        conn.commit()
+        click.echo(f"Removed {cur.rowcount} listings priced over ${cap:,.0f}.")
+
+    if days is not None:
+        removed = prune_old(conn, days)
+        click.echo(f"Removed {removed} listings not seen in {days} days.")
+
     conn.close()
-    click.echo(f"Removed {removed} listings older than {days} days.")
 
 
 @cli.command()

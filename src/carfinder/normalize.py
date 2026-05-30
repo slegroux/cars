@@ -40,6 +40,27 @@ _NOISE_TOKENS = {
 _MILES_K = re.compile(r"^\d+k$", re.IGNORECASE)        # 107k
 _DISPLACEMENT = re.compile(r"^\d(\.\d)?l?$", re.IGNORECASE)  # 2, 2.5, 2.0l, 3l
 
+# Trim-code models that KBB pages under a different name. BMW sells "528i",
+# "330i", "228i" etc. but KBB's value page is "/bmw/5-series/"; Mazdaspeed3 is a
+# trim of the Mazda3. Map these so they resolve to a value page + image.
+_BMW_TRIM = re.compile(r"^[1-8]\d\d[a-z]{1,3}$", re.IGNORECASE)   # 528i, 330i, 325xi, 750i
+_MAZDASPEED = re.compile(r"^mazdaspeed[\s-]?(\d)$", re.IGNORECASE)
+
+
+def _model_alias(make: str | None, model: str | None) -> str | None:
+    if not model:
+        return model
+    m = model.strip()
+    mk = (make or "").strip().lower()
+    if mk == "bmw" and _BMW_TRIM.match(m):
+        return f"{m[0]} Series"
+    if mk == "mazda":
+        ms = _MAZDASPEED.match(m)
+        if ms:
+            return f"Mazda{ms.group(1)}"
+    return m
+
+
 # Leading tokens of genuine multi-word models — keep the following token too
 # (e.g. Tesla "Model 3"/"Model Y", "Range Rover", "Grand Cherokee", Audi "RS 7",
 # "Land Cruiser", "Santa Fe"). The 2nd token is kept even when it looks like a
@@ -87,4 +108,5 @@ def normalize_make_model(make: str | None, model: str | None) -> tuple[str | Non
     key = (make or "").strip().lower()
     if key in _MAKE_IS_MODEL:
         return _MAKE_IS_MODEL[key]
-    return normalize_make(make), clean_model(model)
+    make_norm = normalize_make(make)
+    return make_norm, _model_alias(make_norm, clean_model(model))
