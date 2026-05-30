@@ -124,10 +124,14 @@ def parse_fair_values(html: str, expected_year: int | None = None) -> dict | Non
     else:
         default = averages[0]
 
-    # Studio model image (EVOX) — exact model+year because the page already
-    # passed the year guard. Used as a photo fallback for listings without one.
+    # Model image from the page's own og:image — exact model+year because the
+    # page already passed the year guard. KBB serves these from its image CDN
+    # under either /evox/ (studio renders) or /house/ (older models); accept
+    # both, but only that CDN so generic social-share cards are ignored. (Other
+    # evox URLs scattered in the page are *related* cars, so we never scrape
+    # those — only this page's canonical og:image.)
     img_m = re.search(r'<meta property="og:image" content="([^"]+)"', html)
-    image = img_m.group(1) if img_m and "evox" in img_m.group(1).lower() else None
+    image = img_m.group(1) if img_m and "kelleybluebookimages.com" in img_m.group(1).lower() else None
 
     return {
         "default": round(default),

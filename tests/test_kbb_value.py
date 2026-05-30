@@ -91,8 +91,24 @@ def test_parse_extracts_evox_og_image():
     assert vals["image"] and "2016-Toyota-RAV4" in vals["image"]
 
 
-def test_parse_ignores_non_evox_og_image():
-    # A generic social-share image (not an EVOX studio render) is not a car photo.
+def test_parse_accepts_house_image_for_older_models():
+    # Older models' og:image lives under /house/ (not /evox/); still a real
+    # vehicle photo from KBB's image CDN, so it must be accepted.
+    html = (
+        '<html><head>'
+        '<link rel="canonical" href="https://www.kbb.com/toyota/rav4/2010/"/>'
+        '<meta property="og:image" content="https://file.kelleybluebookimages.com/kbb/base/house/2010/2010-Toyota-RAV4-FrontSide.jpg"/>'
+        '</head><body><script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps({"props": {"r": {"trimsData": [
+            {"name": "Base", "fairMarketPriceLow": 7000, "fairMarketPriceHigh": 7000}]}}})
+        + "</script></body></html>"
+    )
+    vals = parse_fair_values(html, expected_year=2010)
+    assert vals is not None and vals["image"] and "2010-Toyota-RAV4" in vals["image"]
+
+
+def test_parse_ignores_non_vehicle_og_image():
+    # A generic social-share card (not from KBB's image CDN) is not a car photo.
     html = (
         '<html><head>'
         '<link rel="canonical" href="https://www.kbb.com/toyota/rav4/2016/"/>'
