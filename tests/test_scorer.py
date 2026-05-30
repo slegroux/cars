@@ -184,6 +184,19 @@ def test_price_falls_back_to_depreciation_when_cohort_lt_3():
     assert fs.ref_price is not None
 
 
+def test_kbb_fair_value_takes_priority_as_reference():
+    # A cached KBB Fair Market Price should be used ahead of cohort/MSRP tiers,
+    # trim-matched, mileage-adjusted, and reported with "real" confidence.
+    lk = _lk()
+    lk.kbb_fmv[("toyota", "rav4", 2016)] = {"default": 16000, "trims": {"xle": 16000, "limited": 18000}}
+    listing = _listing(year=2016, make="Toyota", model="RAV4", trim="XLE", mileage=72_000, asking_price=14_000)
+    fs = score_price_value(listing, [], lk, _cfg(), _cfg().weights.price_value)
+    assert fs.confidence == "real"
+    assert "KBB" in fs.reason
+    assert fs.ref_price is not None and fs.ref_price > 16000  # low miles → adjusted up
+    assert fs.raw == 10.0  # asking well below the KBB reference
+
+
 # ---------------------------------------------------------------------------
 # 7. Unknown make defaults to 5 / estimated (reliability)
 # ---------------------------------------------------------------------------

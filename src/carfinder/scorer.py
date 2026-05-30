@@ -94,6 +94,24 @@ def _market_reference(
     yr, mk, mo = listing.year, listing.make, listing.model
     nmk, nmo = _norm(mk or ""), _norm(mo or "")
 
+    # 0. KBB Fair Market Price (most trustworthy) — a real published valuation,
+    #    trim-matched when possible and adjusted toward this listing's mileage
+    #    (KBB's figure assumes typical mileage of ~12k mi/yr).
+    if yr:
+        kbb = lookups.kbb_fmv.get((nmk, nmo, yr))
+        if kbb and kbb.get("default"):
+            price = float(kbb["default"])
+            trim_norm = _norm(listing.trim or "")
+            if trim_norm:
+                for tname, tprice in kbb.get("trims", {}).items():
+                    if tname.startswith(trim_norm) or trim_norm in tname:
+                        price = float(tprice)
+                        break
+            if listing.mileage is not None:
+                typical = 12_000 * max(_CURRENT_YEAR - yr, 0)
+                price = price + (typical - listing.mileage) * _COST_PER_MILE
+            return max(price, 1000.0), f"KBB Fair Market Price (${kbb['default']:,.0f})", "real"
+
     # 1. Exact (year, make, model) cohort — most trustworthy.
     exact = [
         c.asking_price

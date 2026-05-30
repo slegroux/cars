@@ -694,3 +694,72 @@ async def _refresh_fixtures_async(cfg, enabled_sources: list[str], today: str) -
 
     for w in warnings:
         click.echo(f"WARNING: {w}")
+
+
+@cli.command("kbb-values")
+@click.option("--limit", default=None, type=int, help="Cap how many vehicles to fetch this run.")
+@click.option("--refresh", is_flag=True, help="Re-fetch even vehicles already cached.")
+def kbb_values(limit: int | None, refresh: bool) -> None:
+    """Populate data/kbb_values.json with KBB Fair Market Prices.
+
+    Scrapes the KBB value page once per unique (make, model, year) in the
+    database and caches the result so the scorer can use a real valuation as
+    its price reference. Re-run periodically to refresh.
+    """
+    import json as _json
+    import random
+
+    import httpx
+
+    from carfinder.config import load_config
+    from carfinder.db import get_listings, init_db
+    from carfinder.fetchers.kbb_value import BROWSER_HEADERS, cache_key, fetch_fair_values
+
+    cfg = load_config()
+    cache_path = Path("data/kbb_values.json")
+    cache: dict = {}
+    if cache_path.exists():
+        try:
+            cache = _json.loads(cache_path.read_text())
+        except _json.JSONDecodeError:
+            click.echo(f"WARNING: {cache_path} is corrupt — starting fresh.")
+
+    db_path = Path("data/listings.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = init_db(db_path)
+    listings = get_listings(conn)
+    conn.close()
+
+    unique: dict[str, tuple[str, str, int]] = {}
+    for lst in listings:
+        if lst.make and lst.model and lst.year:
+            unique.setdefault(cache_key(lst.make, lst.model, lst.year), (lst.make, lst.model, lst.year))
+
+    todo = [(k, v) for k, v in unique.items() if refresh or k not in cache]
+    if limit is not None:
+        todo = todo[:limit]
+    click.echo(f"{len(unique)} unique vehicles · {len(cache)} cached · {len(todo)} to fetch")
+    if not todo:
+        return
+
+    async def _run() -> None:
+        async with httpx.AsyncClient(
+            http2=True, headers=BROWSER_HEADERS, follow_redirects=True, timeout=30.0
+        ) as client:
+            for i, (key, (mk, mo, yr)) in enumerate(todo, 1):
+                vals = await fetch_fair_values(client, mk, mo, yr)
+                if vals:
+                    cache[key] = vals
+                    click.echo(f"  [{i}/{len(todo)}] {yr} {mk} {mo}: ${vals['default']:,} ({len(vals['trims'])} trims)")
+                else:
+                    # Negative cache so re-runs skip models KBB can't resolve
+                    # (e.g. Craigslist free-text model strings). Use --refresh to retry.
+                    cache[key] = {"default": None, "miss": True}
+                    click.echo(f"  [{i}/{len(todo)}] {yr} {mk} {mo}: no value found")
+                await asyncio.sleep(random.uniform(cfg.rate_limit.min_delay_seconds, cfg.rate_limit.max_delay_seconds))
+
+    try:
+        asyncio.run(_run())
+    finally:
+        cache_path.write_text(_json.dumps(cache, indent=2, sort_keys=True))
+        click.echo(f"Wrote {len(cache)} entries to {cache_path}")

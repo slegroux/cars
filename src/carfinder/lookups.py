@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -37,6 +38,9 @@ class Lookups:
     mpg: dict[tuple[int, str, str], int] = field(default_factory=dict)
     # (_norm(make), _norm(model)) -> approximate base MSRP (USD)
     msrp: dict[tuple[str, str], int] = field(default_factory=dict)
+    # (_norm(make), _norm(model), year) -> {"default": price, "trims": {norm_trim: price}}
+    # KBB Fair Market Price, populated on demand by the `kbb-values` CLI command.
+    kbb_fmv: dict[tuple[str, str, int], dict] = field(default_factory=dict)
 
 
 _EXPECTED_FILES = [
@@ -129,10 +133,28 @@ def load_lookups(data_dir: Path = Path("data")) -> Lookups:
         for entry in entries:
             lk.msrp[(_norm(entry["make"]), _norm(entry["model"]))] = int(entry["msrp"])
 
+    # --- kbb_values.json: "make|model|year" -> {default, trims} (optional cache) ---
+    kbb_path = data_dir / "kbb_values.json"
+    if kbb_path.exists():
+        try:
+            raw = json.loads(kbb_path.read_text())
+        except (json.JSONDecodeError, OSError) as exc:
+            logger.warning("Could not read %s: %s", kbb_path, exc)
+            raw = {}
+        for key, val in raw.items():
+            parts = key.split("|")
+            # Skip negative-cache entries (default == null) — they exist only so
+            # the CLI doesn't re-fetch models KBB couldn't resolve.
+            if len(parts) == 3 and isinstance(val, dict) and val.get("default") is not None:
+                try:
+                    lk.kbb_fmv[(parts[0], parts[1], int(parts[2]))] = val
+                except ValueError:
+                    continue
+
     logger.info(
         "Loaded lookups: %d reliability, %d dimensions, %d insurance, "
-        "%d roof_rack, %d mpg, %d msrp",
+        "%d roof_rack, %d mpg, %d msrp, %d kbb_fmv",
         len(lk.reliability), len(lk.dimensions), len(lk.insurance),
-        len(lk.roof_rack), len(lk.mpg), len(lk.msrp),
+        len(lk.roof_rack), len(lk.mpg), len(lk.msrp), len(lk.kbb_fmv),
     )
     return lk
