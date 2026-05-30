@@ -78,6 +78,15 @@ def _listing_to_dict(s: "ScoredListing") -> dict:
     lst = s.listing
     photos = lst.photos or []
 
+    # Market reference + deal delta from the price_value factor (negative = below market).
+    pv = s.score_breakdown.get("price_value")
+    ref_price = pv.ref_price if pv else None
+    deal = (
+        lst.asking_price - ref_price
+        if ref_price is not None and lst.asking_price is not None
+        else None
+    )
+
     factors = []
     for key in _FACTOR_KEYS:
         fs = s.score_breakdown.get(key)
@@ -118,9 +127,15 @@ def _listing_to_dict(s: "ScoredListing") -> dict:
         "distance_miles": lst.distance_miles,
         "seller_type": lst.seller_type or "",
         "transmission": lst.transmission or "",
+        "drivetrain": lst.drivetrain or "",
+        "title_status": lst.title_status or "",
+        "mpg": lst.mpg_combined,
+        "market_value": ref_price,
+        "deal": round(deal) if deal is not None else None,
         "description": lst.description or "",
         "photos": photos,
         "first_photo": photos[0] if photos else "",
+        "first_seen": lst.first_seen.isoformat() if lst.first_seen else "",
         "last_seen": lst.last_seen.isoformat() if lst.last_seen else "",
         "factors": factors,
     }
@@ -197,6 +212,11 @@ def render_html(
     # Prevent </script> in string values from breaking out of the script block.
     # <\/ is valid JSON (forward slash needs no escaping) and valid JS.
     listings_json = listings_json.replace("</", "<\\/")
+
+    # Default scoring weights — seed the dashboard's live re-rank sliders.
+    from carfinder.config import WeightsConfig
+    weights = config.weights if config is not None else WeightsConfig()
+    weights_json = json.dumps(weights.model_dump(), separators=(",", ":"))
 
     # Stat chips
     src_parts = ", ".join(
@@ -285,6 +305,81 @@ def render_html(
         '  <button id="btnReset" class="btn-reset">Reset filters</button>',
         "</div>",
         "",
+        "<!-- ── Secondary filters (make/model facets + spec filters) ── -->",
+        '<div class="filters filters-secondary">',
+        '  <div class="filter-group facet-group">',
+        '    <label>Make</label>',
+        '    <div class="facet" id="makeFacet"></div>',
+        "  </div>",
+        '  <div class="filter-group facet-group">',
+        '    <label>Model</label>',
+        '    <div class="facet" id="modelFacet"></div>',
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterDrivetrain">Drivetrain</label>',
+        '    <select id="filterDrivetrain">',
+        '      <option value="all">Any</option><option value="AWD">AWD</option>',
+        '      <option value="4WD">4WD</option><option value="FWD">FWD</option><option value="RWD">RWD</option>',
+        "    </select>",
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterTransmission">Transmission</label>',
+        '    <select id="filterTransmission">',
+        '      <option value="all">Any</option><option value="automatic">Automatic</option><option value="manual">Manual</option>',
+        "    </select>",
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterTitle">Title</label>',
+        '    <select id="filterTitle">',
+        '      <option value="all">Any</option><option value="clean">Clean</option>',
+        '      <option value="rebuilt">Rebuilt</option><option value="salvage">Salvage</option>',
+        "    </select>",
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterSeller">Seller</label>',
+        '    <select id="filterSeller">',
+        '      <option value="all">Any</option><option value="dealer">Dealer</option>',
+        '      <option value="private">Private</option><option value="certified">Certified</option>',
+        "    </select>",
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterDist">Max distance <span id="filterDistLabel">any</span></label>',
+        '    <input type="range" id="filterDist" min="0" max="300" value="300" step="10">',
+        "  </div>",
+        '  <div class="filter-group">',
+        '    <label for="filterMpg">Min MPG <span id="filterMpgLabel">0</span></label>',
+        '    <input type="range" id="filterMpg" min="0" max="60" value="0" step="1">',
+        "  </div>",
+        '  <div class="filter-group">',
+        "    <label>Confidence</label>",
+        '    <div class="checkbox-group" id="confGroup">',
+        '      <label class="cb-label checked"><input type="checkbox" class="conf-cb" value="full" checked>Full</label>',
+        '      <label class="cb-label checked"><input type="checkbox" class="conf-cb" value="partial" checked>Partial</label>',
+        '      <label class="cb-label checked"><input type="checkbox" class="conf-cb" value="low" checked>Low</label>',
+        "    </div>",
+        "  </div>",
+        '  <div class="filter-group">',
+        "    <label>Freshness</label>",
+        '    <label class="cb-label"><input type="checkbox" id="filterNew">New only</label>',
+        "  </div>",
+        "</div>",
+        "",
+        "<!-- ── Live re-rank weights ────────────────────────────── -->",
+        '<div class="weights-panel">',
+        '  <button type="button" class="weights-toggle" id="weightsToggle">⚖ Re-rank weights</button>',
+        '  <div class="weights-body" id="weightsBody" hidden>',
+        '    <div class="weights-grid" id="weightsGrid"></div>',
+        '    <button type="button" class="btn-reset" id="weightsReset">Reset weights</button>',
+        "  </div>",
+        "</div>",
+        "",
+        "<!-- ── Saved targets ───────────────────────────────────── -->",
+        '<div class="targets-bar" id="targetsBar">',
+        '  <span class="targets-label">★ Targets</span>',
+        '  <span class="targets-chips" id="targetsChips"></span>',
+        '  <button type="button" class="target-save" id="saveTargetBtn">+ Save current filters</button>',
+        "</div>",
+        "",
         "<!-- ── Scatter chart ───────────────────────────────────── -->",
         '<div class="chart-section">',
         '  <div class="section-title">Price vs Score</div>',
@@ -313,6 +408,7 @@ def render_html(
         ("body_type", "Body", False),
         ("mileage", "Miles", True),
         ("asking_price", "Price", True),
+        ("deal", "Deal", True),
         ("score", "Score", True),
         ("source", "Src", True),
         ("distance_miles", "Dist", False),
@@ -400,8 +496,9 @@ def render_html(
         "",
         "<!-- Listing data embedded as JSON -->",
         "<script>",
-        f"/* global LISTINGS */",  # noqa
+        f"/* global LISTINGS, WEIGHTS */",  # noqa
         f"var LISTINGS = {listings_json};",  # noqa: S608
+        f"var WEIGHTS = {weights_json};",  # noqa: S608
         "</script>",
         "<script>",
         _JS,

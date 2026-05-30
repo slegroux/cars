@@ -16,6 +16,78 @@
     return BODY_CANON[String(bt).toLowerCase()] || 'Unknown';
   }
 
+  // Drivetrain comes in mixed forms across sources ("FWD", "Front Wheel Drive",
+  // "AWD4WD", "Four Wheel Drive"…). Fold to a small canonical set for filtering.
+  function canonDrive(dt) {
+    if (!dt) return 'Unknown';
+    var s = String(dt).toLowerCase();
+    if (s.indexOf('all') !== -1 || s.indexOf('awd') !== -1) return 'AWD';
+    if (s.indexOf('4') !== -1 || s.indexOf('four') !== -1) return '4WD';
+    if (s.indexOf('rear') !== -1 || s.indexOf('rwd') !== -1) return 'RWD';
+    if (s.indexOf('front') !== -1 || s.indexOf('fwd') !== -1) return 'FWD';
+    return 'Unknown';
+  }
+
+  // ── Freshness (NEW badge) ───────────────────────────────────────────────────
+  // Treat "now" as the most recent last_seen in the dataset; anything first seen
+  // within FRESH_DAYS of that is flagged NEW. Robust to stale exported files.
+  var FRESH_DAYS = 3;
+  var NEW_CUTOFF = 0;
+  function parseTs(s) { var t = s ? Date.parse(s) : NaN; return isNaN(t) ? 0 : t; }
+  function computeFreshness() {
+    var latest = 0;
+    LISTINGS.forEach(function(d) { latest = Math.max(latest, parseTs(d.last_seen)); });
+    NEW_CUTOFF = latest ? latest - FRESH_DAYS * 86400000 : 0;
+    LISTINGS.forEach(function(d) {
+      d.isNew = NEW_CUTOFF > 0 && parseTs(d.first_seen) >= NEW_CUTOFF;
+    });
+  }
+
+  // ── Deal + score formatting ─────────────────────────────────────────────────
+  function fmtDeal(v) {
+    if (v == null) return '—';
+    var k = Math.abs(v) >= 1000 ? (Math.abs(v) / 1000).toFixed(1) + 'k' : Math.round(Math.abs(v)).toLocaleString();
+    if (v < 0) return '▼ $' + k;   // below market = good
+    if (v > 0) return '▲ $' + k;   // over market
+    return 'fair';
+  }
+  function dealClass(v) {
+    if (v == null) return 'deal-none';
+    if (v <= -750) return 'deal-good';
+    if (v >= 750) return 'deal-bad';
+    return 'deal-fair';
+  }
+  function fmtDisplayScore(d) {
+    var s = (d.score != null ? d.score : 0).toFixed(1);
+    if (d.confidence === 'partial') return '~' + s;
+    if (d.confidence === 'low') return '~' + s + '*';
+    return s;
+  }
+
+  // ── Live re-ranking from adjustable weights ──────────────────────────────────
+  // Each listing ships its raw per-factor scores; recompute the 0-100 score as a
+  // weight-normalised sum so dragging a weight instantly re-ranks with no refetch.
+  function rescoreAll() {
+    var keys = Object.keys(S.weights);
+    var wsum = 0;
+    keys.forEach(function(k) { wsum += S.weights[k]; });
+    if (wsum <= 0) wsum = 1;
+    LISTINGS.forEach(function(d) {
+      if (!d.factors || !d.factors.length) return;
+      var hardReject = d.factors.some(function(f) {
+        return f.key === 'title_status' && f.raw === 0 && /HARD REJECT/.test(f.reason || '');
+      });
+      if (hardReject) { d.score = 0; d.display_score = fmtDisplayScore(d); return; }
+      var sum = 0;
+      d.factors.forEach(function(f) {
+        var w = S.weights[f.key] != null ? S.weights[f.key] : f.weight;
+        sum += f.raw * w;
+      });
+      d.score = (sum / wsum) * 10;
+      d.display_score = fmtDisplayScore(d);
+    });
+  }
+
   window.dashboardState = {
     source: 'all',
     minScore: 0,
@@ -30,6 +102,17 @@
     priceMin: 0,
     priceMax: 20000,
     search: '',
+    makes: new Set(),        // empty = all makes
+    models: new Set(),       // empty = all models
+    drivetrain: 'all',
+    transmission: 'all',
+    titleStatus: 'all',
+    sellerType: 'all',
+    distMax: null,           // null = no distance cap
+    mpgMin: 0,
+    confidence: new Set(['full', 'partial', 'low']),
+    newOnly: false,
+    weights: {},             // live re-rank weights, seeded from WEIGHTS at boot
   };
 
   var S = window.dashboardState;
@@ -55,6 +138,18 @@
     if (mi < S.mileMin || mi > S.mileMax) return false;
     var yr = d.year != null ? d.year : 0;
     if (yr < S.yearMin) return false;
+    if (S.makes.size && !S.makes.has(d.make)) return false;
+    if (S.models.size && !S.models.has(d.model)) return false;
+    if (S.drivetrain !== 'all' && canonDrive(d.drivetrain) !== S.drivetrain) return false;
+    if (S.transmission !== 'all' && (d.transmission || '').toLowerCase() !== S.transmission) return false;
+    if (S.titleStatus !== 'all' && (d.title_status || '').toLowerCase() !== S.titleStatus) return false;
+    if (S.sellerType !== 'all' && (d.seller_type || '').toLowerCase() !== S.sellerType) return false;
+    // Distance cap only excludes listings whose distance is known and exceeds it;
+    // unknown-distance listings (e.g. manual entries) are never hidden by it.
+    if (S.distMax != null && d.distance_miles != null && d.distance_miles > S.distMax) return false;
+    if (S.mpgMin > 0 && !(d.mpg != null && d.mpg >= S.mpgMin)) return false;
+    if (!S.confidence.has(d.confidence)) return false;
+    if (S.newOnly && !d.isNew) return false;
     if (S.search) {
       var hay = searchHaystack(d);
       // AND across whitespace-separated terms so "honda civic" requires both.
@@ -256,10 +351,10 @@
   }
 
   // ── Table rendering ────────────────────────────────────────────────────────
-  var COLS = ['photo','year','make','model','trim','body_type','mileage','asking_price','score','source','distance_miles','url'];
+  var COLS = ['photo','year','make','model','trim','body_type','mileage','asking_price','deal','score','source','distance_miles','url'];
   var COL_LABELS = { photo:'Photo', year:'Year', make:'Make', model:'Model', trim:'Trim', body_type:'Body',
-                     mileage:'Miles', asking_price:'Price', score:'Score', source:'Src', distance_miles:'Dist', url:'View' };
-  var SORTABLE = new Set(['year','make','model','mileage','asking_price','score','source']);
+                     mileage:'Miles', asking_price:'Price', deal:'Deal', score:'Score', source:'Src', distance_miles:'Dist', url:'View' };
+  var SORTABLE = new Set(['year','make','model','mileage','asking_price','deal','score','source','distance_miles']);
 
   function renderTable() {
     var fl = filteredListings();
@@ -336,6 +431,15 @@
       // Price
       tr.appendChild(_td(fmtPrice(d.asking_price)));
 
+      // Deal (asking vs market estimate; negative = below market)
+      var tdDeal = document.createElement('td');
+      var dealSpan = document.createElement('span');
+      dealSpan.className = 'deal-cell ' + dealClass(d.deal);
+      dealSpan.textContent = fmtDeal(d.deal);
+      if (d.market_value != null) dealSpan.title = 'Market est. ' + fmtPrice(d.market_value);
+      tdDeal.appendChild(dealSpan);
+      tr.appendChild(tdDeal);
+
       // Score
       var tdScore = document.createElement('td');
       var scoreSpan = document.createElement('span');
@@ -350,6 +454,13 @@
       srcSpan.className = 'source-chip ' + sourceChipClass(d.source);
       srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source === 'carscom' ? 'Cars' : d.source === 'kbb' ? 'KBB' : d.source;
       tdSrc.appendChild(srcSpan);
+      if (d.isNew) {
+        var newBadge = document.createElement('span');
+        newBadge.className = 'new-badge';
+        newBadge.textContent = 'NEW';
+        newBadge.title = 'First seen in the last ' + FRESH_DAYS + ' days';
+        tdSrc.appendChild(newBadge);
+      }
       tr.appendChild(tdSrc);
 
       // Distance
@@ -749,6 +860,71 @@
     mileMin.addEventListener('input', updateMileage);
     mileMax.addEventListener('input', updateMileage);
 
+    // ── Secondary filters (drivetrain / transmission / title / seller) ──────────
+    function bindSelect(id, key) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', function() { S[key] = this.value; applyFilters(); });
+    }
+    bindSelect('filterDrivetrain', 'drivetrain');
+    bindSelect('filterTransmission', 'transmission');
+    bindSelect('filterTitle', 'titleStatus');
+    bindSelect('filterSeller', 'sellerType');
+
+    // Max-distance slider — at its max it means "no cap".
+    var distEl = document.getElementById('filterDist');
+    var distLabel = document.getElementById('filterDistLabel');
+    if (distEl) distEl.addEventListener('input', function() {
+      var v = +this.value;
+      S.distMax = v >= +this.max ? null : v;
+      distLabel.textContent = S.distMax == null ? 'any' : v + ' mi';
+      applyFilters();
+    });
+
+    // Min-MPG slider
+    var mpgEl = document.getElementById('filterMpg');
+    var mpgLabel = document.getElementById('filterMpgLabel');
+    if (mpgEl) mpgEl.addEventListener('input', function() {
+      S.mpgMin = +this.value;
+      mpgLabel.textContent = this.value;
+      applyFilters();
+    });
+
+    // Confidence checkboxes
+    document.querySelectorAll('.conf-cb').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (this.checked) S.confidence.add(this.value); else S.confidence.delete(this.value);
+        this.parentElement.classList.toggle('checked', this.checked);
+        applyFilters();
+      });
+    });
+
+    // New-only toggle
+    var newEl = document.getElementById('filterNew');
+    if (newEl) newEl.addEventListener('change', function() { S.newOnly = this.checked; applyFilters(); });
+
+    // Make/model facets + weight sliders + targets
+    buildMakeFacet();
+    buildModelFacet();
+    buildWeightSliders();
+    var wToggle = document.getElementById('weightsToggle');
+    if (wToggle) wToggle.addEventListener('click', function() {
+      var body = document.getElementById('weightsBody');
+      if (body) { body.hidden = !body.hidden; this.classList.toggle('open', !body.hidden); }
+    });
+    var wReset = document.getElementById('weightsReset');
+    if (wReset) wReset.addEventListener('click', function() {
+      S.weights = Object.assign({}, (typeof WEIGHTS !== 'undefined' ? WEIGHTS : {}));
+      buildWeightSliders(); rescoreAll(); applyFilters();
+    });
+    var saveT = document.getElementById('saveTargetBtn');
+    if (saveT) saveT.addEventListener('click', function() {
+      var name = prompt('Name this target (e.g. "Outback AWD under $12k")');
+      if (!name || !name.trim()) return;
+      var ts = loadTargets(); ts.push({ name: name.trim(), state: captureFilterState() });
+      saveTargets(ts); renderTargets();
+    });
+    renderTargets();
+
     // Reset
     document.getElementById('btnReset').addEventListener('click', function() {
       S.source = 'all'; S.minScore = 0;
@@ -756,6 +932,10 @@
       S.priceMin = 0; S.priceMax = 20000;
       S.mileMin = 0; S.mileMax = 200000; S.yearMin = 2008;
       S.search = '';
+      S.makes = new Set(); S.models = new Set();
+      S.drivetrain = 'all'; S.transmission = 'all'; S.titleStatus = 'all'; S.sellerType = 'all';
+      S.distMax = null; S.mpgMin = 0; S.newOnly = false;
+      S.confidence = new Set(['full', 'partial', 'low']);
       if (searchInput) searchInput.value = '';
       selSrc.value = 'all';
       scoreSlider.value = 0; scoreLabel.textContent = '0';
@@ -767,6 +947,18 @@
       priceLabel.textContent = '$0k – $20k';
       mileMin.value = 0; mileMax.value = 200000;
       mileLabel.textContent = '0k – 200k mi';
+      ['filterDrivetrain', 'filterTransmission', 'filterTitle', 'filterSeller'].forEach(function(id) {
+        var e = document.getElementById(id); if (e) e.value = 'all';
+      });
+      if (distEl) distEl.value = distEl.max;
+      if (distLabel) distLabel.textContent = 'any';
+      if (mpgEl) mpgEl.value = 0;
+      if (mpgLabel) mpgLabel.textContent = '0';
+      document.querySelectorAll('.conf-cb').forEach(function(cb) {
+        cb.checked = true; cb.parentElement.classList.add('checked');
+      });
+      if (newEl) newEl.checked = false;
+      buildMakeFacet(); buildModelFacet();
       applyFilters();
     });
   }
@@ -969,8 +1161,186 @@
     });
   }
 
+  // ── Make / model facets ─────────────────────────────────────────────────────
+  function renderFacet(container, counts, selectedSet, onToggle) {
+    if (!container) return;
+    container.innerHTML = '';
+    var keys = Object.keys(counts).sort(function(a, b) {
+      return counts[b] - counts[a] || a.localeCompare(b);
+    });
+    keys.forEach(function(k) {
+      var lbl = document.createElement('label');
+      lbl.className = 'facet-item' + (selectedSet.has(k) ? ' checked' : '');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.value = k; cb.checked = selectedSet.has(k);
+      cb.addEventListener('change', function() { onToggle(k, this.checked, lbl); });
+      lbl.appendChild(cb);
+      lbl.appendChild(document.createTextNode(' ' + (k || '—') + ' '));
+      var cnt = document.createElement('span');
+      cnt.className = 'facet-count'; cnt.textContent = '(' + counts[k] + ')';
+      lbl.appendChild(cnt);
+      container.appendChild(lbl);
+    });
+  }
+
+  function buildMakeFacet() {
+    var counts = {};
+    LISTINGS.forEach(function(d) { var k = d.make || '—'; counts[k] = (counts[k] || 0) + 1; });
+    renderFacet(document.getElementById('makeFacet'), counts, S.makes, function(k, on, lbl) {
+      if (on) S.makes.add(k); else S.makes.delete(k);
+      lbl.classList.toggle('checked', on);
+      buildModelFacet();  // available models depend on the make selection
+      applyFilters();
+    });
+  }
+
+  function buildModelFacet() {
+    var counts = {};
+    LISTINGS.forEach(function(d) {
+      if (S.makes.size && !S.makes.has(d.make)) return;
+      var k = d.model || '—'; counts[k] = (counts[k] || 0) + 1;
+    });
+    // Drop selected models that are no longer reachable under the current makes.
+    Array.from(S.models).forEach(function(m) { if (counts[m] == null) S.models.delete(m); });
+    renderFacet(document.getElementById('modelFacet'), counts, S.models, function(k, on, lbl) {
+      if (on) S.models.add(k); else S.models.delete(k);
+      lbl.classList.toggle('checked', on);
+      applyFilters();
+    });
+  }
+
+  // ── Weight sliders (live re-rank) ────────────────────────────────────────────
+  function buildWeightSliders() {
+    var grid = document.getElementById('weightsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    Object.keys(S.weights).forEach(function(key) {
+      var row = document.createElement('div'); row.className = 'weight-row';
+      var name = document.createElement('span'); name.className = 'weight-name';
+      name.textContent = key.replace(/_/g, ' ');
+      var slider = document.createElement('input');
+      slider.type = 'range'; slider.min = '0'; slider.max = '0.4'; slider.step = '0.01';
+      slider.value = S.weights[key];
+      var val = document.createElement('span'); val.className = 'weight-val';
+      val.textContent = (+S.weights[key]).toFixed(2);
+      slider.addEventListener('input', function() {
+        S.weights[key] = +this.value;
+        val.textContent = (+this.value).toFixed(2);
+        rescoreAll();
+        applyFilters();
+      });
+      row.appendChild(name); row.appendChild(slider); row.appendChild(val);
+      grid.appendChild(row);
+    });
+  }
+
+  // ── Saved targets (localStorage) ─────────────────────────────────────────────
+  var TARGETS_KEY = 'carfinderTargets';
+  function loadTargets() {
+    try { return JSON.parse(localStorage.getItem(TARGETS_KEY)) || []; } catch (e) { return []; }
+  }
+  function saveTargets(t) {
+    try { localStorage.setItem(TARGETS_KEY, JSON.stringify(t)); } catch (e) { /* storage off */ }
+  }
+
+  function captureFilterState() {
+    return {
+      search: S.search, source: S.source, minScore: S.minScore,
+      bodyTypes: Array.from(S.bodyTypes), priceMin: S.priceMin, priceMax: S.priceMax,
+      mileMin: S.mileMin, mileMax: S.mileMax, yearMin: S.yearMin,
+      makes: Array.from(S.makes), models: Array.from(S.models),
+      drivetrain: S.drivetrain, transmission: S.transmission, titleStatus: S.titleStatus,
+      sellerType: S.sellerType, distMax: S.distMax, mpgMin: S.mpgMin,
+      confidence: Array.from(S.confidence), newOnly: S.newOnly,
+    };
+  }
+
+  function applyStateToS(st) {
+    S.search = st.search || ''; S.source = st.source || 'all'; S.minScore = st.minScore || 0;
+    S.bodyTypes = new Set(st.bodyTypes && st.bodyTypes.length ? st.bodyTypes : BODY_TYPES);
+    S.priceMin = st.priceMin || 0; S.priceMax = st.priceMax != null ? st.priceMax : 20000;
+    S.mileMin = st.mileMin || 0; S.mileMax = st.mileMax != null ? st.mileMax : 200000;
+    S.yearMin = st.yearMin || 2008;
+    S.makes = new Set(st.makes || []); S.models = new Set(st.models || []);
+    S.drivetrain = st.drivetrain || 'all'; S.transmission = st.transmission || 'all';
+    S.titleStatus = st.titleStatus || 'all'; S.sellerType = st.sellerType || 'all';
+    S.distMax = st.distMax != null ? st.distMax : null; S.mpgMin = st.mpgMin || 0;
+    S.confidence = new Set(st.confidence && st.confidence.length ? st.confidence : ['full', 'partial', 'low']);
+    S.newOnly = !!st.newOnly;
+  }
+
+  // Count how many listings a saved state matches, without disturbing the live view.
+  function countMatches(st) {
+    var saved = captureFilterState();
+    applyStateToS(st);
+    var n = LISTINGS.filter(matchesFilter).length;
+    applyStateToS(saved);
+    return n;
+  }
+
+  function syncControlsFromState() {
+    var g = function(id) { return document.getElementById(id); };
+    if (g('filterSearch')) g('filterSearch').value = S.search;
+    g('filterSource').value = S.source;
+    g('filterScore').value = S.minScore; g('filterScoreLabel').textContent = S.minScore;
+    document.querySelectorAll('.body-cb').forEach(function(cb) {
+      var on = S.bodyTypes.has(cb.value); cb.checked = on; cb.parentElement.classList.toggle('checked', on);
+    });
+    g('priceMin').value = S.priceMin; g('priceMax').value = S.priceMax;
+    g('priceLabel').textContent = '$' + (S.priceMin / 1000).toFixed(0) + 'k – $' + (S.priceMax / 1000).toFixed(S.priceMin >= 1000 ? 1 : 0) + 'k';
+    g('mileMin').value = S.mileMin; g('mileMax').value = S.mileMax;
+    g('mileLabel').textContent = (S.mileMin / 1000).toFixed(0) + 'k – ' + (S.mileMax / 1000).toFixed(0) + 'k mi';
+    g('filterYear').value = S.yearMin;
+    g('filterDrivetrain').value = S.drivetrain; g('filterTransmission').value = S.transmission;
+    g('filterTitle').value = S.titleStatus; g('filterSeller').value = S.sellerType;
+    g('filterDist').value = S.distMax == null ? 300 : S.distMax;
+    g('filterDistLabel').textContent = S.distMax == null ? 'any' : S.distMax + ' mi';
+    g('filterMpg').value = S.mpgMin; g('filterMpgLabel').textContent = S.mpgMin;
+    document.querySelectorAll('.conf-cb').forEach(function(cb) {
+      var on = S.confidence.has(cb.value); cb.checked = on; cb.parentElement.classList.toggle('checked', on);
+    });
+    g('filterNew').checked = S.newOnly;
+    buildMakeFacet(); buildModelFacet();
+  }
+
+  function applyFilterState(st) {
+    applyStateToS(st);
+    syncControlsFromState();
+    applyFilters();
+  }
+
+  function renderTargets() {
+    var chips = document.getElementById('targetsChips');
+    if (!chips) return;
+    var targets = loadTargets();
+    chips.innerHTML = '';
+    if (!targets.length) {
+      var empty = document.createElement('span');
+      empty.className = 'targets-empty'; empty.textContent = 'none saved yet';
+      chips.appendChild(empty);
+      return;
+    }
+    targets.forEach(function(t, i) {
+      var chip = document.createElement('span'); chip.className = 'target-chip';
+      var apply = document.createElement('button');
+      apply.type = 'button'; apply.className = 'target-apply';
+      apply.textContent = t.name + ' (' + countMatches(t.state) + ')';
+      apply.addEventListener('click', function() { applyFilterState(t.state); });
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'target-del'; del.textContent = '×'; del.title = 'Delete target';
+      del.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var ts = loadTargets(); ts.splice(i, 1); saveTargets(ts); renderTargets();
+      });
+      chip.appendChild(apply); chip.appendChild(del);
+      chips.appendChild(chip);
+    });
+  }
+
   // ── Boot ───────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
+    S.weights = Object.assign({}, (typeof WEIGHTS !== 'undefined' ? WEIGHTS : {}));
+    computeFreshness();
     initFilters();
     initLightbox();
     attachSortHandlers();
