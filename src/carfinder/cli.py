@@ -756,6 +756,10 @@ def kbb_values(limit: int | None, refresh: bool) -> None:
                     # (e.g. Craigslist free-text model strings). Use --refresh to retry.
                     cache[key] = {"default": None, "miss": True}
                     click.echo(f"  [{i}/{len(todo)}] {yr} {mk} {mo}: no value found")
+                # Flush periodically so progress survives a crash and the
+                # dashboard can pick up new values mid-run.
+                if i % 10 == 0:
+                    cache_path.write_text(_json.dumps(cache, indent=2, sort_keys=True))
                 await asyncio.sleep(random.uniform(cfg.rate_limit.min_delay_seconds, cfg.rate_limit.max_delay_seconds))
 
     try:

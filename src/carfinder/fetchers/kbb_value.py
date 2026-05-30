@@ -123,9 +123,16 @@ def parse_fair_values(html: str, expected_year: int | None = None) -> dict | Non
         default = mids[len(mids) // 2]  # median trim price
     else:
         default = averages[0]
+
+    # Studio model image (EVOX) — exact model+year because the page already
+    # passed the year guard. Used as a photo fallback for listings without one.
+    img_m = re.search(r'<meta property="og:image" content="([^"]+)"', html)
+    image = img_m.group(1) if img_m and "evox" in img_m.group(1).lower() else None
+
     return {
         "default": round(default),
         "trims": {k: round(v) for k, v in trims.items()},
+        "image": image,
     }
 
 

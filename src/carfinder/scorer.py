@@ -34,6 +34,9 @@ class ScoredListing(BaseModel):
     score: float
     score_breakdown: dict[str, FactorScore]
     confidence: Literal["full", "partial", "low"]
+    # Exact model+year studio image from KBB, used as a photo fallback in the
+    # dashboard when the listing has no source photo of its own.
+    model_image: str | None = None
 
     def display_score(self) -> str:
         """Return score string with confidence prefix."""
@@ -427,9 +430,16 @@ def score_listing(
     else:
         conf = "low"
 
+    model_image = None
+    if listing.year:
+        entry = lookups.kbb_fmv.get((_norm(listing.make or ""), _norm(listing.model or ""), listing.year))
+        if entry:
+            model_image = entry.get("image")
+
     return ScoredListing(
         listing=listing,
         score=round(total, 2),
         score_breakdown=breakdown,
         confidence=conf,
+        model_image=model_image,
     )

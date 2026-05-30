@@ -64,17 +64,6 @@
     return s;
   }
 
-  // Stock model render from imagin.studio's CDN, used as a fallback when a
-  // listing has no source photo. Returns null if we can't build a query.
-  function modelImageUrl(d) {
-    if (!d.make || !d.model) return null;
-    var q = 'customer=img&angle=23'
-      + '&make=' + encodeURIComponent(String(d.make).toLowerCase().trim())
-      + '&modelFamily=' + encodeURIComponent(String(d.model).toLowerCase().trim());
-    if (d.year) q += '&modelYear=' + encodeURIComponent(d.year);
-    return 'https://cdn.imagin.studio/getImage?' + q;
-  }
-
   // ── Live re-ranking from adjustable weights ──────────────────────────────────
   // Each listing ships its raw per-factor scores; recompute the 0-100 score as a
   // weight-normalised sum so dragging a weight instantly re-ranks with no refetch.
@@ -410,7 +399,7 @@
       // every listing has an image; placeholder only if even that fails.
       var tdPhoto = document.createElement('td');
       tdPhoto.className = 'col-photo';
-      var imgSrc = d.first_photo || modelImageUrl(d);
+      var imgSrc = d.first_photo || d.model_image || null;
       if (imgSrc) {
         var isStock = !d.first_photo;
         var img = document.createElement('img');

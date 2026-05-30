@@ -76,6 +76,36 @@ def test_year_guard_accepts_matching_year():
     assert vals is not None and vals["default"] == 12000
 
 
+def test_parse_extracts_evox_og_image():
+    html = (
+        '<html><head>'
+        '<link rel="canonical" href="https://www.kbb.com/toyota/rav4/2016/"/>'
+        '<meta property="og:image" content="https://file.kelleybluebookimages.com/kbb/base/evox/CP/10921/2016-Toyota-RAV4-front.png"/>'
+        '</head><body><script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps({"props": {"r": {"trimsData": [
+            {"name": "LE", "fairMarketPriceLow": 14000, "fairMarketPriceHigh": 14000}]}}})
+        + "</script></body></html>"
+    )
+    vals = parse_fair_values(html, expected_year=2016)
+    assert vals is not None
+    assert vals["image"] and "2016-Toyota-RAV4" in vals["image"]
+
+
+def test_parse_ignores_non_evox_og_image():
+    # A generic social-share image (not an EVOX studio render) is not a car photo.
+    html = (
+        '<html><head>'
+        '<link rel="canonical" href="https://www.kbb.com/toyota/rav4/2016/"/>'
+        '<meta property="og:image" content="https://www.kbb.com/assets/social-card.png"/>'
+        '</head><body><script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps({"props": {"r": {"trimsData": [
+            {"name": "LE", "fairMarketPriceLow": 14000, "fairMarketPriceHigh": 14000}]}}})
+        + "</script></body></html>"
+    )
+    vals = parse_fair_values(html, expected_year=2016)
+    assert vals is not None and vals["image"] is None
+
+
 def test_cache_key_is_normalised():
     assert cache_key("Toyota", "RAV 4", 2016) == "toyota|rav4|2016"
     assert cache_key("toyota", "rav4", 2016) == cache_key("TOYOTA", "RAV4", 2016)

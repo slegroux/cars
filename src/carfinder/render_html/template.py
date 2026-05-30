@@ -135,6 +135,7 @@ def _listing_to_dict(s: "ScoredListing") -> dict:
         "description": lst.description or "",
         "photos": photos,
         "first_photo": photos[0] if photos else "",
+        "model_image": s.model_image or "",  # exact model+year studio image fallback
         "first_seen": lst.first_seen.isoformat() if lst.first_seen else "",
         "last_seen": lst.last_seen.isoformat() if lst.last_seen else "",
         "factors": factors,
