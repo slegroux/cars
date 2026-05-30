@@ -32,14 +32,20 @@
   // Treat "now" as the most recent last_seen in the dataset; anything first seen
   // within FRESH_DAYS of that is flagged NEW. Robust to stale exported files.
   var FRESH_DAYS = 3;
+  var STALE_DAYS = 2;   // last_seen this far behind the newest fetch => likely gone
   var NEW_CUTOFF = 0;
   function parseTs(s) { var t = s ? Date.parse(s) : NaN; return isNaN(t) ? 0 : t; }
   function computeFreshness() {
     var latest = 0;
     LISTINGS.forEach(function(d) { latest = Math.max(latest, parseTs(d.last_seen)); });
     NEW_CUTOFF = latest ? latest - FRESH_DAYS * 86400000 : 0;
+    var staleCutoff = latest ? latest - STALE_DAYS * 86400000 : 0;
     LISTINGS.forEach(function(d) {
       d.isNew = NEW_CUTOFF > 0 && parseTs(d.first_seen) >= NEW_CUTOFF;
+      // Not refreshed by the most recent fetch — wasn't in the source anymore.
+      d.isStale = staleCutoff > 0 && parseTs(d.last_seen) < staleCutoff;
+      var ls = parseTs(d.last_seen);
+      d.seenDaysAgo = (latest && ls) ? Math.round((latest - ls) / 86400000) : null;
     });
   }
 
@@ -112,6 +118,7 @@
     mpgMin: 0,
     confidence: new Set(['full', 'partial', 'low']),
     newOnly: false,
+    hideSold: true,          // hide listings whose page was found gone/sold
     weights: {},             // live re-rank weights, seeded from WEIGHTS at boot
   };
 
@@ -150,6 +157,7 @@
     if (S.mpgMin > 0 && !(d.mpg != null && d.mpg >= S.mpgMin)) return false;
     if (!S.confidence.has(d.confidence)) return false;
     if (S.newOnly && !d.isNew) return false;
+    if (S.hideSold && d.sold) return false;
     if (S.search) {
       var hay = searchHaystack(d);
       // AND across whitespace-separated terms so "honda civic" requires both.
@@ -472,7 +480,20 @@
       srcSpan.className = 'source-chip ' + sourceChipClass(d.source);
       srcSpan.textContent = d.source === 'craigslist' ? 'CL' : d.source === 'carmax' ? 'CMax' : d.source === 'carscom' ? 'Cars' : d.source === 'kbb' ? 'KBB' : d.source;
       tdSrc.appendChild(srcSpan);
-      if (d.isNew) {
+      if (d.sold) {
+        var soldBadge = document.createElement('span');
+        soldBadge.className = 'sold-badge';
+        soldBadge.textContent = 'SOLD';
+        soldBadge.title = 'Listing page was found gone/sold by check-sold';
+        tdSrc.appendChild(soldBadge);
+      } else if (d.isStale) {
+        var staleBadge = document.createElement('span');
+        staleBadge.className = 'stale-badge';
+        staleBadge.textContent = d.seenDaysAgo != null ? d.seenDaysAgo + 'd' : 'stale';
+        staleBadge.title = 'Not seen in the latest fetch (' +
+          (d.seenDaysAgo != null ? d.seenDaysAgo + ' days behind' : 'stale') + ') — may be sold. Re-run search to confirm.';
+        tdSrc.appendChild(staleBadge);
+      } else if (d.isNew) {
         var newBadge = document.createElement('span');
         newBadge.className = 'new-badge';
         newBadge.textContent = 'NEW';
@@ -920,6 +941,13 @@
     var newEl = document.getElementById('filterNew');
     if (newEl) newEl.addEventListener('change', function() { S.newOnly = this.checked; applyFilters(); });
 
+    var hideSoldEl = document.getElementById('filterHideSold');
+    if (hideSoldEl) hideSoldEl.addEventListener('change', function() {
+      S.hideSold = this.checked;
+      this.parentElement.classList.toggle('checked', this.checked);
+      applyFilters();
+    });
+
     // Make/model facets + weight sliders + targets
     buildMakeFacet();
     buildModelFacet();
@@ -952,7 +980,7 @@
       S.search = '';
       S.makes = new Set(); S.models = new Set();
       S.drivetrain = 'all'; S.transmission = 'all'; S.titleStatus = 'all'; S.sellerType = 'all';
-      S.distMax = null; S.mpgMin = 0; S.newOnly = false;
+      S.distMax = null; S.mpgMin = 0; S.newOnly = false; S.hideSold = true;
       S.confidence = new Set(['full', 'partial', 'low']);
       if (searchInput) searchInput.value = '';
       selSrc.value = 'all';
@@ -976,6 +1004,7 @@
         cb.checked = true; cb.parentElement.classList.add('checked');
       });
       if (newEl) newEl.checked = false;
+      if (hideSoldEl) { hideSoldEl.checked = true; hideSoldEl.parentElement.classList.add('checked'); }
       buildMakeFacet(); buildModelFacet();
       applyFilters();
     });
@@ -1269,7 +1298,7 @@
       makes: Array.from(S.makes), models: Array.from(S.models),
       drivetrain: S.drivetrain, transmission: S.transmission, titleStatus: S.titleStatus,
       sellerType: S.sellerType, distMax: S.distMax, mpgMin: S.mpgMin,
-      confidence: Array.from(S.confidence), newOnly: S.newOnly,
+      confidence: Array.from(S.confidence), newOnly: S.newOnly, hideSold: S.hideSold,
     };
   }
 
@@ -1285,6 +1314,7 @@
     S.distMax = st.distMax != null ? st.distMax : null; S.mpgMin = st.mpgMin || 0;
     S.confidence = new Set(st.confidence && st.confidence.length ? st.confidence : ['full', 'partial', 'low']);
     S.newOnly = !!st.newOnly;
+    S.hideSold = st.hideSold !== false;  // default true
   }
 
   // Count how many listings a saved state matches, without disturbing the live view.
@@ -1318,6 +1348,8 @@
       var on = S.confidence.has(cb.value); cb.checked = on; cb.parentElement.classList.toggle('checked', on);
     });
     g('filterNew').checked = S.newOnly;
+    var hs = g('filterHideSold');
+    if (hs) { hs.checked = S.hideSold; hs.parentElement.classList.toggle('checked', S.hideSold); }
     buildMakeFacet(); buildModelFacet();
   }
 

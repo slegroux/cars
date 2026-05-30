@@ -138,6 +138,7 @@ def _listing_to_dict(s: "ScoredListing") -> dict:
         "model_image": s.model_image or "",  # exact model+year studio image fallback
         "first_seen": lst.first_seen.isoformat() if lst.first_seen else "",
         "last_seen": lst.last_seen.isoformat() if lst.last_seen else "",
+        "sold": bool(lst.sold),
         "factors": factors,
     }
 
@@ -362,6 +363,7 @@ def render_html(
         '  <div class="filter-group">',
         "    <label>Freshness</label>",
         '    <label class="cb-label"><input type="checkbox" id="filterNew">New only</label>',
+        '    <label class="cb-label checked"><input type="checkbox" id="filterHideSold" checked>Hide sold</label>',
         "  </div>",
         "</div>",
         "",

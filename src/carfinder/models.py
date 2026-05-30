@@ -6,7 +6,7 @@ import sqlite3
 from datetime import date, datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 
 
 class Listing(BaseModel):
@@ -53,7 +53,16 @@ class Listing(BaseModel):
     # Internal / scoring
     first_seen: datetime | None = None
     last_seen: datetime | None = None
+    # Liveness: set by `check-sold` when the listing's page is gone/sold. Reset
+    # to False whenever the listing is re-seen in a fetch (handled by upsert).
+    sold: bool = False
     score: float | None = None
+
+    @field_validator("sold", mode="before")
+    @classmethod
+    def _coerce_sold(cls, v: object) -> bool:
+        # Existing DB rows predate this column and store NULL; treat as not-sold.
+        return bool(v) if v is not None else False
     score_breakdown: dict[str, Any] = {}
     score_confidence: str | None = None
 

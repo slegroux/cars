@@ -788,3 +788,88 @@ def kbb_values(limit: int | None, refresh: bool) -> None:
     finally:
         cache_path.write_text(_json.dumps(cache, indent=2, sort_keys=True))
         click.echo(f"Wrote {len(cache)} entries to {cache_path}")
+
+
+@cli.command("check-sold")
+@click.option("--recheck", is_flag=True, help="Re-check listings already marked sold.")
+@click.option("--concurrency", default=6, show_default=True, type=int)
+def check_sold(recheck: bool, concurrency: int) -> None:
+    """Visit each listing's URL and mark the ones whose page is gone/sold.
+
+    Conservative: only flags clear 404/410 or explicit "deleted/sold" pages;
+    transient errors are left untouched. A sold flag is cleared automatically
+    the next time the listing is re-seen in a search.
+    """
+    import asyncio as _asyncio
+
+    import httpx
+
+    from carfinder.db import get_listings, init_db
+    from carfinder.fetchers.liveness import detect_sold
+
+    db_path = Path("data/listings.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = init_db(db_path)
+    listings = get_listings(conn)
+    todo = [lst for lst in listings if lst.url and (recheck or not lst.sold)]
+    click.echo(f"Checking {len(todo)} listing URLs (concurrency={concurrency})...")
+    if not todo:
+        conn.close()
+        return
+
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
+    }
+    sem = _asyncio.Semaphore(concurrency)
+
+    async def _check(client: httpx.AsyncClient, lst) -> tuple[str, bool]:
+        async with sem:
+            try:
+                resp = await client.get(lst.url)
+                return lst.id, detect_sold(resp.status_code, resp.text, lst.source)
+            except httpx.HTTPError:
+                return lst.id, False  # transient — leave as-is
+
+    async def _run() -> list[tuple[str, bool]]:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=20.0, headers=headers) as client:
+            return await _asyncio.gather(*[_check(client, lst) for lst in todo])
+
+    results = _asyncio.run(_run())
+    sold_ids = [lid for lid, sold in results if sold]
+    for lid in sold_ids:
+        conn.execute("UPDATE listings SET sold = 1 WHERE id = ?", (lid,))
+    conn.commit()
+    conn.close()
+    click.echo(f"Marked {len(sold_ids)} listing(s) sold/removed.")
+
+
+@cli.command()
+@click.option("--stale-days", default=21, show_default=True, type=int,
+              help="After re-fetching, remove listings not seen in N days.")
+def refresh(stale_days: int) -> None:
+    """Re-fetch all enabled sources, then prune listings that have gone stale.
+
+    Re-running the search bumps last_seen for every still-live listing; cars
+    that have been sold/removed fall behind and are pruned once they pass the
+    stale-days window.
+    """
+    from carfinder.config import load_config
+    from carfinder.db import init_db, prune_old
+
+    cfg = load_config()
+    enabled = [s for s, on in cfg.sources.model_dump().items() if on]
+    if enabled:
+        click.echo(f"Re-fetching: {', '.join(enabled)}")
+        asyncio.run(_run_search(cfg, enabled))
+    else:
+        click.echo("No sources enabled — skipping fetch.")
+
+    db_path = Path("data/listings.db")
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    conn = init_db(db_path)
+    removed = prune_old(conn, stale_days)
+    conn.close()
+    click.echo(f"Pruned {removed} listing(s) not seen in {stale_days} days.")

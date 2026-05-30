@@ -759,17 +759,19 @@ body.server-mode th.col-actions { display: table-cell; }
 .deal-none { color: var(--text-faint); }
 
 /* ── NEW badge ──────────────────────────────────────────────────────────── */
-.new-badge {
+.new-badge, .sold-badge, .stale-badge {
   margin-left: 5px;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 1px 4px;
   border-radius: 2px;
-  background: var(--green);
   color: #fff;
   vertical-align: middle;
 }
+.new-badge { background: var(--green); }
+.sold-badge { background: var(--red); }
+.stale-badge { background: var(--text-faint); }
 
 /* ── Live re-rank weights panel ─────────────────────────────────────────── */
 .weights-panel { margin-bottom: 16px; }
