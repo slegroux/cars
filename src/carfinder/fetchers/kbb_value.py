@@ -66,12 +66,24 @@ def _slug_variants(make: str, model: str) -> list[str]:
     return [f"{mk}/{mo}" for mo in models]
 
 
-def parse_fair_values(html: str) -> dict | None:
+def parse_fair_values(html: str, expected_year: int | None = None) -> dict | None:
     """Extract Fair Market Prices from a KBB value page.
 
     Returns ``{"default": <median trim price>, "trims": {<norm trim>: price}}``
     or None if no valuation data is present.
+
+    When ``expected_year`` is given, the page is rejected unless its canonical
+    URL contains ``/<year>/``. KBB serves the *latest* model-year landing page
+    (canonical ``…/make/model/``, no year) when a year-specific page doesn't
+    exist, so without this guard a 2015 car could be priced off 2026 data.
     """
+    if expected_year is not None:
+        cm = re.search(r'<link rel="canonical" href="([^"]*)"', html)
+        canonical = cm.group(1) if cm else ""
+        if f"/{expected_year}/" not in canonical:
+            logger.debug("KBB page canonical %r lacks year %d — rejecting", canonical, expected_year)
+            return None
+
     m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
     if not m:
         return None
@@ -127,7 +139,7 @@ async def fetch_fair_values(client: httpx.AsyncClient, make: str, model: str, ye
             logger.debug("KBB value request failed for %s: %s", url, exc)
             continue
         if resp.status_code == 200:
-            vals = parse_fair_values(resp.text)
+            vals = parse_fair_values(resp.text, expected_year=year)
             if vals:
                 return vals
         logger.debug("KBB value page %s -> %d (no usable data)", url, resp.status_code)

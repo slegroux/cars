@@ -48,6 +48,34 @@ def test_parse_fair_values_returns_none_when_absent():
     assert parse_fair_values(_next_data_html({"props": {"unrelated": 1}})) is None
 
 
+def _with_canonical(href: str, payload: dict) -> str:
+    return (
+        f'<html><head><link rel="canonical" href="{href}"/></head><body>'
+        '<script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps(payload)
+        + "</script></body></html>"
+    )
+
+
+_PAYLOAD = {"props": {"r": {"trimsData": [
+    {"name": "Base", "fairMarketPriceLow": 12000, "fairMarketPriceHigh": 12000},
+]}}}
+
+
+def test_year_guard_rejects_wrong_year_landing_page():
+    # KBB served the model landing page (canonical has no /year/) — must reject.
+    html = _with_canonical("https://www.kbb.com/hyundai/sonata-hybrid/", _PAYLOAD)
+    assert parse_fair_values(html, expected_year=2015) is None
+    # No expected_year → no guard, parses fine.
+    assert parse_fair_values(html) is not None
+
+
+def test_year_guard_accepts_matching_year():
+    html = _with_canonical("https://www.kbb.com/toyota/rav4/2016/", _PAYLOAD)
+    vals = parse_fair_values(html, expected_year=2016)
+    assert vals is not None and vals["default"] == 12000
+
+
 def test_cache_key_is_normalised():
     assert cache_key("Toyota", "RAV 4", 2016) == "toyota|rav4|2016"
     assert cache_key("toyota", "rav4", 2016) == cache_key("TOYOTA", "RAV4", 2016)
