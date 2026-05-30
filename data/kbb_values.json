@@ -1,0 +1,566 @@
+{
+  "audi|rs7|2021": {
+    "default": 65500,
+    "trims": {
+      "sedan4d": 65500
+    }
+  },
+  "bmw|2002|1974": {
+    "default": null,
+    "miss": true
+  },
+  "bmw|m3|2018": {
+    "default": 55900,
+    "trims": {
+      "cssedan4d": 55900,
+      "sedan4d": 48700
+    }
+  },
+  "chevrolet|sonic|2015": {
+    "default": 6150,
+    "trims": {
+      "lshatchbacksedan4d": 5625,
+      "lssedan4d": 5550,
+      "lthatchbacksedan4d": 5375,
+      "ltsedan4d": 4900,
+      "ltzhatchbacksedan4d": 6300,
+      "ltzsedan4d": 6150,
+      "rshatchbacksedan4d": 7675,
+      "rssedan4d": 7475
+    }
+  },
+  "chevrolet|spark|2016": {
+    "default": 6925,
+    "trims": {
+      "1lthatchback4d": 7225,
+      "2lthatchback4d": 6925,
+      "lshatchback4d": 5700
+    }
+  },
+  "chevrolet|volt|2013": {
+    "default": 5100,
+    "trims": {
+      "sedan4d": 5100
+    }
+  },
+  "fiat|500poppop2drhatchbacknojoborcreditneeded|2013": {
+    "default": null,
+    "miss": true
+  },
+  "fiat|500x|2018": {
+    "default": 11500,
+    "trims": {
+      "loungesportutility4d": 13150,
+      "popblueskyeditionsportutility4d": 11000,
+      "popsportutility4d": 11000,
+      "trekkingsportutility4d": 11500,
+      "urbanaeditionsportutility4d": 11500
+    }
+  },
+  "fiat|500|2013": {
+    "default": 4400,
+    "trims": {
+      "500cabarthcabrioconvertible2d": 6125,
+      "500cgucciconvertible2d": 5000,
+      "500cloungecabrioconvertible2d": 5000,
+      "500cpopcabrioconvertible2d": 4400,
+      "abarthhatchback2d": 4800,
+      "guccihatchback2d": 4150,
+      "loungehatchback2d": 4150,
+      "pophatchback2d": 4475,
+      "sportcattivahatchback2d": 3950,
+      "sporthatchback2d": 2975,
+      "turbocattivahatchback2d": 4100,
+      "turbohatchback2d": 4100
+    }
+  },
+  "ford|c-max|2015": {
+    "default": null,
+    "miss": true
+  },
+  "ford|escape|2014": {
+    "default": 7400,
+    "trims": {
+      "sesportutility4d": 6925,
+      "ssportutility4d": 7400,
+      "titaniumsportutility4d": 7775
+    }
+  },
+  "ford|escape|2018": {
+    "default": 11850,
+    "trims": {
+      "selsportutility4d": 11850,
+      "sesportutility4d": 9825,
+      "ssportutility4d": 8950,
+      "titaniumsportutility4d": 12050
+    }
+  },
+  "ford|fiesta|2016": {
+    "default": 6450,
+    "trims": {
+      "sehatchback4d": 6450,
+      "sesedan4d": 6325,
+      "shatchback4d": 5950,
+      "ssedan4d": 5825,
+      "sthatchback4d": 9700,
+      "titaniumhatchback4d": 7525,
+      "titaniumsedan4d": 7400
+    }
+  },
+  "ford|focusst4doorhatchback|2014": {
+    "default": null,
+    "miss": true
+  },
+  "ford|focusst|2014": {
+    "default": 9725,
+    "trims": {
+      "hatchback4d": 9725
+    }
+  },
+  "ford|focus|2015": {
+    "default": 5925,
+    "trims": {
+      "electrichatchback4d": 5050,
+      "sehatchback4d": 6525,
+      "sesedan4d": 5575,
+      "ssedan4d": 5125,
+      "titaniumhatchback4d": 6675,
+      "titaniumsedan4d": 5925
+    }
+  },
+  "ford|fusion|2016": {
+    "default": 8675,
+    "trims": {
+      "sehybridsedan4d": 9225,
+      "sesedan4d": 8675,
+      "shybridsedan4d": 8000,
+      "ssedan4d": 8500,
+      "titaniumhybridsedan4d": 7500,
+      "titaniumsedan4d": 9575
+    }
+  },
+  "ford|transitconnect|2014": {
+    "default": 9425,
+    "trims": {
+      "titaniumvan4d": 9425,
+      "xltvan4d": 8400,
+      "xlvan4d": 10250
+    }
+  },
+  "gen|4toyotapickuphiluxrwd22emanual|1986": {
+    "default": null,
+    "miss": true
+  },
+  "honda|accordtwo-doorhatchback76000miles|1979": {
+    "default": null,
+    "miss": true
+  },
+  "honda|cr-v|2016": {
+    "default": 15200,
+    "trims": {
+      "ex-lsportutility4d": 15450,
+      "exsportutility4d": 15200,
+      "lxsportutility4d": 12900,
+      "sesportutility4d": 13300,
+      "touringsportutility4d": 16350
+    }
+  },
+  "honda|cr-v|2026": {
+    "default": 34450,
+    "trims": {
+      "ex": 34450,
+      "ex-l": 36850,
+      "lx": 32550
+    }
+  },
+  "hyundai|accent|2017": {
+    "default": 7625,
+    "trims": {
+      "sehatchback4d": 7625,
+      "sesedan4d": 7475,
+      "sporthatchback4d": 7875,
+      "valueeditionsedan4d": 7550
+    }
+  },
+  "hyundai|elantra|2007": {
+    "default": 3350,
+    "trims": {
+      "glssedan4d": 2875,
+      "limitedsedan4d": 3550,
+      "sesedan4d": 3350
+    }
+  },
+  "hyundai|elantra|2015": {
+    "default": 7800,
+    "trims": {
+      "limitedsedan4d": 7800,
+      "sesedan4d": 7900,
+      "sportsedan4d": 7225
+    }
+  },
+  "hyundai|genesis107k6speedtopmodelgrantouring38lpowerful|2010": {
+    "default": null,
+    "miss": true
+  },
+  "hyundai|genesis|2010": {
+    "default": 5950,
+    "trims": {
+      "3.8sedan4d": 5950,
+      "4.6sedan4d": 5525
+    }
+  },
+  "hyundai|sonatahybrid|2015": {
+    "default": null,
+    "miss": true
+  },
+  "hyundai|sonata|2014": {
+    "default": 7650,
+    "trims": {
+      "glssedan4d": 6150,
+      "hybridlimitedsedan4d": 8150,
+      "hybridsedan4d": 7650,
+      "limitedsedan4d": 8675,
+      "sesedan4d": 6625
+    }
+  },
+  "jeep|cherokee|2016": {
+    "default": 11050,
+    "trims": {
+      "75thanniversarysportutility4d": 9300,
+      "altitudesportutility4d": 11000,
+      "highaltitudesportutility4d": 11450,
+      "latitudesportutility4d": 10150,
+      "limitedsportutility4d": 11550,
+      "overlandsportutility4d": 11850,
+      "sportaltitudesportutility4d": 11050,
+      "sportsuv4d": 9325,
+      "trailhawksportutility4d": 12450
+    }
+  },
+  "jeep|compass|2015": {
+    "default": 7325,
+    "trims": {
+      "altitudeeditionsportutility4d": 7275,
+      "highaltitudeeditionsportutility4d": 7425,
+      "latitudesportutility4d": 7325,
+      "limitedsportutility4d": 9225,
+      "sportsuv4d": 7150
+    }
+  },
+  "jeep|compass|2016": {
+    "default": 7900,
+    "trims": {
+      "75thanniversarysportutility4d": 7900,
+      "highaltitudeeditionsportutility4d": 8150,
+      "latitudesportutility4d": 8425,
+      "sportsesportutility4d": 7475,
+      "sportsuv4d": 7825
+    }
+  },
+  "jeep|patriot|2015": {
+    "default": 7475,
+    "trims": {
+      "altitudeeditionsportutility4d": 6425,
+      "highaltitudeeditionsportutility4d": 5950,
+      "latitudesportutility4d": 7475,
+      "limitedsportutility4d": 7850,
+      "sportsuv4d": 7650
+    }
+  },
+  "jeep|renegade|2017": {
+    "default": 12250,
+    "trims": {
+      "altitudesportutility4d": 11400,
+      "deserthawksportutility4d": 13850,
+      "latitudesportutility4d": 11850,
+      "limitedsportutility4d": 12250,
+      "sportsuv4d": 11250,
+      "trailhawksportutility4d": 12300
+    }
+  },
+  "kia|cadenza|2014": {
+    "default": 7550,
+    "trims": {
+      "limited-sxlsedan4d": 5775,
+      "premiumsedan4d": 7550
+    }
+  },
+  "kia|forte|2014": {
+    "default": null,
+    "miss": true
+  },
+  "kia|rio|2016": {
+    "default": 7250,
+    "trims": {
+      "exhatchback4d": 7150,
+      "exsedan4d": 7250,
+      "lxhatchback4d": 7200,
+      "lxsedan4d": 6400,
+      "sxhatchback4d": 9400,
+      "sxsedan4d": 8925
+    }
+  },
+  "kia|soul|2014": {
+    "default": 7225,
+    "trims": {
+      "!wagon4d": 7850,
+      "+wagon4d": 7225,
+      "wagon4d": 6750
+    }
+  },
+  "kia|soul|2015": {
+    "default": 7225,
+    "trims": {
+      "!wagon4d": 7225,
+      "+wagon4d": 8475,
+      "wagon4d": 6200
+    }
+  },
+  "kia|soul|2016": {
+    "default": 8700,
+    "trims": {
+      "!wagon4d": 10150,
+      "+wagon4d": 8700,
+      "wagon4d": 7925
+    }
+  },
+  "mazda|b2600i|1992": {
+    "default": null,
+    "miss": true
+  },
+  "mazda|cx-5|2014": {
+    "default": 10750,
+    "trims": {
+      "grandtouringsportutility4d": 11150,
+      "sportsuv4d": 9875,
+      "touringsportutility4d": 10750
+    }
+  },
+  "mini|coopercountryman|2015": {
+    "default": null,
+    "miss": true
+  },
+  "nissan|240sxs13240sx|1990": {
+    "default": null,
+    "miss": true
+  },
+  "nissan|350zroadster6psdmanual|2005": {
+    "default": null,
+    "miss": true
+  },
+  "nissan|altima|2014": {
+    "default": 7325,
+    "trims": {
+      "2.5sedan4d": 5950,
+      "2.5slsedan4d": 8325,
+      "2.5ssedan4d": 6175,
+      "2.5svsedan4d": 7325,
+      "3.5slsedan4d": 8275,
+      "3.5ssedan4d": 6850,
+      "3.5svsedan4d": 7425
+    }
+  },
+  "nissan|altima|2015": {
+    "default": 7750,
+    "trims": {
+      "2.5sedan4d": 6850,
+      "2.5slsedan4d": 8400,
+      "2.5ssedan4d": 7925,
+      "2.5svsedan4d": 7750,
+      "3.5slsedan4d": 9325,
+      "3.5ssedan4d": 6875,
+      "3.5svsedan4d": 7750
+    }
+  },
+  "nissan|sentra|2014": {
+    "default": 5975,
+    "trims": {
+      "fe+ssedan4d": 5175,
+      "fe+svsedan4d": 5375,
+      "slsedan4d": 6625,
+      "srsedan4d": 6825,
+      "ssedan4d": 5725,
+      "svsedan4d": 5975
+    }
+  },
+  "nissan|sentra|2015": {
+    "default": 5700,
+    "trims": {
+      "fe+ssedan4d": 5325,
+      "slsedan4d": 5700,
+      "srsedan4d": 5525,
+      "ssedan4d": 6575,
+      "svsedan4d": 7300
+    }
+  },
+  "nissan|sentra|2020": {
+    "default": 13400,
+    "trims": {
+      "srsedan4d": 13800,
+      "ssedan4d": 12250,
+      "svsedan4d": 13400
+    }
+  },
+  "nissan|versanote|2016": {
+    "default": 5800,
+    "trims": {
+      "shatchback4d": 5275,
+      "slhatchback4d": 7125,
+      "splushatchback4d": 4250,
+      "srhatchback4d": 6175,
+      "svhatchback4d": 5800
+    }
+  },
+  "porsche|944s22doorcovertible|1990": {
+    "default": null,
+    "miss": true
+  },
+  "porsche|944|1990": {
+    "default": null,
+    "miss": true
+  },
+  "porsche|cayenne|2014": {
+    "default": 15650,
+    "trims": {
+      "dieselplatinumeditionsportutility4d": 16550,
+      "dieselsportutility4d": 15650,
+      "gtssportutility4d": 20600,
+      "platinumeditionsportutility4d": 12650,
+      "shybridsportutility4d": 14800,
+      "sportutility4d": 13450,
+      "ssportutility4d": 13300,
+      "turbosportutility4d": 21000,
+      "turbossportutility4d": 25700
+    }
+  },
+  "subaru|crosstrek|2017": {
+    "default": 13550,
+    "trims": {
+      "2.0ilimitedsportutility4d": 14350,
+      "2.0ipremiumsportutility4d": 13550,
+      "2.0isportutility4d": 12500
+    }
+  },
+  "subaru|forester25xmanualtransmissionawd|2013": {
+    "default": null,
+    "miss": true
+  },
+  "subaru|forester|2018": {
+    "default": 16650,
+    "trims": {
+      "2.0xtpremiumsportutility4d": 15350,
+      "2.0xttouringsportutility4d": 17100,
+      "2.5ilimitedsportutility4d": 16700,
+      "2.5ipremiumsportutility4d": 15250,
+      "2.5isportutility4d": 14650,
+      "2.5itouringsportutility4d": 16650
+    }
+  },
+  "tesla|model3|2020": {
+    "default": 23100,
+    "trims": {
+      "longrangesedan4d": 23100,
+      "performancesedan4d": 23900,
+      "standardrangeplussedan4d": 19750,
+      "standardrangesedan4d": 19500
+    }
+  },
+  "toyota|camry|2014": {
+    "default": 10950,
+    "trims": {
+      "hybridlesedan4d": 10950,
+      "hybridselimitededitionsedan4d": 10600,
+      "hybridxlesedan4d": 12100,
+      "lesedan4d": 10600,
+      "lsedan4d": 10800,
+      "sesedan4d": 11050,
+      "sesportsedan4d": 10550,
+      "xlesedan4d": 12100
+    }
+  },
+  "toyota|rav4|2010": {
+    "default": 7850,
+    "trims": {
+      "limitedsportutility4d": 10700,
+      "sportsuv4d": 7575,
+      "sportutility4d": 7850
+    }
+  },
+  "toyota|rav4|2017": {
+    "default": 17650,
+    "trims": {
+      "lesportutility4d": 16100,
+      "limitedsportutility4d": 18450,
+      "platinumsportutility4d": 18800,
+      "sesportutility4d": 17650,
+      "xlesportutility4d": 16800
+    }
+  },
+  "toyota|tacoma4x4sr54cylinder5speedmanual|2000": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|tacoma5spdmanual|1997": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|tacoma|1997": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|tacoma|2000": {
+    "default": null,
+    "miss": true
+  },
+  "toyota|tacoma|2002": {
+    "default": 6200,
+    "trims": {
+      "prerunnershortbed": 5275,
+      "shortbed": 6200
+    }
+  },
+  "volkswagen|golf|2015": {
+    "default": 9500,
+    "trims": {
+      "launcheditionhatchbackcoupe2d": 6950,
+      "sehatchbacksedan4d": 8825,
+      "selhatchbacksedan4d": 10200,
+      "shatchbackcoupe2d": 9500,
+      "shatchbacksedan4d": 8900,
+      "tdisehatchbacksedan4d": 8200,
+      "tdiselhatchbacksedan4d": 12350,
+      "tdishatchbacksedan4d": 10950
+    }
+  },
+  "volkswagen|jetta|2018": {
+    "default": 11500,
+    "trims": {
+      "1.4tsesedan4d": 10900,
+      "1.4tssedan4d": 9875,
+      "1.4twolfsburgeditionsedan4d": 10200,
+      "1.8tselsedan4d": 12600,
+      "1.8tsesportsedan4d": 11500,
+      "2.0tglisedan4d": 12850
+    }
+  },
+  "volkswagen|tiguan|2025": {
+    "default": 32300,
+    "trims": {
+      "s": 28500,
+      "s4motion": 30100,
+      "se": 31100,
+      "se4motion": 32300,
+      "selr-line4motion": 37900,
+      "ser-lineblack": 34000,
+      "ser-lineblack4motion": 35700
+    }
+  },
+  "volkswagen|vanagon|1985": {
+    "default": null,
+    "miss": true
+  },
+  "volvo|v70t5|1998": {
+    "default": null,
+    "miss": true
+  }
+}
