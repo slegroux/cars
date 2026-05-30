@@ -40,6 +40,12 @@ _NOISE_TOKENS = {
 _MILES_K = re.compile(r"^\d+k$", re.IGNORECASE)        # 107k
 _DISPLACEMENT = re.compile(r"^\d(\.\d)?l?$", re.IGNORECASE)  # 2, 2.5, 2.0l, 3l
 
+# Leading tokens of genuine multi-word models — keep the following token too
+# (e.g. Tesla "Model 3"/"Model Y", "Range Rover", "Grand Cherokee", Audi "RS 7",
+# "Land Cruiser", "Santa Fe"). The 2nd token is kept even when it looks like a
+# bare number/letter, which would otherwise be treated as noise.
+_MULTIWORD_LEAD = {"model", "range", "grand", "land", "santa", "crown", "rs"}
+
 
 def normalize_make(make: str | None) -> str | None:
     if not make:
@@ -63,10 +69,17 @@ def clean_model(model: str | None) -> str | None:
     """
     if not model:
         return model
-    for tok in re.split(r"\s+", model.strip()):
-        if not _is_noise(tok):
-            return tok
-    return model.strip() or None
+    toks = [t for t in re.split(r"\s+", model.strip()) if t]
+    if not toks:
+        return model.strip() or None
+    first = toks[0]
+    # Genuine multi-word model: keep the following token even if it looks numeric.
+    if first.lower().strip(".,") in _MULTIWORD_LEAD and len(toks) >= 2:
+        return f"{first} {toks[1]}"
+    if _is_noise(first):
+        # Leading token is itself noise — can't confidently clean; leave as-is.
+        return model.strip()
+    return first
 
 
 def normalize_make_model(make: str | None, model: str | None) -> tuple[str | None, str | None]:

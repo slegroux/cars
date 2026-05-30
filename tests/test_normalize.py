@@ -17,6 +17,12 @@ from carfinder.normalize import clean_model, normalize_make, normalize_make_mode
     ("V70 T5", "V70"),
     ("CR-V", "CR-V"),          # clean single-token model is untouched
     ("Tacoma", "Tacoma"),
+    # multi-word models keep their second token even though it looks numeric
+    ("model 3 Long Range AWD", "model 3"),
+    ("Model Y", "Model Y"),
+    ("RS 7", "RS 7"),
+    ("Range Rover Evoque", "Range Rover"),
+    ("Grand Cherokee Laredo 4x4", "Grand Cherokee"),
 ])
 def test_clean_model_reduces_to_leading_token(raw, expected):
     assert clean_model(raw) == expected
