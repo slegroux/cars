@@ -29,3 +29,5 @@ output/
 
 # Scratch screenshots
 *.png
+.DS_Store
+.omc/
