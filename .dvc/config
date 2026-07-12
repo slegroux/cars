@@ -1,0 +1,4 @@
+[core]
+    remote = pcloud
+['remote "pcloud"']
+    url = /Users/sylvain/pCloud Drive/Datasets/dvc/cars
